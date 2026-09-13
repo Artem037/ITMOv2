@@ -1,22 +1,22 @@
 # Журнал экспериментов Практики 2
 
-- Выбранный слабый артефакт Практики 1:
-- Что в нём нужно улучшить:
-- Как поймём, что изменение полезно:
+- Выбранный слабый артефакт Практики 1: [`../practice_01/tests_load.md`](../practice_01/tests_load.md)
+- Что в нём нужно улучшить: отделить требования из источников от придуманных нагрузочных параметров и гипотез. Сейчас конкретные RPS, latency и success-rate могут выглядеть как подтверждённые SLO, хотя `CASE.md` их не задаёт.
+- Как поймём, что изменение полезно: каждое числовое значение либо имеет явный источник, либо обозначено как параметр эксперимента/гипотеза с способом последующей калибровки. В файле не остаётся неподтверждённых SLO, представленных как требования.
 
 | Техника | Файл эксперимента | Изменённый файл Практики 1 | Конкретное изменение | Проверка | Что отклонили |
 |---|---|---|---|---|---|
-| Few-shot | [`few_shot/experiment.md`](few_shot/experiment.md) |  |  |  |  |
-| R.C.T.F. | [`rctf/experiment.md`](rctf/experiment.md) |  |  |  |  |
-| Chain of Verification | [`chain_of_verification/experiment.md`](chain_of_verification/experiment.md) |  |  |  |  |
-| Tree of Thoughts | [`tree_of_thoughts/experiment.md`](tree_of_thoughts/experiment.md) |  |  |  |  |
-| RAG | [`rag/experiment.md`](rag/experiment.md) |  |  |  |  |
-| ReAct | [`react/experiment.md`](react/experiment.md) |  |  |  |  |
+| Few-shot | [`few_shot/experiment.md`](few_shot/experiment.md) | Оригинал не изменялся; улучшенная копия: [`few_shot/tests_load_candidate.md`](few_shot/tests_load_candidate.md) | Переписаны LT-1..LT-4 с явной классификацией [ТРЕБОВАНИЕ]/[ПАРАМЕТР]/[ГИПОТЕЗА]; добавлены ссылки на CASE.md (API-1, REL-1, SEC-1, OBS-1) и пример "хороший/плохой результат". | Сопоставили все числовые значения с CASE.md; проверили, что у жёстких границ есть ссылки; перечитали кандидат на отсутствие новых SLO. | Не добавляли новые SLO/latency/availability цели; не меняли исходные параметры нагрузок; не использовали реальный внешний LLM в массовых тестах. |
+| R.C.T.F. | [`rctf/experiment.md`](rctf/experiment.md) | Оригинал не изменялся; улучшенная копия: [`rctf/tests_load_candidate.md`](rctf/tests_load_candidate.md) | Добавлен LT-0 Baseline discovery; оформлен раздел "Анализ" с классификацией утверждений и источниками (CASE.md), плюс инструментирование stub/spy и лог-скан. | Сопоставили каждое требование с CASE.md; убедились, что ни одно число не объявлено SLO; проверочные шаги воспроизводимы и не требуют внешнего LLM. | Не добавляли SLO/SLA/целевые RPS/latency/availability; не превращали гипотезы в требования; не включали реальные внешние LLM-вызовы. |
+| Chain of Verification | [`chain_of_verification/experiment.md`](chain_of_verification/experiment.md) | Оригинал не изменялся; улучшенная копия: [`chain_of_verification/tests_load_candidate.md`](chain_of_verification/tests_load_candidate.md) | Применён Draft -> Verify -> Correct: сформированы независимые вопросы проверки с evidence и затем исправлен кандидат; подтверждённые требования отделены от параметров и гипотез. | Сопоставили все числовые значения с CASE.md; оставили pass/fail только для требований; проверили отсутствие новых SLO. | Отклонены любые SLO/целевые RPS/latency/availability; жёсткие pass-критерии для p95/success/RSS; использование реального внешнего LLM в регулярной нагрузке. |
+| Tree of Thoughts | [`tree_of_thoughts/experiment.md`](tree_of_thoughts/experiment.md) | Оригинал не изменялся; улучшенная копия: [`tree_of_thoughts/tests_load_candidate.md`](tree_of_thoughts/tests_load_candidate.md) | Рассмотрены три альтернативы (A/B/C) и выбран baseline-подход B; введена политика не использовать реальный LLM в массовой нагрузке, staging smoke отдельно. | План проверки: прогнать LT-1..LT-4 из кандидата; подтвердить соответствие CASE.md и отсутствие новых SLO; отсутствие реального LLM в нагрузке зафиксировано в документе. | Отклонена альтернатива A с фиксированными выдуманными порогами; вариант C как основной — оставлен только как точечный smoke после baseline. |
+| RAG | [`rag/experiment.md`](rag/experiment.md) | Оригинал не изменялся; улучшенная копия: [`rag/tests_load_candidate.md`](rag/tests_load_candidate.md) | Ограничена база знаний артефактами Practice 1 и построена трассировка фактов с указанием файлов и строк; разделены confirmed requirements, test configuration, metrics to observe и hypotheses/TBD. | Проверили ссылки: у каждого факта указан файл и строки; использованы только разрешённые файлы; перекрёстно сопоставлены правила и метрики. | Отклонены все production SLO и конкретные числа (50/10/5 RPS, 200/500 мс, >=99%, "не позже 11 сек", лимит одного metadata-event) как неподтверждённые; оставлены как гипотезы/TBD. |
+| ReAct | [`react/experiment.md`](react/experiment.md) | Оригинал не изменялся; улучшенная копия: [`react/tests_load_candidate.md`](react/tests_load_candidate.md) | Пошаговый аудит с лимитом 4 шагов (Action/Observation/Decision); внесены правки: убран pass/fail по памяти (оставлена метрика без порога) и "504 rate" заменен на "доля контролируемых таймаутов (HTTP-статус TBD по ADR)". | Проверка по источникам: сопоставление с CASE.md, context.md, problem.md; учтен статус ADR (proposed). | Не вводили новые SLO/SLA/RPS; не фиксировали конкретный HTTP-код для таймаута; не добавляли новые сценарии сверх исходных. |
 
 ## Независимое ревью
 
 | Замечание другой команды | Где исправили | Evidence |
 |---|---|---|
-| Двусмысленность |  |  |
-| Непроверяемое требование |  |  |
-| Пропущенный риск или источник |  |  |
+| Двусмысленность | few_shot/experiment.md — раздел «Итоги независимого ревью» | Зафиксировано, что эффект Few-shot смешан с прямой инструкцией по классификации, поэтому трудно отделить эффект примеров. См. изменения в файле practices/practice_02/few_shot/experiment.md.
+| Непроверяемое требование/утверждение | few_shot/experiment.md — раздел «Итоги независимого ревью» | Нельзя подтвердить, что улучшение произошло именно благодаря Few-shot, потому что контрольный запуск без примеров не проводился. См. добавленный пункт об отсутствии контрольного прогона.
+| Пропущенный источник/evidence | few_shot/tests_load_candidate.md — сценарий LT-1 | 100% HTTP 413 не является отдельным требованием CASE.md, а является derived acceptance criterion из API-1. См. изменённые строки в LT-1 Hard Requirements.
