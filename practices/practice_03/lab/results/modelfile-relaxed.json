@@ -1,0 +1,40 @@
+{
+  "request": {
+    "model": "itmo-local-relaxed",
+    "messages": [
+      {
+        "role": "user",
+        "content": "# Notify Mini\nУчебный сервис подписки. Подписчики хранятся в памяти процесса.\nВ service.py функция subscribe добавляет непустое имя в множество.\nПовторное добавление имени не создаёт дубликат.\n\nПроверка: make test.\nЗависимости: стандартная библиотека Python 3.10+.\n\n\nКакая CI-система запускает тесты проекта?"
+      }
+    ],
+    "stream": false,
+    "think": false,
+    "options": {
+      "temperature": 0.2,
+      "seed": 42,
+      "num_ctx": 4096,
+      "num_predict": 512
+    }
+  },
+  "response": {
+    "model": "itmo-local-relaxed",
+    "created_at": "2026-09-25T07:49:18.523049Z",
+    "message": {
+      "role": "assistant",
+      "content": "В предоставленном контексте **отсутствует информация** о том, какая конкретная система непрерывной интеграции (CI) используется для запуска тестов в проекте Notify Mini.\n\nУказано только требование: «Проверка: make test», но не сказано, на какой платформе это выполняется.\n\n*Предположение*: В подобных учебных проектах часто используются GitHub Actions или GitLab CI, однако без явного указания в документации это остается догадкой."
+    },
+    "done": true,
+    "done_reason": "stop",
+    "total_duration": 22594687125,
+    "load_duration": 10770017834,
+    "prompt_eval_count": 205,
+    "prompt_eval_cached_count": 0,
+    "prompt_eval_duration": 1221662000,
+    "eval_count": 95,
+    "eval_duration": 10569763000
+  },
+  "wall_seconds": 22.697934291994898,
+  "load_seconds": 10.770017834,
+  "total_seconds": 22.594687125,
+  "decode_tokens_per_second": 8.987902566973355
+}

@@ -2,6 +2,8 @@
   "$schema": "https://opencode.ai/config.json",
   "model": "ollama/itmo-agent",
   "small_model": "ollama/itmo-agent",
+  "enabled_providers": ["ollama"],
+  "disabled_providers": ["vsellm"],
   "provider": {
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
@@ -15,6 +17,9 @@
           "limit": {
             "context": 65536,
             "output": 4096
+          },
+          "options": {
+            "reasoningEffort": "none"
           }
         }
       }
@@ -35,4 +40,3 @@
     }
   }
 }
-
