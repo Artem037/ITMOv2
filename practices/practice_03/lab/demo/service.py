@@ -7,3 +7,11 @@ def subscribe(name):
     subscribers.add(name.strip())
     return {"subscribed": True}
 
+
+def unsubscribe(name):
+    cleaned_name = name.strip()
+    if not cleaned_name:
+        raise ValueError("empty name")
+    was_subscribed = cleaned_name in subscribers
+    subscribers.discard(cleaned_name)
+    return {"unsubscribed": was_subscribed}

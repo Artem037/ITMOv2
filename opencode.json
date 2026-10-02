@@ -1,6 +1,14 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "build",
+  "mcp": {
+    "fetch": {
+      "type": "local",
+      "command": ["/opt/homebrew/bin/uvx", "mcp-server-fetch@2026.8.18"],
+      "enabled": true,
+      "timeout": 15000
+    }
+  },
   "provider": {
     "vsellm": {
       "npm": "@ai-sdk/openai-compatible",
