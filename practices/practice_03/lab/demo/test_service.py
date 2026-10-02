@@ -40,6 +40,18 @@ class SubscribeTest(unittest.TestCase):
             service.unsubscribe("  ")
         self.assertEqual(subscribers, set())
 
+    def test_list_subscribers_sorted_without_mutation(self):
+        subscribe("Zoe")
+        subscribe("Ann")
+        original_subscribers = subscribers.copy()
+        self.assertTrue(callable(getattr(service, "list_subscribers", None)))
+        self.assertEqual(service.list_subscribers(), ["Ann", "Zoe"])
+        self.assertEqual(subscribers, original_subscribers)
+
+    def test_list_subscribers_empty(self):
+        self.assertTrue(callable(getattr(service, "list_subscribers", None)))
+        self.assertEqual(service.list_subscribers(), [])
+
 
 if __name__ == "__main__":
     unittest.main()

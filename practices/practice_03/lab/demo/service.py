@@ -15,3 +15,7 @@ def unsubscribe(name):
     was_subscribed = cleaned_name in subscribers
     subscribers.discard(cleaned_name)
     return {"unsubscribed": was_subscribed}
+
+
+def list_subscribers():
+    return sorted(subscribers)
