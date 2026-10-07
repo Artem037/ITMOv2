@@ -1,0 +1,105 @@
+{
+  "departure_window": {
+    "start": "2026-10-14T06:00:00+03:00",
+    "end": "2026-10-14T12:00:00+03:00"
+  },
+  "timezone": "Europe/Moscow",
+  "max_options": 5,
+  "boarding_buffer_minutes": 10,
+  "sources": [
+    {
+      "id": "synthetic",
+      "url": "https://example.org/synthetic-timetable",
+      "checked_at": "2026-10-07T12:00:00+03:00",
+      "valid_dates": [
+        "2026-10-14"
+      ],
+      "mode": "fixture",
+      "verified": false
+    }
+  ],
+  "chains": [
+    {
+      "id": "forest-connection",
+      "origin": "Учебный старт В",
+      "destination": "Учебная лесная точка Г",
+      "coverage": "complete",
+      "access": {
+        "minutes": 20,
+        "description": "Пешком и метро до автобуса",
+        "basis": "Вымышленная оценка для теста"
+      },
+      "egress": {
+        "minutes": 10,
+        "description": "Пешком до цели",
+        "basis": "Вымышленная оценка для теста"
+      },
+      "stages": [
+        {
+          "from_stop": "rail-c",
+          "to_stop": "rail-d",
+          "from_name": "Учебная платформа В",
+          "to_name": "Учебная платформа Г",
+          "trips": [
+            {
+              "id": "t0",
+              "mode": "suburban",
+              "label": "Учебная электричка t0",
+              "departure": "2026-10-14T08:00:00+03:00",
+              "arrival": "2026-10-14T08:50:00+03:00",
+              "source_id": "synthetic"
+            },
+            {
+              "id": "t1",
+              "mode": "suburban",
+              "label": "Учебная электричка t1",
+              "departure": "2026-10-14T08:30:00+03:00",
+              "arrival": "2026-10-14T09:20:00+03:00",
+              "source_id": "synthetic"
+            },
+            {
+              "id": "t2",
+              "mode": "suburban",
+              "label": "Учебная электричка t2",
+              "departure": "2026-10-14T09:30:00+03:00",
+              "arrival": "2026-10-14T10:20:00+03:00",
+              "source_id": "synthetic"
+            }
+          ]
+        },
+        {
+          "from_stop": "bus-a",
+          "to_stop": "bus-b",
+          "from_name": "Учебная остановка А",
+          "to_name": "Учебная остановка Б",
+          "trips": [
+            {
+              "id": "b0",
+              "mode": "bus",
+              "label": "Учебный автобус b0",
+              "departure": "2026-10-14T09:36:00+03:00",
+              "arrival": "2026-10-14T10:11:00+03:00",
+              "source_id": "synthetic"
+            },
+            {
+              "id": "b1",
+              "mode": "bus",
+              "label": "Учебный автобус b1",
+              "departure": "2026-10-14T10:30:00+03:00",
+              "arrival": "2026-10-14T11:05:00+03:00",
+              "source_id": "synthetic"
+            }
+          ]
+        }
+      ],
+      "transfers": [
+        {
+          "from_stop": "rail-d",
+          "to_stop": "bus-a",
+          "walk_minutes": 8,
+          "buffer_minutes": 9
+        }
+      ]
+    }
+  ]
+}

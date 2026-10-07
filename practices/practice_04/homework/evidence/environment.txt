@@ -1,0 +1,8 @@
+Сессия OpenCode ses_ee7de9776ffeblCTknE6hF7LR8.
+Фактическое чтение AGENTS.md: True.
+Фактическая загрузка transit-trip-planner: True.
+Фактические MCP-вызовы: 3, см. mcp.txt.
+Конфигурация подключает fetch для чтения источников и собственный trip_planner для арифметики.
+Runner проверяет старое демо, новую домашку (включая stdio MCP) и hook без сети.
+Hook на новых путях: unit RED 1 fail/5 pass → GREEN 6 pass.
+Фактический FAIL/PASS после правки сохраняется отдельно в hook.txt.

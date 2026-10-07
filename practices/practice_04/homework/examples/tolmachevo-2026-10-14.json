@@ -1,0 +1,108 @@
+{
+  "departure_window": {
+    "start": "2026-10-14T06:00:00+03:00",
+    "end": "2026-10-14T10:00:00+03:00"
+  },
+  "timezone": "Europe/Moscow",
+  "max_options": 5,
+  "boarding_buffer_minutes": 10,
+  "sources": [
+    {
+      "id": "szppk",
+      "url": "https://ticket.ppk-piter.ru/passenger/schedule/?from=036002&to=072102&when=2026-10-14",
+      "checked_at": "2026-10-08T01:44:25+03:00",
+      "valid_dates": [
+        "2026-10-14"
+      ],
+      "mode": "manual",
+      "verified": true
+    },
+    {
+      "id": "metro",
+      "url": "https://metro.spb.ru/rejimrabotystancii.html?v=1",
+      "checked_at": "2026-10-08T01:44:25+03:00",
+      "valid_dates": [
+        "2026-10-14"
+      ],
+      "mode": "manual",
+      "verified": true
+    },
+    {
+      "id": "walking-map",
+      "url": "https://brouter.de/brouter?lonlats=29.8967895%2C58.8646210%7C29.985616%2C58.824440&profile=hiking-mountain&alternativeidx=0&format=geojson",
+      "checked_at": "2026-10-08T01:44:25+03:00",
+      "valid_dates": [
+        "2026-10-14"
+      ],
+      "mode": "manual",
+      "verified": true
+    }
+  ],
+  "chains": [
+    {
+      "id": "tolmachevo-walk",
+      "origin": "Альпийский переулок, точка пользователя",
+      "destination": "Малый Лужский каньон у Плоского",
+      "coverage": "complete",
+      "access": {
+        "minutes": 70,
+        "description": "Пешком до Проспекта Славы → линия 5 до Звенигородской → переход на Пушкинскую → линия 1 до Балтийской → вокзал",
+        "basis": "Оценка: 25 мин пешком (около 1,2 км), 40 мин метро с ожиданием и переходом, 5 мин от метро до посадки; ещё 10 мин запаса добавляются отдельно",
+        "source_ids": [
+          "metro"
+        ]
+      },
+      "egress": {
+        "minutes": 115,
+        "description": "Выход со станции Толмачёво и около 9,2 км пешком до каньона",
+        "basis": "BRouter по пешеходной сети: 9226 м, 6587 с; округлено до 110 мин, плюс 5 мин на выход с платформы. Это оценка, без остановок на отдых",
+        "source_ids": [
+          "walking-map"
+        ]
+      },
+      "stages": [
+        {
+          "from_stop": "szppk:036002",
+          "to_stop": "szppk:072102",
+          "from_name": "Санкт-Петербург, Балтийский вокзал",
+          "to_name": "Толмачёво",
+          "trips": [
+            {
+              "id": "6105",
+              "mode": "suburban",
+              "label": "Электричка 6105",
+              "departure": "2026-10-14T07:15:00+03:00",
+              "arrival": "2026-10-14T09:18:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "7451",
+              "mode": "suburban",
+              "label": "Электричка 7451",
+              "departure": "2026-10-14T08:37:00+03:00",
+              "arrival": "2026-10-14T10:00:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "6111",
+              "mode": "suburban",
+              "label": "Электричка 6111",
+              "departure": "2026-10-14T08:43:00+03:00",
+              "arrival": "2026-10-14T10:44:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "7413",
+              "mode": "suburban",
+              "label": "Электричка 7413",
+              "departure": "2026-10-14T09:36:00+03:00",
+              "arrival": "2026-10-14T11:41:00+03:00",
+              "source_id": "szppk"
+            }
+          ]
+        }
+      ],
+      "transfers": []
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+Реальный OpenCode run: skill + собственный MCP
+Session: ses_ee7de9776ffeblCTknE6hF7LR8
+OpenCode 1.18.32; MCP SDK 2.3.0; model vsellm/openai/gpt-5.
+Вход: tests/fixtures/rare_connections.json, вымышленные данные.
+
+Tool: trip_planner_plan_departures; callID: call_P1AQzMFouiNVbzfOpckuuJIH
+boarding_buffer_minutes=10; state=completed
+{"status": "ok", "data_kind": "fixture"}
+{"leave_at": "2026-10-14T09:35:00+03:00", "arrive_at": "2026-10-14T11:50:00+03:00", "total_minutes": 135.0, "waiting_minutes": 10}
+
+Tool: trip_planner_plan_departures; callID: call_qmgVj2AnxI8qepPVX8ews5LG
+boarding_buffer_minutes=-1; state=error
+Error executing tool plan_departures: 1 validation error for plan_departuresArguments
+request.boarding_buffer_minutes
+  Input should be greater than or equal to 0 [type=greater_than_equal, input_value=-1, input_type=int]
+    For further information visit https://errors.pydantic.dev/2.13/v/greater_than_equal
+
+Tool: trip_planner_plan_departures; callID: call_UC4siyINfDOJXCjmnLFtemzY
+boarding_buffer_minutes=10; state=completed
+{"status": "ok", "data_kind": "fixture"}
+{"leave_at": "2026-10-14T09:35:00+03:00", "arrive_at": "2026-10-14T11:50:00+03:00", "total_minutes": 135.0, "waiting_minutes": 10}

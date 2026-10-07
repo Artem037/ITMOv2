@@ -4,7 +4,26 @@
   "mcp": {
     "fetch": {
       "type": "local",
-      "command": ["/opt/homebrew/bin/uvx", "mcp-server-fetch@2026.8.18"],
+      "command": [
+        "/opt/homebrew/bin/uvx",
+        "mcp-server-fetch@2026.8.18"
+      ],
+      "enabled": true,
+      "timeout": 15000
+    },
+    "trip_planner": {
+      "type": "local",
+      "command": [
+        "uv",
+        "run",
+        "--directory",
+        "practices/practice_04/homework",
+        "--locked",
+        "--offline",
+        "python",
+        "-m",
+        "trip_planner.server"
+      ],
       "enabled": true,
       "timeout": 15000
     }

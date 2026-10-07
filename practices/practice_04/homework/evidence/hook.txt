@@ -1,0 +1,66 @@
+Реальная демонстрация OpenCode hook на новой домашке
+Session: ses_ee775e71fffeTa3d5qH7eRb5lE
+Изменение: только ожидаемое total_minutes в test_departure_is_0935:135→134→135.
+
+Tool: apply_patch; callID: call_QDtP9AnpjNSijjgiKJ62FsRy
+{"status": "FAIL", "exitCode": 2, "timedOut": false}
+ce_cannot_confirm_a_whole_trip) ... ok
+test_unverified_and_wrong_date_are_not_confirmed (test_planner.PlannerTests.test_unverified_and_wrong_date_are_not_confirmed) ... ok
+test_cli_missing_file_is_actionable_without_traceback (test_sources.SourceTests.test_cli_missing_file_is_actionable_without_traceback) ... ok
+test_duplicate_json_keys_are_not_silently_overwritten (test_sources.SourceTests.test_duplicate_json_keys_are_not_silently_overwritten) ... ok
+test_import_never_marks_unverified_source_verified (test_sources.SourceTests.test_import_never_marks_unverified_source_verified) ... ok
+test_import_preserves_provenance_and_fixture_label (test_sources.SourceTests.test_import_preserves_provenance_and_fixture_label) ... ok
+test_missing_and_broken_input_report_input_error (test_sources.SourceTests.test_missing_and_broken_input_report_input_error) ... ok
+test_plan_cli_uses_calculator_and_labels_fixture (test_sources.SourceTests.test_plan_cli_uses_calculator_and_labels_fixture) ... ok
+test_validate_cli_writes_normalized_request (test_sources.SourceTests.test_validate_cli_writes_normalized_request) ... ok
+
+======================================================================
+FAIL: test_departure_is_0935 (test_planner.PlannerTests.test_departure_is_0935)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/.codex/worktrees/homework4-trip-planner/ITMOv2/practices/practice_04/homework/tests/test_planner.py", line 55, in test_departure_is_0935
+    self.assertEqual(option["total_minutes"], 134)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 135.0 != 134
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.559s
+
+FAILED (failures=1)
+make: *** [test] Error 1
+
+
+Tool: apply_patch; callID: call_vwiN3PM5pzSmHopp8PXO3RgZ
+{"status": "PASS", "exitCode": 0, "timedOut": false}
+k
+test_unverified_and_wrong_date_are_not_confirmed (test_planner.PlannerTests.test_unverified_and_wrong_date_are_not_confirmed) ... ok
+test_cli_missing_file_is_actionable_without_traceback (test_sources.SourceTests.test_cli_missing_file_is_actionable_without_traceback) ... ok
+test_duplicate_json_keys_are_not_silently_overwritten (test_sources.SourceTests.test_duplicate_json_keys_are_not_silently_overwritten) ... ok
+test_import_never_marks_unverified_source_verified (test_sources.SourceTests.test_import_never_marks_unverified_source_verified) ... ok
+test_import_preserves_provenance_and_fixture_label (test_sources.SourceTests.test_import_preserves_provenance_and_fixture_label) ... ok
+test_missing_and_broken_input_report_input_error (test_sources.SourceTests.test_missing_and_broken_input_report_input_error) ... ok
+test_plan_cli_uses_calculator_and_labels_fixture (test_sources.SourceTests.test_plan_cli_uses_calculator_and_labels_fixture) ... ok
+test_validate_cli_writes_normalized_request (test_sources.SourceTests.test_validate_cli_writes_normalized_request) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.526s
+
+OK
+✔ checks homework code, tests, dependencies, skill and environment configuration (39.929792ms)
+✔ ignores homework evidence, reports, environments and files outside project (1.244125ms)
+✔ returns a real failing runner result to the agent without losing edit output (3.515708ms)
+✔ checks apply_patch changes from an absolute project path and reports PASS (3.422584ms)
+✔ ignores evidence edits and reads, so logging cannot recursively run the check (0.691291ms)
+✔ reports a timeout as FAIL and stops a stuck runner (109.416541ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 204.0845
+
+
+После демонстрации исходный test_planner.py совпадает побайтно с резервной копией.
+Runner и production code в ходе демонстрации не менялись.

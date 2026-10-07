@@ -20,6 +20,31 @@ def calculate(data):
 
 
 class PlannerTests(unittest.TestCase):
+    def test_same_departure_keeps_only_the_best_route(self):
+        data = request()
+        trips = data["chains"][0]["stages"][0]["trips"]
+        slow = copy.deepcopy(trips[0])
+        slow.update(id="slower-bus", arrival="2026-10-14T12:40:00+03:00")
+        trips.insert(0, slow)
+        options = calculate(data)["options"]
+        self.assertEqual(len(options), 1)
+        self.assertEqual(options[0]["total_minutes"], 135)
+
+    def test_unknown_access_is_missing_data_not_zero_minutes(self):
+        data = request()
+        data["chains"][0]["access"]["minutes"] = None
+        result = calculate(data)
+        self.assertEqual(result["status"], "needs_data")
+        self.assertEqual(result["options"], [])
+
+    def test_unverified_access_source_cannot_confirm_a_whole_trip(self):
+        data = request()
+        source = copy.deepcopy(data["sources"][0])
+        source.update(id="map", verified=False)
+        data["sources"].append(source)
+        data["chains"][0]["access"]["source_ids"] = ["map"]
+        self.assertEqual(calculate(data)["status"], "needs_data")
+
     def test_departure_is_0935(self):
         result = calculate(request())
         self.assertEqual(result["status"], "ok")

@@ -54,7 +54,7 @@ class Source(Model):
 
 
 class Access(Model):
-    minutes: Minutes
+    minutes: Minutes | None
     description: Text
     basis: Text
     source_ids: list[str] = Field(default_factory=list)

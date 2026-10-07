@@ -1,6 +1,6 @@
 """Расчёт по переданным цепочкам: без сети и скрытых расписаний."""
 
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 from trip_planner.models import Chain, PlanRequest, PlanResult, Trip
 
@@ -129,20 +129,11 @@ def _connections(chain, available, boarding, window):
 
 
 def _identity(option):
+    """Одно время выхода — лучший путь, а не несколько худших дублей."""
     return (
         option["origin"],
         option["destination"],
-        tuple(
-            (
-                event["kind"],
-                event["start"],
-                event["end"],
-                event.get("from_stop"),
-                event.get("to_stop"),
-                event.get("trip_id"),
-            )
-            for event in option["timeline"]
-        ),
+        option["leave_at"],
     )
 
 
@@ -153,7 +144,11 @@ def _rank(option):
         option["transfer_count"],
         option["leave_at"],
         option["chain_id"],
-        _identity(option),
+        tuple(
+            event["trip_id"]
+            for event in option["timeline"]
+            if event["kind"] == "ride"
+        ),
     )
 
 
@@ -164,6 +159,10 @@ def plan_departures(request: PlanRequest) -> PlanResult:
     incomplete = False
     best = {}
     for chain in request.chains:
+        if chain.access.minutes is None or chain.egress.minutes is None:
+            incomplete = True
+            warnings.append(f"{chain.id}: неизвестно время подхода или выхода")
+            continue
         if chain.coverage != "complete":
             incomplete = True
             warnings.append(f"{chain.id}: покрытие {chain.coverage}")
@@ -190,6 +189,21 @@ def plan_departures(request: PlanRequest) -> PlanResult:
             request.boarding_buffer_minutes,
             request.departure_window,
         ):
+            access_date = datetime.fromisoformat(option["leave_at"]).date()
+            egress_date = datetime.fromisoformat(option["arrive_at"]).date()
+            grounds = [
+                (chain.access, access_date),
+                (chain.egress, egress_date),
+            ]
+            if any(
+                not sources[ref].verified
+                or day not in sources[ref].valid_dates
+                for segment, day in grounds
+                for ref in segment.source_ids
+            ):
+                incomplete = True
+                warnings.append(f"{chain.id}: подход не подтверждён на дату")
+                continue
             key = _identity(option)
             if key not in best or _rank(option) < _rank(best[key]):
                 best[key] = option

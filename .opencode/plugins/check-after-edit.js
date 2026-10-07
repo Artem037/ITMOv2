@@ -16,8 +16,16 @@ export default async function CheckAfterEdit({ directory }, options = {}) {
     }
     return paths.filter(p => typeof p === 'string').some(p => {
       const local = relative(root, resolve(root, p));
+      const homework = 'practices/practice_04/homework/';
       return local.startsWith('practices/practice_03/lab/demo/') ||
-        local.startsWith('scripts/') || local === '.pre-commit-config.yaml';
+        local.startsWith(`${homework}trip_planner/`) ||
+        local.startsWith(`${homework}tests/`) ||
+        ['pyproject.toml', 'uv.lock', 'Makefile'].some(name => local === homework + name) ||
+        local.startsWith('.opencode/skills/transit-trip-planner/') ||
+        local === '.opencode/plugins/check-after-edit.js' ||
+        local === 'tests/check-after-edit.test.mjs' ||
+        ['opencode.json', 'Makefile', 'AGENTS.md', '.pre-commit-config.yaml'].includes(local) ||
+        local.startsWith('scripts/');
     });
   }
 
