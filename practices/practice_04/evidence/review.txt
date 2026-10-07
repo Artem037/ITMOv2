@@ -17,7 +17,7 @@ OUTPUT
   - /Users/pip/.codex/worktrees/practice4-b/ITMOv2/practices/practice_03/lab/demo/test_service.py
 - Доказательства:
   - README.md (строки 9–10): описывает, что list_subscribers() “возвращает имена в виде отсортированного списка, не изменяя множество подписчиков”.
-  - service.py (строки 20–21): реализация list_subscribers: 
+  - service.py (строки 20–21): реализация list_subscribers:
     - 20: def list_subscribers():
     - 21:     return sorted(subscribers)
   - test_service.py (строки 43–54): два теста на сортировку, немутацию и пустой список.
@@ -104,7 +104,7 @@ index 750649f..87a376c 100644
  `ValueError`, как и при подписке.
 +Функция `list_subscribers()` возвращает имена в виде отсортированного
 +списка, не изменяя множество подписчиков.
- 
+
  Проверка: make test.
  Зависимости: стандартная библиотека Python 3.10+.
 diff --git a/practices/practice_03/lab/demo/service.py b/practices/practice_03/lab/demo/service.py
@@ -126,7 +126,7 @@ index 50ecd59..24ddaab 100644
 @@ -40,6 +40,18 @@ class SubscribeTest(unittest.TestCase):
              service.unsubscribe("  ")
          self.assertEqual(subscribers, set())
- 
+
 +    def test_list_subscribers_sorted_without_mutation(self):
 +        subscribe("Zoe")
 +        subscribe("Ann")
@@ -139,7 +139,7 @@ index 50ecd59..24ddaab 100644
 +        self.assertTrue(callable(getattr(service, "list_subscribers", None)))
 +        self.assertEqual(service.list_subscribers(), [])
 +
- 
+
  if __name__ == "__main__":
      unittest.main()
 

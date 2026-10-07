@@ -43,20 +43,20 @@ OUTPUT <path>/Users/pip/.codex/worktrees/practice4-b/ITMOv2/.opencode/skills/tes
 <type>file</type>
 <content>
 1: # Writing Good Tests
-2: 
+2:
 3: **Load this reference when:** writing or changing tests, adding mocks, or
 4: adding cleanup/helper methods for tests.
-5: 
+5:
 6: ## Overview
-7: 
+7:
 8: A test exists to catch a specific break. Two principles govern everything
 9: here:
-10: 
+10:
 11: ```
 12: 1. Every test names the break it catches
 13: 2. Every test exercises the real thing
 14: ```
-15: 
+15:
 16: Strict TDD produces both naturally: a test written first and watched
 17: failing against real code has already proven it ca
 
