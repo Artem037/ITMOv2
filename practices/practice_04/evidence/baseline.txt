@@ -1,0 +1,19 @@
+Baseline at 2026-10-07T19:59:42.635363+00:00
+Command: make -C practices/practice_03/lab/demo test
+Branch: practice-04-b; HEAD: 2f76f48
+python3 -m unittest -v
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+
+Exit code: 0

@@ -1,0 +1,141 @@
+Source: OpenCode 1.18.32, session ses_ee80befecffecohpizLCmwXvN5
+Model: vsellm/openai/gpt-5
+
+TOOL skill
+INPUT {"name": "test-driven-development"}
+STATUS completed
+OUTPUT <skill_content name="test-driven-development">
+# Skill: test-driven-development
+
+# Test-Driven Development (TDD)
+
+## Overview
+
+Write the test first. Watch it fail. Write minimal code to pass.
+
+**Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.
+
+**Violating the letter of the rules is violating the spirit of the rules.**
+
+## When to Use
+
+**Always:**
+- New features
+- Bug fixes
+- Refactoring
+- Behavior changes
+
+**Exceptions (ask your human partner):**
+- Throwaway prototypes
+- Generated code
+- Configuration files
+
+Thinking "skip TDD just this once"? Stop. That's rationalization.
+
+## The Iron Law
+
+```
+
+TOOL read
+INPUT {"filePath": "/Users/pip/.codex/worktrees/practice4-b/ITMOv2/.opencode/skills/test-driven-development/writing-good-tests.md", "limit": 2000}
+STATUS completed
+OUTPUT <path>/Users/pip/.codex/worktrees/practice4-b/ITMOv2/.opencode/skills/test-driven-development/writing-good-tests.md</path>
+<type>file</type>
+<content>
+1: # Writing Good Tests
+2: 
+3: **Load this reference when:** writing or changing tests, adding mocks, or
+4: adding cleanup/helper methods for tests.
+5: 
+6: ## Overview
+7: 
+8: A test exists to catch a specific break. Two principles govern everything
+9: here:
+10: 
+11: ```
+12: 1. Every test names the break it catches
+13: 2. Every test exercises the real thing
+14: ```
+15: 
+16: Strict TDD produces both naturally: a test written first and watched
+17: failing against real code has already proven it ca
+
+AGENT EXPLANATION
+Цель и действия:
+1) Подключил skill test-driven-development, чтобы опираться на правила TDD при анализе поведения демо.
+Фактический вызов: functions.skill with name="test-driven-development".
+Результат: skill загружен; база навыка: /Users/pip/.codex/worktrees/practice4-b/ITMOv2/.opencode/skills/test-driven-development.
+
+2) Прочитал руководство по тестам из skill.
+Фактический вызов: functions.read filePath="/Users/pip/.codex/worktrees/practice4-b/ITMOv2/.opencode/skills/test-driven-development/writing-good-tests.md".
+Результат: прочитаны 198 строк; ключевые принципы: «Every test names the break it catches» и «Exercise the real thing».
+
+3) Прочитал AGENTS.md и файлы демо (README.md, service.py, test_service.py, STYLE_GUIDE.md).
+Фактические вызовы:
+- functions.read filePath="/Users/pip/.codex/worktrees/practice4-b/ITMOv2/AGENTS.md"
+- functions.read filePath="/Users/pip/.codex/worktrees/practice4-b/ITMOv2/practices/practice_03/lab/demo/README.md"
+- functions.read filePath="/Users/pip/.codex/worktrees/practice4-b/ITMOv2/practices/practice_03/lab/demo/service.py"
+- functions.read filePath="/Users/pip/.codex/worktrees/practice4-b/ITMOv2/practices/practice_03/lab/demo/test_service.py"
+- functions.read filePath="/Users/pip/.codex/worktrees/practice4-b/ITMOv2/practices/practice_03/lab/demo/STYLE_GUIDE.md"
+
+4) Получил официальную документацию Python по set.discard через MCP fetch. Из-за длины страницы использовал параметры start_index/max_length.
+Фактические вызовы MCP fetch (URL: https://docs.python.org/3/library/stdtypes.html#set.discard):
+- functions.fetch_fetch url="https://docs.python.org/3/library/stdtypes.html#set.discard", max_length=4000
+- functions.fetch_fetch url="https://docs.python.org/3/library/stdtypes.html#set.discard", start_index=4000, max_length=4000
+- functions.fetch_fetch url="https://docs.python.org/3/library/stdtypes.html#set.discard", start_index=8000, max_length=4000
+- functions.fetch_fetch url="https://docs.python.org/3/library/stdtypes.html#set.discard", start_index=12000, max_length=4000
+- functions.fetch_fetch url="https://docs.python.org/3/library/stdtypes.html#set.discard", start_index=16000, max_length=4000
+- functions.fetch_fetch url="https://docs.python.org/3/library/stdtypes.html#set.discard", start_index=20000, max_length=4000
+- functions.fetch_fetch url="https://docs.python.org/3/library/stdtypes.html#set.discard", start_index=146000, max_length=6000  ← этот вызов содержит нужный раздел Set Types и строку про discard
+
+Ограничения проекта (из AGENTS.md и README):
+- Меняем только Notify Mini в practices/practice_03/lab/demo. Подписчики — только в памяти процесса; никаких БД/веб-серверов.
+- Зависимости — только стандартная библиотека Python 3.10+.
+- Перед изменениями Python-файлов читать STYLE_GUIDE.md и следовать ему.
+- Для изменений поведения: загрузить skill test-driven-development; сначала добавить узко сфокусированный тест, увидеть ожидаемое падение, затем реализовать поведение.
+- Для важного поведения стандартной библиотеки Python — использовать MCP fetch и указывать URL, факт и сам вызов.
+- Верификация перед завершением изменения: make test в каталоге демо и git diff --check. pre-commit гоняет Ruff и тесты для демо-файлов.
+- Не использовать в ветках слово codex. Интеграционная ветка: practice4-unsubscribe. Держать изменения локально, не пушить без запроса. Объяснять шаги по-русски.
+
+Поведение A/B в демо (из README и тестов):
+- Подписка: subscribe добавляет trimmed имя в множество; повтор — без дубликатов.
+- Отписка: unsubscribe обрезает пробелы; A: если имя было в множестве — возвращает {"unsubscribed": True} и удаляет; B: если имени нет — безопасно, не кидает исключение, возвращает {"unsubscribed": False}.
+- Пустое имя и в subscribe, и в unsubscribe — ValueError.
+- list_subscribers() возвращает отсортированный список без мутации множества.
+
+Конкретное правило стиля и место в коде:
+- Правило: «Separate top-level function definitions with two blank lines» (STYLE_GUIDE.md, пункт 3).
+- В service.py это соблюдено: две пустые строки между верхнеуровневыми объявлениями. Пример: после строки 1 (subscribers = set()) идут две пустые строки (2–3), затем def subscribe на строке 4; аналогично перед def unsubscribe и def list_subscribers поддерживается разделение. Также соблюдается snake_case: переменная cleaned_name в unsubscribe (строка 12) подтверждает правило пункта 2.
+
+Что требует skill test-driven-development:
+- Непреложно: «NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST». При изменении или добавлении поведения сначала написать минимальный тест, наблюдать корректное падение (RED), затем минимальную реализацию (GREEN), затем рефакторинг с сохранением зелёного статуса.
+- Из writing-good-tests.md: каждый тест должен «называть» ломку, которую ловит, и упражнять реальную функциональность. Ожидания должны быть выведены независимо от кода под тестом.
+
+Почему set.discard подходит для unsubscribe отсутствующего имени:
+- Требование B: «missing is safe» — отсутствие подписчика не должно приводить к исключению, а результат должен быть {"unsubscribed": False}. В тесте test_unsubscribe_missing_is_safe это закреплено: ловится KeyError как недопустимый, и ожидается unsubscribed=False, а множество остаётся пустым.
+- В service.py (строки 15–17) реализовано:
+  - was_subscribed = cleaned_name in subscribers
+  - subscribers.discard(cleaned_name)
+  - return {"unsubscribed": was_subscribed}
+- discard в отличие от remove не поднимает KeyError при отсутствии элемента. Это ровно соответствует безопасной семантике «удали, если есть; иначе ничего не делай».
+- Факт из официальной документации Python (получено MCP fetch, URL см. выше, вызов со start_index=146000):
+  - Цитата раздела Set Types — set, frozenset: “set.discard(elem, /): Remove element elem from the set if it is present.” То есть discard удаляет элемент, только если он присутствует, и не бросает исключений при отсутствии.
+- Благодаря проверке membership перед вызовом discard код корректно возвращает True/False, а discard обеспечивает отсутствие KeyError, полностью соответствуя тесту и README.
+
+Краткое сопоставление кода и требований:
+- Тест test_unsubscribe_missing_is_safe в test_service.py (строки 30–36) явно запрещает KeyError и ожидает {"unsubscribed": False}. Использование subscribers.discard(cleaned_name) в service.py (строка 16) и вычисление was_subscribed через оператор in (строка 15) удовлетворяет этому контракту.
+- Это решение минимально, опирается на стандартную библиотеку, не меняет состояние при отсутствии элемента и соответствует стилю проекта.
+
+Ссылки и вызовы:
+- Skill: functions.skill name="test-driven-development".
+- Read skill doc: functions.read filePath="/Users/pip/.codex/worktrees/practice4-b/ITMOv2/.opencode/skills/test-driven-development/writing-good-tests.md".
+- Read AGENTS.md/README/service/test/style: functions.read по путям, указанным выше.
+- MCP fetch (официальная документация): URL https://docs.python.org/3/library/stdtypes.html#set.discard.
+  - Ключевой вызов, содержащий раздел Set Types и определение discard: functions.fetch_fetch url="https://docs.python.org/3/library/stdtypes.html#set.discard", start_index=146000, max_length=6000.
+  - Дополнительные вызовы для навигации по длинной странице: см. перечисление выше (начальный без start_index и последовательные с 4000, 8000, 12000, 16000, 20000).
+
+Вывод:
+- Ограничения проекта соблюдены: только stdlib, память процесса, следование STYLE_GUIDE, использование TDD-навыка и MCP fetch для подтверждения поведения библиотек.
+- Поведение A/B unsubscribe реализовано строго по README и тестам.
+- Стиль соблюдён с конкретным правилом и подтверждением в коде.
+- discard — правильный выбор для безопасной отписки отсутствующего имени, что подтверждается официальной документацией Python и текущими тестами демо.

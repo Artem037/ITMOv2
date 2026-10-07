@@ -1,0 +1,363 @@
+New educational replay on 2026-10-07; NOT original development history.
+Source: OpenCode 1.18.32; session ses_ee8072094ffecoFPUVKsZngS1A
+
+TOOL skill
+INPUT {"name": "test-driven-development"}
+STATUS completed
+OUTPUT
+<skill_content name="test-driven-development">
+# Skill: test-driven-development
+
+# Test-Driven Development (TDD)
+
+## Overview
+
+Write the test first. Watch it fail. Write minimal code to pass.
+
+**Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.
+
+**Violating the letter of the rules is violating the spirit of the rules.**
+
+## When to Use
+
+**Always:**
+- New features
+- Bug fixes
+- Refactoring
+- Behavior changes
+
+**Exceptions (ask your human partner):**
+- Throwaway prototypes
+- Generated code
+- Configuration files
+
+Thinking "skip TDD just this once"? Stop. That's rationalization.
+
+## The Iron Law
+
+```
+NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
+```
+
+Write code before the test? Delete it. Start over.
+
+**No exceptions:**
+- Don't keep it as "reference"
+- Don't "adapt" it while writing tests
+- Don't look at it
+- Delete means delete
+
+Implement fresh from tests. Period.
+
+## Red-Green-Refactor
+
+```dot
+digraph tdd_cycle {
+    rankdir=LR;
+    red [label="RED\nWrite failing test", shape=box, style=filled, fillcolor="#ffcccc"];
+    verify_red [label="Verify fails\ncorrectly", shape=diamond];
+    green [label="GREEN\nMinimal code", shape=box, style=filled, fillcolor="#ccffcc"];
+    verify_green [label="Verify passes\nAll green", shape=diamond];
+    refactor [label="REFACTOR\nClean up", shape=box, style=filled, fillcolor="#ccccff"];
+    next [label="Next", shape=ellipse];
+
+    red -> verify_red;
+    verify_red -> green [label="yes"];
+    verify_red -> red [label="wrong\nfailure"];
+    green -> verify_green;
+    verify_green -> refactor [label="yes"];
+    verify_green -> green [label="no"];
+    refactor -> verify_green [label="stay\ngreen"];
+    verify_green -> next;
+    next -> red;
+}
+```
+
+### RED - Write Failing Test
+
+Write one minimal test showing what should happen.
+
+<Good>
+```typescript
+test('retries failed operations 3 times', async () => {
+  let attempts = 0;
+  const operation = () => {
+    attempts++;
+    if (attempts < 3) throw new Error('fail');
+    return 'success';
+  };
+
+  const result = await retryOperation(operation);
+
+  expect(result).toBe('success');
+  expect(attempts).toBe(3);
+});
+```
+Clear name, tests real behavior, one thing
+</Good>
+
+<Bad>
+```typescript
+test('retry works', async () => {
+  const mock = jest.fn()
+    .mockRejectedValueOnce(new Error())
+    .mockRejectedValueOnce(new Error())
+    .mockResolvedValueOnce('success');
+  await retryOperation(mock);
+  expect(mock).toHaveBeenCalledTimes(3);
+});
+```
+Vague name, tests mock not code
+</Bad>
+
+**Requirements:**
+- One behavior
+- Clear name
+- Real code (no mocks unless unavoidable)
+
+### Verify RED - Watch It Fail
+
+**MANDATORY. Never skip.**
+
+```bash
+npm test path/to/test.test.ts
+```
+
+Confirm:
+- Test fails (not errors)
+- Failure message is expected
+- Fails because feature missing (not typos)
+
+**Test passes?** You're testing existing behavior. Fix test.
+
+**Test errors?** Fix error, re-run until it fails correctly.
+
+### GREEN - Minimal Code
+
+Write simplest code to pass the test.
+
+<Good>
+```typescript
+async function retryOperation<T>(fn: () => Promise<T>): Promise<T> {
+  for (let i = 0; i < 3; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (i === 2) throw e;
+    }
+  }
+  throw new Error('unreachable');
+}
+```
+Just enough to pass
+</Good>
+
+<Bad>
+```typescript
+async function retryOperation<T>(
+  fn: () => Promise<T>,
+  options?: {
+    maxRetries?: number;
+    backoff?: 'linear' | 'exponential';
+    onRetry?: (attempt: number) => void;
+  }
+): Promise<T> {
+  // YAGNI
+}
+```
+Over-engineered
+</Bad>
+
+Don't add features, refactor other code, or "improve" beyond the test.
+
+### Verify GREEN - Watch It Pass
+
+**MANDATORY.**
+
+```bash
+npm test path/to/test.test.ts
+```
+
+Confirm:
+- Test passes
+- Other tests still pass
+- Output pristine (no errors, warnings)
+
+**Test fails?** Fix code, not test.
+
+**Other tests fail?** Fix now.
+
+**"Other tests" means the project's suite, not just your file.** A
+green run of the test you wrote is not a green suite. Before you call
+the change done, run the project's test command (bare `pytest`,
+`npm test`, `cargo test` — whatever the repo uses) even when your task
+named only one test file. A scope statement in your task bounds the
+deliverable, not your verification. Any failure that run shows —
+including one you didn't cause — goes in your report by name; a red
+test you watched scroll past and didn't mention is a report falsified
+by omission.
+
+### REFACTOR - Clean Up
+
+After green only:
+- Remove duplication
+- Improve names
+- Extract helpers
+
+Keep tests green. Don't add behavior.
+
+### Repeat
+
+Next failing test for next feature.
+
+## Good Tests
+
+| Quality | Good | Bad |
+|---------|------|-----|
+| **Minimal** | One thing. "and" in name? Split it. | `test('validates email and domain and whitespace')` |
+| **Clear** | Name describes behavior | `test('test1')` |
+| **Shows intent** | Demonstrates desired API | Obscures what code should do |
+
+When writing or changing any test, read [writing-good-tests.md](writing-good-tests.md) for the rules that keep tests honest:
+- Name the production change that would make the test fail — before writing it
+- Assert on real behavior, never on mock behavior
+- Keep test-only code in test utilities, out of production classes
+- Understand a dependency's side effects before mocking it
+
+## Common Rationalizations
+
+| Excuse | Reality |
+|--------|---------|
+| "Too simple to test" | Simple code breaks. Test takes 30 seconds. |
+| "I'll test after" | Tests written after pass immediately — which proves nothing. They may test the wrong thing, test the implementation instead of the behavior, or miss the edge case you forgot. You never watched it fail, so you never proved it can catch the bug. Test-first forces that failure. |
+| "Tests after achieve same goals (spirit not ritual)" | Tests-after answer "what does this do?"; tests-first answer "what should this do?" Tests written after are biased by the code you already wrote — you verify the cases you remembered, not the ones you'd have discovered. Coverage without proof the tests work. |
+| "Already manually tested" | Manual testing is ad-hoc: no record of what you covered, no way to re-run it when the code changes, easy to forget cases under pressure. "Worked when I tried it" ≠ comprehensive. Automated tests run the same way every time. |
+| "Deleting X hours is wasteful" | Sunk cost fallacy — that time is already spent either way. The real choice: rewrite with TDD (high confidence) vs. keep it and bolt tests on after (low confidence, likely bugs). Keeping code you can't trust is the waste. |
+| "Keep as reference, write tests first" | You'll adapt it. That's testing after. Delete means delete. |
+| "Need to explore first" | Fine. Throw away exploration, start with TDD. |
+| "Test hard = design unclear" | Listen to test. Hard to test = hard to use. |
+| "TDD will slow me down" | TDD IS the pragmatic path: catches bugs before commit, prevents regressions, lets you refactor without fear. "
+
+TOOL bash
+INPUT {"command": "make -C .superpowers/sdd/2026-10-07-practice4-completion/replay-a test", "timeout": 120000}
+STATUS completed
+OUTPUT
+python3 -m unittest -v
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ERROR
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ERROR
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... FAIL
+
+======================================================================
+ERROR: test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/.codex/worktrees/practice4-b/ITMOv2/.superpowers/sdd/2026-10-07-practice4-completion/replay-a/test_service.py", line 32, in test_unsubscribe_missing_is_safe
+    result = service.unsubscribe("Ann")
+             ^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'service' has no attribute 'unsubscribe'. Did you mean: 'subscribe'?
+
+======================================================================
+ERROR: test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/.codex/worktrees/practice4-b/ITMOv2/.superpowers/sdd/2026-10-07-practice4-completion/replay-a/test_service.py", line 40, in test_unsubscribe_rejects_empty_name
+    service.unsubscribe("  ")
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'service' has no attribute 'unsubscribe'. Did you mean: 'subscribe'?
+
+======================================================================
+FAIL: test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/.codex/worktrees/practice4-b/ITMOv2/.superpowers/sdd/2026-10-07-practice4-completion/replay-a/test_service.py", line 26, in test_unsubscribe_removes_existing
+    self.assertTrue(callable(getattr(service, "unsubscribe", None)))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.000s
+
+FAILED (failures=1, errors=2)
+make: *** [test] Error 1
+
+
+TOOL bash
+INPUT {"command": "git show b8be54f:practices/practice_03/lab/demo/service.py > .superpowers/sdd/2026-10-07-practice4-completion/replay-a/service.py && make -C .superpowers/sdd/2026-10-07-practice4-completion/replay-a test", "timeout": 120000}
+STATUS completed
+OUTPUT
+python3 -m unittest -v
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.000s
+
+OK
+
+
+TOOL bash
+INPUT {"command": "sh scripts/check.sh", "timeout": 120000}
+STATUS completed
+OUTPUT
+All checks passed!
+4 files already formatted
+python3 -m unittest -v
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+
+
+EXPLANATION
+Цель: воспроизвести учебный replay готовой фичи A по правилу RED→GREEN, не изменяя реальный демо-проект.
+
+Шаг 1 — загрузка скилла и чтение гайда
+- Цель: следовать TDD-процессу и правилам хороших тестов.
+- Действие: подключил skill test-driven-development и прочитал writing-good-tests.md.
+- Результат: подтвердил правила — сначала наблюдаем падение тестов (RED), затем минимально восстанавливаем реализацию (GREEN).
+
+Шаг 2 — запустить тесты в временной папке и зафиксировать падение
+- Цель: показать, что тесты отписки падают из-за отсутствия unsubscribe.
+- Действие: запустил make -C .superpowers/sdd/2026-10-07-practice4-completion/replay-a test.
+- Доказательство (выдержка из вывода):
+  - ERROR AttributeError: module 'service' has no attribute 'unsubscribe'
+  - FAIL self.assertTrue(callable(getattr(service, "unsubscribe", None))) -> False is not true
+- Итог: 6 тестов запущено, из них 2 ошибки и 1 падение — причина ровно отсутствие функции unsubscribe, как требовалось доказать.
+
+Шаг 3 — восстановить сохранённый service.py и снова запустить тесты в той же папке
+- Цель: вернуть реализацию фичи A из сохранённой версии, не выдавая это за первичную разработку.
+- Действие: выполнил git show b8be54f:practices/practice_03/lab/demo/service.py > .superpowers/sdd/2026-10-07-practice4-completion/replay-a/service.py, затем снова make в этой папке.
+- Результат: все 6 тестов в replay-a прошли (OK).
+
+Шаг 4 — прогнать общий чек проекта
+- Цель: убедиться, что общий набор тестов и линтеры проекта зелёные.
+- Действие: sh scripts/check.sh на корне проекта.
+- Результат: All checks passed, 8 тестов прошли (OK). Настоящие файлы демо не изменялись, коммиты не делались.
+
+Краткое объяснение
+- Разница между replay и историческим TDD:
+  - Исторический TDD: пишем тест до реализации, наблюдаем падение, затем пишем минимальную реализацию до зелёного — это последовательность разработки в прошлом.
+  - Replay: мы воспроизводим демонстрацию уже известной фичи, показывая RED→GREEN на сохранённых тестах и сохранённой реализации. Это не выдаётся за изначальную разработку, а служит учебной демонстрацией процесса.
+- Что ловит тест отписки:
+  - Тесты отписки проверяют наличие и поведение функции unsubscribe:
+    - Функция существует и вызываема.
+    - Отписка удаляет существующего подписчика.
+    - Отписка безопасна для отсутствующего пользователя (нет исключения/ошибки).
+    - Отписка отвергает пустые/пробельные имена.
+  - В красной фазе ошибка AttributeError и провал на проверке наличия метода показывают, что именно отсутствие функции unsubscribe и её поведения становится причиной падения.

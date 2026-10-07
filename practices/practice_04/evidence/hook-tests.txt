@@ -1,0 +1,12 @@
+✔ returns a real failing runner result to the agent without losing edit output (7.479583ms)
+✔ checks apply_patch changes from an absolute project path and reports PASS (4.355792ms)
+✔ ignores evidence edits and reads, so logging cannot recursively run the check (1.341833ms)
+✔ reports a timeout as FAIL and stops a stuck runner (103.182875ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 145.215541

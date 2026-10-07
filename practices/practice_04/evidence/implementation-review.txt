@@ -1,0 +1,6 @@
+Independent read-only reviewer: /root/review_practice4_changes
+Scope: hook, runner, tests, skill packaging, AGENTS and existing A/B.
+Verdict: no Critical or Important findings.
+Checks: Node hook tests 4/4; Ruff and demo tests 8/8; git diff --check; real OpenCode callback FAIL/PASS/evidence exclusion; skill hashes and actual skill/MCP evidence.
+Packaging note: generated .opencode/package.json is ignored. Resolution: keep generated runtime files local; explicitly track .opencode/plugins/package.json with type=module.
+Limits: macOS/OpenCode1.18.32 checked; merged-branch and fresh-session checks follow separately. Historical replay is not a claim about original TDD.

@@ -1,0 +1,169 @@
+Source: OpenCode 1.18.32; parent session ses_ee805822effeTPFFSn4BdR7Vvn
+
+TOOL task
+INPUT {"description": "Review feature B", "prompt": "Тщательность: medium.\nЗадача: Прочитай practices/practice_03/lab/demo/README.md и STYLE_GUIDE.md, service.py, test_service.py. Посмотри git diff b8be54f..2f76f48 -- practices/practice_03/lab/demo . Проверь B: list_subscribers() возвращает имена в алфавитном порядке, пустой список для пустого множества, не меняет множество и не ломает subscribe/unsubscribe. Запусти sh scripts/check.sh. Не редактируй файлы. Сообщи только подтверждённые проблемы, с путём/строкой и способом воспроизведения; отдельно укажи проверки и ограничения проверки.", "subagent_type": "explore"}
+STATUS completed
+CHILD ses_ee8054037ffeMfB4XUg8ufq6ox
+OUTPUT
+<task id="ses_ee8054037ffeMfB4XUg8ufq6ox" state="completed">
+<task_result>
+Ниже — мои действия и выводы. Я соблюдал требование не редактировать файлы. Путь к каждому упомянутому файлу — абсолютный.
+
+1) Цель: изучить README, STYLE_GUIDE, реализацию и тесты
+- Действие: прочитал файлы
+  - /Users/pip/.codex/worktrees/practice4-b/ITMOv2/practices/practice_03/lab/demo/README.md
+  - /Users/pip/.codex/worktrees/practice4-b/ITMOv2/practices/practice_03/lab/demo/STYLE_GUIDE.md
+  - /Users/pip/.codex/worktrees/practice4-b/ITMOv2/practices/practice_03/lab/demo/service.py
+  - /Users/pip/.codex/worktrees/practice4-b/ITMOv2/practices/practice_03/lab/demo/test_service.py
+- Доказательства:
+  - README.md (строки 9–10): описывает, что list_subscribers() “возвращает имена в виде отсортированного списка, не изменяя множество подписчиков”.
+  - service.py (строки 20–21): реализация list_subscribers: 
+    - 20: def list_subscribers():
+    - 21:     return sorted(subscribers)
+  - test_service.py (строки 43–54): два теста на сортировку, немутацию и пустой список.
+
+Результат: функциональные ожидания и тесты для list_subscribers() присутствуют.
+
+2) Цель: проверить, что изменения действительно были внесены в указанном диапазоне коммитов
+- Действие: просмотрел git diff b8be54f..2f76f48 только по каталогу демо
+- Доказательства (git diff):
+  - /Users/pip/.codex/worktrees/practice4-b/ITMOv2/practices/practice_03/lab/demo/README.md: добавлены строки об описании list_subscribers().
+  - /Users/pip/.codex/worktrees/practice4-b/ITMOv2/practices/practice_03/lab/demo/service.py: добавлена функция list_subscribers() (строки 20–21 в текущем файле).
+  - /Users/pip/.codex/worktrees/practice4-b/ITMOv2/practices/practice_03/lab/demo/test_service.py: добавлены тесты test_list_subscribers_sorted_without_mutation и test_list_subscribers_empty (строки 43–54).
+- Результат: изменения соответствуют цели “B”.
+
+3) Цель: проверить требование B — list_subscribers()
+- Что нужно подтвердить:
+  - Возвращает имена в алфавитном порядке
+  - Возвращает пустой список для пустого множества
+  - Не изменяет множество подписчиков
+  - Не ломает subscribe/unsubscribe
+- Действия и доказательства:
+  - Алфавитный порядок и немутация:
+    - Реализация: /practices/practice_03/lab/demo/service.py строки 20–21 — возвращает sorted(subscribers), что создаёт новый отсортированный список, не мутируя исходный set.
+    - Тест: /practices/practice_03/lab/demo/test_service.py строки 44–49:
+      - 44–45: добавляет "Zoe" и "Ann"
+      - 47: проверяет наличие функции
+      - 48: ожидает ["Ann", "Zoe"]
+      - 49: сравнивает subscribers с original_subscribers — немутация подтверждается
+  - Пустой список для пустого множества:
+    - Тест: /practices/practice_03/lab/demo/test_service.py строки 51–54 — ожидает [], когда множество пусто.
+  - Не ломает subscribe/unsubscribe:
+    - Тесты на subscribe и unsubscribe остаются и проходят:
+      - test_unsubscribe_removes_existing: /practices/practice_03/lab/demo/test_service.py строки 24–29
+      - test_unsubscribe_missing_is_safe: /practices/practice_03/lab/demo/test_service.py строки 30–36
+      - test_unsubscribe_rejects_empty_name: /practices/practice_03/lab/demo/test_service.py строки 38–41
+- Результат: реализация отвечает всем пунктам B, а покрывающие тесты это подтверждают.
+
+4) Цель: запустить общий проверочный скрипт проекта
+- Действие: sh scripts/check.sh из корня проекта
+- Доказательства:
+  - Вывод: “All checks passed! … python3 -m unittest -v … OK; Ran 8 tests …”
+- Результат: линтер/форматирование и все тесты прошли.
+
+Подтверждённые проблемы
+- Не обнаружено. В рамках прочитанных файлов и прогона check.sh список подтверждённых проблем пуст.
+
+Как воспроизвести проверки
+- Проверить diff:
+  - Команда: git diff b8be54f..2f76f48 -- practices/practice_03/lab/demo
+- Запустить проверки стиля и тесты:
+  - Команда: sh scripts/check.sh
+- Точечные тесты list_subscribers:
+  - Команда: python3 -m unittest -v practices/practice_03/lab/demo/test_service.py
+  - Ожидания:
+    - test_list_subscribers_sorted_without_mutation: проходит; возвращает ["Ann", "Zoe"], множество не меняется
+    - test_list_subscribers_empty: проходит; возвращает []
+
+Проверки, которые были выполнены
+- Чтение и анализ:
+  - README, STYLE_GUIDE, service.py, test_service.py
+- Анализ изменений по диапазону коммитов: git diff b8be54f..2f76f48 для каталога демо
+- Прогон интегрированного скрипта проверок: sh scripts/check.sh (линтер Ruff/форматирование и юнит-тесты)
+- Верификация соответствия поведения list_subscribers() требованиям B через код и тесты
+
+Ограничения проверки
+- Проверка выполнялась на текущем состоянии локального репозитория; внешние зависимости отсутствуют, а тесты используют стандартную библиотеку Python, как указано.
+- Были использованы имеющиеся юнит-тесты; дополнительных сценариев (например, сортировка с нестандартными локалями, смешанные регистры или нестандартные символы) специально не добавлялось, так как задание не требовало расширенного тестового покрытия.
+- Проверка производилась без модификации кода и без запуска вне предоставленного скрипта и юнит-тестов.
+</task_result>
+</task>
+
+
+CHILD TOOL bash
+INPUT {"command": "git diff b8be54f..2f76f48 -- practices/practice_03/lab/demo", "timeout": 120000, "workdir": "/Users/pip/.codex/worktrees/practice4-b/ITMOv2"}
+STATUS completed
+OUTPUT
+diff --git a/practices/practice_03/lab/demo/README.md b/practices/practice_03/lab/demo/README.md
+index 750649f..87a376c 100644
+--- a/practices/practice_03/lab/demo/README.md
++++ b/practices/practice_03/lab/demo/README.md
+@@ -6,6 +6,8 @@
+ Она возвращает `{"unsubscribed": true}`, если имя было в множестве,
+ и `{"unsubscribed": false}`, если его не было. Пустое имя вызывает
+ `ValueError`, как и при подписке.
++Функция `list_subscribers()` возвращает имена в виде отсортированного
++списка, не изменяя множество подписчиков.
+ 
+ Проверка: make test.
+ Зависимости: стандартная библиотека Python 3.10+.
+diff --git a/practices/practice_03/lab/demo/service.py b/practices/practice_03/lab/demo/service.py
+index 6178dc5..e364bf5 100644
+--- a/practices/practice_03/lab/demo/service.py
++++ b/practices/practice_03/lab/demo/service.py
+@@ -15,3 +15,7 @@ def unsubscribe(name):
+     was_subscribed = cleaned_name in subscribers
+     subscribers.discard(cleaned_name)
+     return {"unsubscribed": was_subscribed}
++
++
++def list_subscribers():
++    return sorted(subscribers)
+diff --git a/practices/practice_03/lab/demo/test_service.py b/practices/practice_03/lab/demo/test_service.py
+index 50ecd59..24ddaab 100644
+--- a/practices/practice_03/lab/demo/test_service.py
++++ b/practices/practice_03/lab/demo/test_service.py
+@@ -40,6 +40,18 @@ class SubscribeTest(unittest.TestCase):
+             service.unsubscribe("  ")
+         self.assertEqual(subscribers, set())
+ 
++    def test_list_subscribers_sorted_without_mutation(self):
++        subscribe("Zoe")
++        subscribe("Ann")
++        original_subscribers = subscribers.copy()
++        self.assertTrue(callable(getattr(service, "list_subscribers", None)))
++        self.assertEqual(service.list_subscribers(), ["Ann", "Zoe"])
++        self.assertEqual(subscribers, original_subscribers)
++
++    def test_list_subscribers_empty(self):
++        self.assertTrue(callable(getattr(service, "list_subscribers", None)))
++        self.assertEqual(service.list_subscribers(), [])
++
+ 
+ if __name__ == "__main__":
+     unittest.main()
+
+
+CHILD TOOL bash
+INPUT {"command": "sh scripts/check.sh", "timeout": 120000, "workdir": "/Users/pip/.codex/worktrees/practice4-b/ITMOv2"}
+STATUS completed
+OUTPUT
+All checks passed!
+4 files already formatted
+python3 -m unittest -v
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+
+
+Decision: no confirmed defects; keep B unchanged. Use sh scripts/check.sh from the repository root. The alternative unittest command in reviewer prose requires the demo working directory for import service. Python sorted ordering is the current contract; no locale-aware ordering was requested.

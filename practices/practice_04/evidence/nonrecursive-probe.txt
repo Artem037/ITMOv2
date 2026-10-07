@@ -1,0 +1,1 @@
+Documentation edit does not trigger the code check.
