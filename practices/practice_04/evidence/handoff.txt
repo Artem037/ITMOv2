@@ -1,0 +1,68 @@
+Source: OpenCode 1.18.32; fresh session ses_ee7fe4241ffeSuYAFz1D1pZjxe
+Working directory: /Users/pip/ITMOv2; no prior session history supplied.
+
+TOOL read
+INPUT {"filePath": "/Users/pip/ITMOv2/AGENTS.md", "limit": 2000}
+STATUS completed
+
+TOOL read
+INPUT {"filePath": "/Users/pip/ITMOv2/docs/HANDOFF.md", "limit": 2000}
+STATUS completed
+
+TOOL bash
+INPUT {"command": "git branch --show-current", "timeout": 120000}
+EXIT 0
+OUTPUT
+practice4-unsubscribe
+
+
+TOOL bash
+INPUT {"command": "sh scripts/check.sh", "timeout": 120000}
+EXIT 0
+OUTPUT
+All checks passed!
+4 files already formatted
+python3 -m unittest -v
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+
+
+AGENT SUMMARY
+Цель: прочитать инструкции и состояние проекта, затем реально выполнить проверки без изменений, чтобы кратко подтвердить статус.
+
+Доказательство: прочитал файлы AGENTS.md и docs/HANDOFF.md инструментом Read; выполнил команды `git branch --show-current` и `sh scripts/check.sh`.
+
+Результат:
+- Что такое Notify Mini: учебный Python-сервис (не skill) в каталоге `practices/practice_03/lab/demo/`. Он управляет множеством подписчиков в памяти процесса, без базы данных и без отправки уведомлений. Используется только стандартная библиотека Python.
+- Что делают A и B:
+  - A (коммит `b8be54f`): добавлена функция `unsubscribe(name)`, которая возвращает `{"unsubscribed": true/false}` в зависимости от того, было ли имя в множестве; пустая строка после `strip()` вызывает `ValueError`. Удаление безопасное через `set.discard`.
+  - B (коммит `2f76f48`): добавлена функция `list_subscribers()`, которая возвращает отсортированный список подписчиков, не мутируя исходное множество; для пустого множества — `[]`. Обычная Python-сортировка без локалей.
+- Где данные и какие ограничения: данные — множество имён подписчиков в ОЗУ текущего процесса; нет персистентности, БД и сети; сортировка стандартная; запрещено расширять демо внешними зависимостями; сохранять результаты практики 3; ветки не должны содержать `codex`.
+- Текущая ветка: по команде `git branch --show-current` — `practice4-unsubscribe`. По HANDOFF: 7 октября 2026 локально fast-forward объединена `practice-04-b` в эту ветку, коммит состояния — `619fca9`; в remote ничего не отправлялось.
+- Как работают skill/MCP/hook:
+  - Skill: готовый skill `test-driven-development` загружается для поведения через TDD; он описывает добавление теста, получение RED, затем реализацию до GREEN. В ходе демонстрации этот skill действительно загружали и прогоняли.
+  - MCP fetch: внешний MCP `fetch` прописан в `opencode.json`; им обращались к официальной документации Python (например, подтверждение поведения `set.discard`). Собственных MCP-серверов не добавляли.
+  - Hook/plugin: `.opencode/plugins/check-after-edit.js` автоматически запускает `scripts/check.sh` после правок демо/проверок и добавляет PASS/FAIL к результату инструмента; таймаут 30 секунд; лог пишется в `.opencode/logs/check-after-edit.jsonl`. Pre-commit дополнительно гоняет Ruff и тесты при стадировании Python-файлов демо.
+- Что проверено сейчас: запустил `sh scripts/check.sh` из корня проекта. Вывод: All checks passed; Ruff ок, форматирование ок, 8 тестов Python выполнены и все прошли (unittest подробный вывод показал 8/8 OK).
+- Что осталось по практике: согласно HANDOFF, требовалось новой сессией прочитать правила и этот файл, своими словами назвать A/B, ограничения, состояние практики и домашки; затем выполнить runner без изменения файлов — это выполнено. Далее по документу: сохранить подтверждение и завершить журнал практики; не создавать собственный MCP, не писать reflection.md, не оформлять сдачу ДЗ 4 в этой сессии.
+- Выполнялась ли домашка 4: по HANDOFF слайды 23–24 описывают домашку, которая ещё не выполнялась; домашка 4 не выполнялась.
+
+Никаких изменений в файлах не делал, коммитов не создавал.
+
+HUMAN-REVIEW CORRECTION: pre-commit runs on git commit, not git add. Clarified in AGENTS.md and reread in the same session.
+TOOL read {"filePath": "/Users/pip/ITMOv2/AGENTS.md", "limit": 2000}; status=completed
+Подтверждаю корректировку.
+
+- Момент запуска pre-commit: pre-commit запускается при выполнении git commit, проверяя подходящие staged-файлы. Обычное git add только помещает изменения в индекс и не запускает pre-commit.
+- Отличие от after-edit hook: after-edit — это плагин OpenCode (`.opencode/plugins/check-after-edit.js`), который автоматически запускает `scripts/check.sh` сразу после правок демо/проверок внутри среды OpenCode и добавляет PASS/FAIL к результату инструмента. Он не зависит от git и не требует коммита, в отличие от pre-commit, который срабатывает только на git commit.

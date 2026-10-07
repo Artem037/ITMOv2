@@ -1,0 +1,49 @@
+Integrated branch practice4-unsubscribe at 619fca9
+2026-10-07T20:13:19.454510+00:00
+
+COMMAND: sh scripts/check.sh
+All checks passed!
+4 files already formatted
+python3 -m unittest -v
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+
+EXIT: 0
+
+COMMAND: /Users/pip/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --test tests/check-after-edit.test.mjs
+✔ returns a real failing runner result to the agent without losing edit output (8.503166ms)
+✔ checks apply_patch changes from an absolute project path and reports PASS (4.513417ms)
+✔ ignores evidence edits and reads, so logging cannot recursively run the check (1.240917ms)
+✔ reports a timeout as FAIL and stops a stuck runner (104.075917ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 152.699833
+
+EXIT: 0
+
+COMMAND: pre-commit run --all-files
+ruff check...............................................................Passed
+ruff format..............................................................Passed
+Notify Mini tests........................................................Passed
+
+EXIT: 0
+
+COMMAND: git diff --check b8be54f..HEAD
+
+EXIT: 0
