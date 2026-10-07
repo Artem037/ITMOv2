@@ -152,6 +152,45 @@ def _rank(option):
     )
 
 
+def _coverage_gaps(chain, request, sources):
+    """Полнота требует источников на все даты возможной посадки.
+
+    У пустого этапа нет trip.source_id: доказательство отсутствия рейсов
+    передаётся отдельно в stage.source_ids. Дальние этапы проверяются
+    консервативно, включая даты прибытия предыдущих рейсов и переход.
+    """
+    shift = timedelta(
+        minutes=chain.access.minutes + request.boarding_buffer_minutes
+    )
+    lower = request.departure_window.start + shift
+    upper = request.departure_window.end + shift
+    for index, stage in enumerate(chain.stages):
+        if index:
+            transfer = chain.transfers[index - 1]
+            walk = timedelta(
+                minutes=transfer.walk_minutes + transfer.buffer_minutes
+            )
+            ready = [
+                trip.arrival + walk for trip in chain.stages[index - 1].trips
+            ]
+            lower = min([lower, *ready])
+            upper = max([upper, *ready, *(t.departure for t in stage.trips)])
+        first, last = lower.date(), upper.date()
+        refs = set(stage.source_ids) | {t.source_id for t in stage.trips}
+        confirmed = {
+            day
+            for ref in refs
+            if sources[ref].verified
+            for day in sources[ref].valid_dates
+            if first <= day <= last
+        }
+        if len(confirmed) != (last - first).days + 1:
+            yield (
+                f"{chain.id}/этап {index + 1}: нет подтверждённого покрытия "
+                f"дат {first}–{last}; нужно расписание на запрошенное окно"
+            )
+
+
 def plan_departures(request: PlanRequest) -> PlanResult:
     """Выбрать до пяти вариантов среди подтверждённых входных данных."""
     sources = {source.id: source for source in request.sources}
@@ -166,6 +205,10 @@ def plan_departures(request: PlanRequest) -> PlanResult:
         if chain.coverage != "complete":
             incomplete = True
             warnings.append(f"{chain.id}: покрытие {chain.coverage}")
+        gaps = list(_coverage_gaps(chain, request, sources))
+        if gaps:
+            incomplete = True
+            warnings.extend(gaps)
         available = []
         for stage in chain.stages:
             verified = []

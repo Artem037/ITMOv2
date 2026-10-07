@@ -18,6 +18,7 @@ from pydantic import (
 )
 
 MOSCOW = ZoneInfo("Europe/Moscow")
+MAX_SEARCH_STEPS = 50_000
 Minutes = Annotated[StrictInt, Field(ge=0, le=1440)]
 Text = Annotated[str, Field(min_length=1, max_length=500)]
 Moment = Annotated[
@@ -81,6 +82,7 @@ class Stage(Model):
     from_name: Text
     to_name: Text
     trips: list[Trip] = Field(max_length=500)
+    source_ids: list[Text] = Field(default_factory=list, max_length=100)
 
 
 class Transfer(Model):
@@ -128,6 +130,7 @@ class PlanRequest(Model):
             raise ValueError("sources.id должны быть уникальны")
         if len({chain.id for chain in self.chains}) != len(self.chains):
             raise ValueError("chains.id должны быть уникальны")
+        search_steps = 0
         for chain in self.chains:
             ids = chain.access.source_ids + chain.egress.source_ids
             ids += [
@@ -135,9 +138,19 @@ class PlanRequest(Model):
                 for stage in chain.stages
                 for trip in stage.trips
             ]
+            ids += [ref for stage in chain.stages for ref in stage.source_ids]
             unknown = set(ids) - sources.keys()
             if unknown:
                 raise ValueError(f"source_id не найден: {sorted(unknown)}")
+            prefixes = 1
+            for stage in chain.stages:
+                prefixes *= len(stage.trips)
+                search_steps += prefixes
+                if search_steps > MAX_SEARCH_STEPS:
+                    raise ValueError(
+                        f"лимит {MAX_SEARCH_STEPS} шагов перебора превышен; "
+                        "сократите набор рейсов или цепочек"
+                    )
         return self
 
 

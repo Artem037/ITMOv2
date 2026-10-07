@@ -49,6 +49,18 @@ class MCPTests(unittest.IsolatedAsyncioTestCase):
             )
             self.assertFalse(recovered.is_error)
             self.assertEqual(recovered.structured_content["status"], "ok")
+            request["departure_window"] = {
+                "start": "2026-10-15T06:00:00+03:00",
+                "end": "2026-10-15T10:00:00+03:00",
+            }
+            stale = await client.call_tool(
+                "plan_departures", {"request": request}
+            )
+            self.assertFalse(stale.is_error)
+            self.assertEqual(stale.structured_content["status"], "needs_data")
+            self.assertFalse(
+                stale.structured_content["search_scope"]["complete"]
+            )
 
 
 if __name__ == "__main__":

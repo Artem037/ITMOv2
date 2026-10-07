@@ -167,9 +167,51 @@ class PlannerTests(unittest.TestCase):
     def test_no_routes_is_not_missing_data(self):
         data = request()
         data["chains"][0]["stages"][0]["trips"] = []
+        data["chains"][0]["stages"][0]["source_ids"] = ["synthetic"]
         self.assertEqual(calculate(data)["status"], "no_routes")
         data["chains"][0]["coverage"] = "missing"
         self.assertEqual(calculate(data)["status"], "needs_data")
+
+    def test_old_snapshot_cannot_rule_out_routes_on_another_date(self):
+        data = json.loads(
+            (
+                FIXTURE.parents[2] / "examples/tolmachevo-2026-10-14.json"
+            ).read_text()
+        )
+        data["departure_window"] = {
+            "start": "2026-10-15T06:00:00+03:00",
+            "end": "2026-10-15T10:00:00+03:00",
+        }
+        result = calculate(data)
+        self.assertEqual(result["status"], "needs_data")
+        self.assertFalse(result["search_scope"]["complete"])
+        self.assertTrue(any("2026-10-15" in w for w in result["warnings"]))
+
+    def test_empty_stage_needs_verified_dated_evidence(self):
+        for refs, verified, dates in [
+            ([], True, ["2026-10-14"]),
+            (["synthetic"], False, ["2026-10-14"]),
+            (["synthetic"], True, ["2026-10-13"]),
+        ]:
+            with self.subTest(refs=refs, verified=verified, dates=dates):
+                data = request()
+                stage = data["chains"][0]["stages"][0]
+                stage.update(trips=[], source_ids=refs)
+                data["sources"][0].update(verified=verified, valid_dates=dates)
+                result = calculate(data)
+                self.assertEqual(result["status"], "needs_data")
+                self.assertFalse(result["search_scope"]["complete"])
+
+    def test_coverage_uses_boarding_date_and_every_day_of_window(self):
+        data = request()
+        data["departure_window"] = {
+            "start": "2026-10-13T23:00:00+03:00",
+            "end": "2026-10-13T23:30:00+03:00",
+        }
+        self.assertEqual(calculate(data)["status"], "no_routes")
+        data["departure_window"]["end"] = "2026-10-15T23:30:00+03:00"
+        data["sources"][0]["valid_dates"] = ["2026-10-14", "2026-10-16"]
+        self.assertFalse(calculate(data)["search_scope"]["complete"])
 
     def test_rejects_invalid_requests(self):
         mutations = [
@@ -199,6 +241,59 @@ class PlannerTests(unittest.TestCase):
                 mutate(data)
                 with self.assertRaises(InputError):
                     calculate(data)
+
+    def test_large_combination_input_is_rejected_before_calculation(self):
+        data = self.two_stages()
+        chain = data["chains"][0]
+        third = copy.deepcopy(chain["stages"][1])
+        third.update(from_stop="third-a", to_stop="third-b")
+        chain["stages"].append(third)
+        chain["transfers"].append(
+            {
+                "from_stop": "bus-b",
+                "to_stop": "third-a",
+                "walk_minutes": 5,
+                "buffer_minutes": 5,
+            }
+        )
+        for stage in chain["stages"]:
+            stage["trips"] = [
+                {**stage["trips"][0], "id": f"trip-{i}"} for i in range(100)
+            ]
+        with self.assertRaisesRegex(InputError, "50000.*сократите"):
+            parse_request(data)
+        # Небольшой запрос остаётся допустимым, без полного запрета 3 этапов.
+        for stage in chain["stages"]:
+            stage["trips"] = stage["trips"][:20]
+        parse_request(data)
+
+    def test_combination_budget_counts_all_chains_and_empty_tail(self):
+        data = self.two_stages()
+        chain = data["chains"][0]
+        for stage in chain["stages"]:
+            stage["trips"] *= 160
+        other = copy.deepcopy(chain)
+        other["id"] = "another"
+        data["chains"].append(other)
+        with self.assertRaisesRegex(InputError, "50000"):
+            parse_request(data)
+        # Пустой последний этап не отменяет перебор первых двух.
+        data["chains"] = [chain]
+        third = copy.deepcopy(chain["stages"][1])
+        third.update(from_stop="third-a", to_stop="third-b", trips=[])
+        chain["stages"].append(third)
+        chain["transfers"].append(
+            {
+                "from_stop": "bus-b",
+                "to_stop": "third-a",
+                "walk_minutes": 0,
+                "buffer_minutes": 0,
+            }
+        )
+        for stage in chain["stages"][:2]:
+            stage["trips"] *= 2
+        with self.assertRaisesRegex(InputError, "50000"):
+            parse_request(data)
 
     def test_transfer_must_connect_exact_stop_ids(self):
         data = self.two_stages()
