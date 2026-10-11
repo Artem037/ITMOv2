@@ -19,13 +19,13 @@
 | Работа | Корень проекта | Ветка |
 |---|---|---|
 | ДЗ 3 | `/Users/pip/ITMOv2` | `practice_03` |
-| ДЗ 4 | `/Users/pip/.codex/worktrees/homework4-trip-planner/ITMOv2` | `homework_04` |
+| ДЗ 4 | `/Users/pip/ITMOv2` | `homework_04` |
 
-Это две рабочие папки одного Git-репозитория с разными версиями файлов.
-Основная папка `/Users/pip/ITMOv2` открыта на ветке `practice_03`;
-ДЗ 4 находится в отдельном worktree на ветке `homework_04`.
-Для защиты используй две папки из таблицы. Git не позволяет открыть
-одну ветку одновременно в двух worktree.
+Обе работы запускаются из основной папки `/Users/pip/ITMOv2`.
+Перед показом ДЗ 3 выполни `git switch practice_03`, перед показом ДЗ 4 —
+`git switch homework_04`. Подготовительные worktree оставлены без привязки
+к этим веткам и не мешают переключению. Git меняет файлы основной папки
+на версию выбранной ветки; поэтому сначала переключись, затем запускай команды.
 
 В ДЗ 3 у Notify Mini только `subscribe` и три теста. В практике 4 появились
 `unsubscribe`, `list_subscribers` и восемь тестов. Поэтому вопрос
@@ -125,6 +125,7 @@ Temperature влияет на выбор продолжения; увеличе�
 
 ```sh
 cd /Users/pip/ITMOv2
+git switch practice_03
 git branch --show-current
 make step3
 ollama list
@@ -161,7 +162,9 @@ ollama create itmo-agent -f practices/practice_03/lab/Modelfile.agent
 Из обычного терминала:
 
 ```sh
-cd /Users/pip/ITMOv2/practices/practice_03/lab/demo
+cd /Users/pip/ITMOv2
+git switch practice_03
+cd practices/practice_03/lab/demo
 env -u VSELLM_API_KEY -u OPENCODE_CONFIG_CONTENT \
   -u OPENCODE_CONFIG -u OPENCODE_CONFIG_DIR \
   OPENCODE_DISABLE_AUTOUPDATE=true \
@@ -277,7 +280,8 @@ Python-код определяет достижимые сочетания и с
 ### Запуск ДЗ 4 в терминале
 
 ```sh
-cd /Users/pip/.codex/worktrees/homework4-trip-planner/ITMOv2
+cd /Users/pip/ITMOv2
+git switch homework_04
 git branch --show-current
 make step4
 sh scripts/check.sh
