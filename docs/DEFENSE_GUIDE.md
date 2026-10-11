@@ -7,7 +7,7 @@
 ## Актуальные требования и папки
 
 Для ДЗ 3 актуальны критерии **1 + 1 + 2 + 2 + 4** из
-[README ветки practice_03](/Users/pip/.codex/worktrees/homework3-defense/ITMOv2/practices/practice_03/README.md).
+[README ветки practice_03](/Users/pip/ITMOv2/practices/practice_03/README.md).
 Преподаватель обновил README 28.09.2026, коммит `c378e16`, и удалил прежний
 `HOMEWORK.md` следующим коммитом `739966d`. Свежий `upstream/main` проверен
 11.10.2026. Сохранившиеся старые материалы с пятью критериями по 2 балла
@@ -18,13 +18,14 @@
 
 | Работа | Корень проекта | Ветка |
 |---|---|---|
-| ДЗ 3 | `/Users/pip/.codex/worktrees/homework3-defense/ITMOv2` | `practice_03` |
+| ДЗ 3 | `/Users/pip/ITMOv2` | `practice_03` |
 | ДЗ 4 | `/Users/pip/.codex/worktrees/homework4-trip-planner/ITMOv2` | `homework_04` |
 
-Это Git worktrees: две папки одного репозитория с разными версиями файлов.
-Они позволяют держать обе работы открытыми одновременно. Основная папка
-`/Users/pip/ITMOv2` сейчас содержит более ранний отчёт ДЗ 3 и код практики 4.
-Для защиты используй две папки из таблицы.
+Это две рабочие папки одного Git-репозитория с разными версиями файлов.
+Основная папка `/Users/pip/ITMOv2` открыта на ветке `practice_03`;
+ДЗ 4 находится в отдельном worktree на ветке `homework_04`.
+Для защиты используй две папки из таблицы. Git не позволяет открыть
+одну ветку одновременно в двух worktree.
 
 В ДЗ 3 у Notify Mini только `subscribe` и три теста. В практике 4 появились
 `unsubscribe`, `list_subscribers` и восемь тестов. Поэтому вопрос
@@ -118,12 +119,12 @@ Temperature влияет на выбор продолжения; увеличе�
 | Ограничения и выводы — 2 | Разделы 4–6 отчёта | Ошибки команды, неполная проверка CI, неточное обоснование хранения |
 | Живой локальный пример — 4 | OpenCode с локальной моделью и новым вопросом | Видны вызовы инструментов, ответ сверяется с файлами |
 
-Открыть [полный отчёт ДЗ 3](/Users/pip/.codex/worktrees/homework3-defense/ITMOv2/practices/practice_03/REPORT.md).
+Открыть [полный отчёт ДЗ 3](/Users/pip/ITMOv2/practices/practice_03/REPORT.md).
 
 ### Запуск ДЗ 3 в терминале
 
 ```sh
-cd /Users/pip/.codex/worktrees/homework3-defense/ITMOv2
+cd /Users/pip/ITMOv2
 git branch --show-current
 make step3
 ollama list
@@ -160,7 +161,7 @@ ollama create itmo-agent -f practices/practice_03/lab/Modelfile.agent
 Из обычного терминала:
 
 ```sh
-cd /Users/pip/.codex/worktrees/homework3-defense/ITMOv2/practices/practice_03/lab/demo
+cd /Users/pip/ITMOv2/practices/practice_03/lab/demo
 env -u VSELLM_API_KEY -u OPENCODE_CONFIG_CONTENT \
   -u OPENCODE_CONFIG -u OPENCODE_CONFIG_DIR \
   OPENCODE_DISABLE_AUTOUPDATE=true \
@@ -196,7 +197,7 @@ env -u VSELLM_API_KEY -u OPENCODE_CONFIG_CONTENT \
   -u OPENCODE_CONFIG -u OPENCODE_CONFIG_DIR \
   OPENCODE_DISABLE_AUTOUPDATE=true \
   opencode run --pure \
-  --dir /Users/pip/.codex/worktrees/homework3-defense/ITMOv2/practices/practice_03/lab/demo \
+  --dir /Users/pip/ITMOv2/practices/practice_03/lab/demo \
   --model ollama/itmo-agent --agent local-guide -- \
   'Можно ли дважды подписать Ann и получить две записи? Прочитай service.py и test_service.py.'
 ```
