@@ -1,0 +1,32 @@
+Повторная репетиция защиты 11.10.2026
+OpenCode 1.19.0; model opencode/big-pickle; agent build.
+Session: ses_ed3ff0db9ffeA98flhU36rHHN7
+Вход: tests/fixtures/rare_connections.json; только вымышленные данные.
+В этом запуске VSELLM_API_KEY не передавался процессу.
+
+Успешно выполнены skill transit-trip-planner и чтение AGENTS.md,
+двух справок и фикстуры. Затем состоялись настоящие MCP-вызовы:
+
+Tool: trip_planner_plan_departures
+callID: call_00_yh3i1j5wr0hu311bnuw0rfaj
+request — объект, boarding_buffer_minutes=10, state=completed.
+status=ok, data_kind=fixture, leave_at=2026-10-14T09:35:00+03:00,
+arrive_at=2026-10-14T11:50:00+03:00, total_minutes=135.
+
+Tool: trip_planner_plan_departures
+callID: call_00_ld8fjo0uner8ukd8l3nv1wcf
+boarding_buffer_minutes=-1, state=error.
+request.boarding_buffer_minutes:
+Input should be greater than or equal to 0
+[type=greater_than_equal, input_value=-1, input_type=int]
+
+Tool: trip_planner_plan_departures
+callID: call_00_avbgp6q8496cam5gshn02ex0
+boarding_buffer_minutes=10, state=completed.
+status=ok, data_kind=fixture, leave_at=2026-10-14T09:35:00+03:00,
+arrive_at=2026-10-14T11:50:00+03:00, total_minutes=135.
+
+Схема, калькулятор и MCP-сервер не менялись. Изменена модель запуска.
+Исходный прогон VseLLM сохранён в mcp.txt, он относится к прежней репетиции.
+Полные журналы повторного прогона доступны в локальной сессии OpenCode;
+секреты и личные адреса в это подтверждение не включены.

@@ -65,13 +65,13 @@
 
 ## Запуск и проверка
 
-Из корня worktree, Python 3.12+, uv и Node.js:
+Из `/Users/pip/ITMOv2` на ветке `homework_04`, Python 3.12+, uv и Node.js:
 
 ```sh
 make -C practices/practice_04/homework install
 sh scripts/check.sh
 make step4
-opencode
+OPENCODE_DISABLE_AUTOUPDATE=true opencode --model opencode/big-pickle --agent build
 ```
 
 Зависимости зафиксированы в `uv.lock`; после установки проверки offline.
@@ -80,8 +80,12 @@ MCP SDK 2.3.0, OpenCode 1.18.32, Ruff 0.16.10. Runner проверяет Ruff,
 и 6 тестов hook; длительность около секунды, лимит hook — 30 секунд.
 Node берётся из PATH либо из стандартного bundled runtime приложения.
 
-Ключ VseLLM хранится вне репозитория. Не выводить/не переносить его в файлы
-или evidence. OpenCode использует переменную `VSELLM_API_KEY`.
+Для учебного демо по умолчанию выбрана бесплатная тестовая `opencode/big-pickle`;
+проверены загрузка skill и успешный MCP-вызов на фикстуре. Условия обработки
+данных и диагностика провайдера описаны в `docs/DEFENSE_GUIDE.md`.
+Ключ дополнительного провайдера VseLLM хранится вне репозитория.
+Не выводить/не переносить его в файлы или evidence. Для него OpenCode
+использует переменную `VSELLM_API_KEY`.
 `pre-commit` остался для Python-файлов Notify Mini; для домашки обязателен
 общий runner. Не запускать старые сетевые эксперименты ради этой проверки.
 
