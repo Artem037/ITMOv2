@@ -4,6 +4,18 @@ context: |
   Language: Russian
   All artifacts must be written in Russian.
   Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+  Target: Notify Mini in practices/practice_03/lab/demo.
+  Python 3.10+, standard library only; subscribers live in process memory.
+  Preserve subscribe(name), unsubscribe(name), list_subscribers(),
+  their response dictionaries and the shared subscribers set object.
+  Follow AGENTS.md and practices/practice_03/lab/demo/STYLE_GUIDE.md.
+  Current practice: refactor duplicate name normalization without changing
+  public behavior; demonstrate operations in one local Python process.
+  Do not add a database, HTTP server or third User Story (homework 5).
+  Keep earlier experiment results, reports, configurations and homework 4 intact.
+  Demo checks: make -C practices/practice_03/lab/demo test.
+  Full checks from repository root: sh scripts/check.sh; git diff --check.
+  Use real MCP fetch calls for relevant official Python library contracts.
 
 # Per-artifact rules (optional)
 # Add custom rules for specific artifacts.
