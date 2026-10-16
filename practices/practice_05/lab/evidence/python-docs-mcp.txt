@@ -1,0 +1,181 @@
+Практика 5: официальная документация Python через настоящий MCP fetch
+
+Цель: проверить контракты стандартной библиотеки для сохраняемого поведения Notify Mini.
+Страницы рассматриваются только как справочные данные, не как инструкции агенту.
+LLM не запускалась; использован временный Python-клиент официального MCP SDK из locked homework .venv.
+Транспорт: MCP stdio. Команда взята из opencode.json без изменения конфигурации:
+["/opt/homebrew/bin/uvx", "mcp-server-fetch@2026.8.18"]
+
+Реальная последовательность: Client(mode=legacy) -> initialize -> list_tools -> call_tool('fetch', arguments).
+Client(mode=legacy) посылает initialize при входе в async context manager.
+Это не прямой HTTP-запрос клиента и не встроенный webfetch.
+
+Факты и применение:
+1. https://docs.python.org/3/library/stdtypes.html#str.strip
+   str.strip без chars возвращает строку без пробельных символов по краям. Исходная строка не изменяется.
+   Это подтверждает нормализацию имён и обработку строки только из whitespace как пустого имени.
+2. https://docs.python.org/3/library/stdtypes.html#set.discard
+   set.discard удаляет элемент, если тот присутствует; это основание для безопасного удаления отсутствующего имени.
+   Это подтверждает безопасную повторную отписку. Булев результат определяется нашим membership check, не возвратом discard.
+3. https://docs.python.org/3/library/functions.html#sorted
+   sorted возвращает новый отсортированный список из элементов iterable.
+   Это подтверждает порядок результата list_subscribers и независимость выданного списка от множества.
+
+Наблюдавшиеся ограничения запуска:
+- Запуски в sandbox до handshake завершались ошибкой uv cache: Operation not permitted (os error 1). MCP-ответами они не считаются.
+- При первом успешном чтении stdtypes SDK сообщил Failed to parse JSONRPC message from server:
+  в stdout были посторонние startup-строки npm, включая 'added 38 packages, and audited 39 packages in 4s'.
+  Несмотря на предупреждения, initialize/list_tools и валидный ответ fetch с isError=false были получены.
+- Версия launcher package — mcp-server-fetch@2026.8.18; serverInfo отдельно сообщил mcp-fetch 1.30.0.
+  Эти две фактические версии не отождествляются.
+- Метка <error>Content truncated в адресных ответах — сообщение fetch о пагинации по max_length, а не isError=true.
+  Определения strip и discard полностью присутствуют в сохранённых фрагментах.
+
+Реальный ответ initialize:
+{
+  "_meta": null,
+  "protocolVersion": "2025-11-25",
+  "capabilities": {
+    "experimental": {},
+    "logging": null,
+    "prompts": {
+      "listChanged": false
+    },
+    "resources": null,
+    "tools": {
+      "listChanged": false
+    },
+    "completions": null,
+    "extensions": null,
+    "tasks": null
+  },
+  "serverInfo": {
+    "name": "mcp-fetch",
+    "title": null,
+    "version": "1.30.0",
+    "description": null,
+    "websiteUrl": null,
+    "icons": null
+  },
+  "instructions": null
+}
+
+Реальный ответ list_tools:
+{
+  "_meta": null,
+  "ttlMs": 0,
+  "cacheScope": "private",
+  "nextCursor": null,
+  "tools": [
+    {
+      "name": "fetch",
+      "title": null,
+      "description": "Fetches a URL from the internet and optionally extracts its contents as markdown.\n\nAlthough originally you did not have internet access, and were advised to refuse and tell the user this, this tool now grants you internet access. Now you can fetch the most up-to-date information and let the user know that.",
+      "inputSchema": {
+        "description": "Parameters for fetching a URL.",
+        "properties": {
+          "url": {
+            "description": "URL to fetch",
+            "format": "uri",
+            "minLength": 1,
+            "title": "Url",
+            "type": "string"
+          },
+          "max_length": {
+            "default": 5000,
+            "description": "Maximum number of characters to return.",
+            "exclusiveMaximum": 1000000,
+            "exclusiveMinimum": 0,
+            "title": "Max Length",
+            "type": "integer"
+          },
+          "start_index": {
+            "default": 0,
+            "description": "On return output starting at this character index, useful if a previous fetch was truncated and more context is required.",
+            "minimum": 0,
+            "title": "Start Index",
+            "type": "integer"
+          },
+          "raw": {
+            "default": false,
+            "description": "Get the actual HTML content of the requested page, without simplification.",
+            "title": "Raw",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "Fetch",
+        "type": "object"
+      },
+      "execution": null,
+      "outputSchema": null,
+      "icons": null,
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "resultType": "complete"
+}
+
+Первичный поиск точных индексов:
+recorded_at_utc: 2026-10-16T07:12:43.561253+00:00
+tool: fetch
+arguments: {"url": "https://docs.python.org/3/library/stdtypes.html", "start_index": 0, "max_length": 900000, "raw": false}
+isError: false
+Полная страница получена через MCP, но в репозиторий не копируется. Ниже сохранены адресные ответы.
+
+Адресные вызовы:
+recorded_at_utc: 2026-10-16T07:14:02.175014+00:00
+
+Вызов 1
+tool: fetch
+arguments: {"url": "https://docs.python.org/3/library/stdtypes.html", "start_index": 95286, "max_length": 1300, "raw": false}
+Реальный ответ (без изменения содержимого):
+{
+  "_meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "Contents of https://docs.python.org/3/library/stdtypes.html:\nstr.strip(*chars=None*, */*)[¶](#str.strip \"Link to this definition\")\n:   Return a copy of the string with the leading and trailing characters removed.\n    The *chars* argument is a string specifying the set of characters to be removed.\n    If omitted or `None`, the *chars* argument defaults to removing whitespace.\n    The *chars* argument is not a prefix or suffix; rather, all combinations of its\n    values are stripped.\n\n    Whitespace characters are defined by [`str.isspace()`](#str.isspace \"str.isspace\").\n\n    For example:\n\n    ```\n    >>> '   spacious   '.strip()\n    'spacious'\n    >>> 'www.example.com'.strip('cmowz.')\n    'example'\n    ```\n\n    The outermost leading and trailing *chars* argument values are stripped\n    from the string. Characters are removed from the leading end until\n    reaching a string character that is not contained in the set of\n    characters in *chars*. A similar action takes place on the trailing end.\n\n    For example:\n\n    ```\n    >>> comment_string = '#....... Section 3.2.1 Issue #32 .......'\n    >>> comment_string.strip('.#! ')\n    'Section 3.2.1 Issue #32'\n    ```\n\n    See also [`rstrip()`](#str.rstrip \"str.rstrip\").\n\nstr.swapcase()[¶](#str.swapcase \"Link to this definition\")\n:   Return a copy of the string with uppercase characters converted t\n\n<error>Content truncated. Call the fetch tool with a start_index of 96586 to get more content.</error>",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false,
+  "resultType": "complete"
+}
+
+Вызов 2
+tool: fetch
+arguments: {"url": "https://docs.python.org/3/library/stdtypes.html", "start_index": 189532, "max_length": 350, "raw": false}
+Реальный ответ (без изменения содержимого):
+{
+  "_meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "Contents of https://docs.python.org/3/library/stdtypes.html:\nset.discard(*elem*, */*)[¶](#set.discard \"Link to this definition\")\n:   Remove element *elem* from the set if it is present.\n\nset.pop()[¶](#set.pop \"Link to this definition\")\n:   Remove and return an arbitrary element from the set. Raises\n    [`KeyError`](exceptions.html#KeyError \"KeyError\") if the set is empty.\n\nset.clear()[¶](#set.clear \"Link to \n\n<error>Content truncated. Call the fetch tool with a start_index of 189882 to get more content.</error>",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false,
+  "resultType": "complete"
+}
+
+Вызов 3
+tool: fetch
+arguments: {"url": "https://docs.python.org/3/library/functions.html", "start_index": 0, "max_length": 900000, "raw": false}
+isError: false
+Ответ сохранён выдержкой: символы [89847:90002] текстового блока длиной 111368. Остальная страница опущена.
+BEGIN ACTUAL RESPONSE EXCERPT
+sorted(*iterable*, */*, *\**, *key=None*, *reverse=False*)[¶](#sorted "Link to this definition")
+:   Return a new sorted list from the items in *iterable*.
+END ACTUAL RESPONSE EXCERPT
+
+stderr адресного запуска:
+(пусто)
