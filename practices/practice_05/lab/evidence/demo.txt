@@ -1,0 +1,39 @@
+Коммит кода: 60e21d0
+Каталог: /Users/pip/ITMOv2
+Команда: python3 -i practices/practice_03/lab/demo/service.py
+Фактический вывод PTY; CRLF приведены к LF, конечные пробелы удалены.
+
+warning: can't use pyrepl: (5, "terminal doesn't have the required clear capability"); TERM=dumb
+>>> list_subscribers()
+[]
+>>> subscribe(" Ann ")
+{'subscribed': True}
+>>> subscribe("Ann")
+{'subscribed': True}
+>>> subscribe("Zoe")
+{'subscribed': True}
+>>> list_subscribers()
+['Ann', 'Zoe']
+>>> unsubscribe(" Ann ")
+{'unsubscribed': True}
+>>> unsubscribe("Ann")
+{'unsubscribed': False}
+>>> subscribe(" \t\n")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+    subscribe(" \t\n")
+    ~~~~~~~~~^^^^^^^^^
+  File "/Users/pip/ITMOv2/practices/practice_03/lab/demo/service.py", line 12, in subscribe
+    cleaned_name = _normalize_name(name)
+  File "/Users/pip/ITMOv2/practices/practice_03/lab/demo/service.py", line 7, in _normalize_name
+    raise ValueError("empty name")
+ValueError: empty name
+>>> list_subscribers()
+['Zoe']
+>>> exit()
+
+
+Новый процесс, команда:
+python3 -c 'import runpy; print(runpy.run_path("practices/practice_03/lab/demo/service.py")["list_subscribers"]())'
+Фактический stdout:
+[]

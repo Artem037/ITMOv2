@@ -12,9 +12,9 @@
 
 ## 3. Локальный показ и приёмка
 
-- [ ] 3.1 Из корня запустить существующий Python-модуль, показать пять условий фильтра; сохранить реальный PTY в `evidence/filter-demo.txt` и инструкции в `lab/REPORT.md`.
-- [ ] 3.2 Независимо проверить code/spec/tests/report, устранить существенные замечания; сохранить итог в `evidence/filter-review.md`.
-- [ ] 3.3 Выполнить `sh scripts/check.sh`, `git diff --check` и `openspec validate --all --strict`; сохранить `evidence/filter-checks.txt`, обновить план и локальные коммиты в practice-05 без push.
+- [x] 3.1 Из корня запустить существующий Python-модуль, показать пять условий фильтра; сохранить реальный PTY в `evidence/filter-demo.txt` и инструкции в `lab/REPORT.md`.
+- [x] 3.2 Независимо проверить code/spec/tests/report, устранить существенные замечания; сохранить итог в `evidence/filter-review.md`.
+- [x] 3.3 Выполнить `sh scripts/check.sh`, `git diff --check` и `openspec validate --all --strict`; сохранить `evidence/filter-checks.txt`, обновить план и локальные коммиты в practice-05 без push.
 
 ## Workflow follow-up
 

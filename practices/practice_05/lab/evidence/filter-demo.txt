@@ -1,0 +1,33 @@
+Коммит кода: 573dc6c
+Каталог: /Users/pip/ITMOv2
+Команда: python3 -i practices/practice_03/lab/demo/service.py
+Фактический PTY, CRLF приведены к LF, конечные пробелы удалены.
+
+warning: can't use pyrepl: (5, "terminal doesn't have the required clear capability"); TERM=dumb
+>>> list_subscribers("zz")
+[]
+>>> subscribe("Anna")
+{'subscribed': True}
+>>> subscribe("Bob")
+{'subscribed': True}
+>>> subscribe("Ann")
+{'subscribed': True}
+>>> list_subscribers(" aN ")
+['Ann', 'Anna']
+>>> list_subscribers("zz")
+[]
+>>> list_subscribers("   ")
+['Ann', 'Anna', 'Bob']
+>>> list_subscribers()
+['Ann', 'Anna', 'Bob']
+>>> names = list_subscribers("ann")
+>>> names.append("Zoe")
+>>> list_subscribers("ann")
+['Ann', 'Anna']
+>>> list_subscribers()
+['Ann', 'Anna', 'Bob']
+>>> subscribe("Straße")
+{'subscribed': True}
+>>> list_subscribers("STRASSE")
+['Straße']
+>>> exit()
