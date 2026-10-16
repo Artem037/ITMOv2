@@ -1,0 +1,23 @@
+python3 -m unittest -v
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_empty_names_preserve_existing_subscribers (test_service.SubscribeTest.test_empty_names_preserve_existing_subscribers) ... ok
+test_list_filter_blank_query_returns_all (test_service.SubscribeTest.test_list_filter_blank_query_returns_all) ... ok
+test_list_filter_preserves_state (test_service.SubscribeTest.test_list_filter_preserves_state) ... ok
+test_list_filter_trims_query (test_service.SubscribeTest.test_list_filter_trims_query) ... ok
+test_list_filter_without_matches_returns_empty (test_service.SubscribeTest.test_list_filter_without_matches_returns_empty) ... ok
+test_list_filters_substring_without_case (test_service.SubscribeTest.test_list_filters_substring_without_case) ... ok
+test_list_result_is_detached (test_service.SubscribeTest.test_list_result_is_detached) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_repeated_unsubscribe_returns_false (test_service.SubscribeTest.test_repeated_unsubscribe_returns_false) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_subscribe_trims_name (test_service.SubscribeTest.test_subscribe_trims_name) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.000s
+
+OK

@@ -21,5 +21,8 @@ def unsubscribe(name):
     return {"unsubscribed": was_subscribed}
 
 
-def list_subscribers():
-    return sorted(subscribers)
+def list_subscribers(query=""):
+    cleaned_query = query.strip().casefold()
+    return sorted(
+        name for name in subscribers if cleaned_query in name.casefold()
+    )

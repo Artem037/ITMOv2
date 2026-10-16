@@ -1,0 +1,82 @@
+python3 -m unittest -v
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_empty_names_preserve_existing_subscribers (test_service.SubscribeTest.test_empty_names_preserve_existing_subscribers) ... ok
+test_list_filter_blank_query_returns_all (test_service.SubscribeTest.test_list_filter_blank_query_returns_all) ...
+  test_list_filter_blank_query_returns_all (test_service.SubscribeTest.test_list_filter_blank_query_returns_all) (query='') ... ERROR
+  test_list_filter_blank_query_returns_all (test_service.SubscribeTest.test_list_filter_blank_query_returns_all) (query=' \t\n') ... ERROR
+test_list_filter_preserves_state (test_service.SubscribeTest.test_list_filter_preserves_state) ... ERROR
+test_list_filter_trims_query (test_service.SubscribeTest.test_list_filter_trims_query) ... ERROR
+test_list_filter_without_matches_returns_empty (test_service.SubscribeTest.test_list_filter_without_matches_returns_empty) ... ERROR
+test_list_filters_substring_without_case (test_service.SubscribeTest.test_list_filters_substring_without_case) ... ERROR
+test_list_result_is_detached (test_service.SubscribeTest.test_list_result_is_detached) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_repeated_unsubscribe_returns_false (test_service.SubscribeTest.test_repeated_unsubscribe_returns_false) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_subscribe_trims_name (test_service.SubscribeTest.test_subscribe_trims_name) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+======================================================================
+ERROR: test_list_filter_blank_query_returns_all (test_service.SubscribeTest.test_list_filter_blank_query_returns_all) (query='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_03/lab/demo/test_service.py", line 98, in test_list_filter_blank_query_returns_all
+    self.assertEqual(service.list_subscribers(query), ["Ann", "Zoe"])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+TypeError: list_subscribers() takes 0 positional arguments but 1 was given
+
+======================================================================
+ERROR: test_list_filter_blank_query_returns_all (test_service.SubscribeTest.test_list_filter_blank_query_returns_all) (query=' \t\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_03/lab/demo/test_service.py", line 98, in test_list_filter_blank_query_returns_all
+    self.assertEqual(service.list_subscribers(query), ["Ann", "Zoe"])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+TypeError: list_subscribers() takes 0 positional arguments but 1 was given
+
+======================================================================
+ERROR: test_list_filter_preserves_state (test_service.SubscribeTest.test_list_filter_preserves_state)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_03/lab/demo/test_service.py", line 108, in test_list_filter_preserves_state
+    names = service.list_subscribers("ann")
+TypeError: list_subscribers() takes 0 positional arguments but 1 was given
+
+======================================================================
+ERROR: test_list_filter_trims_query (test_service.SubscribeTest.test_list_filter_trims_query)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_03/lab/demo/test_service.py", line 91, in test_list_filter_trims_query
+    self.assertEqual(service.list_subscribers(" \tAN\n "), ["Ann", "Anna"])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+TypeError: list_subscribers() takes 0 positional arguments but 1 was given
+
+======================================================================
+ERROR: test_list_filter_without_matches_returns_empty (test_service.SubscribeTest.test_list_filter_without_matches_returns_empty)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_03/lab/demo/test_service.py", line 101, in test_list_filter_without_matches_returns_empty
+    self.assertEqual(service.list_subscribers("zz"), [])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+TypeError: list_subscribers() takes 0 positional arguments but 1 was given
+
+======================================================================
+ERROR: test_list_filters_substring_without_case (test_service.SubscribeTest.test_list_filters_substring_without_case)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_03/lab/demo/test_service.py", line 85, in test_list_filters_substring_without_case
+    self.assertEqual(service.list_subscribers("AN"), ["Ann", "Joanna"])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+TypeError: list_subscribers() takes 0 positional arguments but 1 was given
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.001s
+
+FAILED (errors=6)
+make: *** [test] Error 1
+
+Команда: make -C practices/practice_03/lab/demo test
+Наблюдавшийся exit code: 2. Конечные пробелы вывода удалены.

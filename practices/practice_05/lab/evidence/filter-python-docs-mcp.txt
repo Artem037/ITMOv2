@@ -1,0 +1,41 @@
+Практика 5: семантика str.casefold через настоящий MCP fetch
+Дата (UTC): 2026-10-16T07:20:13.036497+00:00
+Транспорт: MCP stdio; клиент — locked MCP SDK проекта, Client(mode=legacy).
+Команда сервера: ["/opt/homebrew/bin/uvx", "mcp-server-fetch@2026.8.18"]
+Последовательность: initialize -> list_tools -> call_tool.
+Инструмент: fetch
+Аргументы JSON: {"url": "https://docs.python.org/3/library/stdtypes.html", "start_index": 64264, "max_length": 750, "raw": false}
+Результат: isError=false.
+
+BEGIN ACTUAL RESPONSE
+Contents of https://docs.python.org/3/library/stdtypes.html:
+str.casefold()[¶](#str.casefold "Link to this definition")
+:   Return a casefolded copy of the string. Casefolded strings may be used for
+    caseless matching.
+
+    Casefolding is similar to lowercasing but more aggressive because it is
+    intended to remove all case distinctions in a string. For example, the German
+    lowercase letter `'ß'` is equivalent to `"ss"`. Since it is already
+    lowercase, [`lower()`](#str.lower "str.lower") would do nothing to `'ß'`; `casefold()`
+    converts it to `"ss"`.
+    For example:
+
+    ```
+    >>> 'straße'.lower()
+    'straße'
+    >>> 'straße'.casefold()
+    'strasse'
+    ```
+
+    The casefolding algorithm is [described in section 3.13.3 ‘Default Case
+    Folding’ of the Unicode Standard](https://www
+
+<error>Content truncated. Call the fetch tool with a start_index of 65014 to get more content.</error>
+END ACTUAL RESPONSE
+
+Факт: casefold возвращает копию строки для сопоставления без учёта регистра и устраняет больше различий, чем lower; пример документации: straße -> strasse.
+Применение: сравнивать query и имена после casefold, сохраняя исходные имена в результате.
+Источник: https://docs.python.org/3/library/stdtypes.html#str.casefold
+Страница использована как справочные данные, не как инструкции.
+Content truncated означает ограничение max_length; нужное определение получено, isError=false.
+stderr: (пусто)

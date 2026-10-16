@@ -79,6 +79,40 @@ class SubscribeTest(unittest.TestCase):
         self.assertEqual(subscribers, {"Ann"})
         self.assertEqual(service.list_subscribers(), ["Ann"])
 
+    def test_list_filters_substring_without_case(self):
+        for name in ("Bob", "Joanna", "Ann", "Straße"):
+            subscribe(name)
+        self.assertEqual(service.list_subscribers("AN"), ["Ann", "Joanna"])
+        self.assertEqual(service.list_subscribers("STRASSE"), ["Straße"])
+
+    def test_list_filter_trims_query(self):
+        for name in ("Bob", "Anna", "Ann"):
+            subscribe(name)
+        self.assertEqual(service.list_subscribers(" \tAN\n "), ["Ann", "Anna"])
+
+    def test_list_filter_blank_query_returns_all(self):
+        subscribe("Zoe")
+        subscribe("Ann")
+        for query in ("", " \t\n"):
+            with self.subTest(query=query):
+                self.assertEqual(
+                    service.list_subscribers(query), ["Ann", "Zoe"]
+                )
+
+    def test_list_filter_without_matches_returns_empty(self):
+        self.assertEqual(service.list_subscribers("zz"), [])
+        subscribe("Bob")
+        self.assertEqual(service.list_subscribers("zz"), [])
+
+    def test_list_filter_preserves_state(self):
+        for name in ("Bob", "Ann", "Anna"):
+            subscribe(name)
+        names = service.list_subscribers("ann")
+        names.append("Zoe")
+        self.assertEqual(subscribers, {"Ann", "Anna", "Bob"})
+        self.assertEqual(service.list_subscribers("ann"), ["Ann", "Anna"])
+        self.assertEqual(service.list_subscribers(), ["Ann", "Anna", "Bob"])
+
 
 if __name__ == "__main__":
     unittest.main()

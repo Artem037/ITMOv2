@@ -9,8 +9,9 @@ context: |
   Preserve subscribe(name), unsubscribe(name), list_subscribers(),
   their response dictionaries and the shared subscribers set object.
   Follow AGENTS.md and practices/practice_03/lab/demo/STYLE_GUIDE.md.
-  Current practice: refactor duplicate name normalization without changing
-  public behavior; demonstrate operations in one local Python process.
+  Current practice: add a small case-insensitive substring filter to
+  list_subscribers(query=""); trim query edges and preserve the old no-arg call.
+  Preserve stored names, default sorting and process state; demonstrate locally.
   Do not add a database, HTTP server or third User Story (homework 5).
   Keep earlier experiment results, reports, configurations and homework 4 intact.
   Demo checks: make -C practices/practice_03/lab/demo test.
