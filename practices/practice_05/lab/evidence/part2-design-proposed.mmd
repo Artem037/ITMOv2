@@ -1,0 +1,11 @@
+sequenceDiagram
+    actor Caller as Вызывающий код
+    participant Counter as count_subscribers
+    participant List as list_subscribers
+    Caller->>Counter: query (строка, по умолчанию "")
+    Counter->>List: query без изменения
+    Note over List: Прежний фильтр: удаление краевых<br/>пробельных символов, Unicode casefold,<br/>поиск подстроки.<br/>Пустой запрос — все подписчики.
+    List-->>Counter: Новый отсортированный список<br/>исходных имён, [] при пустом сервисе<br/>или отсутствии совпадений
+    Note over Counter,List: Множество subscribers и его объект сохраняются
+    Counter-->>Caller: Длина списка: int, включая 0 для []
+    Note over Caller,List: Прежнее поведение subscribe, unsubscribe<br/>и list_subscribers сохраняется

@@ -1,5 +1,7 @@
 # Практика 5 Фильтр подписчиков Notify Mini
 
+Это материалы практического занятия, сохранённые отдельно от домашней работы 5. Ветка снимка работы с пары — `practice-05-classwork`; дата сохранения — 2026-10-20. Для будущей домашней работы предложено имя ветки `homework_05`, сама эта ветка пока не создавалась.
+
 Небольшая фича для нашего проекта: `list_subscribers(query="")` умеет искать подписчиков по части имени. Запрос не учитывает регистр и пробельные символы по краям. Имена, подписки, сортировка и старый вызов без аргументов сохраняются.
 
 ## Пять условий
@@ -15,12 +17,14 @@
 Все команды выполнялись из `/Users/pip/ITMOv2`, ветка `practice-05`, OpenSpec `1.14.1`. Использован текущий Codex; профиль `core` также настроен для OpenCode.
 
 - **Explore:** прочитаны код, README, тесты и текущая spec. Уже был отсортированный список без параметров; выбрана одна маленькая фича для своего проекта, как уточнил пользователь по материалам преподавателя. Baseline — [12 успешных тестов](evidence/filter-baseline.txt).
-- **Proposal:** создан change `filter-notify-mini-subscribers` с [обоснованием](../../../openspec/changes/filter-notify-mini-subscribers/proposal.md).
-- **Требования и обсуждение:** пять условий и конкретные входы/выходы сохранены в [delta spec](../../../openspec/changes/filter-notify-mini-subscribers/specs/notify-mini/spec.md), решения — в [design](../../../openspec/changes/filter-notify-mini-subscribers/design.md), действия — в [tasks](../../../openspec/changes/filter-notify-mini-subscribers/tasks.md).
+- **Proposal:** создан change `filter-notify-mini-subscribers` с [обоснованием](../../../openspec/changes/archive/2026-10-16-filter-notify-mini-subscribers/proposal.md).
+- **Требования и обсуждение:** пять условий и конкретные входы/выходы сохранены в [delta spec](../../../openspec/changes/archive/2026-10-16-filter-notify-mini-subscribers/specs/notify-mini/spec.md), решения — в [design](../../../openspec/changes/archive/2026-10-16-filter-notify-mini-subscribers/design.md), действия — в [tasks](../../../openspec/changes/archive/2026-10-16-filter-notify-mini-subscribers/tasks.md).
 - **RED:** до реализации добавлены пять тестов. [Фактический прогон](evidence/filter-red.txt) дал 6 ошибок `TypeError` на отсутствующем параметре: у одного теста два subtest. Старые 12 тестов прошли.
 - **GREEN:** функция получила необязательный `query`, очистку запроса и фильтрацию перед `sorted`. [Все 17 тестов прошли](evidence/filter-green.txt); README содержит пример новой функции и старого вызова.
 - **Локальный показ:** настоящий интерактивный Python запущен из корня; [вывод](evidence/filter-demo.txt) показывает все пять условий и неизменный полный список.
-- **Проверка:** [независимое ревью](evidence/filter-review.md), [итоговые команды и вывод](evidence/filter-checks.txt). Архивирование и sync delta остаются после пользовательской приёмки.
+- **Проверка:** [независимое ревью](evidence/filter-review.md), [итоговые команды и вывод](evidence/filter-checks.txt). На шаге 5 отдельный агент повторно проверил требования прямыми вызовами и запустил настоящий runner: основной, ошибочный и прежний сценарии прошли.
+- **Приёмка:** 2026-10-16 пользователь явно подтвердил: «принимаю фичу» и поручил выполнить шаг 6.
+- **Sync и archive:** после приёмки delta перенесена в [основную spec](../../../openspec/specs/notify-mini/spec.md): обновлён контракт списка, добавлены шесть сценариев, сохранены прежние сценарии и остальные требования. Команда `openspec archive filter-notify-mini-subscribers --yes --json` сохранила изменение в `openspec/changes/archive/2026-10-16-filter-notify-mini-subscribers/`. Поле `specsUpdated: false` в ответе CLI означает, что spec уже была синхронизирована отдельным шагом. [Команды, diff и итоговые проверки](evidence/filter-archive.txt).
 
 Подготовительный рефакторинг вынес нормализацию имени в один helper; его отдельные доказательства сохранены в [REFACTOR.md](REFACTOR.md). Он не заменяет фичу фильтра, выбранную для занятия.
 
@@ -41,7 +45,8 @@
 
 ```sh
 openspec --version
-openspec status --change filter-notify-mini-subscribers
+openspec list --specs
+openspec show notify-mini --type spec
 python3 -i practices/practice_03/lab/demo/service.py
 ```
 
@@ -61,3 +66,30 @@ exit()
 Проверка из корня: `sh scripts/check.sh`, затем `git diff --check` и `openspec validate --all --strict`. Итоговый состав: 17 тестов демо + 28 домашки 4 + 6 hook = 51 тест.
 
 Это локальный Python-модуль со состоянием в процессе. HTTP-сервер, БД, отдельный интерфейс и домашняя работа 5 не добавлялись; оценка преподавателя не утверждается.
+
+## Часть 2 — правило OpenSpec для проекта
+
+Фильтр Notify Mini и его архив относятся к части 1. В части 2 проверяется настройка формы документов на связанном учебном [черновике подсчёта](../../../openspec/changes/count-filtered-subscribers/proposal.md). `count_subscribers(query="")` только предложен: он должен считать результаты прежнего фильтра, считать всех при пустом запросе и давать `0` при пустом сервисе или отсутствии совпадений. Код счётчика не добавлен, задачи его реализации остаются незавершёнными.
+
+**Шаг 7 выполнен:** исходный [текстовый design «до»](evidence/part2-design-before.md) сохранён до изменения config. В [config](../../../openspec/config.yaml) добавлено одно постоянное правило:
+
+```yaml
+rules:
+  design:
+    - Объясни взаимодействие диаграммой Mermaid.
+```
+
+До изменения config поле `rules` отсутствовало в [ответе CLI](evidence/part2-instructions-before.json). После изменения команда `openspec instructions design --change count-filtered-subscribers --json` вернула точную строку правила в `rules`; сохранён [реальный свежий ответ](evidence/part2-instructions-after.json).
+
+**Шаг 8 подготовлен к приёмке:** в [предлагаемом варианте](evidence/part2-design-proposed.md) только четыре текстовых шага Interaction заменяются Mermaid-диаграммой. [Diff](evidence/part2-design-proposed.diff) и [визуальный preview](evidence/part2-design-preview.png) предназначены для проверки формы. Делегирование существующему фильтру, строковый запрос, правила поиска, тип `int`, граничные значения, состояние и существующие API сохраняются.
+
+Основной [design черновика](../../../openspec/changes/count-filtered-subscribers/design.md) пока остаётся равным «до». Подтверждение человека ещё не получено; «после» и завершение части 2 не заявляются. После принятия diff меняется только этот фрагмент, выполняется сравнение до/после и открывается диаграмма. Реализация, sync и archive этого черновика не выполняются.
+
+Предложенный Mermaid действительно разобран и отрисован локально; [журнал](evidence/part2-mermaid-render.txt) содержит результаты и первоначальную ошибку подписи, исправленную до успешного preview. Независимый агент подтвердил сохранение смысла. [Контрольные суммы](evidence/part2-baseline.json), сравнение файлов и [фактические проверки](evidence/part2-checks.txt) подтверждают сохранность кода и основной spec; 51 тест, Ruff и строгая проверка OpenSpec прошли.
+
+## Снимок работы с пары на 2026-10-20
+
+- Часть 1 завершена: фильтр реализован, проверен, принят пользователем, основная spec обновлена, change заархивирован.
+- Часть 2 сохранена как фактический прогресс: постоянное правило Mermaid работает, учебный draft и предлагаемый diff готовы. Подтверждение и запись варианта «после» ещё не выполнялись.
+- Домашняя работа 5 не начата. Незавершённые задачи реализации счётчика относятся к учебному draft и не означают начало домашки.
+- Перед коммитом повторно выполнены [проверки текущего снимка](evidence/classwork-checks-2026-10-20.txt).

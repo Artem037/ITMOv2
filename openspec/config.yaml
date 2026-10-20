@@ -18,6 +18,10 @@ context: |
   Full checks from repository root: sh scripts/check.sh; git diff --check.
   Use real MCP fetch calls for relevant official Python library contracts.
 
+rules:
+  design:
+    - Объясни взаимодействие диаграммой Mermaid.
+
 # Per-artifact rules (optional)
 # Add custom rules for specific artifacts.
 # Example:

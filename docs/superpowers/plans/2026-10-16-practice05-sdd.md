@@ -1,6 +1,6 @@
 # Практика 5 Фильтр подписчиков Notify Mini Implementation Plan
 
-> Выполнение: OpenSpec `filter-notify-mini-subscribers`, схема `spec-driven`. Чекбоксы отражают фактический прогресс; архивирование выполняется после пользовательской приёмки.
+> Выполнение: OpenSpec `filter-notify-mini-subscribers`, схема `spec-driven`. Фича принята пользователем 2026-10-16; основная spec синхронизирована, изменение заархивировано.
 
 **Goal:** Добавить небольшую персональную фичу — фильтр существующего списка подписчиков по части имени — и пройти исследование, требования, RED/GREEN, локальный запуск и проверку.
 
@@ -8,7 +8,7 @@
 
 **Tech Stack:** Python 3.10+, стандартная библиотека, unittest, Ruff, Make; OpenSpec 1.14.1, профиль core, Codex/OpenCode.
 
-**Spec:** Текущая база — `openspec/specs/notify-mini/spec.md`; пять условий новой фичи — `openspec/changes/filter-notify-mini-subscribers/specs/notify-mini/spec.md`. Proposal, design и tasks находятся рядом.
+**Spec:** Принятый контракт — `openspec/specs/notify-mini/spec.md`; delta новой фичи сохранена в `openspec/changes/archive/2026-10-16-filter-notify-mini-subscribers/specs/notify-mini/spec.md`. Proposal, design и tasks находятся рядом в архиве.
 
 ## Уточнённое задание
 
@@ -16,10 +16,10 @@
 
 ## Global Constraints
 
-- Работать из `/Users/pip/ITMOv2`, ветка `practice-05`; без push.
+- Работать из `/Users/pip/ITMOv2`. Занятие выполнялось в `practice-05`; 2026-10-20 пользователь поручил сохранить снимок в отдельной ветке `practice-05-classwork`, сделать коммит и push в origin.
 - Соблюдать `AGENTS.md` и STYLE_GUIDE демо; только стандартная библиотека и память процесса.
 - Старые результаты, отчёты, настройки практики 3 и домашку 4 сохранять.
-- Домашняя работа 5 и третья User Story не входят в объём занятия.
+- Домашняя работа 5 не входит в объём занятия; для будущей домашки предложено отдельное имя ветки `homework_05`.
 - Для нового поведения: тесты → ожидаемый RED → минимальный код → GREEN.
 - Официальные контракты Python получать через настоящий MCP fetch, сохранять URL, аргументы и результат.
 - Перед действием объяснять цель по-русски, после — доказательство и результат.
@@ -40,7 +40,7 @@
 | `practices/practice_03/lab/demo/service.py` | Необязательный query и фильтрация |
 | `practices/practice_03/lab/demo/test_service.py` | Пять новых тестов; всего 17 |
 | `practices/practice_03/lab/demo/README.md` | Пример фильтра и запуска из корня |
-| `openspec/changes/filter-notify-mini-subscribers/` | Proposal, delta spec, design, tasks |
+| `openspec/changes/archive/2026-10-16-filter-notify-mini-subscribers/` | Архив принятых proposal, delta spec, design, tasks |
 | `practices/practice_05/lab/REPORT.md` | Объяснение процесса и инструкция показа |
 | `practices/practice_05/lab/evidence/filter-*.txt` | Реальные baseline, MCP, RED, GREEN, demo, checks |
 | `practices/practice_05/lab/evidence/filter-review.md` | Независимое ревью новой фичи |
@@ -57,6 +57,20 @@
 
 ## После пользовательской приёмки
 
-- [ ] Синхронизировать принятую delta в основную spec и архивировать change штатным OpenSpec workflow.
+- [x] Пользователь принял фичу после технических проверок шага 5 и независимой сверки требований.
+- [x] Синхронизировать принятую delta в основную spec: один обновлённый контракт списка, шесть новых сценариев; остальные требования и прежние сценарии сохранены.
+- [x] Архивировать change штатной командой `openspec archive filter-notify-mini-subscribers --yes --json`, обновить ссылки на `openspec/changes/archive/2026-10-16-filter-notify-mini-subscribers/`. Доказательство шага 6: `practices/practice_05/lab/evidence/filter-archive.txt`.
 
 Локальный показ выполняется существующим Python-модулем в одном процессе. Новый HTTP-сервер не добавляется. Факт запуска и проверки не подменяет решение преподавателя об оценке.
+
+## Часть 2 — настройка формы OpenSpec
+
+**Цель:** Сохранить постоянное правило `rules.design` и проверить его на одном фрагменте связанного черновика `count-filtered-subscribers`. Реализация счётчика не входит в эту часть.
+
+- [x] **7.1 Черновик:** создать proposal/spec/design/tasks для подсчёта результатов существующего фильтра; будущие задачи реализации оставить незавершёнными.
+- [x] **7.2 Исходный фрагмент:** сохранить настоящий текстовый design в `practices/practice_05/lab/evidence/part2-design-before.md`, исходный config и контрольные суммы кода, основной spec и документов черновика.
+- [x] **7.3 Правило проекта:** добавить единственный `rules.design` с правилом «Объясни взаимодействие диаграммой Mermaid.» в существующий `openspec/config.yaml`.
+- [x] **8.1 Свежие инструкции:** выполнить `openspec instructions design --change count-filtered-subscribers --json` после изменения config, проверить точное правило в `rules`, сохранить реальный JSON.
+- [x] **8.2 Предлагаемый diff:** подготовить отдельный `part2-design-proposed.md` и `part2-design-proposed.diff`, меняющие только Interaction; основной design оставить равным «до» до подтверждения.
+- [ ] **8.3 Приёмка формы:** показать человеку diff и диаграмму, получить подтверждение замены текста на Mermaid.
+- [ ] **8.4 Сохранение и итог:** после подтверждения обновить только Interaction в design, сохранить «после», сравнить смысл и контрольные суммы, открыть диаграмму и записать фактические проверки. Оставить правило для будущих design; apply, sync и archive черновика не запускать.

@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "timestamp": "2026-10-16T08:08:50.793Z",
+  "purpose": "Локальный preview ещё не принятого предложенного Mermaid; design.md не изменялся",
+  "input": "/Users/pip/ITMOv2/practices/practice_05/lab/evidence/part2-design-proposed.mmd",
+  "outputs": {
+    "svg": "/Users/pip/ITMOv2/practices/practice_05/lab/evidence/part2-design-preview.svg",
+    "png": "/Users/pip/ITMOv2/practices/practice_05/lab/evidence/part2-design-preview.png"
+  },
+  "node": "v24.19.0",
+  "playwright": "1.62.1",
+  "vscode": "1.141.0",
+  "mermaidModule": "/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/markdown-language-features/markdown-editor-out/mermaid.core-OF7Z62KM.js",
+  "chromeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "errors": [],
+  "consoleErrors": [],
+  "previousAttempts": [
+    {
+      "timestamp": "2026-10-16T08:07:24.920Z",
+      "status": "FAIL",
+      "sourceSha256": "dad1482762d952b7f038c7747402b908d099b5163555d9060c63a306316cd419",
+      "errors": [
+        "page.evaluate: Error: Parse error on line 8:\n... нет имён/совпадений    Note over Count\n-----------------------^\nExpecting '()', 'SOLID_OPEN_ARROW', 'DOTTED_OPEN_ARROW', 'SOLID_ARROW', 'SOLID_ARROW_TOP', 'SOLID_ARROW_BOTTOM', 'STICK_ARROW_TOP', 'STICK_ARROW_BOTTOM', 'SOLID_ARROW_TOP_DOTTED', 'SOLID_ARROW_BOTTOM_DOTTED', 'STICK_ARROW_TOP_DOTTED', 'STICK_ARROW_BOTTOM_DOTTED', 'SOLID_ARROW_TOP_REVERSE', 'SOLID_ARROW_BOTTOM_REVERSE', 'STICK_ARROW_TOP_REVERSE', 'STICK_ARROW_BOTTOM_REVERSE', 'SOLID_ARROW_TOP_REVERSE_DOTTED', 'SOLID_ARROW_BOTTOM_REVERSE_DOTTED', 'STICK_ARROW_TOP_REVERSE_DOTTED', 'STICK_ARROW_BOTTOM_REVERSE_DOTTED', 'BIDIRECTIONAL_SOLID_ARROW', 'DOTTED_ARROW', 'BIDIRECTIONAL_DOTTED_ARROW', 'SOLID_CROSS', 'DOTTED_CROSS', 'SOLID_POINT', 'DOTTED_POINT', got 'NEWLINE'\n    at Parser.parseError (http://mermaid.local/sequenceDiagram-WJ2MYXX4-TBYRHK2Y.js:1:19175)\n    at Parser.parse (http://mermaid.local/sequenceDiagram-WJ2MYXX4-TBYRHK2Y.js:3:174)\n    at Diagram.fromText (http://mermaid.local/mermaid.core-OF7Z62KM.js:3:255)\n    at async Object.parse (http://mermaid.local/mermaid.core-OF7Z62KM.js:6:1360)\n    at /private/tmp/itmo-part2-mermaid-render.cjs:44:33"
+      ],
+      "browserClosed": true
+    },
+    {
+      "timestamp": "2026-10-16T08:08:28.570Z",
+      "status": "PASS",
+      "sourceSha256": "1d3aef99d33a6c70cbc075d1c39325b33db40c59f47bc2ca16914a9c8fe535bc",
+      "errors": [],
+      "browserClosed": true
+    }
+  ],
+  "sourceSha256": "1d3aef99d33a6c70cbc075d1c39325b33db40c59f47bc2ca16914a9c8fe535bc",
+  "chrome": "155.0.8059.84",
+  "mermaid": "11.17.0",
+  "parse": {
+    "diagramType": "sequence",
+    "config": {}
+  },
+  "viewBox": [
+    -50,
+    -10,
+    1028,
+    601
+  ],
+  "displayedSvg": {
+    "width": 1028,
+    "height": 601
+  },
+  "svgElements": 104,
+  "textLabels": 19,
+  "png": {
+    "width": 1028,
+    "height": 601,
+    "bytes": 65456,
+    "capturedFrom": "#preview > svg",
+    "deviceScaleFactor": 1
+  },
+  "svg": {
+    "bytes": 29142,
+    "sha256": "97a73f2a4a9b630fa040e7528d948e414e98ec19d11e0acb7264b9543513750c"
+  },
+  "browserClosed": true
+}

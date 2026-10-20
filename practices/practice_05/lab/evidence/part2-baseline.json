@@ -1,0 +1,14 @@
+{
+  "stage": "before project rule and proposed design transformation; existing code/main spec unchanged since part 1",
+  "files": {
+    "practices/practice_03/lab/demo/service.py": "198343c640108eb071c52a6d0561bcfa4661cbc7ab7d471b939749543af3ee0b",
+    "practices/practice_03/lab/demo/test_service.py": "704737f1804c49498044a8605dfcb0964f6c9c755a65412e1fad6dd204733973",
+    "practices/practice_03/lab/demo/README.md": "37ae08e8939eccae357d6cd86517a1cdeb50805a24cad06e599420b81d78d925",
+    "practices/practice_03/lab/demo/Makefile": "7a2570dd2c7d0ce6f99a457f2b71b50f9dc1df042cba1e5f6bcf5cfa6c4ebef7",
+    "openspec/specs/notify-mini/spec.md": "0d53acf5d4bc1d67498e6b3d7535df46e65d80ec1402146fe783f5407d0650ca",
+    "openspec/changes/count-filtered-subscribers/proposal.md": "41a5705d5b4b2a22cda712ccb61eae80a39ffd7343297df259f36919f5916172",
+    "openspec/changes/count-filtered-subscribers/specs/notify-mini/spec.md": "c05b4f92fb62bc7a7c1834ac9bb42dc7beb230b9ef2799ffb2c7f08cc2b3b0de",
+    "openspec/changes/count-filtered-subscribers/tasks.md": "905bee391eab10c21cb591b343c44c81179e37bd12a477cfa6b54edd6ce3a4ec"
+  },
+  "design_before_sha256": "1022e4c514a4c6b8026ede9b8ad9afa4d3ec318880593823fe8faf1a36f4df16"
+}

@@ -18,4 +18,6 @@
 
 ## Workflow follow-up
 
-- После пользовательской приёмки синхронизировать delta и архивировать change штатным OpenSpec workflow.
+- 2026-10-16 пользователь явно принял фичу после проверок шага 5.
+- Delta синхронизирована в `openspec/specs/notify-mini/spec.md`: контракт списка соответствует принятому поведению, остальные требования сохранены.
+- Штатная команда `openspec archive filter-notify-mini-subscribers --yes --json` сохранила change в `openspec/changes/archive/2026-10-16-filter-notify-mini-subscribers/`. Итоговые команды и результаты записаны в `practices/practice_05/lab/evidence/filter-archive.txt`.

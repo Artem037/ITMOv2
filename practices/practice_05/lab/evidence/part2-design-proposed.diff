@@ -1,0 +1,20 @@
+--- a/openspec/changes/count-filtered-subscribers/design.md
++++ b/openspec/changes/count-filtered-subscribers/design.md
+@@ -21,4 +21,13 @@
+-1. Вызывающий передаёт строковый `query` в `count_subscribers`; значение по умолчанию — `""`.
+-2. Счётчик передаёт запрос без изменения в `list_subscribers(query)`. Список применяет прежний фильтр: удаление пробельных символов по краям, Unicode casefold и поиск подстроки; пустой запрос выбирает всех.
+-3. Список возвращает новый отсортированный список исходных имён; пустой сервис и отсутствие совпадений дают `[]`. Множество `subscribers` и его объект сохраняются.
+-4. Счётчик возвращает длину этого списка с типом `int`, включая `0` для `[]`. Прежнее поведение `subscribe`, `unsubscribe` и `list_subscribers` сохраняется.
++```mermaid
++sequenceDiagram
++    actor Caller as Вызывающий код
++    participant Counter as count_subscribers
++    participant List as list_subscribers
++    Caller->>Counter: query (строка, по умолчанию "")
++    Counter->>List: query без изменения
++    Note over List: Прежний фильтр: удаление краевых<br/>пробельных символов, Unicode casefold,<br/>поиск подстроки.<br/>Пустой запрос — все подписчики.
++    List-->>Counter: Новый отсортированный список<br/>исходных имён, [] при пустом сервисе<br/>или отсутствии совпадений
++    Note over Counter,List: Множество subscribers и его объект сохраняются
++    Counter-->>Caller: Длина списка: int, включая 0 для []
++    Note over Caller,List: Прежнее поведение subscribe, unsubscribe<br/>и list_subscribers сохраняется
++```
