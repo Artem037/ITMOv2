@@ -1,0 +1,41 @@
+{
+  "transformation": "Remove trailing spaces/tabs only; original bytes preserved losslessly in raw_text archives.",
+  "files": [
+    {
+      "path": "practices/practice_06/evidence/before/security-red-expanded.txt",
+      "original_sha256": "dd6a8b3b7465879693bf87efc8fafc22c67c5e1a034980a20a6d242c92677eb2",
+      "normalized_sha256": "00a21c1cbe8bb7f0dafef9fdff9e66cf48dc2e16412111a7b3810e202ee0f5ef",
+      "lossless_archive": "practices/practice_06/evidence/before/security-red-expanded.txt.raw.json"
+    },
+    {
+      "path": "practices/practice_06/evidence/before/security-red-final.txt",
+      "original_sha256": "8d1ec6a40dbcbe53784da68b8b9c441fb8ef6d56781ddf925fed8714717f7a16",
+      "normalized_sha256": "10ce2bb533ecb037d15a94666c62f498688049b0a5d1c206854da864fd51de56",
+      "lossless_archive": "practices/practice_06/evidence/before/security-red-final.txt.raw.json"
+    },
+    {
+      "path": "practices/practice_06/evidence/before/security-red-initial.txt",
+      "original_sha256": "9ede6d54e6497cb1ad26f05350a2d6ee3a6d8b98ee285b327b74ef44eaf606bd",
+      "normalized_sha256": "ccf3522d4534ea77c34f4a7bdaedf262d917d287c5d6fe0e2cd232c5bb26e164",
+      "lossless_archive": "practices/practice_06/evidence/before/security-red-initial.txt.raw.json"
+    },
+    {
+      "path": "practices/practice_06/evidence/before/security-red-resumed.txt",
+      "original_sha256": "35349ebde276604c946d203dbb30ae512c686f76553addbf051b08b45ddaa0b7",
+      "normalized_sha256": "557114f80351b8ba17f59db63b7d3d16814d9c3e6250295c86e1e022d5075a47",
+      "lossless_archive": "practices/practice_06/evidence/before/security-red-resumed.txt.raw.json"
+    },
+    {
+      "path": "practices/practice_06/evidence/before/security-red.txt",
+      "original_sha256": "f5e8ea2f3fe98d8175da568e44363167d4a92b575a51307ba385c9713cf2f3a9",
+      "normalized_sha256": "944625c346add11b4d10e84f80ff3038dcd6d1d4af5dd6d7cbeee45b172c5c34",
+      "lossless_archive": "practices/practice_06/evidence/before/security-red.txt.raw.json"
+    },
+    {
+      "path": "practices/practice_06/evidence/before/verified/judge-input.txt",
+      "original_sha256": "8cabe89930403650cfd74a2b3390a22ac80e2f6d034be3a301588773f9a1caa1",
+      "normalized_sha256": "420731637cc89144aa92a86e3ba1ef6e2ebe3cfd0d019dbfe2c20cf4256d32d6",
+      "lossless_archive": "practices/practice_06/evidence/before/verified/judge-input.txt.raw.json"
+    }
+  ]
+}

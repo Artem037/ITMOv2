@@ -1,0 +1,14 @@
+{
+  "resumed_at": "2026-10-26T23:12:29.682645+03:00",
+  "git_base": "e2e3315bd756718b543bd4e95505ae2a9cc1afaf",
+  "branch": "practice_06",
+  "source_matches_original": true,
+  "service_sha256": "8cb3abeaaf7bb647cbbd9d1c9a0ea50375c70c30110313f5015468ded24b7569",
+  "security_red_command": "python3 -m unittest -v test_security test_http_security",
+  "security_red_exit_code": 1,
+  "security_red_result": "35 tests; failures=94; errors=0",
+  "provider_diagnosis": {
+    "opencode_free": "Official runtime log reported Free usage limit reached; failures kept separately.",
+    "vsellm": "Configured account diagnostic returned final text and exit 0 using existing credential, supplied only in child environment."
+  }
+}

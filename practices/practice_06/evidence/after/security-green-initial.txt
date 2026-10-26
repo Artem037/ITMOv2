@@ -1,0 +1,40 @@
+test_customer_cannot_read_debug_logs (test_security.SecurityTest.test_customer_cannot_read_debug_logs) ... ok
+test_customer_cannot_spoof_staff (test_security.SecurityTest.test_customer_cannot_spoof_staff) ... ok
+test_duplicate_query_parameter_is_not_silently_selected (test_security.SecurityTest.test_duplicate_query_parameter_is_not_silently_selected) ... ok
+test_executor_allows_model_refusal_without_side_effect (test_security.SecurityTest.test_executor_allows_model_refusal_without_side_effect) ... ok
+test_executor_rechecks_file_owner_and_forbids_export_and_delete (test_security.SecurityTest.test_executor_rechecks_file_owner_and_forbids_export_and_delete) ... ok
+test_executor_rejects_malformed_arguments_and_extra_capabilities (test_security.SecurityTest.test_executor_rejects_malformed_arguments_and_extra_capabilities) ... ok
+test_files_reject_other_customer_and_private_traversal (test_security.SecurityTest.test_files_reject_other_customer_and_private_traversal) ... ok
+test_logs_do_not_store_password_token_body_or_query (test_security.SecurityTest.test_logs_do_not_store_password_token_body_or_query) ... ok
+test_long_review_is_rejected_without_storage (test_security.SecurityTest.test_long_review_is_rejected_without_storage) ... ok
+test_new_order_does_not_return_old_purchase_receipt (test_security.SecurityTest.test_new_order_does_not_return_old_purchase_receipt) ... ok
+test_numeric_sql_injections_are_rejected (test_security.SecurityTest.test_numeric_sql_injections_are_rejected) ... ok
+test_orders_are_scoped_to_customer (test_security.SecurityTest.test_orders_are_scoped_to_customer) ... ok
+test_oversized_numeric_id_is_a_client_error (test_security.SecurityTest.test_oversized_numeric_id_is_a_client_error) ... ok
+test_price_is_from_catalog_in_response_and_database (test_security.SecurityTest.test_price_is_from_catalog_in_response_and_database) ... ok
+test_profile_and_context_reject_other_owner (test_security.SecurityTest.test_profile_and_context_reject_other_owner) ... ok
+test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) ... ok
+test_purchase_collection_has_a_limit_without_extra_insert (test_security.SecurityTest.test_purchase_collection_has_a_limit_without_extra_insert) ... ok
+test_review_collection_has_a_limit (test_security.SecurityTest.test_review_collection_has_a_limit) ... ok
+test_reviews_render_untrusted_markup_as_text (test_security.SecurityTest.test_reviews_render_untrusted_markup_as_text) ... ok
+test_search_sql_injection_is_literal_data (test_security.SecurityTest.test_search_sql_injection_is_literal_data) ... ok
+test_search_wildcard_does_not_bypass_owner (test_security.SecurityTest.test_search_wildcard_does_not_bypass_owner) ... ok
+test_session_and_log_memory_are_bounded (test_security.SecurityTest.test_session_and_log_memory_are_bounded) ... ok
+test_staff_cannot_use_customer_executor (test_security.SecurityTest.test_staff_cannot_use_customer_executor) ... ok
+test_staff_export_uses_session_without_role_header (test_security.SecurityTest.test_staff_export_uses_session_without_role_header) ... ok
+test_absolute_file_argument_is_forbidden_without_internal_error (test_http_security.HttpSecurityTest.test_absolute_file_argument_is_forbidden_without_internal_error) ... ok
+test_ambiguous_body_framing_is_rejected (test_http_security.HttpSecurityTest.test_ambiguous_body_framing_is_rejected) ... ok
+test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) ... ok
+test_bad_request_does_not_break_following_good_request (test_http_security.HttpSecurityTest.test_bad_request_does_not_break_following_good_request) ... ok
+test_header_names_are_case_insensitive (test_http_security.HttpSecurityTest.test_header_names_are_case_insensitive) ... ok
+test_invalid_content_length_is_400_and_oversize_is_413 (test_http_security.HttpSecurityTest.test_invalid_content_length_is_400_and_oversize_is_413) ... ok
+test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) ... ok
+test_json_content_type_required_for_post (test_http_security.HttpSecurityTest.test_json_content_type_required_for_post) ... ok
+test_review_response_has_browser_safety_headers (test_http_security.HttpSecurityTest.test_review_response_has_browser_safety_headers) ... ok
+test_structured_price_is_ignored_and_catalog_price_is_stored (test_http_security.HttpSecurityTest.test_structured_price_is_ignored_and_catalog_price_is_stored) ... ok
+test_unexpected_internal_failure_does_not_expose_details (test_http_security.HttpSecurityTest.test_unexpected_internal_failure_does_not_expose_details) ... ok
+
+----------------------------------------------------------------------
+Ran 35 tests in 0.554s
+
+OK

@@ -1,0 +1,2 @@
+before: 21 HTTP scenarios verified; evidence: /Users/pip/ITMOv2/practices/practice_06/evidence/checks/reproduced-before.json
+exit_code=0

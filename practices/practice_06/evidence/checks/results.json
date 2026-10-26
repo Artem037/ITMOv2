@@ -1,0 +1,35 @@
+[
+  {
+    "command": [
+      "make",
+      "step6"
+    ],
+    "exit_code": 0,
+    "output": "practices/practice_06/evidence/checks/step6.txt"
+  },
+  {
+    "command": [
+      "make",
+      "test"
+    ],
+    "exit_code": 0,
+    "output": "practices/practice_06/evidence/checks/all-tests.txt"
+  },
+  {
+    "command": [
+      "sh",
+      "scripts/check.sh"
+    ],
+    "exit_code": 0,
+    "output": "practices/practice_06/evidence/checks/project-check.txt"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "output": "practices/practice_06/evidence/checks/diff-check.txt"
+  }
+]

@@ -1,0 +1,114 @@
+{
+  "base_url": "http://127.0.0.1:57145",
+  "pid": 63263,
+  "records": [
+    {
+      "id": "duplicate-content-length",
+      "method": "POST",
+      "target": "/login",
+      "headers": [
+        [
+          "Content-Length",
+          "2"
+        ],
+        [
+          "Content-Length",
+          "3"
+        ]
+      ],
+      "body": "{}",
+      "status": 400,
+      "response": {
+        "error": "ambiguous body framing"
+      }
+    },
+    {
+      "id": "transfer-encoding-with-length",
+      "method": "POST",
+      "target": "/login",
+      "headers": [
+        [
+          "Content-Length",
+          "2"
+        ],
+        [
+          "Transfer-Encoding",
+          "chunked"
+        ]
+      ],
+      "body": "{}",
+      "status": 400,
+      "response": {
+        "error": "ambiguous body framing"
+      }
+    },
+    {
+      "id": "oversize-body",
+      "method": "POST",
+      "target": "/login",
+      "headers": [
+        [
+          "Content-Length",
+          "65537"
+        ]
+      ],
+      "body": "",
+      "status": 413,
+      "response": {
+        "error": "body too large"
+      }
+    },
+    {
+      "id": "wrong-content-type",
+      "method": "POST",
+      "target": "/login",
+      "headers": [
+        [
+          "Content-Length",
+          "2"
+        ],
+        [
+          "Content-Type",
+          "text/plain"
+        ]
+      ],
+      "body": "{}",
+      "status": 415,
+      "response": {
+        "error": "JSON content type required"
+      }
+    },
+    {
+      "id": "minimal-log-over-http",
+      "query_result": {
+        "status": 200,
+        "response": [],
+        "content_type": "application/json; charset=utf-8"
+      },
+      "status": 200,
+      "response": [
+        {
+          "method": "POST",
+          "path": "/login",
+          "actor": null
+        },
+        {
+          "method": "POST",
+          "path": "/login",
+          "actor": null
+        },
+        {
+          "method": "GET",
+          "path": "/search",
+          "actor": 1
+        },
+        {
+          "method": "GET",
+          "path": "/debug/logs",
+          "actor": 0
+        }
+      ]
+    }
+  ],
+  "exit_code": 0
+}

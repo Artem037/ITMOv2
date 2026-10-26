@@ -1,0 +1,29 @@
+[
+  {
+    "command": [
+      "sh",
+      "scripts/check.sh"
+    ],
+    "exit_code": 0,
+    "output": "evidence/checks/project-check-final.txt"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--cached",
+      "--check"
+    ],
+    "exit_code": 0,
+    "output": "evidence/checks/staged-diff-check.txt"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "output": "evidence/checks/working-diff-check.txt"
+  }
+]

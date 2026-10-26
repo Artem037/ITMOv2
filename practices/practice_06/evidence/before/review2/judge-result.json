@@ -1,0 +1,377 @@
+{
+  "command": [
+    "opencode",
+    "run",
+    "Проверь представленные материалы этой фазы по своей рубрике.",
+    "--pure",
+    "--dir",
+    "/Users/pip/ITMOv2/practices/practice_06",
+    "--agent",
+    "threat-judge",
+    "--model",
+    "vsellm/openai/gpt-5",
+    "--format",
+    "json",
+    "--file",
+    "/Users/pip/ITMOv2/practices/practice_06/evidence/before/review2/judge-input.txt"
+  ],
+  "model": "vsellm/openai/gpt-5",
+  "agent": "threat-judge",
+  "input_sha256": "d53c6e00c1f2d28ce0b1a1f4b3bfcba1f89e606663af59d719d2a4dd0ea2b338",
+  "prompt_sha256": "d388eb003aeae6a236d094fdf536c4c0e7e721cbeebc14d1ca700f480d20c196",
+  "duration_seconds": 72.728,
+  "exit_code": 0,
+  "timed_out": false,
+  "event_types": {
+    "step_start": 1,
+    "text": 1,
+    "step_finish": 1
+  },
+  "session_ids": [
+    "ses_e8623497bffe6b0QUPa51epaUA"
+  ],
+  "final_text": "{\n  \"verdict\": \"pass\",\n  \"coverage\": [\n    {\n      \"surface\": \"GET /health\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L151-L153\"]\n    },\n    {\n      \"surface\": \"GET /products\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L153-L154\"]\n    },\n    {\n      \"surface\": \"POST /login\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L155-L161\"]\n    },\n    {\n      \"surface\": \"GET /profile\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L162-L164\", \"submitted_evidence:http-replay.json:record id=V01 target=/profile?id=1+OR+1%3D1\", \"submitted_evidence:http-replay.json:record id=V02-guest target=/profile?id=2\"]\n    },\n    {\n      \"surface\": \"GET /search\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L164-L166\", \"submitted_evidence:http-replay.json:record id=V01 target=/search?q=%27+OR+1%3D1+--\"]\n    },\n    {\n      \"surface\": \"GET /orders\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L166-L168\", \"submitted_evidence:http-replay.json:record id=V02-orders target=/orders\"]\n    },\n    {\n      \"surface\": \"POST /orders\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L168-L179\"]\n    },\n    {\n      \"surface\": \"GET /admin/export\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L180-L184\"]\n    },\n    {\n      \"surface\": \"GET /files\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L184-L186\", \"lab/sandbox.py:L296-L304\"]\n    },\n    {\n      \"surface\": \"POST /reviews\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L189-L191\"]\n    },\n    {\n      \"surface\": \"GET /reviews/view\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L192-L194\"]\n    },\n    {\n      \"surface\": \"GET /debug/logs\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L150\", \"lab/service.py:L187-L188\"]\n    },\n    {\n      \"surface\": \"GET /assistant/context\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L194-L205\", \"submitted_evidence:http-replay.json:record id=V01 target=/assistant/context?order_id=1+OR+1%3D1\"]\n    },\n    {\n      \"surface\": \"POST /assistant/execute\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L205-L215\"]\n    },\n    {\n      \"surface\": \"Boundary: client/server framing and error handling\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L225-L243\", \"lab/service.py:L235\"]\n    },\n    {\n      \"surface\": \"Boundary: one client vs other client (owner checks)\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L162-L168\", \"lab/service.py:L184-L186\"]\n    },\n    {\n      \"surface\": \"Boundary: client vs staff (role checks)\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L180-L184\"]\n    },\n    {\n      \"surface\": \"Boundary: application vs sandbox (path controls)\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L184-L186\", \"lab/sandbox.py:L296-L304\", \"lab/sandbox.py:L305-L311\"]\n    },\n    {\n      \"surface\": \"Boundary: data vs LLM instructions\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L196-L204\"]\n    },\n    {\n      \"surface\": \"Boundary: LLM decision vs executor permissions\",\n      \"status\": \"checked\",\n      \"evidence\": [\"lab/service.py:L205-L215\"]\n    }\n  ],\n  \"findings\": [\n    {\n      \"id\": \"V01\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"SQL-инъекция в /profile, /search, /assistant/context расширяет выборку.\",\n      \"evidence\": [\n        \"lab/service.py:L162-L166 (f-строки в SQL WHERE/LIKE)\",\n        \"lab/service.py:L194-L200 (f-строка для orders в assistant/context)\",\n        \"submitted_evidence:http-replay.json:record id=V01 target=/profile?id=1+OR+1%3D1 (HTTP 200 с 2 строками)\",\n        \"submitted_evidence:http-replay.json:record id=V01 target=/search?q=%27+OR+1%3D1+-- (HTTP 200 с 2 строками)\",\n        \"submitted_evidence:http-replay.json:record id=V01 target=/assistant/context?order_id=1+OR+1%3D1\"\n      ],\n      \"next_check\": \"После фикса проверить параметризацию и строгую валидацию id/q, повторить те же запросы — должно вернуть только разрешённые строки или 400/404.\"\n    },\n    {\n      \"id\": \"V02\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"Отсутствуют сессия/владельцы: гость и клиент видят чужие профили и заказы.\",\n      \"evidence\": [\n        \"lab/service.py:L162-L168 (/profile и /orders без проверки X-Token и owner)\",\n        \"submitted_evidence:http-replay.json:record id=V02-guest target=/profile?id=2 (гость читает Bob)\",\n        \"submitted_evidence:http-replay.json:record id=V02-orders target=/orders (возврат всех заказов)\"\n      ],\n      \"next_check\": \"Добавить проверку сессии и owner-фильтр; повторить чтение профиля Bob гостем и Alice — ожидать 401/403.\"\n    },\n    {\n      \"id\": \"V03\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"Повышение привилегий: роль staff берётся из заголовка X-Role, подделывается.\",\n      \"evidence\": [\n        \"lab/service.py:L180-L184 (проверка headers.get('X-Role') без сессии)\"\n      ],\n      \"next_check\": \"Перенести роль в серверную сессию, игнорировать X-Role; проверить, что X-Role: staff больше не даёт доступ, а staff-сессия — да.\"\n    },\n    {\n      \"id\": \"V04\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"Подмена цены: сервер принимает price из тела и сохраняет его.\",\n      \"evidence\": [\n        \"lab/service.py:L175-L179 (price = body.get('price', ...); INSERT с price, возврат price)\"\n      ],\n      \"next_check\": \"Игнорировать body.price; создать заказ с price=0 — ожидать сохранённую каталожную цену.\"\n    },\n    {\n      \"id\": \"V05\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"Чтение чужого чека и служебной записки внутри sandbox через /files и read_file.\",\n      \"evidence\": [\n        \"lab/service.py:L184-L186 (name = files/{user}/{path})\",\n        \"lab/sandbox.py:L296-L304 (разрешение пути: допускает root/private/*)\",\n        \"lab/sandbox.py:L288-L294 (private/operator-note.txt создаётся внутри root)\",\n        \"lab/service.py:L209 (assistant/execute read_file без проверки владельца)\"\n      ],\n      \"next_check\": \"Ввести allowlist на свой receipt и owner-проверку; пробовать path='../../private/operator-note.txt' — ожидать 403/404.\"\n    },\n    {\n      \"id\": \"V06\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"Утечка секретов через журнал: сохраняются body/headers/query и отдаются всем.\",\n      \"evidence\": [\n        \"lab/service.py:L150 (logs.append с body и headers)\",\n        \"lab/service.py:L187-L188 (GET /debug/logs без аутентификации)\"\n      ],\n      \"next_check\": \"Оставить только метаданные, закрыть доступ staff-сессией; проверить, что пароли/токены не сохраняются и гостю 403.\"\n    },\n    {\n      \"id\": \"V07\",\n      \"status\": \"confirmed\",\n      \"severity\": \"medium\",\n      \"claim\": \"XSS/HTML-инъекция в /reviews/view: текст вставляется без экранирования.\",\n      \"evidence\": [\n        \"lab/service.py:L192-L194 (\\\"<p>{r['text']}</p>\\\" без html.escape)\"\n      ],\n      \"next_check\": \"Экранировать HTML и/или включить CSP; сохранить отзыв с <script> и убедиться, что в ответе отображается экранированный текст.\"\n    },\n    {\n      \"id\": \"V08\",\n      \"status\": \"insufficient_evidence\",\n      \"severity\": \"medium\",\n      \"claim\": \"Инъекция инструкций через отзыв в контекст LLM; модель может воспринять отзыв как команды.\",\n      \"evidence\": [\n        \"lab/service.py:L196-L204 (слияние отзывов с инструкциями, перечислены опасные инструменты)\",\n        \"REPORT_01.md: строки 423-436 (описание пар запусков модели с отказом; успешной сквозной атаки не зафиксировано)\"\n      ],\n      \"next_check\": \"Повторить сопоставимые пары запусков с инструкцией в отзыве, сохранять ответы/решения; после разделения данных/инструкций проверить отказ LLM и отсутствие побочных действий.\"\n    },\n    {\n      \"id\": \"V09\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"Executor LLM-решений выполняет export/delete/read без проверки сессии/роли/ресурса.\",\n      \"evidence\": [\n        \"lab/service.py:L205-L215 (нет проверки X-Token/owner/role перед read/export/delete)\"\n      ],\n      \"next_check\": \"Ограничить executor: разрешить только read_file своего чека и отказ; попытка export/delete должна возвращать 403/400, удаление sandbox недопустимо.\"\n    },\n    {\n      \"id\": \"V10\",\n      \"status\": \"confirmed\",\n      \"severity\": \"medium\",\n      \"claim\": \"Ошибки схемы/JSON приводят к 500 с раскрытием типа исключения; отсутствует валидация тел.\",\n      \"evidence\": [\n        \"lab/service.py:L231-L235 (json.loads без проверки; 500 содержит 'type' и 'error')\"\n      ],\n      \"next_check\": \"Ввести валидацию входов и безопасный 500 без деталей; отправить некорректные тела и ожидать контролируемые 4xx.\"\n    },\n    {\n      \"id\": \"V11\",\n      \"status\": \"confirmed\",\n      \"severity\": \"medium\",\n      \"claim\": \"Рост памяти: неограниченные сессии, логи и отзывы; длина текста отзывов не ограничена.\",\n      \"evidence\": [\n        \"lab/service.py:L139-L143 (sessions, reviews, logs списки/словарь без ограничений)\",\n        \"lab/service.py:L189-L191 (append в reviews без ограничений)\",\n        \"lab/service.py:L150 (append в logs на каждый запрос)\",\n        \"lab/service.py:L155-L161 (новые сессии без TTL/ограничений)\"\n      ],\n      \"next_check\": \"Добавить ограничение размеров коллекций и длины строк; протестировать граничные значения (кол-во логинов, отзывов, длина текста).\"\n    }\n  ],\n  \"missing_evidence\": [\n    \"Подтверждённый http-replay для V03 (спуфинг X-Role на /admin/export)\",\n    \"Подтверждённый http-replay для V04 (создание заказа с подменой цены)\",\n    \"Подтверждённый http-replay для V05 (чтение private/operator-note.txt через /files)\",\n    \"Подтверждённый http-replay для V06 (выдача логов гостю)\",\n    \"Подтверждённый http-replay для V07 (HTML-инъекция в /reviews/view)\",\n    \"Полные артефакты запусков модели для V08 (request/response пары и решение executor)\"\n  ],\n  \"residual_risks\": [\n    \"Учебные статические пароли и отсутствие TLS; локальный стенд не защищён от локального злоумышленника\",\n    \"In-memory сессии и данные: отсутствие долговечной аудита/логов и продвинутого IAM — осознанная граница\",\n    \"Ограничение тела до 64 КБ есть, но нет распределённого rate limiting — вне рамок локальной лаборатории\"\n  ],\n  \"rubric\": [\n    {\n      \"criterion\": \"Построена модель угроз в любом виде\",\n      \"status\": \"met\",\n      \"reason\": \"THREAT_MODEL.md содержит диаграмму, описаны границы, политика доступа и реестр STRIDE V01–V11.\"\n    },\n    {\n      \"criterion\": \"Есть кастомный промпт под LLM-судью\",\n      \"status\": \"met\",\n      \"reason\": \"judge-system-prompt.md присутствует и соответствует требованиям.\"\n    },\n    {\n      \"criterion\": \"REPORT_01: описание всех найденных проблем присутствует\",\n      \"status\": \"met\",\n      \"reason\": \"REPORT_01.md описывает V01–V11, ссылается на evidence и конкретные запросы/ответы.\"\n    },\n    {\n      \"criterion\": \"Есть исправления в коде и сервис собирается и проходит тесты через make step6, make test\",\n      \"status\": \"unverified\",\n      \"reason\": \"Фаза before: исправленный код не предоставляется и не оценивается.\"\n    },\n    {\n      \"criterion\": \"REPORT_02: описание всех найденных проблем после фикса присутствует\",\n      \"status\": \"unverified\",\n      \"reason\": \"Фаза before: второй отчёт отсутствует по условию.\"\n    },\n    {\n      \"criterion\": \"Студент открыл PR и предоставил свои выводы (1-2 абзаца)\",\n      \"status\": \"unverified\",\n      \"reason\": \"Ссылка на PR не предоставлена в before-пакете.\"\n    }\n  ]\n}",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "errors": [],
+  "runtime_overrides": {
+    "mcp": {
+      "fetch": {
+        "enabled": false
+      },
+      "trip_planner": {
+        "enabled": false
+      }
+    },
+    "snapshot": false,
+    "small_model": "vsellm/openai/gpt-5"
+  },
+  "generation_parameters": "provider/model defaults; temperature and seed not exposed by this invocation",
+  "decision": {
+    "verdict": "pass",
+    "coverage": [
+      {
+        "surface": "GET /health",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L151-L153"
+        ]
+      },
+      {
+        "surface": "GET /products",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L153-L154"
+        ]
+      },
+      {
+        "surface": "POST /login",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L155-L161"
+        ]
+      },
+      {
+        "surface": "GET /profile",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L162-L164",
+          "submitted_evidence:http-replay.json:record id=V01 target=/profile?id=1+OR+1%3D1",
+          "submitted_evidence:http-replay.json:record id=V02-guest target=/profile?id=2"
+        ]
+      },
+      {
+        "surface": "GET /search",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L164-L166",
+          "submitted_evidence:http-replay.json:record id=V01 target=/search?q=%27+OR+1%3D1+--"
+        ]
+      },
+      {
+        "surface": "GET /orders",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L166-L168",
+          "submitted_evidence:http-replay.json:record id=V02-orders target=/orders"
+        ]
+      },
+      {
+        "surface": "POST /orders",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L168-L179"
+        ]
+      },
+      {
+        "surface": "GET /admin/export",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L180-L184"
+        ]
+      },
+      {
+        "surface": "GET /files",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L184-L186",
+          "lab/sandbox.py:L296-L304"
+        ]
+      },
+      {
+        "surface": "POST /reviews",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L189-L191"
+        ]
+      },
+      {
+        "surface": "GET /reviews/view",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L192-L194"
+        ]
+      },
+      {
+        "surface": "GET /debug/logs",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L150",
+          "lab/service.py:L187-L188"
+        ]
+      },
+      {
+        "surface": "GET /assistant/context",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L194-L205",
+          "submitted_evidence:http-replay.json:record id=V01 target=/assistant/context?order_id=1+OR+1%3D1"
+        ]
+      },
+      {
+        "surface": "POST /assistant/execute",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L205-L215"
+        ]
+      },
+      {
+        "surface": "Boundary: client/server framing and error handling",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L225-L243",
+          "lab/service.py:L235"
+        ]
+      },
+      {
+        "surface": "Boundary: one client vs other client (owner checks)",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L162-L168",
+          "lab/service.py:L184-L186"
+        ]
+      },
+      {
+        "surface": "Boundary: client vs staff (role checks)",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L180-L184"
+        ]
+      },
+      {
+        "surface": "Boundary: application vs sandbox (path controls)",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L184-L186",
+          "lab/sandbox.py:L296-L304",
+          "lab/sandbox.py:L305-L311"
+        ]
+      },
+      {
+        "surface": "Boundary: data vs LLM instructions",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L196-L204"
+        ]
+      },
+      {
+        "surface": "Boundary: LLM decision vs executor permissions",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:L205-L215"
+        ]
+      }
+    ],
+    "findings": [
+      {
+        "id": "V01",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "SQL-инъекция в /profile, /search, /assistant/context расширяет выборку.",
+        "evidence": [
+          "lab/service.py:L162-L166 (f-строки в SQL WHERE/LIKE)",
+          "lab/service.py:L194-L200 (f-строка для orders в assistant/context)",
+          "submitted_evidence:http-replay.json:record id=V01 target=/profile?id=1+OR+1%3D1 (HTTP 200 с 2 строками)",
+          "submitted_evidence:http-replay.json:record id=V01 target=/search?q=%27+OR+1%3D1+-- (HTTP 200 с 2 строками)",
+          "submitted_evidence:http-replay.json:record id=V01 target=/assistant/context?order_id=1+OR+1%3D1"
+        ],
+        "next_check": "После фикса проверить параметризацию и строгую валидацию id/q, повторить те же запросы — должно вернуть только разрешённые строки или 400/404."
+      },
+      {
+        "id": "V02",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "Отсутствуют сессия/владельцы: гость и клиент видят чужие профили и заказы.",
+        "evidence": [
+          "lab/service.py:L162-L168 (/profile и /orders без проверки X-Token и owner)",
+          "submitted_evidence:http-replay.json:record id=V02-guest target=/profile?id=2 (гость читает Bob)",
+          "submitted_evidence:http-replay.json:record id=V02-orders target=/orders (возврат всех заказов)"
+        ],
+        "next_check": "Добавить проверку сессии и owner-фильтр; повторить чтение профиля Bob гостем и Alice — ожидать 401/403."
+      },
+      {
+        "id": "V03",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "Повышение привилегий: роль staff берётся из заголовка X-Role, подделывается.",
+        "evidence": [
+          "lab/service.py:L180-L184 (проверка headers.get('X-Role') без сессии)"
+        ],
+        "next_check": "Перенести роль в серверную сессию, игнорировать X-Role; проверить, что X-Role: staff больше не даёт доступ, а staff-сессия — да."
+      },
+      {
+        "id": "V04",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "Подмена цены: сервер принимает price из тела и сохраняет его.",
+        "evidence": [
+          "lab/service.py:L175-L179 (price = body.get('price', ...); INSERT с price, возврат price)"
+        ],
+        "next_check": "Игнорировать body.price; создать заказ с price=0 — ожидать сохранённую каталожную цену."
+      },
+      {
+        "id": "V05",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "Чтение чужого чека и служебной записки внутри sandbox через /files и read_file.",
+        "evidence": [
+          "lab/service.py:L184-L186 (name = files/{user}/{path})",
+          "lab/sandbox.py:L296-L304 (разрешение пути: допускает root/private/*)",
+          "lab/sandbox.py:L288-L294 (private/operator-note.txt создаётся внутри root)",
+          "lab/service.py:L209 (assistant/execute read_file без проверки владельца)"
+        ],
+        "next_check": "Ввести allowlist на свой receipt и owner-проверку; пробовать path='../../private/operator-note.txt' — ожидать 403/404."
+      },
+      {
+        "id": "V06",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "Утечка секретов через журнал: сохраняются body/headers/query и отдаются всем.",
+        "evidence": [
+          "lab/service.py:L150 (logs.append с body и headers)",
+          "lab/service.py:L187-L188 (GET /debug/logs без аутентификации)"
+        ],
+        "next_check": "Оставить только метаданные, закрыть доступ staff-сессией; проверить, что пароли/токены не сохраняются и гостю 403."
+      },
+      {
+        "id": "V07",
+        "status": "confirmed",
+        "severity": "medium",
+        "claim": "XSS/HTML-инъекция в /reviews/view: текст вставляется без экранирования.",
+        "evidence": [
+          "lab/service.py:L192-L194 (\"<p>{r['text']}</p>\" без html.escape)"
+        ],
+        "next_check": "Экранировать HTML и/или включить CSP; сохранить отзыв с <script> и убедиться, что в ответе отображается экранированный текст."
+      },
+      {
+        "id": "V08",
+        "status": "insufficient_evidence",
+        "severity": "medium",
+        "claim": "Инъекция инструкций через отзыв в контекст LLM; модель может воспринять отзыв как команды.",
+        "evidence": [
+          "lab/service.py:L196-L204 (слияние отзывов с инструкциями, перечислены опасные инструменты)",
+          "REPORT_01.md: строки 423-436 (описание пар запусков модели с отказом; успешной сквозной атаки не зафиксировано)"
+        ],
+        "next_check": "Повторить сопоставимые пары запусков с инструкцией в отзыве, сохранять ответы/решения; после разделения данных/инструкций проверить отказ LLM и отсутствие побочных действий."
+      },
+      {
+        "id": "V09",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "Executor LLM-решений выполняет export/delete/read без проверки сессии/роли/ресурса.",
+        "evidence": [
+          "lab/service.py:L205-L215 (нет проверки X-Token/owner/role перед read/export/delete)"
+        ],
+        "next_check": "Ограничить executor: разрешить только read_file своего чека и отказ; попытка export/delete должна возвращать 403/400, удаление sandbox недопустимо."
+      },
+      {
+        "id": "V10",
+        "status": "confirmed",
+        "severity": "medium",
+        "claim": "Ошибки схемы/JSON приводят к 500 с раскрытием типа исключения; отсутствует валидация тел.",
+        "evidence": [
+          "lab/service.py:L231-L235 (json.loads без проверки; 500 содержит 'type' и 'error')"
+        ],
+        "next_check": "Ввести валидацию входов и безопасный 500 без деталей; отправить некорректные тела и ожидать контролируемые 4xx."
+      },
+      {
+        "id": "V11",
+        "status": "confirmed",
+        "severity": "medium",
+        "claim": "Рост памяти: неограниченные сессии, логи и отзывы; длина текста отзывов не ограничена.",
+        "evidence": [
+          "lab/service.py:L139-L143 (sessions, reviews, logs списки/словарь без ограничений)",
+          "lab/service.py:L189-L191 (append в reviews без ограничений)",
+          "lab/service.py:L150 (append в logs на каждый запрос)",
+          "lab/service.py:L155-L161 (новые сессии без TTL/ограничений)"
+        ],
+        "next_check": "Добавить ограничение размеров коллекций и длины строк; протестировать граничные значения (кол-во логинов, отзывов, длина текста)."
+      }
+    ],
+    "missing_evidence": [
+      "Подтверждённый http-replay для V03 (спуфинг X-Role на /admin/export)",
+      "Подтверждённый http-replay для V04 (создание заказа с подменой цены)",
+      "Подтверждённый http-replay для V05 (чтение private/operator-note.txt через /files)",
+      "Подтверждённый http-replay для V06 (выдача логов гостю)",
+      "Подтверждённый http-replay для V07 (HTML-инъекция в /reviews/view)",
+      "Полные артефакты запусков модели для V08 (request/response пары и решение executor)"
+    ],
+    "residual_risks": [
+      "Учебные статические пароли и отсутствие TLS; локальный стенд не защищён от локального злоумышленника",
+      "In-memory сессии и данные: отсутствие долговечной аудита/логов и продвинутого IAM — осознанная граница",
+      "Ограничение тела до 64 КБ есть, но нет распределённого rate limiting — вне рамок локальной лаборатории"
+    ],
+    "rubric": [
+      {
+        "criterion": "Построена модель угроз в любом виде",
+        "status": "met",
+        "reason": "THREAT_MODEL.md содержит диаграмму, описаны границы, политика доступа и реестр STRIDE V01–V11."
+      },
+      {
+        "criterion": "Есть кастомный промпт под LLM-судью",
+        "status": "met",
+        "reason": "judge-system-prompt.md присутствует и соответствует требованиям."
+      },
+      {
+        "criterion": "REPORT_01: описание всех найденных проблем присутствует",
+        "status": "met",
+        "reason": "REPORT_01.md описывает V01–V11, ссылается на evidence и конкретные запросы/ответы."
+      },
+      {
+        "criterion": "Есть исправления в коде и сервис собирается и проходит тесты через make step6, make test",
+        "status": "unverified",
+        "reason": "Фаза before: исправленный код не предоставляется и не оценивается."
+      },
+      {
+        "criterion": "REPORT_02: описание всех найденных проблем после фикса присутствует",
+        "status": "unverified",
+        "reason": "Фаза before: второй отчёт отсутствует по условию."
+      },
+      {
+        "criterion": "Студент открыл PR и предоставил свои выводы (1-2 абзаца)",
+        "status": "unverified",
+        "reason": "Ссылка на PR не предоставлена в before-пакете."
+      }
+    ]
+  },
+  "outcome": "valid_json"
+}
