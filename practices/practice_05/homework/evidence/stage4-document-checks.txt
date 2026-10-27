@@ -1,0 +1,10 @@
+Initial link check: FAIL, AGREEMENT constitution relative path had one extra parent segment. Corrected path and repeated all checks below.
+PASS: all 15 shared input SHA-256 unchanged.
+PASS: both independent before SHA-256 unchanged.
+PASS: after preserve 20 UI/20 LOG requirements, 14 UI/10 LOG scenarios, 8 UI/6 LOG outcomes.
+PASS: 40 local links, 4 embedded JSON examples, evidence JSON, whitespace and balanced fences.
+PASS: 11 actual core scenarios include recovery after errors, exact fractional values, no mutation; no HTTP/UI execution claimed.
+PASS: practice_05; only tracked change is progress plan; new homework files are Markdown/text/JSON, no app/test code.
+$ git diff --check: EXIT_CODE=0
+PASS: sh scripts/check.sh, make test, git diff --check; full commands/stdout/stderr/exit codes in stage4-regression.txt.
+Human acceptance pending; no technical plan/tasks, implementation, commit or push.
