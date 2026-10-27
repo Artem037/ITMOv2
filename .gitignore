@@ -178,3 +178,4 @@ student_solutions/
 .opencode/node_modules/
 .opencode/logs/
 .ruff_cache/
+node_modules/

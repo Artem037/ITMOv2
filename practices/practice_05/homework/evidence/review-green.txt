@@ -1,0 +1,71 @@
+$ HW5_SCREENSHOTS_DIR=/Users/pip/ITMOv2/practices/practice_05/homework/evidence make -C practices/practice_05/homework lint test
+uv run --project "/Users/pip/ITMOv2/practices/practice_04/homework" --locked --offline ruff check --extend-select=E501,I --line-length=79 web tests
+E501 Line too long (80 > 79)
+  --> tests/test_adapter.py:76:80
+   |
+74 |                 "application/json",
+75 |                 response.getheader("Content-Type", ""),
+76 |                 f"{method} {path} returned unstructured HTTP {response.status}",
+   |                                                                                ^
+77 |             )
+78 |             return (
+   |
+
+Found 1 error.
+make: *** [lint] Error 1
+
+EXIT_CODE=2
+
+$ HW5_SCREENSHOTS_DIR=/Users/pip/ITMOv2/practices/practice_05/homework/evidence make -C practices/practice_05/homework lint test
+uv run --project "/Users/pip/ITMOv2/practices/practice_04/homework" --locked --offline ruff check --extend-select=E501,I --line-length=79 web tests
+All checks passed!
+uv run --project "/Users/pip/ITMOv2/practices/practice_04/homework" --locked --offline ruff format --check --line-length=79 web tests
+3 files already formatted
+uv run --project "/Users/pip/ITMOv2/practices/practice_04/homework" --locked --offline python -m unittest discover -s tests -p 'test_adapter.py' -v
+"/opt/homebrew/bin/node" --test tests/browser.test.mjs
+✔ real form calculates, changes buffer and preserves warnings, timeline and source (2010.5085ms)
+✔ real negative windows remain no_routes and needs_data, and equal boundary succeeds (873.116542ms)
+✔ invalid fields retain input and keyboard correction returns to real success (760.069209ms)
+✔ computer timezone cannot shift Moscow inputs or output (619.183375ms)
+✔ 24-hour Moscow input is explicit even in an English browser locale (328.795834ms)
+✔ unusable nested metadata cannot enable the form and reload recovers (458.863833ms)
+✔ editing stays available and stale responses cannot replace the current result: old-first (334.527709ms)
+✔ editing stays available and stale responses cannot replace the current result: new-first (383.759083ms)
+✔ editing stays available and stale responses cannot replace the current result: late-old-error (357.193584ms)
+✔ double submission of the same revision has one current request (252.435209ms)
+✔ broken transport or malformed result can be retried without a stale summary (617.732917ms)
+✔ ten second timeout allows a manual retry (571.909875ms)
+✔ partial success and fractional durations preserve full displayed information (570.565ms)
+✔ metadata failure offers reload and a narrow screen has no horizontal overflow (518.783042ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9164.593375
+test_bad_json_duplicates_and_constants (test_adapter.AdapterTests.test_bad_json_duplicates_and_constants) ... ok
+test_equal_boundary_includes_the_departure (test_adapter.AdapterTests.test_equal_boundary_includes_the_departure) ... ok
+test_fractional_durations_are_not_truncated (test_adapter.AdapterTests.test_fractional_durations_are_not_truncated) ... ok
+test_internal_error_is_safe_and_next_request_succeeds (test_adapter.AdapterTests.test_internal_error_is_safe_and_next_request_succeeds) ... ok
+test_media_type_and_fixed_routes (test_adapter.AdapterTests.test_media_type_and_fixed_routes) ... ok
+test_metadata_and_loopback (test_adapter.AdapterTests.test_metadata_and_loopback) ... ok
+test_missing_extra_and_non_object_fields (test_adapter.AdapterTests.test_missing_extra_and_non_object_fields) ... ok
+test_moscow_datetime_grammar_and_calendar (test_adapter.AdapterTests.test_moscow_datetime_grammar_and_calendar) ... ok
+test_new_date_needs_data_without_moving_source (test_adapter.AdapterTests.test_new_date_needs_data_without_moving_source) ... ok
+test_no_routes_is_a_complete_calculation (test_adapter.AdapterTests.test_no_routes_is_a_complete_calculation) ... ok
+test_normal_response_preserves_entire_prior_core_result (test_adapter.AdapterTests.test_normal_response_preserves_entire_prior_core_result) ... ok
+test_parallel_requests_and_repeats_do_not_mutate_snapshot (test_adapter.AdapterTests.test_parallel_requests_and_repeats_do_not_mutate_snapshot) ... ok
+test_partial_success_is_not_replaced_by_needs_data (test_adapter.AdapterTests.test_partial_success_is_not_replaced_by_needs_data) ... ok
+test_recalculation_uses_new_buffer (test_adapter.AdapterTests.test_recalculation_uses_new_buffer) ... ok
+test_reverse_window_has_stable_field_and_recovers (test_adapter.AdapterTests.test_reverse_window_has_stable_field_and_recovers) ... ok
+test_strict_numbers_and_ranges (test_adapter.AdapterTests.test_strict_numbers_and_ranges) ... ok
+test_unknown_duration_is_not_zero (test_adapter.AdapterTests.test_unknown_duration_is_not_zero) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.280s
+
+OK
+
+EXIT_CODE=0

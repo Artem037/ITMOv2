@@ -1,0 +1,241 @@
+[Formatting note: trailing spaces on diagnostic blank lines removed; command/output text and exit codes otherwise retained.]
+$ /Users/pip/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --test practices/practice_05/homework/tests/browser.test.mjs
+✖ real form calculates, changes buffer and preserves warnings, timeline and source (1408.970541ms)
+✖ real negative windows remain no_routes and needs_data, and equal boundary succeeds (243.601833ms)
+✖ invalid fields retain input and keyboard correction returns to real success (200.221417ms)
+✖ computer timezone cannot shift Moscow inputs or output (214.224959ms)
+✖ editing stays available and stale responses cannot replace the current result: old-first (195.184875ms)
+✖ editing stays available and stale responses cannot replace the current result: new-first (223.930625ms)
+✖ editing stays available and stale responses cannot replace the current result: late-old-error (217.336833ms)
+✖ double submission of the same revision has one current request (216.7745ms)
+✖ broken transport or malformed result can be retried without a stale summary (185.913083ms)
+✖ ten second timeout allows a manual retry (204.165916ms)
+✖ partial success and fractional durations preserve full displayed information (189.0355ms)
+✖ metadata failure offers reload and a narrow screen has no horizontal overflow (209.619084ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 0
+ℹ fail 12
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4119.558459
+
+✖ failing tests:
+
+test at practices/practice_05/homework/tests/browser.test.mjs:86:1
+✖ real form calculates, changes buffer and preserves warnings, timeline and source (1408.970541ms)
+  AssertionError [ERR_ASSERTION]: Calculation screen is not implemented
+
+  0 !== 1
+
+      at open (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:51:10)
+      at async TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:90:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:114:1
+✖ real negative windows remain no_routes and needs_data, and equal boundary succeeds (243.601833ms)
+  AssertionError [ERR_ASSERTION]: Calculation screen is not implemented
+
+  0 !== 1
+
+      at open (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:51:10)
+      at async TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:115:33)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:132:1
+✖ invalid fields retain input and keyboard correction returns to real success (200.221417ms)
+  AssertionError [ERR_ASSERTION]: Calculation screen is not implemented
+
+  0 !== 1
+
+      at open (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:51:10)
+      at async TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:133:33)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:153:1
+✖ computer timezone cannot shift Moscow inputs or output (214.224959ms)
+  AssertionError [ERR_ASSERTION]: Calculation screen is not implemented
+
+  0 !== 1
+
+      at open (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:51:10)
+      at async TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:154:69)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:163:3
+✖ editing stays available and stale responses cannot replace the current result: old-first (195.184875ms)
+  AssertionError [ERR_ASSERTION]: Calculation screen is not implemented
+
+  0 !== 1
+
+      at open (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:51:10)
+      at async TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:164:35)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:163:3
+✖ editing stays available and stale responses cannot replace the current result: new-first (223.930625ms)
+  AssertionError [ERR_ASSERTION]: Calculation screen is not implemented
+
+  0 !== 1
+
+      at open (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:51:10)
+      at async TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:164:35)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:163:3
+✖ editing stays available and stale responses cannot replace the current result: late-old-error (217.336833ms)
+  AssertionError [ERR_ASSERTION]: Calculation screen is not implemented
+
+  0 !== 1
+
+      at open (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:51:10)
+      at async TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:164:35)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:187:1
+✖ double submission of the same revision has one current request (216.7745ms)
+  AssertionError [ERR_ASSERTION]: Calculation screen is not implemented
+
+  0 !== 1
+
+      at open (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:51:10)
+      at async TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:188:33)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:197:1
+✖ broken transport or malformed result can be retried without a stale summary (185.913083ms)
+  AssertionError [ERR_ASSERTION]: Calculation screen is not implemented
+
+  0 !== 1
+
+      at open (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:51:10)
+      at async TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:198:33)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:210:1
+✖ ten second timeout allows a manual retry (204.165916ms)
+  AssertionError [ERR_ASSERTION]: Calculation screen is not implemented
+
+  0 !== 1
+
+      at open (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:51:10)
+      at async TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:211:61)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:221:1
+✖ partial success and fractional durations preserve full displayed information (189.0355ms)
+  AssertionError [ERR_ASSERTION]: Calculation screen is not implemented
+
+  0 !== 1
+
+      at open (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:51:10)
+      at async TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:222:33)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:234:1
+✖ metadata failure offers reload and a narrow screen has no horizontal overflow (209.619084ms)
+  AssertionError [ERR_ASSERTION]: Calculation screen is not implemented
+
+  0 !== 1
+
+      at TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:238:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+EXIT_CODE=1

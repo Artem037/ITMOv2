@@ -224,3 +224,26 @@ exit 0, 58 различных существующих тестов и Ruff пр
 разрешены только явно описанные изменения статуса BRIEF и плана. Новая
 инфраструктура и документы добавлены отдельно, исходники/lock/настройки
 приложения сохранены. Новые исходники формы и задачи реализации не создавались.
+
+
+## Продолжение 27.10.2026: этапы 4–7
+
+Исторические разделы выше описывают именно настройку 22 октября. После неё
+пользователь принял CONTRACT 1.0 и обе after до кода (AGREEMENT, commit91994f0).
+В текущем чате выполнены штатные repo skills speckit-plan/tasks/analyze/implement;
+скрипты setup-plan/setup-tasks/check-prerequisites отработали в существующей фиче.
+Реальная ветка practice_05 не менялась; BRANCH из resolver — идентификатор фичи.
+
+Созданы plan.md/research.md/data-model.md/contracts/http.md/quickstart.md/tasks.md
+в specs/001-trip-planner-form; технический IMPLEMENTATION_PLAN — в папке ДЗ5.
+Analyze: 13 FR +5 SC покрыты17 задачами, critical0. Повторная версия Specify CLI
+проверена 27 октября:1.2.2, не обновлялась. Hooks extensions.yml отсутствуют.
+
+Реализация и проверки:17 HTTP unittest и14 браузерных сценариев с реальным Chrome.
+TDD и независимый review дали реальные исправления, описанные в REPORT.
+Converge и итоговые команды/exit codes — evidence/convergence.md и final-checks.txt.
+Сравнение с OpenSpec взято из фактического classwork snapshot через git show,
+без переключения ветки; описание — REPORT.md. Публикация требует отдельного поручения.
+
+Точные вызовы Python Docs fallback и отсутствие универсального fetch MCP сохранены
+в evidence/python-docs-tool-calls.json; факты/официальные URLs — в research.md.
