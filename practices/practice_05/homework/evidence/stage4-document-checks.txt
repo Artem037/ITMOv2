@@ -8,3 +8,5 @@ PASS: practice_05; only tracked change is progress plan; new homework files are 
 $ git diff --check: EXIT_CODE=0
 PASS: sh scripts/check.sh, make test, git diff --check; full commands/stdout/stderr/exit codes in stage4-regression.txt.
 Human acceptance pending; no technical plan/tasks, implementation, commit or push.
+
+Acceptance checkpoint: git diff --cached --check reported whitespace in saved unified-diff blank context lines; commit 91994f0 still ran because the shell sequence did not stop. Trimmed display-only trailing whitespace before code; no before content changed. Subsequent checks must be run with checked return codes.
