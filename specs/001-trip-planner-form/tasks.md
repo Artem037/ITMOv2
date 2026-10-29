@@ -42,3 +42,12 @@ T001 → T002 → T003 → T004 RED → T005 GREEN → T006 RED → T007 GREEN �
 **Parallel opportunities**: исследование Python/browser в Phase 0 независимо от документации; после готовой реализации T014 read-only review может идти параллельно с T015/T016. Не поручать двум авторам один файл. В текущем run один implementer, независимый reviewer только читает код.
 
 **MVP**: одна US3 целиком; статусы/ошибки/неизменность входят в MVP. Не вводить отдельные новые истории, произвольные маршруты и публикацию.
+
+## Phase 5: Real dated demonstration — поручение29.10.2026
+
+- [x] T018 Проверить реальные датированные источники и нормализовать practices/practice_05/homework/data/tolmachevo-2026-10-30.json; CLI validate и настоящий MCP, evidence/real-route-mcp.json; обновить REAL_ROUTE_CHANGE/CONTRACT/after/constitution до кода.
+- [ ] T019 [US3] Добавить RED для реального default и фиксированного fixture-флага в tests/test_adapter.py, затем реализовать выбор при старте/metadata в web/server.py; HTTP snapshot/path запрещены.
+- [ ] T020 [US3] Добавить RED реального браузерного сценария в tests/browser.test.mjs; обновить web/index.html/app.js/style.css: реальные подписи/даты/описание оценок, сохранить fixture-регрессию.
+- [ ] T021 Добавить serve-fixture в homework/Makefile; тест нового data-пути hook RED→GREEN в tests/check-after-edit.test.mjs и .opencode/plugins/check-after-edit.js.
+- [ ] T022 Пройти шесть исходов реального сценария, регрессию sh scripts/check.sh/make test/diff и независимый review; сохранить evidence/real-route-checks.txt и реальные screenshots.
+- [ ] T023 Обновить homework/README.md, REPORT.md, evidence/demo.md, FRAMEWORK.md и общий план актуальными критериями/источниками и локальным коммитом без push.
