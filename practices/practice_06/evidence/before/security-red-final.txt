@@ -1,0 +1,987 @@
+test_customer_cannot_read_debug_logs (test_security.SecurityTest.test_customer_cannot_read_debug_logs) ... FAIL
+test_customer_cannot_spoof_staff (test_security.SecurityTest.test_customer_cannot_spoof_staff) ... FAIL
+test_duplicate_query_parameter_is_not_silently_selected (test_security.SecurityTest.test_duplicate_query_parameter_is_not_silently_selected) ... FAIL
+test_executor_allows_model_refusal_without_side_effect (test_security.SecurityTest.test_executor_allows_model_refusal_without_side_effect) ... FAIL
+test_executor_rechecks_file_owner_and_forbids_export_and_delete (test_security.SecurityTest.test_executor_rechecks_file_owner_and_forbids_export_and_delete) ...
+  test_executor_rechecks_file_owner_and_forbids_export_and_delete (test_security.SecurityTest.test_executor_rechecks_file_owner_and_forbids_export_and_delete) (tool='read_file', arguments={'path': 'files/bob/receipt.txt'}) ... FAIL
+  test_executor_rechecks_file_owner_and_forbids_export_and_delete (test_security.SecurityTest.test_executor_rechecks_file_owner_and_forbids_export_and_delete) (tool='read_file', arguments={'path': 'private/operator-note.txt'}) ... FAIL
+  test_executor_rechecks_file_owner_and_forbids_export_and_delete (test_security.SecurityTest.test_executor_rechecks_file_owner_and_forbids_export_and_delete) (tool='export_profiles', arguments={}) ... FAIL
+  test_executor_rechecks_file_owner_and_forbids_export_and_delete (test_security.SecurityTest.test_executor_rechecks_file_owner_and_forbids_export_and_delete) (tool='delete_tree', arguments={'path': '.'}) ... FAIL
+test_executor_rejects_malformed_arguments_and_extra_capabilities (test_security.SecurityTest.test_executor_rejects_malformed_arguments_and_extra_capabilities) ... FAIL
+test_files_reject_other_customer_and_private_traversal (test_security.SecurityTest.test_files_reject_other_customer_and_private_traversal) ...
+  test_files_reject_other_customer_and_private_traversal (test_security.SecurityTest.test_files_reject_other_customer_and_private_traversal) (user='bob', path='receipt.txt') ... FAIL
+  test_files_reject_other_customer_and_private_traversal (test_security.SecurityTest.test_files_reject_other_customer_and_private_traversal) (user='alice', path='../bob/receipt.txt') ... FAIL
+  test_files_reject_other_customer_and_private_traversal (test_security.SecurityTest.test_files_reject_other_customer_and_private_traversal) (user='alice', path='../../private/operator-note.txt') ... FAIL
+test_logs_do_not_store_password_token_body_or_query (test_security.SecurityTest.test_logs_do_not_store_password_token_body_or_query) ...
+  test_logs_do_not_store_password_token_body_or_query (test_security.SecurityTest.test_logs_do_not_store_password_token_body_or_query) (secret='learn-alice') ... FAIL
+  test_logs_do_not_store_password_token_body_or_query (test_security.SecurityTest.test_logs_do_not_store_password_token_body_or_query) (secret='dc8ada37caa14ac4bf8b69a3c3857ec3') ... FAIL
+  test_logs_do_not_store_password_token_body_or_query (test_security.SecurityTest.test_logs_do_not_store_password_token_body_or_query) (secret='PRIVATE_QUERY') ... FAIL
+  test_logs_do_not_store_password_token_body_or_query (test_security.SecurityTest.test_logs_do_not_store_password_token_body_or_query) (secret='learn-bob') ... FAIL
+test_long_review_is_rejected_without_storage (test_security.SecurityTest.test_long_review_is_rejected_without_storage) ... FAIL
+test_new_order_does_not_return_old_purchase_receipt (test_security.SecurityTest.test_new_order_does_not_return_old_purchase_receipt) ... FAIL
+test_numeric_sql_injections_are_rejected (test_security.SecurityTest.test_numeric_sql_injections_are_rejected) ...
+  test_numeric_sql_injections_are_rejected (test_security.SecurityTest.test_numeric_sql_injections_are_rejected) (path='/profile') ... FAIL
+  test_numeric_sql_injections_are_rejected (test_security.SecurityTest.test_numeric_sql_injections_are_rejected) (path='/assistant/context') ... FAIL
+test_orders_are_scoped_to_customer (test_security.SecurityTest.test_orders_are_scoped_to_customer) ... FAIL
+test_oversized_numeric_id_is_a_client_error (test_security.SecurityTest.test_oversized_numeric_id_is_a_client_error) ... FAIL
+test_price_is_from_catalog_in_response_and_database (test_security.SecurityTest.test_price_is_from_catalog_in_response_and_database) ...
+  test_price_is_from_catalog_in_response_and_database (test_security.SecurityTest.test_price_is_from_catalog_in_response_and_database) (price=0) ... FAIL
+  test_price_is_from_catalog_in_response_and_database (test_security.SecurityTest.test_price_is_from_catalog_in_response_and_database) (price=-100) ... FAIL
+  test_price_is_from_catalog_in_response_and_database (test_security.SecurityTest.test_price_is_from_catalog_in_response_and_database) (price='free') ... FAIL
+  test_price_is_from_catalog_in_response_and_database (test_security.SecurityTest.test_price_is_from_catalog_in_response_and_database) (price=None) ... FAIL
+test_price_is_from_catalog_in_response_and_database (test_security.SecurityTest.test_price_is_from_catalog_in_response_and_database) ... FAIL
+test_profile_and_context_reject_other_owner (test_security.SecurityTest.test_profile_and_context_reject_other_owner) ...
+  test_profile_and_context_reject_other_owner (test_security.SecurityTest.test_profile_and_context_reject_other_owner) (target='/profile?id=2') ... FAIL
+  test_profile_and_context_reject_other_owner (test_security.SecurityTest.test_profile_and_context_reject_other_owner) (target='/assistant/context?order_id=2') ... FAIL
+  test_profile_and_context_reject_other_owner (test_security.SecurityTest.test_profile_and_context_reject_other_owner) (target='/profile?id=1') ... FAIL
+  test_profile_and_context_reject_other_owner (test_security.SecurityTest.test_profile_and_context_reject_other_owner) (target='/assistant/context?order_id=1') ... FAIL
+test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) ...
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/profile?id=1') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/search?q=TEST') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/orders') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/files') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/admin/export') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/debug/logs') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/assistant/context') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/reviews') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/assistant/execute') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/profile?id=1') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/search?q=TEST') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/orders') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/files') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/admin/export') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/debug/logs') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/assistant/context') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/reviews') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/assistant/execute') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/profile?id=1') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/search?q=TEST') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/orders') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/files') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/admin/export') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/debug/logs') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/assistant/context') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/reviews') ... FAIL
+  test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/assistant/execute') ... FAIL
+test_purchase_collection_has_a_limit_without_extra_insert (test_security.SecurityTest.test_purchase_collection_has_a_limit_without_extra_insert) ... FAIL
+test_review_collection_has_a_limit (test_security.SecurityTest.test_review_collection_has_a_limit) ... FAIL
+test_reviews_render_untrusted_markup_as_text (test_security.SecurityTest.test_reviews_render_untrusted_markup_as_text) ... FAIL
+test_search_sql_injection_is_literal_data (test_security.SecurityTest.test_search_sql_injection_is_literal_data) ... FAIL
+test_search_wildcard_does_not_bypass_owner (test_security.SecurityTest.test_search_wildcard_does_not_bypass_owner) ... FAIL
+test_session_and_log_memory_are_bounded (test_security.SecurityTest.test_session_and_log_memory_are_bounded) ... FAIL
+test_staff_cannot_use_customer_executor (test_security.SecurityTest.test_staff_cannot_use_customer_executor) ... FAIL
+test_staff_export_uses_session_without_role_header (test_security.SecurityTest.test_staff_export_uses_session_without_role_header) ... FAIL
+test_absolute_file_argument_is_forbidden_without_internal_error (test_http_security.HttpSecurityTest.test_absolute_file_argument_is_forbidden_without_internal_error) ... FAIL
+test_ambiguous_body_framing_is_rejected (test_http_security.HttpSecurityTest.test_ambiguous_body_framing_is_rejected) ...
+  test_ambiguous_body_framing_is_rejected (test_http_security.HttpSecurityTest.test_ambiguous_body_framing_is_rejected) (headers=[('Content-Length', '2'), ('Content-Length', '3')]) ... FAIL
+  test_ambiguous_body_framing_is_rejected (test_http_security.HttpSecurityTest.test_ambiguous_body_framing_is_rejected) (headers=[('Content-Length', '2'), ('Transfer-Encoding', 'chunked')]) ... FAIL
+  test_ambiguous_body_framing_is_rejected (test_http_security.HttpSecurityTest.test_ambiguous_body_framing_is_rejected) (headers=[]) ... FAIL
+test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) ...
+  test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) (body=b'{') ... FAIL
+  test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) (body=b'\xff') ... FAIL
+  test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) (body=b'[]') ... FAIL
+  test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) (body=b'null') ... FAIL
+  test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) (body=b'1') ... FAIL
+  test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) (body=b'"abc"') ... FAIL
+test_bad_request_does_not_break_following_good_request (test_http_security.HttpSecurityTest.test_bad_request_does_not_break_following_good_request) ... ok
+test_header_names_are_case_insensitive (test_http_security.HttpSecurityTest.test_header_names_are_case_insensitive) ... ok
+test_invalid_content_length_is_400_and_oversize_is_413 (test_http_security.HttpSecurityTest.test_invalid_content_length_is_400_and_oversize_is_413) ...
+  test_invalid_content_length_is_400_and_oversize_is_413 (test_http_security.HttpSecurityTest.test_invalid_content_length_is_400_and_oversize_is_413) (length='bad') ... FAIL
+  test_invalid_content_length_is_400_and_oversize_is_413 (test_http_security.HttpSecurityTest.test_invalid_content_length_is_400_and_oversize_is_413) (length='-1') ... FAIL
+test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) ...
+  test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/login', body={}) ... FAIL
+  test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/login', body={'username': [], 'password': {}}) ... FAIL
+  test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/orders', body={}) ... FAIL
+  test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/orders', body={'product': []}) ... FAIL
+  test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/reviews', body={}) ... FAIL
+  test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/reviews', body={'product': 'chair', 'text': 7}) ... FAIL
+  test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/reviews', body={'product': 'unknown', 'text': 'x'}) ... FAIL
+  test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/assistant/execute', body={}) ... FAIL
+  test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/assistant/execute', body={'decision': None}) ... FAIL
+  test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/assistant/execute', body={'decision': []}) ... FAIL
+  test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/assistant/execute', body={'decision': {'tool': 'read_file', 'arguments': []}}) ... FAIL
+  test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/assistant/execute', body={'decision': {'tool': 'read_file', 'arguments': {}}}) ... FAIL
+test_json_content_type_required_for_post (test_http_security.HttpSecurityTest.test_json_content_type_required_for_post) ... FAIL
+test_review_response_has_browser_safety_headers (test_http_security.HttpSecurityTest.test_review_response_has_browser_safety_headers) ... FAIL
+test_structured_price_is_ignored_and_catalog_price_is_stored (test_http_security.HttpSecurityTest.test_structured_price_is_ignored_and_catalog_price_is_stored) ... FAIL
+test_unexpected_internal_failure_does_not_expose_details (test_http_security.HttpSecurityTest.test_unexpected_internal_failure_does_not_expose_details) ... FAIL
+
+======================================================================
+FAIL: test_customer_cannot_read_debug_logs (test_security.SecurityTest.test_customer_cannot_read_debug_logs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 125, in test_customer_cannot_read_debug_logs
+    self.assertEqual(self.call('GET', '/debug/logs', auth=self.alice)[0], 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_customer_cannot_spoof_staff (test_security.SecurityTest.test_customer_cannot_spoof_staff)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 76, in test_customer_cannot_spoof_staff
+    self.assertEqual(self.call('GET', target, auth={**self.alice, 'X-Role': 'staff'})[0], 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_duplicate_query_parameter_is_not_silently_selected (test_security.SecurityTest.test_duplicate_query_parameter_is_not_silently_selected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 170, in test_duplicate_query_parameter_is_not_silently_selected
+    self.assertEqual(self.call('GET', '/profile?id=1&id=2', auth=self.alice)[0], 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 400
+
+======================================================================
+FAIL: test_executor_allows_model_refusal_without_side_effect (test_security.SecurityTest.test_executor_allows_model_refusal_without_side_effect)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 109, in test_executor_allows_model_refusal_without_side_effect
+    self.assertEqual(status, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 400 != 200
+
+======================================================================
+FAIL: test_executor_rechecks_file_owner_and_forbids_export_and_delete (test_security.SecurityTest.test_executor_rechecks_file_owner_and_forbids_export_and_delete) (tool='read_file', arguments={'path': 'files/bob/receipt.txt'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 102, in test_executor_rechecks_file_owner_and_forbids_export_and_delete
+    self.assertEqual(status, 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_executor_rechecks_file_owner_and_forbids_export_and_delete (test_security.SecurityTest.test_executor_rechecks_file_owner_and_forbids_export_and_delete) (tool='read_file', arguments={'path': 'private/operator-note.txt'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 102, in test_executor_rechecks_file_owner_and_forbids_export_and_delete
+    self.assertEqual(status, 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_executor_rechecks_file_owner_and_forbids_export_and_delete (test_security.SecurityTest.test_executor_rechecks_file_owner_and_forbids_export_and_delete) (tool='export_profiles', arguments={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 102, in test_executor_rechecks_file_owner_and_forbids_export_and_delete
+    self.assertEqual(status, 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_executor_rechecks_file_owner_and_forbids_export_and_delete (test_security.SecurityTest.test_executor_rechecks_file_owner_and_forbids_export_and_delete) (tool='delete_tree', arguments={'path': '.'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 102, in test_executor_rechecks_file_owner_and_forbids_export_and_delete
+    self.assertEqual(status, 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_executor_rejects_malformed_arguments_and_extra_capabilities (test_security.SecurityTest.test_executor_rejects_malformed_arguments_and_extra_capabilities)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 176, in test_executor_rejects_malformed_arguments_and_extra_capabilities
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 200 != 400
+
+======================================================================
+FAIL: test_files_reject_other_customer_and_private_traversal (test_security.SecurityTest.test_files_reject_other_customer_and_private_traversal) (user='bob', path='receipt.txt')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 92, in test_files_reject_other_customer_and_private_traversal
+    self.assertEqual(status, 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_files_reject_other_customer_and_private_traversal (test_security.SecurityTest.test_files_reject_other_customer_and_private_traversal) (user='alice', path='../bob/receipt.txt')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 92, in test_files_reject_other_customer_and_private_traversal
+    self.assertEqual(status, 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_files_reject_other_customer_and_private_traversal (test_security.SecurityTest.test_files_reject_other_customer_and_private_traversal) (user='alice', path='../../private/operator-note.txt')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 92, in test_files_reject_other_customer_and_private_traversal
+    self.assertEqual(status, 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_logs_do_not_store_password_token_body_or_query (test_security.SecurityTest.test_logs_do_not_store_password_token_body_or_query) (secret='learn-alice')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 122, in test_logs_do_not_store_password_token_body_or_query
+    self.assertNotIn(secret, text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 'learn-alice' unexpectedly found in '[{"method": "POST", "target": "/login", "body": {"username": "alice", "password": "learn-alice"}, "headers": {}}, {"method": "POST", "target": "/login", "body": {"username": "bob", "password": "learn-bob"}, "headers": {}}, {"method": "POST", "target": "/login", "body": {"username": "staff", "password": "learn-staff"}, "headers": {}}, {"method": "GET", "target": "/search?q=PRIVATE_QUERY", "body": {}, "headers": {"X-Token": "dc8ada37caa14ac4bf8b69a3c3857ec3"}}]'
+
+======================================================================
+FAIL: test_logs_do_not_store_password_token_body_or_query (test_security.SecurityTest.test_logs_do_not_store_password_token_body_or_query) (secret='dc8ada37caa14ac4bf8b69a3c3857ec3')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 122, in test_logs_do_not_store_password_token_body_or_query
+    self.assertNotIn(secret, text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 'dc8ada37caa14ac4bf8b69a3c3857ec3' unexpectedly found in '[{"method": "POST", "target": "/login", "body": {"username": "alice", "password": "learn-alice"}, "headers": {}}, {"method": "POST", "target": "/login", "body": {"username": "bob", "password": "learn-bob"}, "headers": {}}, {"method": "POST", "target": "/login", "body": {"username": "staff", "password": "learn-staff"}, "headers": {}}, {"method": "GET", "target": "/search?q=PRIVATE_QUERY", "body": {}, "headers": {"X-Token": "dc8ada37caa14ac4bf8b69a3c3857ec3"}}]'
+
+======================================================================
+FAIL: test_logs_do_not_store_password_token_body_or_query (test_security.SecurityTest.test_logs_do_not_store_password_token_body_or_query) (secret='PRIVATE_QUERY')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 122, in test_logs_do_not_store_password_token_body_or_query
+    self.assertNotIn(secret, text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 'PRIVATE_QUERY' unexpectedly found in '[{"method": "POST", "target": "/login", "body": {"username": "alice", "password": "learn-alice"}, "headers": {}}, {"method": "POST", "target": "/login", "body": {"username": "bob", "password": "learn-bob"}, "headers": {}}, {"method": "POST", "target": "/login", "body": {"username": "staff", "password": "learn-staff"}, "headers": {}}, {"method": "GET", "target": "/search?q=PRIVATE_QUERY", "body": {}, "headers": {"X-Token": "dc8ada37caa14ac4bf8b69a3c3857ec3"}}]'
+
+======================================================================
+FAIL: test_logs_do_not_store_password_token_body_or_query (test_security.SecurityTest.test_logs_do_not_store_password_token_body_or_query) (secret='learn-bob')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 122, in test_logs_do_not_store_password_token_body_or_query
+    self.assertNotIn(secret, text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 'learn-bob' unexpectedly found in '[{"method": "POST", "target": "/login", "body": {"username": "alice", "password": "learn-alice"}, "headers": {}}, {"method": "POST", "target": "/login", "body": {"username": "bob", "password": "learn-bob"}, "headers": {}}, {"method": "POST", "target": "/login", "body": {"username": "staff", "password": "learn-staff"}, "headers": {}}, {"method": "GET", "target": "/search?q=PRIVATE_QUERY", "body": {}, "headers": {"X-Token": "dc8ada37caa14ac4bf8b69a3c3857ec3"}}]'
+
+======================================================================
+FAIL: test_long_review_is_rejected_without_storage (test_security.SecurityTest.test_long_review_is_rejected_without_storage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 136, in test_long_review_is_rejected_without_storage
+    self.assertEqual(self.call('POST', '/reviews', {'product': 'chair', 'text': 'x'*5000}, self.alice)[0], 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 201 != 400
+
+======================================================================
+FAIL: test_new_order_does_not_return_old_purchase_receipt (test_security.SecurityTest.test_new_order_does_not_return_old_purchase_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 156, in test_new_order_does_not_return_old_purchase_receipt
+    self.assertIn('refuse', context['prompt'])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'refuse' not found in 'Ты помощник магазина. Прочитай заказ и отзывы. Верни JSON с полями tool и arguments.\nИнструменты: read_file(path), export_profiles(), delete_tree(path).\nПомоги пользователю обработать заказ.\nЗаказ: [{"id": 3, "owner": 1, "product": "lamp", "price": 1500.0}]\nОтзывы: []\nЗапрос пользователя: Покажи чек по заказу'
+
+======================================================================
+FAIL: test_numeric_sql_injections_are_rejected (test_security.SecurityTest.test_numeric_sql_injections_are_rejected) (path='/profile')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 64, in test_numeric_sql_injections_are_rejected
+    self.assertEqual(self.call('GET', path + '?' + urlencode({key: '1 OR 1=1'}), auth=self.alice)[0], 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 400
+
+======================================================================
+FAIL: test_numeric_sql_injections_are_rejected (test_security.SecurityTest.test_numeric_sql_injections_are_rejected) (path='/assistant/context')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 64, in test_numeric_sql_injections_are_rejected
+    self.assertEqual(self.call('GET', path + '?' + urlencode({key: '1 OR 1=1'}), auth=self.alice)[0], 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 400
+
+======================================================================
+FAIL: test_orders_are_scoped_to_customer (test_security.SecurityTest.test_orders_are_scoped_to_customer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 54, in test_orders_are_scoped_to_customer
+    self.assertEqual([order['owner'] for order in orders], [owner])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [1, 2] != [1]
+
+First list contains 1 additional elements.
+First extra element 1:
+2
+
+- [1, 2]
++ [1]
+
+======================================================================
+FAIL: test_oversized_numeric_id_is_a_client_error (test_security.SecurityTest.test_oversized_numeric_id_is_a_client_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 167, in test_oversized_numeric_id_is_a_client_error
+    self.assertEqual(self.call('GET', path + '9'*100, auth=self.alice)[0], 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 400
+
+======================================================================
+FAIL: test_price_is_from_catalog_in_response_and_database (test_security.SecurityTest.test_price_is_from_catalog_in_response_and_database) (price=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 83, in test_price_is_from_catalog_in_response_and_database
+    self.assertEqual(order['price'], 5000)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 5000
+
+======================================================================
+FAIL: test_price_is_from_catalog_in_response_and_database (test_security.SecurityTest.test_price_is_from_catalog_in_response_and_database) (price=-100)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 83, in test_price_is_from_catalog_in_response_and_database
+    self.assertEqual(order['price'], 5000)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: -100 != 5000
+
+======================================================================
+FAIL: test_price_is_from_catalog_in_response_and_database (test_security.SecurityTest.test_price_is_from_catalog_in_response_and_database) (price='free')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 83, in test_price_is_from_catalog_in_response_and_database
+    self.assertEqual(order['price'], 5000)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'free' != 5000
+
+======================================================================
+FAIL: test_price_is_from_catalog_in_response_and_database (test_security.SecurityTest.test_price_is_from_catalog_in_response_and_database) (price=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 83, in test_price_is_from_catalog_in_response_and_database
+    self.assertEqual(order['price'], 5000)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 5000
+
+======================================================================
+FAIL: test_price_is_from_catalog_in_response_and_database (test_security.SecurityTest.test_price_is_from_catalog_in_response_and_database)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 85, in test_price_is_from_catalog_in_response_and_database
+    self.assertTrue(all(order['price'] == 5000 for order in stored))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_profile_and_context_reject_other_owner (test_security.SecurityTest.test_profile_and_context_reject_other_owner) (target='/profile?id=2')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 46, in test_profile_and_context_reject_other_owner
+    self.assertEqual(status, 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_profile_and_context_reject_other_owner (test_security.SecurityTest.test_profile_and_context_reject_other_owner) (target='/assistant/context?order_id=2')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 46, in test_profile_and_context_reject_other_owner
+    self.assertEqual(status, 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_profile_and_context_reject_other_owner (test_security.SecurityTest.test_profile_and_context_reject_other_owner) (target='/profile?id=1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 46, in test_profile_and_context_reject_other_owner
+    self.assertEqual(status, 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_profile_and_context_reject_other_owner (test_security.SecurityTest.test_profile_and_context_reject_other_owner) (target='/assistant/context?order_id=1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 46, in test_profile_and_context_reject_other_owner
+    self.assertEqual(status, 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/profile?id=1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/search?q=TEST')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/orders')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/files')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/admin/export')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 403 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/debug/logs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/assistant/context')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/reviews')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 201 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={}, path='/assistant/execute')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/profile?id=1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/search?q=TEST')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/orders')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/files')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/admin/export')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 403 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/debug/logs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/assistant/context')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/reviews')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 201 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Token': 'not-a-session'}, path='/assistant/execute')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/profile?id=1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/search?q=TEST')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/orders')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/files')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/admin/export')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/debug/logs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/assistant/context')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/reviews')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 201 != 401
+
+======================================================================
+FAIL: test_protected_routes_require_real_session (test_security.SecurityTest.test_protected_routes_require_real_session) (auth={'X-Role': 'staff'}, path='/assistant/execute')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 39, in test_protected_routes_require_real_session
+    self.assertEqual(self.call(method, path, body, auth)[0], 401)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 401
+
+======================================================================
+FAIL: test_purchase_collection_has_a_limit_without_extra_insert (test_security.SecurityTest.test_purchase_collection_has_a_limit_without_extra_insert)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 162, in test_purchase_collection_has_a_limit_without_extra_insert
+    self.assertEqual(self.call('POST', '/orders', {'product': 'lamp'}, self.alice)[0], 429)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 201 != 429
+
+======================================================================
+FAIL: test_review_collection_has_a_limit (test_security.SecurityTest.test_review_collection_has_a_limit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 142, in test_review_collection_has_a_limit
+    self.assertEqual(self.call('POST', '/reviews', {'product': 'chair', 'text': 'overflow'}, self.alice)[0], 429)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 201 != 429
+
+======================================================================
+FAIL: test_reviews_render_untrusted_markup_as_text (test_security.SecurityTest.test_reviews_render_untrusted_markup_as_text)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 131, in test_reviews_render_untrusted_markup_as_text
+    self.assertNotIn('<script>', html)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: '<script>' unexpectedly found in '<html><body><p><script>alert("TEST")</script><img src=x onerror=alert(1)></p></body></html>'
+
+======================================================================
+FAIL: test_search_sql_injection_is_literal_data (test_security.SecurityTest.test_search_sql_injection_is_literal_data)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 67, in test_search_sql_injection_is_literal_data
+    self.assertEqual(self.call('GET', '/search?' + urlencode({'q': "' OR 1=1 --"}), auth=self.alice), (200, []))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (200, [{'id': 1, 'name': 'TEST_ALICE', 'email': [142 chars]B'}]) != (200, [])
+
+First differing element 1:
+[{'id': 1, 'name': 'TEST_ALICE', 'email': [141 chars]_B'}]
+[]
+
++ (200, [])
+- (200,
+-  [{'address': 'TEST_ADDRESS_A',
+-    'email': 'alice@example.invalid',
+-    'id': 1,
+-    'name': 'TEST_ALICE'},
+-   {'address': 'TEST_ADDRESS_B',
+-    'email': 'bob@example.invalid',
+-    'id': 2,
+-    'name': 'TEST_BOB'}])
+
+======================================================================
+FAIL: test_search_wildcard_does_not_bypass_owner (test_security.SecurityTest.test_search_wildcard_does_not_bypass_owner)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 59, in test_search_wildcard_does_not_bypass_owner
+    self.assertEqual([row['id'] for row in rows], [1])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [1, 2] != [1]
+
+First list contains 1 additional elements.
+First extra element 1:
+2
+
+- [1, 2]
++ [1]
+
+======================================================================
+FAIL: test_session_and_log_memory_are_bounded (test_security.SecurityTest.test_session_and_log_memory_are_bounded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 147, in test_session_and_log_memory_are_bounded
+    self.assertLessEqual(len(self.shop.sessions), 1000)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1008 not less than or equal to 1000
+
+======================================================================
+FAIL: test_staff_cannot_use_customer_executor (test_security.SecurityTest.test_staff_cannot_use_customer_executor)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 114, in test_staff_cannot_use_customer_executor
+    self.assertEqual(self.call('POST', '/assistant/execute', {'decision': {'tool': 'delete_tree', 'arguments': {'path': '.'}}}, self.staff)[0], 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_staff_export_uses_session_without_role_header (test_security.SecurityTest.test_staff_export_uses_session_without_role_header)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_security.py", line 71, in test_staff_export_uses_session_without_role_header
+    self.assertEqual(status, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 403 != 200
+
+======================================================================
+FAIL: test_absolute_file_argument_is_forbidden_without_internal_error (test_http_security.HttpSecurityTest.test_absolute_file_argument_is_forbidden_without_internal_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 98, in test_absolute_file_argument_is_forbidden_without_internal_error
+    self.assertEqual(status, 403)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 403
+
+======================================================================
+FAIL: test_ambiguous_body_framing_is_rejected (test_http_security.HttpSecurityTest.test_ambiguous_body_framing_is_rejected) (headers=[('Content-Length', '2'), ('Content-Length', '3')])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 65, in test_ambiguous_body_framing_is_rejected
+    self.assertEqual(self.raw(b'{}', [('Content-Type', 'application/json'), *headers])[0], 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 401 != 400
+
+======================================================================
+FAIL: test_ambiguous_body_framing_is_rejected (test_http_security.HttpSecurityTest.test_ambiguous_body_framing_is_rejected) (headers=[('Content-Length', '2'), ('Transfer-Encoding', 'chunked')])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 65, in test_ambiguous_body_framing_is_rejected
+    self.assertEqual(self.raw(b'{}', [('Content-Type', 'application/json'), *headers])[0], 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 401 != 400
+
+======================================================================
+FAIL: test_ambiguous_body_framing_is_rejected (test_http_security.HttpSecurityTest.test_ambiguous_body_framing_is_rejected) (headers=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 65, in test_ambiguous_body_framing_is_rejected
+    self.assertEqual(self.raw(b'{}', [('Content-Type', 'application/json'), *headers])[0], 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 401 != 400
+
+======================================================================
+FAIL: test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) (body=b'{')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 52, in test_bad_json_unicode_and_top_level_types_return_safe_400
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) (body=b'\xff')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 52, in test_bad_json_unicode_and_top_level_types_return_safe_400
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) (body=b'[]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 52, in test_bad_json_unicode_and_top_level_types_return_safe_400
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) (body=b'null')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 52, in test_bad_json_unicode_and_top_level_types_return_safe_400
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) (body=b'1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 52, in test_bad_json_unicode_and_top_level_types_return_safe_400
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_bad_json_unicode_and_top_level_types_return_safe_400 (test_http_security.HttpSecurityTest.test_bad_json_unicode_and_top_level_types_return_safe_400) (body=b'"abc"')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 52, in test_bad_json_unicode_and_top_level_types_return_safe_400
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_invalid_content_length_is_400_and_oversize_is_413 (test_http_security.HttpSecurityTest.test_invalid_content_length_is_400_and_oversize_is_413) (length='bad')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 59, in test_invalid_content_length_is_400_and_oversize_is_413
+    self.assertEqual(self.raw(b'', [('Content-Type', 'application/json'), ('Content-Length', length)])[0], want)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_invalid_content_length_is_400_and_oversize_is_413 (test_http_security.HttpSecurityTest.test_invalid_content_length_is_400_and_oversize_is_413) (length='-1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 59, in test_invalid_content_length_is_400_and_oversize_is_413
+    self.assertEqual(self.raw(b'', [('Content-Type', 'application/json'), ('Content-Length', length)])[0], want)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 413 != 400
+
+======================================================================
+FAIL: test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/login', body={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 81, in test_invalid_route_payloads_do_not_throw_500
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 401 != 400
+
+======================================================================
+FAIL: test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/login', body={'username': [], 'password': {}})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 81, in test_invalid_route_payloads_do_not_throw_500
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/orders', body={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 81, in test_invalid_route_payloads_do_not_throw_500
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/orders', body={'product': []})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 81, in test_invalid_route_payloads_do_not_throw_500
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/reviews', body={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 81, in test_invalid_route_payloads_do_not_throw_500
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/reviews', body={'product': 'chair', 'text': 7})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 81, in test_invalid_route_payloads_do_not_throw_500
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 201 != 400
+
+======================================================================
+FAIL: test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/reviews', body={'product': 'unknown', 'text': 'x'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 81, in test_invalid_route_payloads_do_not_throw_500
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 201 != 400
+
+======================================================================
+FAIL: test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/assistant/execute', body={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 81, in test_invalid_route_payloads_do_not_throw_500
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/assistant/execute', body={'decision': None})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 81, in test_invalid_route_payloads_do_not_throw_500
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/assistant/execute', body={'decision': []})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 81, in test_invalid_route_payloads_do_not_throw_500
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/assistant/execute', body={'decision': {'tool': 'read_file', 'arguments': []}})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 81, in test_invalid_route_payloads_do_not_throw_500
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_invalid_route_payloads_do_not_throw_500 (test_http_security.HttpSecurityTest.test_invalid_route_payloads_do_not_throw_500) (target='/assistant/execute', body={'decision': {'tool': 'read_file', 'arguments': {}}})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 81, in test_invalid_route_payloads_do_not_throw_500
+    self.assertEqual(status, 400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 400
+
+======================================================================
+FAIL: test_json_content_type_required_for_post (test_http_security.HttpSecurityTest.test_json_content_type_required_for_post)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 68, in test_json_content_type_required_for_post
+    self.assertEqual(self.raw(b'{}', [('Content-Type', 'text/plain'), ('Content-Length', '2')])[0], 415)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 401 != 415
+
+======================================================================
+FAIL: test_review_response_has_browser_safety_headers (test_http_security.HttpSecurityTest.test_review_response_has_browser_safety_headers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 104, in test_review_response_has_browser_safety_headers
+    self.assertEqual(headers.get('X-Content-Type-Options'), 'nosniff')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 'nosniff'
+
+======================================================================
+FAIL: test_structured_price_is_ignored_and_catalog_price_is_stored (test_http_security.HttpSecurityTest.test_structured_price_is_ignored_and_catalog_price_is_stored)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 92, in test_structured_price_is_ignored_and_catalog_price_is_stored
+    self.assertEqual(status, 201)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 500 != 201
+
+======================================================================
+FAIL: test_unexpected_internal_failure_does_not_expose_details (test_http_security.HttpSecurityTest.test_unexpected_internal_failure_does_not_expose_details)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_06/lab/test_http_security.py", line 116, in test_unexpected_internal_failure_does_not_expose_details
+    self.assertNotIn('TEST_INTERNAL_SECRET', body)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'TEST_INTERNAL_SECRET' unexpectedly found in '{"error": "TEST_INTERNAL_SECRET", "type": "RuntimeError"}'
+
+----------------------------------------------------------------------
+Ran 35 tests in 0.561s
+
+FAILED (failures=94)

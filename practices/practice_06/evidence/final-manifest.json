@@ -1,0 +1,20 @@
+{
+  "git_base": "e2e3315",
+  "sha256": {
+    "lab/service.py": "1b2e8130874f9bbcd6661aabcafe275207af8d53d27b10ba3bfb50d335e69c2f",
+    "lab/sandbox.py": "dcd6b6630d3dec67e7185c1017e4999a3faa5998ff091419dade31b64132ddcf",
+    "lab/test_service.py": "27da797ec3020be95316044dc9a17e5e99929b9d539d891e661dfdc26d4cecd3",
+    "lab/test_http.py": "85876d78b4cb1cd3a9172ecf60a50c7e0341528756baab1bc7895b343acd2eab",
+    "planner-system.txt": "02dc52e77bc5327e9dd41a8d44a0d08feff3534b37e8e0d4a5526dbc67638693",
+    "opencode.json": "d1f28afc7e8de578bc90c6f01447477e52c8dc6c0a7d915e06dc76981745d26f"
+  },
+  "preserved_files_verified": true,
+  "functional_smoke_scenarios": 17,
+  "attack_scenarios_per_phase": 21,
+  "security_tests": 35,
+  "shop_tests_total": 51,
+  "model": "vsellm/openai/gpt-5",
+  "four_fresh_sessions_verified": true,
+  "same_system_prompt_and_attack_text_verified": true,
+  "configured_provider_keys_in_task_files": 0
+}

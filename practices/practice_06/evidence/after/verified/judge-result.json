@@ -1,0 +1,427 @@
+{
+  "command": [
+    "opencode",
+    "run",
+    "Проверь представленные материалы этой фазы по своей рубрике.",
+    "--pure",
+    "--dir",
+    "/Users/pip/ITMOv2/practices/practice_06",
+    "--agent",
+    "threat-judge",
+    "--model",
+    "vsellm/openai/gpt-5",
+    "--format",
+    "json",
+    "--file",
+    "/Users/pip/ITMOv2/practices/practice_06/evidence/after/verified/judge-input.txt",
+    "/Users/pip/ITMOv2/practices/practice_06/evidence/after/verified/judge-evidence.json"
+  ],
+  "model": "vsellm/openai/gpt-5",
+  "agent": "threat-judge",
+  "input_sha256": "bf85210161602aca700bd50038a73a90dfa3f16359a478fc5b2d789f9108e0d6",
+  "inputs": [
+    {
+      "path": "/Users/pip/ITMOv2/practices/practice_06/evidence/after/verified/judge-input.txt",
+      "sha256": "4f084a4fbe582be6a1eec225df4e523c4200cc65ecfce2905b33d12bf859b499"
+    },
+    {
+      "path": "/Users/pip/ITMOv2/practices/practice_06/evidence/after/verified/judge-evidence.json",
+      "sha256": "8d83fc08f0c8982703f84dab9a8ae06e4f70d46106418ea86f8ca822fbc6cec6"
+    }
+  ],
+  "prompt_sha256": "d388eb003aeae6a236d094fdf536c4c0e7e721cbeebc14d1ca700f480d20c196",
+  "duration_seconds": 131.784,
+  "exit_code": 0,
+  "timed_out": false,
+  "event_types": {
+    "step_start": 1,
+    "text": 1,
+    "step_finish": 1
+  },
+  "session_ids": [
+    "ses_e86195ae9ffeu1TIvgrd90Zwze"
+  ],
+  "final_text": "{\n  \"verdict\": \"pass\",\n  \"coverage\": [\n    {\n      \"surface\": \"Client/Server boundary: HTTP parsing, JSON validation, safe errors\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:426-466 (HTTP handler validation and safe error mapping)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V10-json,V10-shape]\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_ambiguous_body_framing_is_rejected, test_bad_json_unicode_and_top_level_types_return_safe_400, test_invalid_content_length_is_400_and_oversize_is_413, test_json_content_type_required_for_post\"\n      ]\n    },\n    {\n      \"surface\": \"GET /health\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:244-246\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_health_and_not_found, test_health_and_catalog\"\n      ]\n    },\n    {\n      \"surface\": \"GET /products\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:246-247\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_health_and_catalog\"\n      ]\n    },\n    {\n      \"surface\": \"POST /login\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:248-263,255-262 (session cap)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_login_and_purchase_over_http, test_wrong_password_rejected, test_tokens_identify_distinct_users\"\n      ]\n    },\n    {\n      \"surface\": \"GET /profile\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:281-290 (positive_id + owner check)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V02-guest,V02-profile]\"\n      ]\n    },\n    {\n      \"surface\": \"GET /search\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:291-298 (owner-scoped LIKE with parameterization)\",\n        \"lab/service.py:133-141 (positive_id used elsewhere for IDs)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V01 (search literal data)]\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_search_sql_injection_is_literal_data, test_search_wildcard_does_not_bypass_owner\"\n      ]\n    },\n    {\n      \"surface\": \"GET /orders\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:299-302\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V02-orders]\"\n      ]\n    },\n    {\n      \"surface\": \"POST /orders\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:303-323 (catalog price enforced, cap at 1000)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V04]\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_structured_price_is_ignored_and_catalog_price_is_stored, test_price_is_from_catalog_in_response_and_database, test_purchase_collection_has_a_limit\"\n      ]\n    },\n    {\n      \"surface\": \"GET /admin/export\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:271-279 (staff-only via session; header ignored)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V03] (header spoof rejected)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_staff_can_export_with_staff_session, test_customer_cannot_spoof_staff\"\n      ]\n    },\n    {\n      \"surface\": \"GET /files\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:325-333 (strict own receipt only)\",\n        \"lab/service.py:175-187 (read_receipt path allowlist + sandbox path check)\",\n        \"lab/sandbox.py:541-549 (sandbox read boundary)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V05-bob,V05-private]\"\n      ]\n    },\n    {\n      \"surface\": \"POST /reviews\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:333-341 (validation + limit 100)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V07-save,V11-review]\"\n      ]\n    },\n    {\n      \"surface\": \"GET /reviews/view\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:263-266 (escape)\",\n        \"lab/service.py:480-483 (CSP default-src 'none', frame-ancestors 'none')\",\n        \"lab/service.py:478-479 (nosniff)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V07-view]\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_review_response_has_browser_safety_headers, test_reviews_render_untrusted_markup_as_text\"\n      ]\n    },\n    {\n      \"surface\": \"GET /debug/logs\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:236-244 (minimal log fields + cap 1000)\",\n        \"lab/service.py:271-279 (staff-only)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V06,V06-guest]\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_logs_do_not_store_password_token_body_or_query, test_session_and_log_memory_are_bounded, test_customer_cannot_read_debug_logs\"\n      ]\n    },\n    {\n      \"surface\": \"GET /assistant/context\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:342-391 (owner check + allowed_action separation + untrusted_reviews)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V02-context]\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_profile_and_context_reject_other_owner\"\n      ]\n    },\n    {\n      \"surface\": \"POST /assistant/execute\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:392-413 (decision schema, forbid export/delete, recheck read_file via read_receipt)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V09-read_file,V09-export_profiles,V09-delete_tree]\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_executor_allows_model_refusal_without_side_effect, test_executor_rechecks_file_owner_and_forbids_export_and_delete, test_executor_rejects_malformed_arguments_and_extra_capabilities\"\n      ]\n    },\n    {\n      \"surface\": \"Boundary: client vs other client (owner scoping)\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:281-302,349-351 (owner checks)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V02-profile,V02-orders,V02-context]\"\n      ]\n    },\n    {\n      \"surface\": \"Boundary: client vs staff (role via session only)\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:271-281\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V03]\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_staff_can_export_with_staff_session, test_staff_cannot_use_customer_executor, test_customer_cannot_spoof_staff\"\n      ]\n    },\n    {\n      \"surface\": \"Boundary: app vs sandbox (path normalization, containment)\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:175-187 (read_receipt + sandbox path equality)\",\n        \"lab/sandbox.py:541-549,550-556 (path containment; delete_tree boundary)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_delete_of_fixture_root_stays_inside_exercise, test_external_directory_cannot_be_deleted, test_parent_paths_cannot_escape_exercise, test_symlink_cannot_escape_exercise\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.files_before/files_after unchanged for private/operator-note.txt and receipts\"\n      ]\n    },\n    {\n      \"surface\": \"Boundary: data vs LLM instructions (prompt separation; untrusted reviews)\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:351-390 (allowed_action, untrusted_reviews, clear system prompt text)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.control,outcome=valid_json decision=read_file; submitted_evidence.injection,outcome=valid_json decision=read_file\"\n      ]\n    },\n    {\n      \"surface\": \"Boundary: LLM decision vs executor authority (server-side recheck)\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:392-413 and 175-187 (executor rechecks path and denies export/delete)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V09-read_file,V09-export_profiles,V09-delete_tree]\"\n      ]\n    },\n    {\n      \"surface\": \"Resource limits: sessions, logs, reviews, orders, body size, query fields\",\n      \"status\": \"checked\",\n      \"evidence\": [\n        \"lab/service.py:255-262 (sessions cap),243-244 (logs cap),338-341 (reviews cap),308-311 (orders cap),439-441 (body size cap),203-208 (parse_qs max_num_fields=10)\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V11-review]\",\n        \"evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_review_collection_has_a_limit, test_purchase_collection_has_a_limit_without_extra_insert, test_session_and_log_memory_are_bounded\"\n      ]\n    }\n  ],\n  \"findings\": [\n    {\n      \"id\": \"V01\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"Numeric SQL injection and search SQL literals are mitigated by strict ID validation and SQL parameterization; owner filter prevents expansion of result set.\",\n      \"evidence\": [\n        \"lab/service.py:133-141 (positive_id)\",\n        \"lab/service.py:295-298 (parameterized LIKE with owner filter)\",\n        \"lab/service.py:343-351 (assistant/context positive_id + owner check)\",\n        \"evidence/after/verified/judge-evidence.json: http-replay.records[id=V01] status=400/200 with empty results\"\n      ],\n      \"next_check\": \"Attempt additional numeric payloads (e.g., overlong digits, leading plus, scientific notation) and verify consistent 400; verify LIKE wildcard handling with edge cases.\"\n    },\n    {\n      \"id\": \"V02\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"Cross-customer data access is denied: guests get 401; other users' profile/orders/context return 403; own orders listed.\",\n      \"evidence\": [\n        \"lab/service.py:281-302,349-351\",\n        \"evidence/after/verified/judge-evidence.json: http-replay.records[id=V02-guest,V02-profile,V02-orders,V02-context]\"\n      ],\n      \"next_check\": \"Add explicit HTTP replay for successful own profile 200 and ensure 404 for non-existent IDs.\"\n    },\n    {\n      \"id\": \"V03\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"Admin export requires a staff session; header-based role spoofing is ineffective.\",\n      \"evidence\": [\n        \"lab/service.py:271-279\",\n        \"evidence/after/verified/judge-evidence.json: http-replay.records[id=V03] (401 with X-Role header only)\",\n        \"evidence/after/verified/judge-evidence.json: security_tests.test_names includes test_staff_can_export_with_staff_session\"\n      ],\n      \"next_check\": \"Record an explicit HTTP replay of staff login + GET /admin/export 200 with response body (redacted if needed) to complement test evidence.\"\n    },\n    {\n      \"id\": \"V04\",\n      \"status\": \"confirmed\",\n      \"severity\": \"medium\",\n      \"claim\": \"Order price is enforced from catalog; client-provided price is ignored; database reflects catalog value.\",\n      \"evidence\": [\n        \"lab/service.py:312-323\",\n        \"evidence/after/verified/judge-evidence.json: http-replay.records[id=V04]\"\n      ],\n      \"next_check\": \"Verify that changing product name case or adding extra fields does not affect price; confirm database row via independent query replay if available.\"\n    },\n    {\n      \"id\": \"V05\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"File access restricted to own receipt; traversal and private files are forbidden in both direct route and executor tool.\",\n      \"evidence\": [\n        \"lab/service.py:175-187,325-333\",\n        \"lab/sandbox.py:541-549\",\n        \"evidence/after/verified/judge-evidence.json: http-replay.records[id=V05-bob,V05-private,V09-read_file]\"\n      ],\n      \"next_check\": \"Test case-insensitive variations and encoded path components; verify symlink behavior (covered by security tests) with explicit replay if possible.\"\n    },\n    {\n      \"id\": \"V06\",\n      \"status\": \"confirmed\",\n      \"severity\": \"medium\",\n      \"claim\": \"Logs store minimal metadata (method, known path or 'unknown', actor id) and are staff-only; no credentials or request bodies are retained.\",\n      \"evidence\": [\n        \"lab/service.py:236-244,271-279\",\n        \"evidence/after/verified/judge-evidence.json: http-replay.records[id=V06 (200 as staff),V06-guest (401)]\",\n        \"evidence/after/verified/judge-evidence.json: security_tests.test_names includes test_logs_do_not_store_password_token_body_or_query\"\n      ],\n      \"next_check\": \"Include a replay showing that query parameters do not appear in logs; verify logs cap rollover by exceeding 1000 events in a controlled replay.\"\n    },\n    {\n      \"id\": \"V07\",\n      \"status\": \"confirmed\",\n      \"severity\": \"medium\",\n      \"claim\": \"Stored review content is escaped on render and protected by strong CSP and nosniff headers; no executable HTML is delivered.\",\n      \"evidence\": [\n        \"lab/service.py:263-266,478-483\",\n        \"evidence/after/verified/judge-evidence.json: http-replay.records[id=V07-save,V07-view]\"\n      ],\n      \"next_check\": \"Attempt HTML attributes and CSS injection; ensure CSP blocks inline styles and images; verify Content-Type remains text/html with escaped content.\"\n    },\n    {\n      \"id\": \"V08\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"Prompt injection in reviews did not escalate capabilities; model returned allowed read_file in both control and injection contexts; executor rechecked rights.\",\n      \"evidence\": [\n        \"lab/service.py:351-391,392-413\",\n        \"evidence/after/verified/judge-evidence.json: control.outcome=valid_json decision=read_file; injection.outcome=valid_json decision=read_file; execution responses 200 with own receipt\"\n      ],\n      \"next_check\": \"Run additional diverse prompt-injection attempts; ensure executor continues to reject any unexpected tools or arguments regardless of model output.\"\n    },\n    {\n      \"id\": \"V09\",\n      \"status\": \"confirmed\",\n      \"severity\": \"high\",\n      \"claim\": \"Executor forbids export/delete and revalidates read_file path; dangerous manual decisions are blocked with 403.\",\n      \"evidence\": [\n        \"lab/service.py:400-413\",\n        \"evidence/after/verified/judge-evidence.json: http-replay.records[id=V09-export_profiles,V09-delete_tree,V09-read_file]; files_before/files_after unchanged\"\n      ],\n      \"next_check\": \"Try additional forbidden capabilities (unknown tool names, extra arguments) to confirm robust 400/403 responses.\"\n    },\n    {\n      \"id\": \"V10\",\n      \"status\": \"confirmed\",\n      \"severity\": \"medium\",\n      \"claim\": \"Malformed JSON, ambiguous framing, wrong content type, and unexpected internal failures map to safe HTTP errors without leaking details.\",\n      \"evidence\": [\n        \"lab/service.py:426-466\",\n        \"evidence/after/verified/judge-evidence.json: http-replay.records[id=V10-json,V10-shape]\",\n        \"evidence/after/verified/judge-evidence.json: security_tests.test_names includes test_unexpected_internal_failure_does_not_expose_details\"\n      ],\n      \"next_check\": \"Add replay for ambiguous framing rejection and oversize body rejection to complement tests.\"\n    },\n    {\n      \"id\": \"V11\",\n      \"status\": \"confirmed\",\n      \"severity\": \"medium\",\n      \"claim\": \"Collections and inputs are bounded: reviews (100), orders (1000), sessions (1000), logs (1000), review length (2000), query fields (10), body size (<= 65536).\",\n      \"evidence\": [\n        \"lab/service.py:255-262,243-244,338-341,308-311,127-131,203-208,439-441\",\n        \"evidence/after/verified/judge-evidence.json: http-replay.records[id=V11-review]\",\n        \"evidence/after/verified/judge-evidence.json: security_tests.test_names includes test_review_collection_has_a_limit, test_purchase_collection_has_a_limit_without_extra_insert, test_session_and_log_memory_are_bounded\"\n      ],\n      \"next_check\": \"Replay boundary overflows for sessions and logs to observe cap behavior; verify 429 on order/review limits with explicit HTTP captures.\"\n    }\n  ],\n  \"missing_evidence\": [\n    \"Explicit HTTP replay of staff login followed by GET /admin/export with 200 and a sample of exported rows (masking if needed).\",\n    \"Explicit HTTP replay showing a successful own profile read (200) and own receipt read via /files.\",\n    \"Explicit HTTP replay for ambiguous body framing rejection and oversized body rejection (beyond test names).\",\n    \"Explicit HTTP replay demonstrating logs do not contain query strings or headers.\"\n  ],\n  \"residual_risks\": [\n    \"Static teaching credentials without rotation; no TLS; in-memory sessions and SQLite for exercise only.\",\n    \"No session TTLs or durable audit trail; logs are ephemeral by design.\",\n    \"Global in-process limits (sessions/logs/orders/reviews) can be exhausted causing controlled 429/eviction but not protecting against distributed DoS.\",\n    \"Loopback-only server and short connection timeout reduce exposure but do not address local malicious users.\",\n    \"LLM prompt separation reduces confusion, but security relies on executor rechecks; prompt injection probability is not assessed from single runs.\"\n  ],\n  \"rubric\": [\n    {\n      \"criterion\": \"Построена модель угроз в любом виде\",\n      \"status\": \"met\",\n      \"reason\": \"THREAT_MODEL.md present with clear boundaries, STRIDE mapping, and post-fix policy (lines 58-79, 80-97).\"\n    },\n    {\n      \"criterion\": \"Есть кастомный промпт под LLM-судью\",\n      \"status\": \"met\",\n      \"reason\": \"judge-system-prompt.md present with detailed instructions and required JSON schema.\"\n    },\n    {\n      \"criterion\": \"REPORT_01: описание всех найденных проблем присутствует\",\n      \"status\": \"unverified\",\n      \"reason\": \"After-phase package does not include REPORT_01; only REPORT_02 is present.\"\n    },\n    {\n      \"criterion\": \"Есть исправления в коде и сервис собирается и проходит тесты через make step6, make test\",\n      \"status\": \"met\",\n      \"reason\": \"lab/service.py shows fixes; evidence/security_tests summary indicates 51 tests OK and baseline OK.\"\n    },\n    {\n      \"criterion\": \"REPORT_02: описание всех найденных проблем после фикса присутствует\",\n      \"status\": \"met\",\n      \"reason\": \"REPORT_02.md present with detailed replay IDs and analysis referencing verified evidence.\"\n    },\n    {\n      \"criterion\": \"Студент открыл PR и предоставил свои выводы (1-2 абзаца)\",\n      \"status\": \"unverified\",\n      \"reason\": \"REPORT_02.md states PR not published due to local-only policy (AGENTS.md); draft exists locally, but no PR URL provided.\"\n    }\n  ]\n}",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "errors": [],
+  "runtime_overrides": {
+    "mcp": {
+      "fetch": {
+        "enabled": false
+      },
+      "trip_planner": {
+        "enabled": false
+      }
+    },
+    "snapshot": false,
+    "small_model": "vsellm/openai/gpt-5"
+  },
+  "generation_parameters": "provider/model defaults; temperature and seed not exposed by this invocation",
+  "decision": {
+    "verdict": "pass",
+    "coverage": [
+      {
+        "surface": "Client/Server boundary: HTTP parsing, JSON validation, safe errors",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:426-466 (HTTP handler validation and safe error mapping)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V10-json,V10-shape]",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_ambiguous_body_framing_is_rejected, test_bad_json_unicode_and_top_level_types_return_safe_400, test_invalid_content_length_is_400_and_oversize_is_413, test_json_content_type_required_for_post"
+        ]
+      },
+      {
+        "surface": "GET /health",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:244-246",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_health_and_not_found, test_health_and_catalog"
+        ]
+      },
+      {
+        "surface": "GET /products",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:246-247",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_health_and_catalog"
+        ]
+      },
+      {
+        "surface": "POST /login",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:248-263,255-262 (session cap)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_login_and_purchase_over_http, test_wrong_password_rejected, test_tokens_identify_distinct_users"
+        ]
+      },
+      {
+        "surface": "GET /profile",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:281-290 (positive_id + owner check)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V02-guest,V02-profile]"
+        ]
+      },
+      {
+        "surface": "GET /search",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:291-298 (owner-scoped LIKE with parameterization)",
+          "lab/service.py:133-141 (positive_id used elsewhere for IDs)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V01 (search literal data)]",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_search_sql_injection_is_literal_data, test_search_wildcard_does_not_bypass_owner"
+        ]
+      },
+      {
+        "surface": "GET /orders",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:299-302",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V02-orders]"
+        ]
+      },
+      {
+        "surface": "POST /orders",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:303-323 (catalog price enforced, cap at 1000)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V04]",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_structured_price_is_ignored_and_catalog_price_is_stored, test_price_is_from_catalog_in_response_and_database, test_purchase_collection_has_a_limit"
+        ]
+      },
+      {
+        "surface": "GET /admin/export",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:271-279 (staff-only via session; header ignored)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V03] (header spoof rejected)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_staff_can_export_with_staff_session, test_customer_cannot_spoof_staff"
+        ]
+      },
+      {
+        "surface": "GET /files",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:325-333 (strict own receipt only)",
+          "lab/service.py:175-187 (read_receipt path allowlist + sandbox path check)",
+          "lab/sandbox.py:541-549 (sandbox read boundary)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V05-bob,V05-private]"
+        ]
+      },
+      {
+        "surface": "POST /reviews",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:333-341 (validation + limit 100)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V07-save,V11-review]"
+        ]
+      },
+      {
+        "surface": "GET /reviews/view",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:263-266 (escape)",
+          "lab/service.py:480-483 (CSP default-src 'none', frame-ancestors 'none')",
+          "lab/service.py:478-479 (nosniff)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V07-view]",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_review_response_has_browser_safety_headers, test_reviews_render_untrusted_markup_as_text"
+        ]
+      },
+      {
+        "surface": "GET /debug/logs",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:236-244 (minimal log fields + cap 1000)",
+          "lab/service.py:271-279 (staff-only)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V06,V06-guest]",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_logs_do_not_store_password_token_body_or_query, test_session_and_log_memory_are_bounded, test_customer_cannot_read_debug_logs"
+        ]
+      },
+      {
+        "surface": "GET /assistant/context",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:342-391 (owner check + allowed_action separation + untrusted_reviews)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V02-context]",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_profile_and_context_reject_other_owner"
+        ]
+      },
+      {
+        "surface": "POST /assistant/execute",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:392-413 (decision schema, forbid export/delete, recheck read_file via read_receipt)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V09-read_file,V09-export_profiles,V09-delete_tree]",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_executor_allows_model_refusal_without_side_effect, test_executor_rechecks_file_owner_and_forbids_export_and_delete, test_executor_rejects_malformed_arguments_and_extra_capabilities"
+        ]
+      },
+      {
+        "surface": "Boundary: client vs other client (owner scoping)",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:281-302,349-351 (owner checks)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V02-profile,V02-orders,V02-context]"
+        ]
+      },
+      {
+        "surface": "Boundary: client vs staff (role via session only)",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:271-281",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V03]",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_staff_can_export_with_staff_session, test_staff_cannot_use_customer_executor, test_customer_cannot_spoof_staff"
+        ]
+      },
+      {
+        "surface": "Boundary: app vs sandbox (path normalization, containment)",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:175-187 (read_receipt + sandbox path equality)",
+          "lab/sandbox.py:541-549,550-556 (path containment; delete_tree boundary)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_delete_of_fixture_root_stays_inside_exercise, test_external_directory_cannot_be_deleted, test_parent_paths_cannot_escape_exercise, test_symlink_cannot_escape_exercise",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.files_before/files_after unchanged for private/operator-note.txt and receipts"
+        ]
+      },
+      {
+        "surface": "Boundary: data vs LLM instructions (prompt separation; untrusted reviews)",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:351-390 (allowed_action, untrusted_reviews, clear system prompt text)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.control,outcome=valid_json decision=read_file; submitted_evidence.injection,outcome=valid_json decision=read_file"
+        ]
+      },
+      {
+        "surface": "Boundary: LLM decision vs executor authority (server-side recheck)",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:392-413 and 175-187 (executor rechecks path and denies export/delete)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V09-read_file,V09-export_profiles,V09-delete_tree]"
+        ]
+      },
+      {
+        "surface": "Resource limits: sessions, logs, reviews, orders, body size, query fields",
+        "status": "checked",
+        "evidence": [
+          "lab/service.py:255-262 (sessions cap),243-244 (logs cap),338-341 (reviews cap),308-311 (orders cap),439-441 (body size cap),203-208 (parse_qs max_num_fields=10)",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.http-replay.json.records[id=V11-review]",
+          "evidence/after/verified/judge-evidence.json: submitted_evidence.security_tests.test_names includes test_review_collection_has_a_limit, test_purchase_collection_has_a_limit_without_extra_insert, test_session_and_log_memory_are_bounded"
+        ]
+      }
+    ],
+    "findings": [
+      {
+        "id": "V01",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "Numeric SQL injection and search SQL literals are mitigated by strict ID validation and SQL parameterization; owner filter prevents expansion of result set.",
+        "evidence": [
+          "lab/service.py:133-141 (positive_id)",
+          "lab/service.py:295-298 (parameterized LIKE with owner filter)",
+          "lab/service.py:343-351 (assistant/context positive_id + owner check)",
+          "evidence/after/verified/judge-evidence.json: http-replay.records[id=V01] status=400/200 with empty results"
+        ],
+        "next_check": "Attempt additional numeric payloads (e.g., overlong digits, leading plus, scientific notation) and verify consistent 400; verify LIKE wildcard handling with edge cases."
+      },
+      {
+        "id": "V02",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "Cross-customer data access is denied: guests get 401; other users' profile/orders/context return 403; own orders listed.",
+        "evidence": [
+          "lab/service.py:281-302,349-351",
+          "evidence/after/verified/judge-evidence.json: http-replay.records[id=V02-guest,V02-profile,V02-orders,V02-context]"
+        ],
+        "next_check": "Add explicit HTTP replay for successful own profile 200 and ensure 404 for non-existent IDs."
+      },
+      {
+        "id": "V03",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "Admin export requires a staff session; header-based role spoofing is ineffective.",
+        "evidence": [
+          "lab/service.py:271-279",
+          "evidence/after/verified/judge-evidence.json: http-replay.records[id=V03] (401 with X-Role header only)",
+          "evidence/after/verified/judge-evidence.json: security_tests.test_names includes test_staff_can_export_with_staff_session"
+        ],
+        "next_check": "Record an explicit HTTP replay of staff login + GET /admin/export 200 with response body (redacted if needed) to complement test evidence."
+      },
+      {
+        "id": "V04",
+        "status": "confirmed",
+        "severity": "medium",
+        "claim": "Order price is enforced from catalog; client-provided price is ignored; database reflects catalog value.",
+        "evidence": [
+          "lab/service.py:312-323",
+          "evidence/after/verified/judge-evidence.json: http-replay.records[id=V04]"
+        ],
+        "next_check": "Verify that changing product name case or adding extra fields does not affect price; confirm database row via independent query replay if available."
+      },
+      {
+        "id": "V05",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "File access restricted to own receipt; traversal and private files are forbidden in both direct route and executor tool.",
+        "evidence": [
+          "lab/service.py:175-187,325-333",
+          "lab/sandbox.py:541-549",
+          "evidence/after/verified/judge-evidence.json: http-replay.records[id=V05-bob,V05-private,V09-read_file]"
+        ],
+        "next_check": "Test case-insensitive variations and encoded path components; verify symlink behavior (covered by security tests) with explicit replay if possible."
+      },
+      {
+        "id": "V06",
+        "status": "confirmed",
+        "severity": "medium",
+        "claim": "Logs store minimal metadata (method, known path or 'unknown', actor id) and are staff-only; no credentials or request bodies are retained.",
+        "evidence": [
+          "lab/service.py:236-244,271-279",
+          "evidence/after/verified/judge-evidence.json: http-replay.records[id=V06 (200 as staff),V06-guest (401)]",
+          "evidence/after/verified/judge-evidence.json: security_tests.test_names includes test_logs_do_not_store_password_token_body_or_query"
+        ],
+        "next_check": "Include a replay showing that query parameters do not appear in logs; verify logs cap rollover by exceeding 1000 events in a controlled replay."
+      },
+      {
+        "id": "V07",
+        "status": "confirmed",
+        "severity": "medium",
+        "claim": "Stored review content is escaped on render and protected by strong CSP and nosniff headers; no executable HTML is delivered.",
+        "evidence": [
+          "lab/service.py:263-266,478-483",
+          "evidence/after/verified/judge-evidence.json: http-replay.records[id=V07-save,V07-view]"
+        ],
+        "next_check": "Attempt HTML attributes and CSS injection; ensure CSP blocks inline styles and images; verify Content-Type remains text/html with escaped content."
+      },
+      {
+        "id": "V08",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "Prompt injection in reviews did not escalate capabilities; model returned allowed read_file in both control and injection contexts; executor rechecked rights.",
+        "evidence": [
+          "lab/service.py:351-391,392-413",
+          "evidence/after/verified/judge-evidence.json: control.outcome=valid_json decision=read_file; injection.outcome=valid_json decision=read_file; execution responses 200 with own receipt"
+        ],
+        "next_check": "Run additional diverse prompt-injection attempts; ensure executor continues to reject any unexpected tools or arguments regardless of model output."
+      },
+      {
+        "id": "V09",
+        "status": "confirmed",
+        "severity": "high",
+        "claim": "Executor forbids export/delete and revalidates read_file path; dangerous manual decisions are blocked with 403.",
+        "evidence": [
+          "lab/service.py:400-413",
+          "evidence/after/verified/judge-evidence.json: http-replay.records[id=V09-export_profiles,V09-delete_tree,V09-read_file]; files_before/files_after unchanged"
+        ],
+        "next_check": "Try additional forbidden capabilities (unknown tool names, extra arguments) to confirm robust 400/403 responses."
+      },
+      {
+        "id": "V10",
+        "status": "confirmed",
+        "severity": "medium",
+        "claim": "Malformed JSON, ambiguous framing, wrong content type, and unexpected internal failures map to safe HTTP errors without leaking details.",
+        "evidence": [
+          "lab/service.py:426-466",
+          "evidence/after/verified/judge-evidence.json: http-replay.records[id=V10-json,V10-shape]",
+          "evidence/after/verified/judge-evidence.json: security_tests.test_names includes test_unexpected_internal_failure_does_not_expose_details"
+        ],
+        "next_check": "Add replay for ambiguous framing rejection and oversize body rejection to complement tests."
+      },
+      {
+        "id": "V11",
+        "status": "confirmed",
+        "severity": "medium",
+        "claim": "Collections and inputs are bounded: reviews (100), orders (1000), sessions (1000), logs (1000), review length (2000), query fields (10), body size (<= 65536).",
+        "evidence": [
+          "lab/service.py:255-262,243-244,338-341,308-311,127-131,203-208,439-441",
+          "evidence/after/verified/judge-evidence.json: http-replay.records[id=V11-review]",
+          "evidence/after/verified/judge-evidence.json: security_tests.test_names includes test_review_collection_has_a_limit, test_purchase_collection_has_a_limit_without_extra_insert, test_session_and_log_memory_are_bounded"
+        ],
+        "next_check": "Replay boundary overflows for sessions and logs to observe cap behavior; verify 429 on order/review limits with explicit HTTP captures."
+      }
+    ],
+    "missing_evidence": [
+      "Explicit HTTP replay of staff login followed by GET /admin/export with 200 and a sample of exported rows (masking if needed).",
+      "Explicit HTTP replay showing a successful own profile read (200) and own receipt read via /files.",
+      "Explicit HTTP replay for ambiguous body framing rejection and oversized body rejection (beyond test names).",
+      "Explicit HTTP replay demonstrating logs do not contain query strings or headers."
+    ],
+    "residual_risks": [
+      "Static teaching credentials without rotation; no TLS; in-memory sessions and SQLite for exercise only.",
+      "No session TTLs or durable audit trail; logs are ephemeral by design.",
+      "Global in-process limits (sessions/logs/orders/reviews) can be exhausted causing controlled 429/eviction but not protecting against distributed DoS.",
+      "Loopback-only server and short connection timeout reduce exposure but do not address local malicious users.",
+      "LLM prompt separation reduces confusion, but security relies on executor rechecks; prompt injection probability is not assessed from single runs."
+    ],
+    "rubric": [
+      {
+        "criterion": "Построена модель угроз в любом виде",
+        "status": "met",
+        "reason": "THREAT_MODEL.md present with clear boundaries, STRIDE mapping, and post-fix policy (lines 58-79, 80-97)."
+      },
+      {
+        "criterion": "Есть кастомный промпт под LLM-судью",
+        "status": "met",
+        "reason": "judge-system-prompt.md present with detailed instructions and required JSON schema."
+      },
+      {
+        "criterion": "REPORT_01: описание всех найденных проблем присутствует",
+        "status": "unverified",
+        "reason": "After-phase package does not include REPORT_01; only REPORT_02 is present."
+      },
+      {
+        "criterion": "Есть исправления в коде и сервис собирается и проходит тесты через make step6, make test",
+        "status": "met",
+        "reason": "lab/service.py shows fixes; evidence/security_tests summary indicates 51 tests OK and baseline OK."
+      },
+      {
+        "criterion": "REPORT_02: описание всех найденных проблем после фикса присутствует",
+        "status": "met",
+        "reason": "REPORT_02.md present with detailed replay IDs and analysis referencing verified evidence."
+      },
+      {
+        "criterion": "Студент открыл PR и предоставил свои выводы (1-2 абзаца)",
+        "status": "unverified",
+        "reason": "REPORT_02.md states PR not published due to local-only policy (AGENTS.md); draft exists locally, but no PR URL provided."
+      }
+    ]
+  },
+  "outcome": "valid_json"
+}

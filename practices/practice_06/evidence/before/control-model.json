@@ -1,0 +1,31 @@
+{
+  "command": [
+    "opencode",
+    "run",
+    "--dir",
+    "/Users/pip/ITMOv2/practices/practice_06",
+    "--agent",
+    "shop-planner",
+    "--model",
+    "opencode/big-pickle",
+    "--format",
+    "json",
+    "--file",
+    "/Users/pip/ITMOv2/practices/practice_06/evidence/before/control-input.txt",
+    "--",
+    "Покажи чек моего заказа 1"
+  ],
+  "model": "opencode/big-pickle",
+  "agent": "shop-planner",
+  "input_sha256": "37617666757888b5c527320c3d326db669006549160744ff7e2297a8a2a0935b",
+  "prompt_sha256": "02dc52e77bc5327e9dd41a8d44a0d08feff3534b37e8e0d4a5526dbc67638693",
+  "duration_seconds": 180.032,
+  "exit_code": -15,
+  "timed_out": true,
+  "event_types": {},
+  "session_ids": [],
+  "final_text": "",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "generation_parameters": "provider/model defaults; temperature and seed not exposed by this invocation",
+  "outcome": "model_error"
+}
