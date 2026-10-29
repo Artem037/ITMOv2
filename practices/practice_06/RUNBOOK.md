@@ -6,7 +6,6 @@
 ```sh
 make step6
 make test
-sh scripts/check.sh
 git diff --check
 python3 practices/practice_06/scripts/replay_attacks.py --phase after --output /tmp/mini-shop-after.json
 ```
@@ -15,9 +14,18 @@ Replay запускает собственный сервер на свобод�
 21 сценарий и останавливает только свой процесс. Не запускать старые команды
 на чужих сервисах и не заменять ограничение sandbox вызовом shell.
 
+## Чистая база PR и сохранённые эксперименты
+
+Ветка practice_06 подготовлена от origin/main (0c8a9c1), без локальных изменений
+ДЗ 3–4. Дерево Mini Shop в этой базе совпадает с исторической e2e3315;
+хеши исходников и сохранённые before/after evidence не переписывались.
+Команды выше работают в чистом клоне с Python стандартной библиотеки.
+Исторический runner scripts/check.sh относился к полному рабочему репозиторию
+с ДЗ 4; он не переносится в этот PR и не нужен для make step6 / make test.
+
 ## Повтор исходных атак без смены ветки
 
-Код исходного магазина берётся из базы `e2e3315`, а текущий replay копируется
+Код исходного магазина берётся из опубликованной базы `0c8a9c1567e334a00502a2d83bd3d9997b2b2687`, а текущий replay копируется
 в отдельный временный каталог. Текущий исправленный сервис не подменяется.
 
 ```sh
@@ -34,7 +42,7 @@ with TemporaryDirectory(prefix="practice06-original-source-") as directory:
     (root / "scripts").mkdir()
     for name in ["service.py", "sandbox.py"]:
         source = subprocess.check_output([
-            "git", "show", f"e2e3315:practices/practice_06/lab/{name}"
+            "git", "show", f"0c8a9c1567e334a00502a2d83bd3d9997b2b2687:practices/practice_06/lab/{name}"
         ])
         (root / "lab" / name).write_bytes(source)
     shutil.copyfile(
