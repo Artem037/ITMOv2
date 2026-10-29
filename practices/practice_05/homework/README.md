@@ -113,6 +113,7 @@ make. Приложение само по себе не требует Node/Playw
 
 ## Материалы сдачи
 
+- [Пошаговая инструкция для защиты](DEFENSE_GUIDE.md): что говорить, какие файлы открывать и что проверить в демо.
 - [BRIEF](BRIEF.md), [настройка Spec Kit](FRAMEWORK.md),
   [общая feature-spec и штатный plan/tasks](../../../specs/001-trip-planner-form/).
 - Две независимые [UI before](specs/ui.before.md)/[logic before](specs/logic.before.md),
