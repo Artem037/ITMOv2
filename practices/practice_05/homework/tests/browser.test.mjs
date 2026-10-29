@@ -15,27 +15,33 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE_PATH || (existsSync(b
 const chrome = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const executablePath = process.env.BROWSER_EXECUTABLE || (existsSync(chrome) ? chrome : undefined);
 const examples = JSON.parse(readFileSync(join(homework, 'evidence/contract-examples.json')));
-let browser, server, url;
+let browser, server, url, realServer, realUrl;
 
-before(async () => {
-  server = spawn('uv', ['run', '--project', 'practices/practice_04/homework', '--locked', '--offline', 'python', 'practices/practice_05/homework/web/server.py', '--port', '0'], { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] });
-  url = await new Promise((resolveUrl, reject) => {
+async function startServer(extraArgs = []) {
+  const process = spawn('uv', ['run', '--project', 'practices/practice_04/homework', '--locked', '--offline', 'python', 'practices/practice_05/homework/web/server.py', '--port', '0', ...extraArgs], { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] });
+  const address = await new Promise((resolveUrl, reject) => {
     let output = '';
     const timer = setTimeout(() => reject(new Error(`Server did not start: ${output}`)), 10000);
-    server.stdout.on('data', bytes => {
+    process.stdout.on('data', bytes => {
       output += bytes.toString();
       const match = output.match(/http:\/\/127\.0\.0\.1:\d+/);
       if (match) { clearTimeout(timer); resolveUrl(match[0]); }
     });
-    server.stderr.on('data', bytes => { output += bytes.toString(); });
-    server.on('exit', code => { clearTimeout(timer); reject(new Error(`Server exited ${code}: ${output}`)); });
+    process.stderr.on('data', bytes => { output += bytes.toString(); });
+    process.on('exit', code => { clearTimeout(timer); reject(new Error(`Server exited ${code}: ${output}`)); });
   });
+  return { process, address };
+}
+
+before(async () => {
+  const fixture = await startServer(['--fixture']); server = fixture.process; url = fixture.address;
+  const real = await startServer(); realServer = real.process; realUrl = real.address;
   browser = await chromium.launch({ headless: true, executablePath });
 });
 
 after(async () => {
   await browser?.close();
-  server?.kill('SIGTERM');
+  server?.kill('SIGTERM'); realServer?.kill('SIGTERM');
 });
 
 async function screen(t, options = {}) {
@@ -46,8 +52,8 @@ async function screen(t, options = {}) {
   return page;
 }
 
-async function open(page) {
-  await page.goto(url);
+async function open(page, address = url) {
+  await page.goto(address);
   assert.equal(await page.getByRole('button', { name: 'Рассчитать', exact: true }).count(), 1, 'Calculation screen is not implemented');
   await page.waitForFunction(() => !document.querySelector('#calculate').disabled);
 }
@@ -269,4 +275,56 @@ test('metadata failure offers reload and a narrow screen has no horizontal overf
   await calculate(page); await state(page, 'success');
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
   if (process.env.HW5_SCREENSHOTS_DIR) await page.screenshot({ path: join(process.env.HW5_SCREENSHOTS_DIR, 'demo-mobile.png'), fullPage: true });
+});
+
+test('default screen uses the real dated route and real calculation', async t => {
+  const page = await screen(t); await open(page, realUrl);
+  assert.equal(await page.locator('#origin').innerText(), 'Метро «Проспект Славы»');
+  assert.equal(await page.locator('#window-start').inputValue(), '30.10.2026 06:00');
+  assert.match(await page.locator('#snapshot-meta').innerText(), /30\.10\.2026/);
+  assert.doesNotMatch(await page.locator('#snapshot-meta').innerText(), /31\.10\.2026/);
+  assert.match(await page.locator('#route-description').innerText(), /9,2 км/);
+  assert.doesNotMatch(await page.locator('header').innerText(), /вымышленный пример/);
+  await calculate(page); await state(page, 'success');
+  const first = page.locator('.option').first();
+  assert.match(await first.innerText(), /07:42/);
+  assert.match(await first.innerText(), /11:55/);
+  assert.match(await first.innerText(), /253/);
+  assert.equal(await page.locator('.option').count(), 3);
+  assert.equal(await page.locator('#result a[href*="ppk-piter.ru/passenger/schedule/"]').count(), 1);
+  assert.match(await page.locator('#source-walking-map').innerText(), /Применимые даты/);
+  if (process.env.HW5_SCREENSHOTS_DIR) await page.screenshot({ path: join(process.env.HW5_SCREENSHOTS_DIR, 'demo-real-route.png'), fullPage: true });
+  await page.locator('#buffer').fill('20'); await calculate(page); await state(page, 'success');
+  assert.match(await first.innerText(), /07:32/);
+  assert.match(await first.innerText(), /263/);
+});
+
+test('real screen reports uncovered dates and recovers without moving trains', async t => {
+  const page = await screen(t, { viewport: { width: 390, height: 844 } }); await open(page, realUrl);
+  assert.equal(await page.locator('#window-start').inputValue(), '30.10.2026 06:00');
+  await page.locator('#window-start').fill('30.10.2026 08:00');
+  await page.locator('#window-end').fill('30.10.2026 08:10');
+  await calculate(page); await state(page, 'no_routes');
+  await page.locator('#window-start').fill('31.10.2026 06:00');
+  await page.locator('#window-end').fill('31.10.2026 10:00');
+  await calculate(page); await state(page, 'needs_data');
+  assert.match(await page.locator('#result').innerText(), /30\.10\.2026/);
+  await page.locator('#window-start').fill('30.10.2026 06:00');
+  await page.locator('#window-end').fill('30.10.2026 10:00');
+  await page.locator('#buffer').fill('1.5'); await calculate(page); await state(page, 'invalid');
+  await page.locator('#buffer').fill('10'); await calculate(page); await state(page, 'success');
+  assert.match(await page.locator('.option').first().innerText(), /07:42/);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
+  if (process.env.HW5_SCREENSHOTS_DIR) await page.screenshot({ path: join(process.env.HW5_SCREENSHOTS_DIR, 'demo-real-mobile.png'), fullPage: true });
+});
+
+test('overnight real train shows the next date at the end of its timeline event', async t => {
+  const page = await screen(t); await open(page, realUrl);
+  await page.locator('#window-start').fill('30.10.2026 22:40');
+  await page.locator('#window-end').fill('30.10.2026 23:00');
+  await calculate(page); await state(page, 'success');
+  const ride = page.locator('.timeline li').filter({ hasText: 'Электричка 6141' });
+  assert.match(await ride.locator('.event-time').innerText(), /30\.10\.2026, 23:45[\s\S]*31\.10\.2026, 01:48/);
+  assert.match(await page.locator('.option').first().innerText(), /03:43/);
+  if (process.env.HW5_SCREENSHOTS_DIR) await page.screenshot({ path: join(process.env.HW5_SCREENSHOTS_DIR, 'demo-real-night.png'), fullPage: true });
 });

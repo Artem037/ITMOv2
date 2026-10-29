@@ -46,8 +46,10 @@ T001 → T002 → T003 → T004 RED → T005 GREEN → T006 RED → T007 GREEN �
 ## Phase 5: Real dated demonstration — поручение29.10.2026
 
 - [x] T018 Проверить реальные датированные источники и нормализовать practices/practice_05/homework/data/tolmachevo-2026-10-30.json; CLI validate и настоящий MCP, evidence/real-route-mcp.json; обновить REAL_ROUTE_CHANGE/CONTRACT/after/constitution до кода.
-- [ ] T019 [US3] Добавить RED для реального default и фиксированного fixture-флага в tests/test_adapter.py, затем реализовать выбор при старте/metadata в web/server.py; HTTP snapshot/path запрещены.
-- [ ] T020 [US3] Добавить RED реального браузерного сценария в tests/browser.test.mjs; обновить web/index.html/app.js/style.css: реальные подписи/даты/описание оценок, сохранить fixture-регрессию.
-- [ ] T021 Добавить serve-fixture в homework/Makefile; тест нового data-пути hook RED→GREEN в tests/check-after-edit.test.mjs и .opencode/plugins/check-after-edit.js.
-- [ ] T022 Пройти шесть исходов реального сценария, регрессию sh scripts/check.sh/make test/diff и независимый review; сохранить evidence/real-route-checks.txt и реальные screenshots.
-- [ ] T023 Обновить homework/README.md, REPORT.md, evidence/demo.md, FRAMEWORK.md и общий план актуальными критериями/источниками и локальным коммитом без push.
+- [x] T019 [US3] Добавить RED для реального default и фиксированного fixture-флага в tests/test_adapter.py, затем реализовать выбор при старте/metadata в web/server.py; HTTP snapshot/path запрещены.
+- [x] T020 [US3] Добавить RED реального браузерного сценария в tests/browser.test.mjs; обновить web/index.html/app.js/style.css: реальные подписи/даты/описание оценок, сохранить fixture-регрессию.
+- [x] T021 Добавить serve-fixture в homework/Makefile; тест нового data-пути hook RED→GREEN в tests/check-after-edit.test.mjs и .opencode/plugins/check-after-edit.js.
+- [x] T022 Пройти шесть исходов реального сценария, регрессию sh scripts/check.sh/make test/diff и независимый review; сохранить evidence/real-route-checks.txt и реальные screenshots.
+- [x] T023 Обновить homework/README.md, REPORT.md, evidence/demo.md, FRAMEWORK.md и общий план актуальными критериями/источниками и локальным коммитом без push.
+
+Итог29 октября:21 HTTP+17 browser; все96 уникальных проектных тестов покрыты общей регрессией/runner. Существенных незакрытых замечаний нет. Доказательства: homework/evidence/real-route-checks.txt, real-route-review.md, real-route-invariants.json. Публикация не входит в T023.

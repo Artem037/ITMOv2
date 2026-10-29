@@ -1,0 +1,51 @@
+[
+  {
+    "tool": "fetch",
+    "transport": "configured local stdio MCP, official SDK client",
+    "arguments": {
+      "url": "https://docs.python.org/3/library/argparse.html",
+      "max_length": 90000,
+      "raw": false
+    },
+    "is_error": true,
+    "term_found": false,
+    "excerpt": "Failed to fetch robots.txt https://docs.python.org/robots.txt due to a connection issue"
+  },
+  {
+    "tool": "fetch",
+    "transport": "configured local stdio MCP, official SDK client",
+    "arguments": {
+      "url": "https://docs.python.org/3/library/copy.html",
+      "max_length": 9000,
+      "raw": false
+    },
+    "is_error": false,
+    "term_found": true,
+    "excerpt": "perations (explained below).\n\nInterface summary:\n\ncopy.copy(*obj*)[¶](#copy.copy \"Link to this definition\")\n:   Return a shallow copy of *obj*.\n\ncopy.deepcopy(*obj*[, *memo*])[¶](#copy.deepcopy \"Link to this definition\")\n:   Return a deep copy of *obj*.\n\ncopy.replace(*obj*, */*, *\\*\\*changes*)[¶](#copy.replace \"Link to this definition\")\n:   Creates a new object of the same type as *obj*, replacing fields with values\n    from *changes*.\n\n    Added in version 3.13.\n\n*exception* copy.Error[¶](#copy.Error \"Link to this definition\")\n:   Raised for module specific errors.\n\nThe difference between shallow and deep copying is only relevant for compound\nobjects (objects that contain other objects, like lists or class instances):\n\n* A *shallow copy* constructs a new compound object and then (to the e"
+  },
+  {
+    "tool": "fetch",
+    "transport": "configured local stdio MCP, official SDK client; retry after transient connection error",
+    "arguments": {
+      "url": "https://docs.python.org/3/library/argparse.html",
+      "max_length": 90000,
+      "raw": false
+    },
+    "is_error": true,
+    "term_found": false,
+    "excerpt": "Failed to fetch https://docs.python.org/3/library/argparse.html: ConnectTimeout('')"
+  },
+  {
+    "tool": "web.run",
+    "reason": "official-only fallback after two failed MCP fetch attempts for argparse",
+    "arguments": {
+      "open": [
+        {
+          "ref_id": "https://docs.python.org/3/library/argparse.html#action"
+        }
+      ],
+      "response_length": "short"
+    },
+    "fact": "argparse add_argument(action=store_true) defines an on/off flag; parse_args puts results in Namespace. Only this stable behavior is used by --fixture."
+  }
+]

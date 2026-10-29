@@ -1,4 +1,4 @@
-.PHONY: serve test python-test browser-test lint
+.PHONY: serve serve-fixture test python-test browser-test lint
 
 ROOT := $(abspath ../../..)
 CORE := $(ROOT)/practices/practice_04/homework
@@ -8,6 +8,9 @@ UV := uv run --project "$(CORE)" --locked --offline
 
 serve:
 	$(UV) python web/server.py --port $(PORT)
+
+serve-fixture:
+	$(UV) python web/server.py --fixture --port $(PORT)
 
 test: python-test browser-test
 

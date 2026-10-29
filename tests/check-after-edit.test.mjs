@@ -27,6 +27,7 @@ test('checks homework code, tests, dependencies, skill and environment configura
     'practices/practice_04/homework/uv.lock',
     'practices/practice_04/homework/Makefile',
     'practices/practice_05/homework/web/server.py',
+    'practices/practice_05/homework/data/tolmachevo-2026-10-30.json',
     'practices/practice_05/homework/web/app.js',
     'practices/practice_05/homework/web/style.css',
     'practices/practice_05/homework/web/index.html',

@@ -122,6 +122,7 @@ function validSource(source) {
 function validMetadata(data) {
   if (!record(data) || !record(data.route) ||
       !['id', 'origin', 'destination'].every(key => typeof data.route[key] === 'string' && data.route[key].length > 0) ||
+      (data.route.description !== undefined && typeof data.route.description !== 'string') ||
       data.timezone !== 'Europe/Moscow' || !['fixture', 'real', 'mixed'].includes(data.data_kind) ||
       !Array.isArray(data.schedule_dates) || !data.schedule_dates.every(validDate) ||
       !Array.isArray(data.sources) || !data.sources.every(validSource) ||
@@ -182,7 +183,8 @@ function renderOption(option, index) {
   const timeline = node('ol', undefined, 'timeline');
   for (const event of option.timeline) {
     const item = node('li');
-    item.append(node('div', `${moment(event.start)} – ${clock(event.end)} · ${minutes(event.minutes)}`, 'event-time'));
+    const end = dateText(event.start) === dateText(event.end) ? clock(event.end) : moment(event.end);
+    item.append(node('div', `${moment(event.start)} – ${end} · ${minutes(event.minutes)}`, 'event-time'));
     item.append(node('p', event.description));
     if (event.from_name && event.to_name) item.append(node('p', `${event.from_name} → ${event.to_name}`, 'hint'));
     if (event.estimated) item.append(node('p', `Оценка${event.basis ? `: ${event.basis}` : ''}`, 'hint'));
@@ -213,7 +215,7 @@ function renderResult(data, sent) {
     const item = node('li'); item.id = `source-${encodeURIComponent(source.id)}`;
     const link = node('a', `${source.mode === 'fixture' ? 'Учебный источник' : 'Источник'} ${source.id}`);
     link.href = source.url; link.target = '_blank'; link.rel = 'noopener noreferrer';
-    item.append(link, node('p', `Режим: ${source.mode}. Даты расписания: ${source.valid_dates.map(dateText).join(', ')}. Проверка: ${moment(source.checked_at)}.`));
+    item.append(link, node('p', `Режим: ${source.mode}. Применимые даты: ${source.valid_dates.map(dateText).join(', ')}. Проверка: ${moment(source.checked_at)}.`));
     item.append(node('p', `Подтверждён${source.mode === 'fixture' ? ' внутри учебного снимка' : ''}: ${source.verified ? 'да' : 'нет'}.`));
     sourceList.append(item);
   }
@@ -292,6 +294,12 @@ async function loadMetadata() {
     if (!response.ok || !validMetadata(data)) throw new Error('Unusable metadata');
     metadata = data;
     $('#origin').textContent = data.route.origin; $('#destination').textContent = data.route.destination;
+    $('#route-description').textContent = data.route.description || '';
+    $('#route-description').hidden = !data.route.description;
+    $('#data-note').textContent = data.data_kind === 'real' ?
+      'Реальный маршрут: сохранённые данные на указанную дату' : data.data_kind === 'fixture' ?
+        'Учебные данные: вымышленный пример, не реальное расписание' : 'Смешанные данные: присутствуют вымышленные сведения';
+    $('#data-note').classList.toggle('real-data', data.data_kind === 'real');
     $('#snapshot-meta').textContent = `Расписание на ${data.schedule_dates.map(dateText).join(', ')}. Проверка источников: ${data.sources.map(source => moment(source.checked_at)).join(', ')}.`;
     $('#window-start').value = `${dateText(data.defaults.departure_window.start)} ${clock(data.defaults.departure_window.start)}`;
     $('#window-end').value = `${dateText(data.defaults.departure_window.end)} ${clock(data.defaults.departure_window.end)}`;
@@ -301,7 +309,7 @@ async function loadMetadata() {
     setState('initial', 'Параметры загружены. Можно рассчитать поездку.');
   } catch {
     metadata = null; $('#reload').hidden = false;
-    setState('transport_error', 'Не удалось загрузить учебный маршрут. Повторите загрузку.');
+    setState('transport_error', 'Не удалось загрузить маршрут. Повторите загрузку.');
   } finally { clearTimeout(timer); }
 }
 

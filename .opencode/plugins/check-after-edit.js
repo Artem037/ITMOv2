@@ -24,6 +24,7 @@ export default async function CheckAfterEdit({ directory }, options = {}) {
         ['pyproject.toml', 'uv.lock', 'Makefile'].some(name => local === homework + name) ||
         local.startsWith(`${homework5}web/`) ||
         local.startsWith(`${homework5}tests/`) ||
+        local.startsWith(`${homework5}data/`) ||
         local === homework5 + 'Makefile' ||
         local.startsWith('.opencode/skills/transit-trip-planner/') ||
         local === '.opencode/plugins/check-after-edit.js' ||

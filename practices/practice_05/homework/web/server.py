@@ -1,4 +1,4 @@
-"""Serve the fixed training route on loopback; calculate with HW4 only."""
+"""Serve one fixed dated route on loopback; calculate with HW4 only."""
 
 import argparse
 import copy
@@ -12,6 +12,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[4]
 CORE = ROOT / "practices/practice_04/homework"
 FIXTURE = CORE / "tests/fixtures/rare_connections.json"
+DEFAULT_REQUEST = (
+    ROOT / "practices/practice_05/homework/data/tolmachevo-2026-10-30.json"
+)
 STATIC = {
     "/": ("index.html", "text/html; charset=utf-8"),
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
@@ -91,7 +94,7 @@ def validate_parameters(parameters):
 class PlannerApplication:
     def __init__(self, payload=None):
         request = (
-            load_request(FIXTURE)
+            load_request(DEFAULT_REQUEST)
             if payload is None
             else parse_request(copy.deepcopy(payload))
         )
@@ -100,11 +103,27 @@ class PlannerApplication:
     def metadata(self):
         snapshot = self._snapshot
         chain = snapshot["chains"][0]
+        schedule_refs = {
+            ref
+            for item in snapshot["chains"]
+            for stage in item["stages"]
+            for ref in (
+                stage["source_ids"]
+                + [trip["source_id"] for trip in stage["trips"]]
+            )
+        }
         modes = {source["mode"] == "fixture" for source in snapshot["sources"]}
         return copy.deepcopy(
             {
                 "route": {
-                    key: chain[key] for key in ("id", "origin", "destination")
+                    **{
+                        key: chain[key]
+                        for key in ("id", "origin", "destination")
+                    },
+                    "description": (
+                        f"{chain['access']['description']}. "
+                        f"{chain['egress']['description']}."
+                    ),
                 },
                 "timezone": snapshot["timezone"],
                 "data_kind": "mixed"
@@ -114,6 +133,7 @@ class PlannerApplication:
                     {
                         day
                         for source in snapshot["sources"]
+                        if source["id"] in schedule_refs
                         for day in source["valid_dates"]
                     }
                 ),
@@ -278,9 +298,19 @@ def create_server(port=0, application=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument(
+        "--fixture",
+        action="store_true",
+        help="Use the fixed synthetic route for regression demonstration",
+    )
     args = parser.parse_args()
     try:
-        server = create_server(args.port)
+        application = (
+            PlannerApplication(load_request(FIXTURE).model_dump(mode="json"))
+            if args.fixture
+            else None
+        )
+        server = create_server(args.port, application=application)
     except (InputError, OSError):
         print("Не удалось запустить локальную форму.", file=sys.stderr)
         return 2

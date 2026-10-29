@@ -1,21 +1,21 @@
 # Implementation Plan: форма повторного расчёта поездки
 
-**Branch**: `practice_05` | **Date**: 2026-10-27 | **Spec**: [spec.md](spec.md)
+**Branch**: `practice_05` | **Date**: 2026-10-29 (основа 27 октября) | **Spec**: [spec.md](spec.md)
 **Input**: общая US3 и принятые CONTRACT/UI after/logic after; приёмка [AGREEMENT](../../practices/practice_05/homework/AGREEMENT.md), checkpoint `91994f0` до кода.
 
 ## Summary
 
-Один экран и тонкий Python HTTP-адаптер вызывают существующие parse_request и plan_departures. HTML/CSS/JS не вычисляют маршрут. Исходный fixture неизменен, каждый вызов получает независимую копию. Реализация идёт в текущем чате; роли владения UI/logic определяют файлы, а не выдумывают второе обсуждение команд.
+Один экран и тонкий Python HTTP-адаптер вызывают существующие parse_request и plan_departures. HTML/CSS/JS не вычисляют маршрут. Исходный датированный снимок неизменен, каждый вызов получает независимую копию. Реализация идёт в текущем чате; роли владения UI/logic определяют файлы, а не выдумывают второе обсуждение команд.
 
 ## Technical Context
 
 **Language/Version**: Python 3.12+, browser ES modules, Node 24 для тестов.
 **Primary Dependencies**: только стандартная библиотека адаптера и существующие locked Pydantic/MCP ядра; Playwright 1.62.1 — внешний инструмент браузерных тестов, не runtime приложения.
-**Storage**: только чтение фиксированного fixture; нет записи состояния.
+**Storage**: только чтение фиксированного реального снимка по умолчанию; фиксированный fixture через флаг запуска; нет записи состояния.
 **Testing**: unittest + настоящий HTTP, Node node:test + Playwright + системный Chrome; Ruff из lock-файла ДЗ4.
 **Target Platform**: локальный браузер, Python, loopback 127.0.0.1.
 **Project Type**: один локальный экран и HTTP service.
-**Performance Goals**: при fixture ответ приходит до клиентского предела 10 секунд; перебор ограничен существующим ядром.
+**Performance Goals**: при подготовленном снимке ответ приходит до клиентского предела 10 секунд; перебор ограничен существующим ядром.
 **Constraints**: без UI-фреймворка, сети расписаний, shell из HTTP, произвольных путей, DB и изменения зависимостей ядра.
 **Scale/Scope**: один пользователь, один снимок, одна US3, 4 значения формы.
 
@@ -24,9 +24,9 @@
 | Принцип | До/после проектирования |
 | --- | --- |
 | I Одно ядро | PASS: импорт из ДЗ4; ни арифметика, ни схемы ядра не копируются |
-| II Честные данные/МСК | PASS: +03:00, fixture, полный PlanResult, deepcopy, no_routes/needs_data/partial различены |
-| III Приёмка до кода | PASS: точное принятие 27 октября записано и закоммичено 91994f0 |
-| IV Проверяемые изменения | PASS design: обязательные RED/GREEN, HTTP/браузер и регрессия в задачах; результаты ещё предстоят |
+| II Честные данные/МСК | PASS: +03:00, real/fixture различены, полный PlanResult, deepcopy, no_routes/needs_data/partial различены |
+| III Приёмка до кода | PASS: точное принятие 27 октября —91994f0; поручение расширения29 октября и спеки до кода —3692527 |
+| IV Проверяемые изменения | PASS: RED/GREEN, HTTP/браузер и регрессия подтверждены evidence; исходная версия17+14, расширенная21+17 |
 | V Локальная история | PASS: loopback, фиксированная таблица ресурсов, нет shell/сети/записи |
 
 Нет оправдываемых нарушений; повторная проверка после дизайна дала тот же результат.
@@ -43,10 +43,11 @@ practices/practice_05/homework/
   web/__init__.py server.py index.html style.css app.js
   tests/test_adapter.py browser.test.mjs
   Makefile
+  data/tolmachevo-2026-10-30.json
   evidence/
 ```
 
-**Structure Decision**: серверный модуль и статические файлы вместе в web, изолированные тесты в tests. Единственное ядро остаётся practices/practice_04/homework/trip_planner. Путь импорта вычисляется из __file__, не случайного cwd. Сервер имеет PlannerApplication(payload), metadata(), plan(parameters) и create_server(port=0, application=None); main читает --port, всегда bind 127.0.0.1. Внешний ввод никогда не выбирает payload.
+**Structure Decision**: серверный модуль и статические файлы вместе в web, изолированные тесты в tests. Единственное ядро остаётся practices/practice_04/homework/trip_planner. Путь импорта вычисляется из __file__, не случайного cwd. Сервер имеет PlannerApplication(payload), metadata(), plan(parameters) и create_server(port=0, application=None); main читает --port и фиксированный --fixture, всегда bind 127.0.0.1. Внешний ввод никогда не выбирает payload.
 
 ## Phase 0: Research
 
@@ -72,3 +73,7 @@ practices/practice_05/homework/
 ## Complexity Tracking
 
 Нарушений constitution нет; DB/framework/дублирование ядра отклонены как лишняя сложность.
+
+## Расширение 29 октября
+
+Обычный старт читает data/tolmachevo-2026-10-30.json, --fixture — прежний rare_connections.json ДЗ4. Не добавляются произвольные пути/переключатель HTTP. route.description содержит оценки и прогулку9,2км; data_kind управляет пометкой. schedule_dates собирается только по source refs расписанных этапов, карта не расширяет дату электричек. В timeline при смене даты конец события показывается с датой. Схема PlanRequest/PlanResult и ядро неизменны; T018–T023 добавлены к той же US3. Макет выше — исходный fixture; размещение полей сохраняется, реальные подписи/зелёная пометка проверены новыми screenshots.

@@ -18,3 +18,22 @@
 Фактическая проверка окружения: Node v24.19.0; playwright 1.62.1 в bundled node_modules. Первая попытка launch bundled Chromium завершилась missing executable; запуск системного Chrome /Applications/Google Chrome.app/Contents/MacOS/Google Chrome дал exit 0, версию 156.0.8078.48 и timezone America/New_York. Зависимости не скачивались. Для переносимости тест принимает PLAYWRIGHT_MODULE_PATH и BROWSER_EXECUTABLE, затем ищет локальный playwright/bundled runtime и Chrome.
 
 В исследовании выбраны только технические способы принятых требований. Неразрешённых вопросов нет; новые ошибки/коды или поведение контракта не вводятся.
+
+
+## Дополнение 29.10.2026: реальные данные и флаг запуска
+
+Источник и нормализация реального маршрута —
+[REAL_ROUTE_SOURCES](../../practices/practice_05/homework/REAL_ROUTE_SOURCES.md).
+Один fixed snapshot на процесс сохранён; основной real, --fixture выбирает
+только старый фиксированный файл, HTTP выбора не предоставляет.
+
+Официальная документация Python [copy](https://docs.python.org/3/library/copy.html)
+получена настоящим настроенным stdio MCP fetch через locked SDK:
+`call_tool("fetch", {"url":"https://docs.python.org/3/library/copy.html","max_length":9000,"raw":false})`,
+is_error=false. deepcopy создаёт рекурсивную копию вложенных объектов;
+это сохраняет изоляцию запросов. Для [argparse](https://docs.python.org/3/library/argparse.html#action)
+MCP fetch с max_length90000/raw=false дважды завершился ошибкой соединения,
+после чего официальный web fallback подтвердил on/off-флаг action=store_true.
+Успех --fixture отдельно проверен настоящим subprocess/HTTP.
+Точные arguments, результаты и fallback — evidence/real-route-python-docs.json
+в homework. Исторический раздел27 октября выше не переписывает эти новые вызовы.

@@ -3,6 +3,8 @@
 import copy
 import http.client
 import json
+import re
+import subprocess
 import sys
 import threading
 import unittest
@@ -10,6 +12,7 @@ from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from pathlib import Path
 from unittest.mock import patch
+from urllib.request import urlopen
 
 HOMEWORK = Path(__file__).resolve().parents[1]
 ROOT = HOMEWORK.parents[2]
@@ -291,6 +294,121 @@ class AdapterTests(unittest.TestCase):
         self.assertEqual(self.payload, self.saved)
         self.assertEqual(FIXTURE.read_bytes(), self.original_bytes)
         self.assertEqual(self.plan()[2]["options"][0]["total_minutes"], 135)
+
+    def test_default_route_is_real_and_schedule_date_excludes_map_only_date(
+        self,
+    ):
+        with running(None) as server:
+            status, _, metadata = self.request(
+                "GET", "/api/trip", server=server
+            )
+            self.assertEqual(status, 200)
+            self.assertEqual(metadata["data_kind"], "real")
+            self.assertEqual(metadata["schedule_dates"], ["2026-10-30"])
+            self.assertEqual(
+                metadata["route"]["origin"], "Метро «Проспект Славы»"
+            )
+            self.assertIn("9,2 км", metadata["route"]["description"])
+            status, _, result = self.plan(metadata["defaults"], server=server)
+        observed = json.loads(
+            (HOMEWORK / "evidence/real-route-mcp.json").read_text()
+        )["cases"][0]["result"]
+        self.assertEqual(status, 200)
+        self.assertEqual(result, observed)
+        self.assertEqual(len(result["options"]), 3)
+        self.assertEqual(result["options"][0]["total_minutes"], 253)
+
+    def test_real_route_recalculation_negative_date_and_recovery(self):
+        with running(None) as server:
+            metadata = self.request("GET", "/api/trip", server=server)[2]
+            self.assertEqual(metadata["data_kind"], "real")
+            parameters = metadata["defaults"]
+            before = copy.deepcopy(metadata)
+            original = self.plan(parameters, server=server)[2]
+            parameters["boarding_buffer_minutes"] = 20
+            result = self.plan(parameters, server=server)[2]
+            self.assertEqual(
+                result["options"][0]["leave_at"], "2026-10-30T07:32:00+03:00"
+            )
+            self.assertEqual(result["options"][0]["total_minutes"], 263)
+            parameters["boarding_buffer_minutes"] = 10
+            for window, expected in [
+                (
+                    {
+                        "start": "2026-10-30T08:00:00+03:00",
+                        "end": "2026-10-30T08:10:00+03:00",
+                    },
+                    "no_routes",
+                ),
+                (
+                    {
+                        "start": "2026-10-31T06:00:00+03:00",
+                        "end": "2026-10-31T10:00:00+03:00",
+                    },
+                    "needs_data",
+                ),
+            ]:
+                parameters["departure_window"] = window
+                result = self.plan(parameters, server=server)[2]
+                self.assertEqual(result["status"], expected)
+                self.assertEqual(
+                    result["sources"][0]["valid_dates"], ["2026-10-30"]
+                )
+            after = self.request("GET", "/api/trip", server=server)[2]
+            self.assertEqual(before, after)
+            self.assertEqual(
+                self.plan(after["defaults"], server=server)[2], original
+            )
+
+    def test_real_route_retains_late_trains_and_midnight_arrival(self):
+        with running(None) as server:
+            parameters = self.request("GET", "/api/trip", server=server)[2][
+                "defaults"
+            ]
+            parameters["departure_window"] = {
+                "start": "2026-10-30T22:40:00+03:00",
+                "end": "2026-10-30T23:00:00+03:00",
+            }
+            result = self.plan(parameters, server=server)[2]
+        self.assertEqual(result["status"], "ok")
+        self.assertEqual(
+            result["options"][0]["arrive_at"], "2026-10-31T03:43:00+03:00"
+        )
+        rides = [
+            event
+            for event in result["options"][0]["timeline"]
+            if event["kind"] == "ride"
+        ]
+        self.assertEqual(rides[0]["trip_id"], "6141")
+
+    def test_fixed_fixture_launch_still_produces_control_metadata(self):
+        process = subprocess.Popen(
+            [
+                sys.executable,
+                str(HOMEWORK / "web/server.py"),
+                "--fixture",
+                "--port",
+                "0",
+            ],
+            cwd=ROOT,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        try:
+            match = re.search(
+                r"http://127\.0\.0\.1:[0-9]+", process.stdout.readline()
+            )
+            self.assertIsNotNone(
+                match, "Fixed --fixture launch is unavailable"
+            )
+            with urlopen(match.group() + "/api/trip", timeout=3) as response:
+                metadata = json.load(response)
+            self.assertEqual(metadata["data_kind"], "fixture")
+            self.assertEqual(metadata["schedule_dates"], ["2026-10-14"])
+        finally:
+            process.terminate()
+            process.communicate(timeout=3)
 
 
 if __name__ == "__main__":

@@ -12,13 +12,14 @@
 <body data-state="loading">
   <main class="page">
     <header class="page-header">
-      <p class="training">Учебные данные: вымышленный пример, не реальное расписание</p>
+      <p id="data-note" class="training">Загружаем сведения о данных…</p>
       <h1>Расчёт времени выхода</h1>
       <div class="route" aria-label="Подготовленный маршрут">
         <span id="origin">Загружаем маршрут…</span>
         <span class="route-line" aria-hidden="true"></span>
         <span id="destination"></span>
       </div>
+      <p id="route-description" class="route-description" hidden></p>
       <p id="snapshot-meta" class="muted">Загружаем сведения о снимке.</p>
     </header>
 
@@ -66,12 +67,12 @@
           <span class="departure-mark" aria-hidden="true">↗</span>
           <h2>Когда выходить?</h2>
           <p>Измените параметры и нажмите «Рассчитать». Здесь появятся подходящие времена выхода и участки пути.</p>
-          <p class="hint">Расчёт использует только подготовленный учебный снимок.</p>
+          <p class="hint">Расчёт использует сохранённые данные на указанную дату.</p>
         </div>
         <div id="result"></div>
       </section>
     </div>
-    <footer>Учебный маршрут. Для реальной поездки нужны заново проверенные расписания и оценки пути.</footer>
+    <footer>Расчёт по датированному снимку. Перед поездкой проверьте изменения расписаний и условия пешего пути.</footer>
   </main>
 </body>
 </html>

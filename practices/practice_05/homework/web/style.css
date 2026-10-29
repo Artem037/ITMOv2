@@ -17,6 +17,8 @@
 body { margin: 0; }
 .page { max-width: 1200px; margin: auto; padding: 40px 40px 24px; }
 .training { display: inline-block; margin: 0 0 18px; padding: 7px 13px; border-radius: 5px; background: var(--amber); color: #433005; font-size: 13px; }
+.training.real-data { background: #d8ece5; color: #184b38; }
+.route-description { font-size: 14px; color: var(--muted); margin: 14px 0 0; }
 h1 { margin: 0 0 24px; font-size: clamp(28px, 4vw, 42px); line-height: 1.15; letter-spacing: -1.3px; font-weight: 650; }
 h2 { margin: 0 0 12px; font-size: 21px; line-height: 1.3; }
 h3 { margin: 24px 0 10px; font-size: 17px; }
