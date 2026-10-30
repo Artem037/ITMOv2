@@ -1,0 +1,19 @@
+minimum_pre_commit_version: "4.4.0"
+files: ^practices/practice_03/lab/demo/.*\.py$
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.10
+    hooks:
+      - id: ruff-check
+        args: ["--extend-select=E501,I", --line-length=79]
+      - id: ruff-format
+        args: [--check, --line-length=79]
+
+  - repo: local
+    hooks:
+      - id: demo-tests
+        name: Notify Mini tests
+        entry: make -C practices/practice_03/lab/demo test
+        language: unsupported
+        pass_filenames: false
