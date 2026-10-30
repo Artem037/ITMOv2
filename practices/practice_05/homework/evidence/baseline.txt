@@ -1,0 +1,770 @@
+Homework 5 / stage 1 / fresh baseline
+UTC: 2026-10-22T08:04:14.860211+00:00
+Root: /Users/pip/ITMOv2
+Branch: practice_05
+HEAD: e828f5b1918cc7bb615ef1a85e769b5ec97f8466
+Feature UI/adapter not implemented. Existing HW4 engine only.
+
+$ sh scripts/check.sh
+All checks passed!
+19 files already formatted
+python3 -m unittest -v
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+uv run --locked --offline python -m unittest discover -s tests -v
+test_real_protocol_success_error_and_next_success (test_mcp.MCPTests.test_real_protocol_success_error_and_next_success) ... ok
+test_combination_budget_counts_all_chains_and_empty_tail (test_planner.PlannerTests.test_combination_budget_counts_all_chains_and_empty_tail) ... ok
+test_coverage_uses_boarding_date_and_every_day_of_window (test_planner.PlannerTests.test_coverage_uses_boarding_date_and_every_day_of_window) ... ok
+test_deduplicates_full_paths_without_padding (test_planner.PlannerTests.test_deduplicates_full_paths_without_padding) ... ok
+test_departure_is_0935 (test_planner.PlannerTests.test_departure_is_0935) ... ok
+test_departure_window_includes_boundaries (test_planner.PlannerTests.test_departure_window_includes_boundaries) ... ok
+test_empty_stage_needs_verified_dated_evidence (test_planner.PlannerTests.test_empty_stage_needs_verified_dated_evidence) ... ok
+test_large_combination_input_is_rejected_before_calculation (test_planner.PlannerTests.test_large_combination_input_is_rejected_before_calculation) ... ok
+test_missed_transfer_by_one_minute (test_planner.PlannerTests.test_missed_transfer_by_one_minute) ... ok
+test_no_routes_is_not_missing_data (test_planner.PlannerTests.test_no_routes_is_not_missing_data) ... ok
+test_old_snapshot_cannot_rule_out_routes_on_another_date (test_planner.PlannerTests.test_old_snapshot_cannot_rule_out_routes_on_another_date) ... ok
+test_overnight_is_30_minutes (test_planner.PlannerTests.test_overnight_is_30_minutes) ... ok
+test_partial_coverage_warns_even_if_option_exists (test_planner.PlannerTests.test_partial_coverage_warns_even_if_option_exists) ... ok
+test_rejects_invalid_requests (test_planner.PlannerTests.test_rejects_invalid_requests) ... ok
+test_same_departure_keeps_only_the_best_route (test_planner.PlannerTests.test_same_departure_keeps_only_the_best_route) ... ok
+test_sources_are_exposed_with_search_scope (test_planner.PlannerTests.test_sources_are_exposed_with_search_scope) ... ok
+test_transfer_at_buffer_boundary (test_planner.PlannerTests.test_transfer_at_buffer_boundary) ... ok
+test_transfer_must_connect_exact_stop_ids (test_planner.PlannerTests.test_transfer_must_connect_exact_stop_ids) ... ok
+test_unknown_access_is_missing_data_not_zero_minutes (test_planner.PlannerTests.test_unknown_access_is_missing_data_not_zero_minutes) ... ok
+test_unverified_access_source_cannot_confirm_a_whole_trip (test_planner.PlannerTests.test_unverified_access_source_cannot_confirm_a_whole_trip) ... ok
+test_unverified_and_wrong_date_are_not_confirmed (test_planner.PlannerTests.test_unverified_and_wrong_date_are_not_confirmed) ... ok
+test_cli_missing_file_is_actionable_without_traceback (test_sources.SourceTests.test_cli_missing_file_is_actionable_without_traceback) ... ok
+test_duplicate_json_keys_are_not_silently_overwritten (test_sources.SourceTests.test_duplicate_json_keys_are_not_silently_overwritten) ... ok
+test_import_never_marks_unverified_source_verified (test_sources.SourceTests.test_import_never_marks_unverified_source_verified) ... ok
+test_import_preserves_provenance_and_fixture_label (test_sources.SourceTests.test_import_preserves_provenance_and_fixture_label) ... ok
+test_missing_and_broken_input_report_input_error (test_sources.SourceTests.test_missing_and_broken_input_report_input_error) ... ok
+test_plan_cli_uses_calculator_and_labels_fixture (test_sources.SourceTests.test_plan_cli_uses_calculator_and_labels_fixture) ... ok
+test_validate_cli_writes_normalized_request (test_sources.SourceTests.test_validate_cli_writes_normalized_request) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 0.795s
+
+OK
+✔ checks homework code, tests, dependencies, skill and environment configuration (47.56425ms)
+✔ ignores homework evidence, reports, environments and files outside project (1.363417ms)
+✔ returns a real failing runner result to the agent without losing edit output (4.297875ms)
+✔ checks apply_patch changes from an absolute project path and reports PASS (4.461042ms)
+✔ ignores evidence edits and reads, so logging cannot recursively run the check (0.828666ms)
+✔ reports a timeout as FAIL and stops a stuck runner (104.027333ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 223.278958
+
+Exit code: 0
+
+$ make test
+Practice 1 artifacts: OK
+Practice 2 artifacts: OK
+Standard library only: ready
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+All checks passed!
+15 files already formatted
+test_real_protocol_success_error_and_next_success (test_mcp.MCPTests.test_real_protocol_success_error_and_next_success) ... ok
+test_combination_budget_counts_all_chains_and_empty_tail (test_planner.PlannerTests.test_combination_budget_counts_all_chains_and_empty_tail) ... ok
+test_coverage_uses_boarding_date_and_every_day_of_window (test_planner.PlannerTests.test_coverage_uses_boarding_date_and_every_day_of_window) ... ok
+test_deduplicates_full_paths_without_padding (test_planner.PlannerTests.test_deduplicates_full_paths_without_padding) ... ok
+test_departure_is_0935 (test_planner.PlannerTests.test_departure_is_0935) ... ok
+test_departure_window_includes_boundaries (test_planner.PlannerTests.test_departure_window_includes_boundaries) ... ok
+test_empty_stage_needs_verified_dated_evidence (test_planner.PlannerTests.test_empty_stage_needs_verified_dated_evidence) ... ok
+test_large_combination_input_is_rejected_before_calculation (test_planner.PlannerTests.test_large_combination_input_is_rejected_before_calculation) ... ok
+test_missed_transfer_by_one_minute (test_planner.PlannerTests.test_missed_transfer_by_one_minute) ... ok
+test_no_routes_is_not_missing_data (test_planner.PlannerTests.test_no_routes_is_not_missing_data) ... ok
+test_old_snapshot_cannot_rule_out_routes_on_another_date (test_planner.PlannerTests.test_old_snapshot_cannot_rule_out_routes_on_another_date) ... ok
+test_overnight_is_30_minutes (test_planner.PlannerTests.test_overnight_is_30_minutes) ... ok
+test_partial_coverage_warns_even_if_option_exists (test_planner.PlannerTests.test_partial_coverage_warns_even_if_option_exists) ... ok
+test_rejects_invalid_requests (test_planner.PlannerTests.test_rejects_invalid_requests) ... ok
+test_same_departure_keeps_only_the_best_route (test_planner.PlannerTests.test_same_departure_keeps_only_the_best_route) ... ok
+test_sources_are_exposed_with_search_scope (test_planner.PlannerTests.test_sources_are_exposed_with_search_scope) ... ok
+test_transfer_at_buffer_boundary (test_planner.PlannerTests.test_transfer_at_buffer_boundary) ... ok
+test_transfer_must_connect_exact_stop_ids (test_planner.PlannerTests.test_transfer_must_connect_exact_stop_ids) ... ok
+test_unknown_access_is_missing_data_not_zero_minutes (test_planner.PlannerTests.test_unknown_access_is_missing_data_not_zero_minutes) ... ok
+test_unverified_access_source_cannot_confirm_a_whole_trip (test_planner.PlannerTests.test_unverified_access_source_cannot_confirm_a_whole_trip) ... ok
+test_unverified_and_wrong_date_are_not_confirmed (test_planner.PlannerTests.test_unverified_and_wrong_date_are_not_confirmed) ... ok
+test_cli_missing_file_is_actionable_without_traceback (test_sources.SourceTests.test_cli_missing_file_is_actionable_without_traceback) ... ok
+test_duplicate_json_keys_are_not_silently_overwritten (test_sources.SourceTests.test_duplicate_json_keys_are_not_silently_overwritten) ... ok
+test_import_never_marks_unverified_source_verified (test_sources.SourceTests.test_import_never_marks_unverified_source_verified) ... ok
+test_import_preserves_provenance_and_fixture_label (test_sources.SourceTests.test_import_preserves_provenance_and_fixture_label) ... ok
+test_missing_and_broken_input_report_input_error (test_sources.SourceTests.test_missing_and_broken_input_report_input_error) ... ok
+test_plan_cli_uses_calculator_and_labels_fixture (test_sources.SourceTests.test_plan_cli_uses_calculator_and_labels_fixture) ... ok
+test_validate_cli_writes_normalized_request (test_sources.SourceTests.test_validate_cli_writes_normalized_request) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 0.582s
+
+OK
+Standard library only: ready
+test_health_and_not_found (test_http.HttpTest.test_health_and_not_found) ... ok
+test_login_and_purchase_over_http (test_http.HttpTest.test_login_and_purchase_over_http) ... ok
+test_transport_only_binds_loopback (test_http.HttpTest.test_transport_only_binds_loopback) ... ok
+test_delete_of_fixture_root_stays_inside_exercise (test_service.SandboxTest.test_delete_of_fixture_root_stays_inside_exercise) ... ok
+test_external_directory_cannot_be_deleted (test_service.SandboxTest.test_external_directory_cannot_be_deleted) ... ok
+test_parent_paths_cannot_escape_exercise (test_service.SandboxTest.test_parent_paths_cannot_escape_exercise) ... ok
+test_symlink_cannot_escape_exercise (test_service.SandboxTest.test_symlink_cannot_escape_exercise) ... ok
+test_assistant_can_return_own_receipt (test_service.ShopTest.test_assistant_can_return_own_receipt) ... ok
+test_customer_can_buy_at_catalog_price (test_service.ShopTest.test_customer_can_buy_at_catalog_price) ... ok
+test_health_and_catalog (test_service.ShopTest.test_health_and_catalog) ... ok
+test_own_profile_and_receipt (test_service.ShopTest.test_own_profile_and_receipt) ... ok
+test_review_can_be_submitted_and_viewed (test_service.ShopTest.test_review_can_be_submitted_and_viewed) ... ok
+test_staff_can_export_with_staff_session (test_service.ShopTest.test_staff_can_export_with_staff_session) ... ok
+test_tokens_identify_distinct_users (test_service.ShopTest.test_tokens_identify_distinct_users) ... ok
+test_unknown_product_rejected (test_service.ShopTest.test_unknown_product_rejected) ... ok
+test_wrong_password_rejected (test_service.ShopTest.test_wrong_password_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.551s
+
+OK
+
+Exit code: 0
+
+$ git diff --check
+
+Exit code: 0
+
+$ uv run --directory practices/practice_04/homework --locked --offline python - <<'PY'
+import copy
+import json
+from pathlib import Path
+from trip_planner.models import InputError, parse_request
+from trip_planner.planner import plan_departures
+
+fixture = Path('tests/fixtures/rare_connections.json')
+original_bytes = fixture.read_bytes()
+base = json.loads(original_bytes)
+results = []
+
+def probe(name, changes, expected):
+    payload = copy.deepcopy(base)
+    for key, value in changes.items():
+        if key == 'coverage':
+            payload['chains'][0]['coverage'] = value
+        else:
+            payload[key] = value
+    before = copy.deepcopy(payload)
+    try:
+        result = plan_departures(parse_request(payload))
+        observed = {
+            'status': result['status'],
+            'data_kind': result['data_kind'],
+            'complete': result['search_scope']['complete'],
+            'options_count': len(result['options']),
+            'options': result['options'],
+            'warnings': result['warnings'],
+        }
+        for key, value in expected.items():
+            if key == 'first_option':
+                assert result['options'], name
+                for field, wanted in value.items():
+                    assert result['options'][0][field] == wanted, (name, field, result['options'][0][field])
+            else:
+                assert observed[key] == value, (name, key, observed[key])
+        assert result['sources'] == parse_request(payload).model_dump(mode='json')['sources']
+    except InputError as error:
+        assert expected.get('error') == 'InputError', (name, str(error))
+        observed = {'error': type(error).__name__, 'message': str(error)}
+        assert expected['field'] in str(error), (name, str(error))
+    assert payload == before, name
+    assert fixture.read_bytes() == original_bytes, name
+    results.append({'case': name, 'changes': changes, 'expected': expected, 'observed': observed, 'input_unchanged': True})
+
+probe('normal', {}, {'status': 'ok', 'data_kind': 'fixture', 'complete': True, 'options_count': 1, 'first_option': {'leave_at': '2026-10-14T09:35:00+03:00', 'arrive_at': '2026-10-14T11:50:00+03:00', 'total_minutes': 135}})
+probe('recalculate_buffer', {'boarding_buffer_minutes': 20}, {'status': 'ok', 'first_option': {'leave_at': '2026-10-14T09:25:00+03:00', 'total_minutes': 145}})
+probe('no_routes', {'departure_window': {'start': '2026-10-14T09:36:00+03:00', 'end': '2026-10-14T10:00:00+03:00'}}, {'status': 'no_routes', 'complete': True, 'options_count': 0})
+probe('unsupported_date', {'departure_window': {'start': '2026-10-15T06:00:00+03:00', 'end': '2026-10-15T12:00:00+03:00'}}, {'status': 'needs_data', 'complete': False, 'options_count': 0})
+probe('inclusive_boundary', {'departure_window': {'start': '2026-10-14T09:35:00+03:00', 'end': '2026-10-14T09:35:00+03:00'}}, {'status': 'ok', 'options_count': 1})
+probe('invalid_window', {'departure_window': {'start': '2026-10-14T10:00:00+03:00', 'end': '2026-10-14T09:00:00+03:00'}}, {'error': 'InputError', 'field': 'departure_window'})
+probe('invalid_max_options', {'max_options': 6}, {'error': 'InputError', 'field': 'max_options'})
+probe('partial_coverage_with_result', {'coverage': 'partial'}, {'status': 'ok', 'complete': False, 'options_count': 1})
+print(json.dumps({'fixture': str(fixture), 'scope': 'existing HW4 engine; not UI/API/Spec Kit', 'cases': results}, ensure_ascii=False, indent=2))
+
+PY
+{
+  "fixture": "tests/fixtures/rare_connections.json",
+  "scope": "existing HW4 engine; not UI/API/Spec Kit",
+  "cases": [
+    {
+      "case": "normal",
+      "changes": {},
+      "expected": {
+        "status": "ok",
+        "data_kind": "fixture",
+        "complete": true,
+        "options_count": 1,
+        "first_option": {
+          "leave_at": "2026-10-14T09:35:00+03:00",
+          "arrive_at": "2026-10-14T11:50:00+03:00",
+          "total_minutes": 135
+        }
+      },
+      "observed": {
+        "status": "ok",
+        "data_kind": "fixture",
+        "complete": true,
+        "options_count": 1,
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:35:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 135.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:35:00+03:00",
+                "end": "2026-10-14T10:30:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:30:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ]
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "recalculate_buffer",
+      "changes": {
+        "boarding_buffer_minutes": 20
+      },
+      "expected": {
+        "status": "ok",
+        "first_option": {
+          "leave_at": "2026-10-14T09:25:00+03:00",
+          "total_minutes": 145
+        }
+      },
+      "observed": {
+        "status": "ok",
+        "data_kind": "fixture",
+        "complete": true,
+        "options_count": 1,
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:25:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 145.0,
+            "waiting_minutes": 20,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:25:00+03:00",
+                "end": "2026-10-14T10:20:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:20:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 20.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ]
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "no_routes",
+      "changes": {
+        "departure_window": {
+          "start": "2026-10-14T09:36:00+03:00",
+          "end": "2026-10-14T10:00:00+03:00"
+        }
+      },
+      "expected": {
+        "status": "no_routes",
+        "complete": true,
+        "options_count": 0
+      },
+      "observed": {
+        "status": "no_routes",
+        "data_kind": "fixture",
+        "complete": true,
+        "options_count": 0,
+        "options": [],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ]
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "unsupported_date",
+      "changes": {
+        "departure_window": {
+          "start": "2026-10-15T06:00:00+03:00",
+          "end": "2026-10-15T12:00:00+03:00"
+        }
+      },
+      "expected": {
+        "status": "needs_data",
+        "complete": false,
+        "options_count": 0
+      },
+      "observed": {
+        "status": "needs_data",
+        "data_kind": "fixture",
+        "complete": false,
+        "options_count": 0,
+        "options": [],
+        "warnings": [
+          "training-route/этап 1: нет подтверждённого покрытия дат 2026-10-15–2026-10-15; нужно расписание на запрошенное окно",
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ]
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "inclusive_boundary",
+      "changes": {
+        "departure_window": {
+          "start": "2026-10-14T09:35:00+03:00",
+          "end": "2026-10-14T09:35:00+03:00"
+        }
+      },
+      "expected": {
+        "status": "ok",
+        "options_count": 1
+      },
+      "observed": {
+        "status": "ok",
+        "data_kind": "fixture",
+        "complete": true,
+        "options_count": 1,
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:35:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 135.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:35:00+03:00",
+                "end": "2026-10-14T10:30:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:30:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ]
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "invalid_window",
+      "changes": {
+        "departure_window": {
+          "start": "2026-10-14T10:00:00+03:00",
+          "end": "2026-10-14T09:00:00+03:00"
+        }
+      },
+      "expected": {
+        "error": "InputError",
+        "field": "departure_window"
+      },
+      "observed": {
+        "error": "InputError",
+        "message": "departure_window: Value error, end должен быть не раньше start"
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "invalid_max_options",
+      "changes": {
+        "max_options": 6
+      },
+      "expected": {
+        "error": "InputError",
+        "field": "max_options"
+      },
+      "observed": {
+        "error": "InputError",
+        "message": "max_options: Input should be less than or equal to 5"
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "partial_coverage_with_result",
+      "changes": {
+        "coverage": "partial"
+      },
+      "expected": {
+        "status": "ok",
+        "complete": false,
+        "options_count": 1
+      },
+      "observed": {
+        "status": "ok",
+        "data_kind": "fixture",
+        "complete": false,
+        "options_count": 1,
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:35:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 135.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:35:00+03:00",
+                "end": "2026-10-14T10:30:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:30:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "training-route: покрытие partial",
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ]
+      },
+      "input_unchanged": true
+    }
+  ]
+}
+
+Exit code: 0
+
+$ uv run --directory practices/practice_04/homework --locked --offline python -m trip_planner.cli validate --input tests/fixtures/rare_connections.json
+{
+  "departure_window": {
+    "start": "2026-10-14T06:00:00+03:00",
+    "end": "2026-10-14T12:00:00+03:00"
+  },
+  "timezone": "Europe/Moscow",
+  "max_options": 5,
+  "boarding_buffer_minutes": 10,
+  "sources": [
+    {
+      "id": "synthetic",
+      "url": "https://example.org/synthetic-timetable",
+      "checked_at": "2026-10-07T12:00:00+03:00",
+      "valid_dates": [
+        "2026-10-14"
+      ],
+      "mode": "fixture",
+      "verified": true
+    }
+  ],
+  "chains": [
+    {
+      "id": "training-route",
+      "origin": "Учебная точка А",
+      "destination": "Учебная точка Б",
+      "coverage": "complete",
+      "access": {
+        "minutes": 55,
+        "description": "Пешком и метро до автобуса",
+        "basis": "Вымышленная оценка для теста",
+        "source_ids": []
+      },
+      "egress": {
+        "minutes": 10,
+        "description": "Пешком до цели",
+        "basis": "Вымышленная оценка для теста",
+        "source_ids": []
+      },
+      "stages": [
+        {
+          "from_stop": "bus-a",
+          "to_stop": "bus-b",
+          "from_name": "Учебная остановка А",
+          "to_name": "Учебная остановка Б",
+          "trips": [
+            {
+              "id": "bus-1",
+              "mode": "bus",
+              "label": "Учебный автобус",
+              "departure": "2026-10-14T10:40:00+03:00",
+              "arrival": "2026-10-14T11:40:00+03:00",
+              "source_id": "synthetic"
+            }
+          ],
+          "source_ids": []
+        }
+      ],
+      "transfers": []
+    }
+  ]
+}
+
+Exit code: 0
+
+$ uv run --directory practices/practice_04/homework --locked --offline python -m trip_planner.cli plan --input tests/fixtures/rare_connections.json
+{
+  "status": "ok",
+  "options": [
+    {
+      "chain_id": "training-route",
+      "origin": "Учебная точка А",
+      "destination": "Учебная точка Б",
+      "leave_at": "2026-10-14T09:35:00+03:00",
+      "arrive_at": "2026-10-14T11:50:00+03:00",
+      "total_minutes": 135.0,
+      "waiting_minutes": 10,
+      "transfer_count": 0,
+      "timeline": [
+        {
+          "kind": "access",
+          "start": "2026-10-14T09:35:00+03:00",
+          "end": "2026-10-14T10:30:00+03:00",
+          "minutes": 55.0,
+          "description": "Пешком и метро до автобуса",
+          "basis": "Вымышленная оценка для теста",
+          "estimated": true
+        },
+        {
+          "kind": "wait",
+          "start": "2026-10-14T10:30:00+03:00",
+          "end": "2026-10-14T10:40:00+03:00",
+          "minutes": 10.0,
+          "description": "Запас на посадку"
+        },
+        {
+          "kind": "ride",
+          "start": "2026-10-14T10:40:00+03:00",
+          "end": "2026-10-14T11:40:00+03:00",
+          "minutes": 60.0,
+          "description": "Учебный автобус",
+          "trip_id": "bus-1",
+          "mode": "bus",
+          "from_stop": "bus-a",
+          "to_stop": "bus-b",
+          "from_name": "Учебная остановка А",
+          "to_name": "Учебная остановка Б",
+          "source_id": "synthetic"
+        },
+        {
+          "kind": "egress",
+          "start": "2026-10-14T11:40:00+03:00",
+          "end": "2026-10-14T11:50:00+03:00",
+          "minutes": 10.0,
+          "description": "Пешком до цели",
+          "basis": "Вымышленная оценка для теста",
+          "estimated": true
+        }
+      ]
+    }
+  ],
+  "warnings": [
+    "Есть вымышленные данные: это не реальная поездка.",
+    "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+  ],
+  "sources": [
+    {
+      "id": "synthetic",
+      "url": "https://example.org/synthetic-timetable",
+      "checked_at": "2026-10-07T12:00:00+03:00",
+      "valid_dates": [
+        "2026-10-14"
+      ],
+      "mode": "fixture",
+      "verified": true
+    }
+  ],
+  "data_kind": "fixture",
+  "search_scope": {
+    "chains": [
+      "training-route"
+    ],
+    "departure_window": {
+      "start": "2026-10-14T06:00:00+03:00",
+      "end": "2026-10-14T12:00:00+03:00"
+    },
+    "max_scheduled_stages": 3,
+    "complete": true,
+    "claim": "Лучшие среди переданных проверенных цепочек"
+  }
+}
+
+Exit code: 0

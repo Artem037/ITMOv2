@@ -173,3 +173,9 @@ student_solutions/
 !.roo/
 !.specify/
 !.vscode/
+
+# Practice 4 local agent/runtime data
+.opencode/node_modules/
+.opencode/logs/
+.ruff_cache/
+node_modules/

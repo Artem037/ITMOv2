@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-10-22T08:58:19.181726+00:00",
+  "project_id": "60193395-69ee-4483-9093-6ce0db43f21d",
+  "host_id": "local",
+  "branch": "practice_05",
+  "status": "two independent before drafts completed; contract and after versions not created",
+  "chats": [
+    {
+      "role": "UI",
+      "title": "ДЗ 5 — команда UI",
+      "thread_id": "01a162d3-5765-7312-a2da-86150785e56a",
+      "prompt": "practices/practice_05/homework/prompts/ui.md",
+      "output": "practices/practice_05/homework/specs/ui.before.md",
+      "initial_message_sha256": "608e1a7481e46ad151b17d84ea69e62d638b8f037be9409c0709b447f3d9d787",
+      "status": "completed",
+      "completion_turn_id": "01a162d3-5b79-79d0-805d-68d1ec938052",
+      "output_sha256": "510b7763296d4c34bbcfbc63ea6709d355c265133523c529c22d9add34cfe6d8",
+      "output_lines": 276,
+      "requirements_count": 20,
+      "valid_json_examples": 0
+    },
+    {
+      "role": "logic",
+      "title": "ДЗ 5 — команда логики",
+      "thread_id": "01a162d3-8741-7d51-80b9-9791eb27504e",
+      "prompt": "practices/practice_05/homework/prompts/logic.md",
+      "output": "practices/practice_05/homework/specs/logic.before.md",
+      "initial_message_sha256": "662d861ed2750efaff839538bbf8ed1a0732ce7ccb81831d533c1878c04d0c64",
+      "status": "completed",
+      "completion_turn_id": "01a162d3-8922-7871-a352-1e1683081084",
+      "output_sha256": "a1baf5517544ed8a736fd51aac6d9a612ef7badbd4d28bf00fd02ce9c41a5539",
+      "output_lines": 601,
+      "requirements_count": 20,
+      "valid_json_examples": 6
+    }
+  ],
+  "observed_complete_at_utc": "2026-10-22T09:07:43.440793+00:00",
+  "shared_inputs_unchanged": true,
+  "coordinator_review": "scope, source preservation, links, requirement IDs and JSON examples; no negotiation or edits to before drafts"
+}

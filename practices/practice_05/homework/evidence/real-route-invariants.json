@@ -1,0 +1,16 @@
+{
+  "before_files": [
+    {
+      "path": "practices/practice_05/homework/specs/ui.before.md",
+      "sha256": "510b7763296d4c34bbcfbc63ea6709d355c265133523c529c22d9add34cfe6d8",
+      "matches_original": true
+    },
+    {
+      "path": "practices/practice_05/homework/specs/logic.before.md",
+      "sha256": "a1baf5517544ed8a736fd51aac6d9a612ef7badbd4d28bf00fd02ce9c41a5539",
+      "matches_original": true
+    }
+  ],
+  "hw4_unchanged_since": "5165c87",
+  "git_diff_exit_code": 0
+}

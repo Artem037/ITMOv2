@@ -1,0 +1,401 @@
+{
+  "fixture": "tests/fixtures/rare_connections.json",
+  "scope": "existing HW4 engine; not UI/API/Spec Kit",
+  "cases": [
+    {
+      "case": "normal",
+      "changes": {},
+      "expected": {
+        "status": "ok",
+        "data_kind": "fixture",
+        "complete": true,
+        "options_count": 1,
+        "first_option": {
+          "leave_at": "2026-10-14T09:35:00+03:00",
+          "arrive_at": "2026-10-14T11:50:00+03:00",
+          "total_minutes": 135
+        }
+      },
+      "observed": {
+        "status": "ok",
+        "data_kind": "fixture",
+        "complete": true,
+        "options_count": 1,
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:35:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 135.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:35:00+03:00",
+                "end": "2026-10-14T10:30:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:30:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ]
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "recalculate_buffer",
+      "changes": {
+        "boarding_buffer_minutes": 20
+      },
+      "expected": {
+        "status": "ok",
+        "first_option": {
+          "leave_at": "2026-10-14T09:25:00+03:00",
+          "total_minutes": 145
+        }
+      },
+      "observed": {
+        "status": "ok",
+        "data_kind": "fixture",
+        "complete": true,
+        "options_count": 1,
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:25:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 145.0,
+            "waiting_minutes": 20,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:25:00+03:00",
+                "end": "2026-10-14T10:20:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:20:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 20.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ]
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "no_routes",
+      "changes": {
+        "departure_window": {
+          "start": "2026-10-14T09:36:00+03:00",
+          "end": "2026-10-14T10:00:00+03:00"
+        }
+      },
+      "expected": {
+        "status": "no_routes",
+        "complete": true,
+        "options_count": 0
+      },
+      "observed": {
+        "status": "no_routes",
+        "data_kind": "fixture",
+        "complete": true,
+        "options_count": 0,
+        "options": [],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ]
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "unsupported_date",
+      "changes": {
+        "departure_window": {
+          "start": "2026-10-15T06:00:00+03:00",
+          "end": "2026-10-15T12:00:00+03:00"
+        }
+      },
+      "expected": {
+        "status": "needs_data",
+        "complete": false,
+        "options_count": 0
+      },
+      "observed": {
+        "status": "needs_data",
+        "data_kind": "fixture",
+        "complete": false,
+        "options_count": 0,
+        "options": [],
+        "warnings": [
+          "training-route/этап 1: нет подтверждённого покрытия дат 2026-10-15–2026-10-15; нужно расписание на запрошенное окно",
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ]
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "inclusive_boundary",
+      "changes": {
+        "departure_window": {
+          "start": "2026-10-14T09:35:00+03:00",
+          "end": "2026-10-14T09:35:00+03:00"
+        }
+      },
+      "expected": {
+        "status": "ok",
+        "options_count": 1
+      },
+      "observed": {
+        "status": "ok",
+        "data_kind": "fixture",
+        "complete": true,
+        "options_count": 1,
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:35:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 135.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:35:00+03:00",
+                "end": "2026-10-14T10:30:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:30:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ]
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "invalid_window",
+      "changes": {
+        "departure_window": {
+          "start": "2026-10-14T10:00:00+03:00",
+          "end": "2026-10-14T09:00:00+03:00"
+        }
+      },
+      "expected": {
+        "error": "InputError",
+        "field": "departure_window"
+      },
+      "observed": {
+        "error": "InputError",
+        "message": "departure_window: Value error, end должен быть не раньше start"
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "invalid_max_options",
+      "changes": {
+        "max_options": 6
+      },
+      "expected": {
+        "error": "InputError",
+        "field": "max_options"
+      },
+      "observed": {
+        "error": "InputError",
+        "message": "max_options: Input should be less than or equal to 5"
+      },
+      "input_unchanged": true
+    },
+    {
+      "case": "partial_coverage_with_result",
+      "changes": {
+        "coverage": "partial"
+      },
+      "expected": {
+        "status": "ok",
+        "complete": false,
+        "options_count": 1
+      },
+      "observed": {
+        "status": "ok",
+        "data_kind": "fixture",
+        "complete": false,
+        "options_count": 1,
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:35:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 135.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:35:00+03:00",
+                "end": "2026-10-14T10:30:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:30:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "training-route: покрытие partial",
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ]
+      },
+      "input_unchanged": true
+    }
+  ]
+}

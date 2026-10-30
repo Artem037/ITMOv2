@@ -1,0 +1,232 @@
+$ uv run --project practices/practice_04/homework --locked --offline python -m unittest discover -s practices/practice_05/homework/tests -p test_adapter.py -v
+test_bad_json_duplicates_and_constants (test_adapter.AdapterTests.test_bad_json_duplicates_and_constants) ... ok
+test_default_route_is_real_and_schedule_date_excludes_map_only_date (test_adapter.AdapterTests.test_default_route_is_real_and_schedule_date_excludes_map_only_date) ... FAIL
+test_equal_boundary_includes_the_departure (test_adapter.AdapterTests.test_equal_boundary_includes_the_departure) ... ok
+test_fixed_fixture_launch_still_produces_control_metadata (test_adapter.AdapterTests.test_fixed_fixture_launch_still_produces_control_metadata) ... FAIL
+test_fractional_durations_are_not_truncated (test_adapter.AdapterTests.test_fractional_durations_are_not_truncated) ... ok
+test_internal_error_is_safe_and_next_request_succeeds (test_adapter.AdapterTests.test_internal_error_is_safe_and_next_request_succeeds) ... ok
+test_media_type_and_fixed_routes (test_adapter.AdapterTests.test_media_type_and_fixed_routes) ... ok
+test_metadata_and_loopback (test_adapter.AdapterTests.test_metadata_and_loopback) ... ok
+test_missing_extra_and_non_object_fields (test_adapter.AdapterTests.test_missing_extra_and_non_object_fields) ... ok
+test_moscow_datetime_grammar_and_calendar (test_adapter.AdapterTests.test_moscow_datetime_grammar_and_calendar) ... ok
+test_new_date_needs_data_without_moving_source (test_adapter.AdapterTests.test_new_date_needs_data_without_moving_source) ... ok
+test_no_routes_is_a_complete_calculation (test_adapter.AdapterTests.test_no_routes_is_a_complete_calculation) ... ok
+test_normal_response_preserves_entire_prior_core_result (test_adapter.AdapterTests.test_normal_response_preserves_entire_prior_core_result) ... ok
+test_parallel_requests_and_repeats_do_not_mutate_snapshot (test_adapter.AdapterTests.test_parallel_requests_and_repeats_do_not_mutate_snapshot) ... ok
+test_partial_success_is_not_replaced_by_needs_data (test_adapter.AdapterTests.test_partial_success_is_not_replaced_by_needs_data) ... ok
+test_real_route_recalculation_negative_date_and_recovery (test_adapter.AdapterTests.test_real_route_recalculation_negative_date_and_recovery) ... FAIL
+test_real_route_retains_late_trains_and_midnight_arrival (test_adapter.AdapterTests.test_real_route_retains_late_trains_and_midnight_arrival) ... FAIL
+test_recalculation_uses_new_buffer (test_adapter.AdapterTests.test_recalculation_uses_new_buffer) ... ok
+test_reverse_window_has_stable_field_and_recovers (test_adapter.AdapterTests.test_reverse_window_has_stable_field_and_recovers) ... ok
+test_strict_numbers_and_ranges (test_adapter.AdapterTests.test_strict_numbers_and_ranges) ... ok
+test_unknown_duration_is_not_zero (test_adapter.AdapterTests.test_unknown_duration_is_not_zero) ... ok
+
+======================================================================
+FAIL: test_default_route_is_real_and_schedule_date_excludes_map_only_date (test_adapter.AdapterTests.test_default_route_is_real_and_schedule_date_excludes_map_only_date)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 302, in test_default_route_is_real_and_schedule_date_excludes_map_only_date
+    self.assertEqual(metadata["data_kind"], "real")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixture' != 'real'
+- fixture
++ real
+
+
+======================================================================
+FAIL: test_fixed_fixture_launch_still_produces_control_metadata (test_adapter.AdapterTests.test_fixed_fixture_launch_still_produces_control_metadata)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 359, in test_fixed_fixture_launch_still_produces_control_metadata
+    self.assertIsNotNone(match, "Fixed --fixture launch is unavailable")
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: unexpectedly None : Fixed --fixture launch is unavailable
+
+======================================================================
+FAIL: test_real_route_recalculation_negative_date_and_recovery (test_adapter.AdapterTests.test_real_route_recalculation_negative_date_and_recovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 318, in test_real_route_recalculation_negative_date_and_recovery
+    self.assertEqual(metadata["data_kind"], "real")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixture' != 'real'
+- fixture
++ real
+
+
+======================================================================
+FAIL: test_real_route_retains_late_trains_and_midnight_arrival (test_adapter.AdapterTests.test_real_route_retains_late_trains_and_midnight_arrival)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 347, in test_real_route_retains_late_trains_and_midnight_arrival
+    self.assertEqual(result["status"], "ok")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'needs_data' != 'ok'
+- needs_data
++ ok
+
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.565s
+
+FAILED (failures=4)
+
+EXIT_CODE=1
+
+$ /Users/pip/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --test --test-name-pattern=default screen|real screen practices/practice_05/homework/tests/browser.test.mjs
+✖ default screen uses the real dated route and real calculation (4179.553625ms)
+✖ real screen reports uncovered dates and recovers without moving trains (227.447625ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4796.027667
+
+✖ failing tests:
+
+test at practices/practice_05/homework/tests/browser.test.mjs:274:1
+✖ default screen uses the real dated route and real calculation (4179.553625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'Учебная точка А'
+  - 'Метро «Проспект Славы»'
+
+      at TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:276:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Учебная точка А',
+    expected: 'Метро «Проспект Славы»',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:295:1
+✖ real screen reports uncovered dates and recovers without moving trains (227.447625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + '14.10.2026 06:00'
+  - '30.10.2026 06:00'
+
+      at TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:297:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '14.10.2026 06:00',
+    expected: '30.10.2026 06:00',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+EXIT_CODE=1
+
+$ /Users/pip/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --test tests/check-after-edit.test.mjs
+✖ checks homework code, tests, dependencies, skill and environment configuration (48.239125ms)
+✔ ignores homework evidence, reports, environments and files outside project (2.852959ms)
+✔ returns a real failing runner result to the agent without losing edit output (7.143375ms)
+✔ checks apply_patch changes from an absolute project path and reports PASS (6.705ms)
+✔ ignores evidence edits and reads, so logging cannot recursively run the check (1.263167ms)
+✔ reports a timeout as FAIL and stops a stuck runner (104.978792ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 5
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 229.37725
+
+✖ failing tests:
+
+test at tests/check-after-edit.test.mjs:20:1
+✖ checks homework code, tests, dependencies, skill and environment configuration (48.239125ms)
+  AssertionError [ERR_ASSERTION]: practices/practice_05/homework/data/tolmachevo-2026-10-30.json
+  + actual - expected
+
+  + undefined
+  - 'PASS'
+
+      at TestContext.<anonymous> (file:///Users/pip/ITMOv2/tests/check-after-edit.test.mjs:44:12)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'PASS',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+EXIT_CODE=1
+
+Map validity label RED:
+$ /Users/pip/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --test --test-name-pattern=default screen practices/practice_05/homework/tests/browser.test.mjs
+✖ default screen uses the real dated route and real calculation (1145.924708ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1480.718583
+
+✖ failing tests:
+
+test at practices/practice_05/homework/tests/browser.test.mjs:280:1
+✖ default screen uses the real dated route and real calculation (1145.924708ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Применимые даты/. Input:
+
+  'Источник walking-map\n' +
+    '\n' +
+    'Режим: manual. Даты расписания: 30.10.2026, 31.10.2026. Проверка: 29.10.2026, 15:49:45 МСК.\n' +
+    '\n' +
+    'Подтверждён: да.'
+
+      at TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:295:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Источник walking-map\n\nРежим: manual. Даты расписания: 30.10.2026, 31.10.2026. Проверка: 29.10.2026, 15:49:45 МСК.\n\nПодтверждён: да.',
+    expected: /Применимые даты/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+EXIT_CODE=1
+✖ overnight real train shows the next date at the end of its timeline event (1496.241208ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1902.76125
+
+✖ failing tests:
+
+test at practices/practice_05/homework/tests/browser.test.mjs:321:1
+✖ overnight real train shows the next date at the end of its timeline event (1496.241208ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /30\.10\.2026, 23:45[\s\S]*31\.10\.2026, 01:48/. Input:
+
+  '30.10.2026, 23:45 МСК – 01:48 · 123 мин'
+
+      at TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:327:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '30.10.2026, 23:45 МСК – 01:48 · 123 мин',
+    expected: /30\.10\.2026, 23:45[\s\S]*31\.10\.2026, 01:48/,
+    operator: 'match',
+    diff: 'simple'
+  }

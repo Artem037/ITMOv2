@@ -1,0 +1,1138 @@
+{
+  "transport": "real stdio MCP, existing HW4 server",
+  "cases": [
+    {
+      "case": "normal",
+      "tool": "trip_planner.plan_departures",
+      "arguments": {
+        "request": {
+          "departure_window": {
+            "start": "2026-10-30T06:00:00+03:00",
+            "end": "2026-10-30T10:00:00+03:00"
+          },
+          "timezone": "Europe/Moscow",
+          "max_options": 5,
+          "boarding_buffer_minutes": 10,
+          "sources": [
+            {
+              "id": "szppk",
+              "url": "https://ticket.ppk-piter.ru/passenger/schedule/?from=036002&to=072102&when=2026-10-30",
+              "checked_at": "2026-10-29T15:49:45+03:00",
+              "valid_dates": [
+                "2026-10-30"
+              ],
+              "mode": "manual",
+              "verified": true
+            },
+            {
+              "id": "walking-map",
+              "url": "https://brouter.de/brouter?lonlats=29.8967895%2C58.8646210%7C29.985616%2C58.824440&profile=hiking-mountain&alternativeidx=0&format=geojson",
+              "checked_at": "2026-10-29T15:49:45+03:00",
+              "valid_dates": [
+                "2026-10-30",
+                "2026-10-31"
+              ],
+              "mode": "manual",
+              "verified": true
+            }
+          ],
+          "chains": [
+            {
+              "id": "tolmachevo-canyon",
+              "origin": "Метро «Проспект Славы»",
+              "destination": "Малый Лужский каньон у Плоского",
+              "coverage": "complete",
+              "access": {
+                "minutes": 45,
+                "description": "Метро до Балтийского вокзала и подход к посадке: плановая оценка 45 минут",
+                "basis": "Плановая оценка: 40 минут метро с ожиданием и переходом через Звенигородскую/Пушкинскую, затем 5 минут до посадки. Это не точное расписание метро; запас на посадку задаётся отдельно. Режим метро 29.10 заново не подтверждён.",
+                "source_ids": []
+              },
+              "egress": {
+                "minutes": 115,
+                "description": "От станции Толмачёво около 9,2 км пешком до каньона",
+                "basis": "BRouter 29.10.2026: 9226 м, 6587 с; округлено до 110 минут ходьбы плюс 5 минут на выход с платформы. Оценка без отдыха и полевой проверки проходимости.",
+                "source_ids": [
+                  "walking-map"
+                ]
+              },
+              "stages": [
+                {
+                  "from_stop": "szppk:036002",
+                  "to_stop": "szppk:072102",
+                  "from_name": "Санкт-Петербург, Балтийский вокзал",
+                  "to_name": "Толмачёво",
+                  "source_ids": [
+                    "szppk"
+                  ],
+                  "trips": [
+                    {
+                      "id": "6105",
+                      "mode": "suburban",
+                      "label": "Электричка 6105",
+                      "departure": "2026-10-30T07:15:00+03:00",
+                      "arrival": "2026-10-30T09:17:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7451",
+                      "mode": "suburban",
+                      "label": "Ласточка 7451",
+                      "departure": "2026-10-30T08:37:00+03:00",
+                      "arrival": "2026-10-30T10:00:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7413",
+                      "mode": "suburban",
+                      "label": "Ласточка 7413",
+                      "departure": "2026-10-30T09:36:00+03:00",
+                      "arrival": "2026-10-30T11:40:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6119",
+                      "mode": "suburban",
+                      "label": "Электричка 6119",
+                      "departure": "2026-10-30T13:50:00+03:00",
+                      "arrival": "2026-10-30T15:56:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7453",
+                      "mode": "suburban",
+                      "label": "Ласточка 7453",
+                      "departure": "2026-10-30T15:00:00+03:00",
+                      "arrival": "2026-10-30T16:26:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6125",
+                      "mode": "suburban",
+                      "label": "Электричка 6125",
+                      "departure": "2026-10-30T16:25:00+03:00",
+                      "arrival": "2026-10-30T18:26:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6131",
+                      "mode": "suburban",
+                      "label": "Электричка 6131",
+                      "departure": "2026-10-30T17:55:00+03:00",
+                      "arrival": "2026-10-30T19:58:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7455",
+                      "mode": "suburban",
+                      "label": "Ласточка 7455",
+                      "departure": "2026-10-30T19:20:00+03:00",
+                      "arrival": "2026-10-30T20:43:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6135",
+                      "mode": "suburban",
+                      "label": "Электричка 6135",
+                      "departure": "2026-10-30T19:38:00+03:00",
+                      "arrival": "2026-10-30T22:01:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6139",
+                      "mode": "suburban",
+                      "label": "Электричка 6139",
+                      "departure": "2026-10-30T21:10:00+03:00",
+                      "arrival": "2026-10-30T23:14:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6141",
+                      "mode": "suburban",
+                      "label": "Электричка 6141",
+                      "departure": "2026-10-30T23:45:00+03:00",
+                      "arrival": "2026-10-31T01:48:00+03:00",
+                      "source_id": "szppk"
+                    }
+                  ]
+                }
+              ],
+              "transfers": []
+            }
+          ]
+        }
+      },
+      "is_error": false,
+      "result": {
+        "status": "ok",
+        "options": [
+          {
+            "chain_id": "tolmachevo-canyon",
+            "origin": "Метро «Проспект Славы»",
+            "destination": "Малый Лужский каньон у Плоского",
+            "leave_at": "2026-10-30T07:42:00+03:00",
+            "arrive_at": "2026-10-30T11:55:00+03:00",
+            "total_minutes": 253.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-30T07:42:00+03:00",
+                "end": "2026-10-30T08:27:00+03:00",
+                "minutes": 45.0,
+                "description": "Метро до Балтийского вокзала и подход к посадке: плановая оценка 45 минут",
+                "basis": "Плановая оценка: 40 минут метро с ожиданием и переходом через Звенигородскую/Пушкинскую, затем 5 минут до посадки. Это не точное расписание метро; запас на посадку задаётся отдельно. Режим метро 29.10 заново не подтверждён.",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-30T08:27:00+03:00",
+                "end": "2026-10-30T08:37:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-30T08:37:00+03:00",
+                "end": "2026-10-30T10:00:00+03:00",
+                "minutes": 83.0,
+                "description": "Ласточка 7451",
+                "trip_id": "7451",
+                "mode": "suburban",
+                "from_stop": "szppk:036002",
+                "to_stop": "szppk:072102",
+                "from_name": "Санкт-Петербург, Балтийский вокзал",
+                "to_name": "Толмачёво",
+                "source_id": "szppk"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-30T10:00:00+03:00",
+                "end": "2026-10-30T11:55:00+03:00",
+                "minutes": 115.0,
+                "description": "От станции Толмачёво около 9,2 км пешком до каньона",
+                "basis": "BRouter 29.10.2026: 9226 м, 6587 с; округлено до 110 минут ходьбы плюс 5 минут на выход с платформы. Оценка без отдыха и полевой проверки проходимости.",
+                "estimated": true
+              }
+            ]
+          },
+          {
+            "chain_id": "tolmachevo-canyon",
+            "origin": "Метро «Проспект Славы»",
+            "destination": "Малый Лужский каньон у Плоского",
+            "leave_at": "2026-10-30T06:20:00+03:00",
+            "arrive_at": "2026-10-30T11:12:00+03:00",
+            "total_minutes": 292.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-30T06:20:00+03:00",
+                "end": "2026-10-30T07:05:00+03:00",
+                "minutes": 45.0,
+                "description": "Метро до Балтийского вокзала и подход к посадке: плановая оценка 45 минут",
+                "basis": "Плановая оценка: 40 минут метро с ожиданием и переходом через Звенигородскую/Пушкинскую, затем 5 минут до посадки. Это не точное расписание метро; запас на посадку задаётся отдельно. Режим метро 29.10 заново не подтверждён.",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-30T07:05:00+03:00",
+                "end": "2026-10-30T07:15:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-30T07:15:00+03:00",
+                "end": "2026-10-30T09:17:00+03:00",
+                "minutes": 122.0,
+                "description": "Электричка 6105",
+                "trip_id": "6105",
+                "mode": "suburban",
+                "from_stop": "szppk:036002",
+                "to_stop": "szppk:072102",
+                "from_name": "Санкт-Петербург, Балтийский вокзал",
+                "to_name": "Толмачёво",
+                "source_id": "szppk"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-30T09:17:00+03:00",
+                "end": "2026-10-30T11:12:00+03:00",
+                "minutes": 115.0,
+                "description": "От станции Толмачёво около 9,2 км пешком до каньона",
+                "basis": "BRouter 29.10.2026: 9226 м, 6587 с; округлено до 110 минут ходьбы плюс 5 минут на выход с платформы. Оценка без отдыха и полевой проверки проходимости.",
+                "estimated": true
+              }
+            ]
+          },
+          {
+            "chain_id": "tolmachevo-canyon",
+            "origin": "Метро «Проспект Славы»",
+            "destination": "Малый Лужский каньон у Плоского",
+            "leave_at": "2026-10-30T08:41:00+03:00",
+            "arrive_at": "2026-10-30T13:35:00+03:00",
+            "total_minutes": 294.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-30T08:41:00+03:00",
+                "end": "2026-10-30T09:26:00+03:00",
+                "minutes": 45.0,
+                "description": "Метро до Балтийского вокзала и подход к посадке: плановая оценка 45 минут",
+                "basis": "Плановая оценка: 40 минут метро с ожиданием и переходом через Звенигородскую/Пушкинскую, затем 5 минут до посадки. Это не точное расписание метро; запас на посадку задаётся отдельно. Режим метро 29.10 заново не подтверждён.",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-30T09:26:00+03:00",
+                "end": "2026-10-30T09:36:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-30T09:36:00+03:00",
+                "end": "2026-10-30T11:40:00+03:00",
+                "minutes": 124.0,
+                "description": "Ласточка 7413",
+                "trip_id": "7413",
+                "mode": "suburban",
+                "from_stop": "szppk:036002",
+                "to_stop": "szppk:072102",
+                "from_name": "Санкт-Петербург, Балтийский вокзал",
+                "to_name": "Толмачёво",
+                "source_id": "szppk"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-30T11:40:00+03:00",
+                "end": "2026-10-30T13:35:00+03:00",
+                "minutes": 115.0,
+                "description": "От станции Толмачёво около 9,2 км пешком до каньона",
+                "basis": "BRouter 29.10.2026: 9226 м, 6587 с; округлено до 110 минут ходьбы плюс 5 минут на выход с платформы. Оценка без отдыха и полевой проверки проходимости.",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ],
+        "sources": [
+          {
+            "id": "szppk",
+            "url": "https://ticket.ppk-piter.ru/passenger/schedule/?from=036002&to=072102&when=2026-10-30",
+            "checked_at": "2026-10-29T15:49:45+03:00",
+            "valid_dates": [
+              "2026-10-30"
+            ],
+            "mode": "manual",
+            "verified": true
+          },
+          {
+            "id": "walking-map",
+            "url": "https://brouter.de/brouter?lonlats=29.8967895%2C58.8646210%7C29.985616%2C58.824440&profile=hiking-mountain&alternativeidx=0&format=geojson",
+            "checked_at": "2026-10-29T15:49:45+03:00",
+            "valid_dates": [
+              "2026-10-30",
+              "2026-10-31"
+            ],
+            "mode": "manual",
+            "verified": true
+          }
+        ],
+        "data_kind": "real",
+        "search_scope": {
+          "chains": [
+            "tolmachevo-canyon"
+          ],
+          "departure_window": {
+            "start": "2026-10-30T06:00:00+03:00",
+            "end": "2026-10-30T10:00:00+03:00"
+          },
+          "max_scheduled_stages": 3,
+          "complete": true,
+          "claim": "Лучшие среди переданных проверенных цепочек"
+        }
+      }
+    },
+    {
+      "case": "buffer20",
+      "tool": "trip_planner.plan_departures",
+      "arguments": {
+        "request": {
+          "departure_window": {
+            "start": "2026-10-30T06:00:00+03:00",
+            "end": "2026-10-30T10:00:00+03:00"
+          },
+          "timezone": "Europe/Moscow",
+          "max_options": 5,
+          "boarding_buffer_minutes": 20,
+          "sources": [
+            {
+              "id": "szppk",
+              "url": "https://ticket.ppk-piter.ru/passenger/schedule/?from=036002&to=072102&when=2026-10-30",
+              "checked_at": "2026-10-29T15:49:45+03:00",
+              "valid_dates": [
+                "2026-10-30"
+              ],
+              "mode": "manual",
+              "verified": true
+            },
+            {
+              "id": "walking-map",
+              "url": "https://brouter.de/brouter?lonlats=29.8967895%2C58.8646210%7C29.985616%2C58.824440&profile=hiking-mountain&alternativeidx=0&format=geojson",
+              "checked_at": "2026-10-29T15:49:45+03:00",
+              "valid_dates": [
+                "2026-10-30",
+                "2026-10-31"
+              ],
+              "mode": "manual",
+              "verified": true
+            }
+          ],
+          "chains": [
+            {
+              "id": "tolmachevo-canyon",
+              "origin": "Метро «Проспект Славы»",
+              "destination": "Малый Лужский каньон у Плоского",
+              "coverage": "complete",
+              "access": {
+                "minutes": 45,
+                "description": "Метро до Балтийского вокзала и подход к посадке: плановая оценка 45 минут",
+                "basis": "Плановая оценка: 40 минут метро с ожиданием и переходом через Звенигородскую/Пушкинскую, затем 5 минут до посадки. Это не точное расписание метро; запас на посадку задаётся отдельно. Режим метро 29.10 заново не подтверждён.",
+                "source_ids": []
+              },
+              "egress": {
+                "minutes": 115,
+                "description": "От станции Толмачёво около 9,2 км пешком до каньона",
+                "basis": "BRouter 29.10.2026: 9226 м, 6587 с; округлено до 110 минут ходьбы плюс 5 минут на выход с платформы. Оценка без отдыха и полевой проверки проходимости.",
+                "source_ids": [
+                  "walking-map"
+                ]
+              },
+              "stages": [
+                {
+                  "from_stop": "szppk:036002",
+                  "to_stop": "szppk:072102",
+                  "from_name": "Санкт-Петербург, Балтийский вокзал",
+                  "to_name": "Толмачёво",
+                  "source_ids": [
+                    "szppk"
+                  ],
+                  "trips": [
+                    {
+                      "id": "6105",
+                      "mode": "suburban",
+                      "label": "Электричка 6105",
+                      "departure": "2026-10-30T07:15:00+03:00",
+                      "arrival": "2026-10-30T09:17:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7451",
+                      "mode": "suburban",
+                      "label": "Ласточка 7451",
+                      "departure": "2026-10-30T08:37:00+03:00",
+                      "arrival": "2026-10-30T10:00:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7413",
+                      "mode": "suburban",
+                      "label": "Ласточка 7413",
+                      "departure": "2026-10-30T09:36:00+03:00",
+                      "arrival": "2026-10-30T11:40:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6119",
+                      "mode": "suburban",
+                      "label": "Электричка 6119",
+                      "departure": "2026-10-30T13:50:00+03:00",
+                      "arrival": "2026-10-30T15:56:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7453",
+                      "mode": "suburban",
+                      "label": "Ласточка 7453",
+                      "departure": "2026-10-30T15:00:00+03:00",
+                      "arrival": "2026-10-30T16:26:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6125",
+                      "mode": "suburban",
+                      "label": "Электричка 6125",
+                      "departure": "2026-10-30T16:25:00+03:00",
+                      "arrival": "2026-10-30T18:26:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6131",
+                      "mode": "suburban",
+                      "label": "Электричка 6131",
+                      "departure": "2026-10-30T17:55:00+03:00",
+                      "arrival": "2026-10-30T19:58:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7455",
+                      "mode": "suburban",
+                      "label": "Ласточка 7455",
+                      "departure": "2026-10-30T19:20:00+03:00",
+                      "arrival": "2026-10-30T20:43:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6135",
+                      "mode": "suburban",
+                      "label": "Электричка 6135",
+                      "departure": "2026-10-30T19:38:00+03:00",
+                      "arrival": "2026-10-30T22:01:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6139",
+                      "mode": "suburban",
+                      "label": "Электричка 6139",
+                      "departure": "2026-10-30T21:10:00+03:00",
+                      "arrival": "2026-10-30T23:14:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6141",
+                      "mode": "suburban",
+                      "label": "Электричка 6141",
+                      "departure": "2026-10-30T23:45:00+03:00",
+                      "arrival": "2026-10-31T01:48:00+03:00",
+                      "source_id": "szppk"
+                    }
+                  ]
+                }
+              ],
+              "transfers": []
+            }
+          ]
+        }
+      },
+      "is_error": false,
+      "result": {
+        "status": "ok",
+        "options": [
+          {
+            "chain_id": "tolmachevo-canyon",
+            "origin": "Метро «Проспект Славы»",
+            "destination": "Малый Лужский каньон у Плоского",
+            "leave_at": "2026-10-30T07:32:00+03:00",
+            "arrive_at": "2026-10-30T11:55:00+03:00",
+            "total_minutes": 263.0,
+            "waiting_minutes": 20,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-30T07:32:00+03:00",
+                "end": "2026-10-30T08:17:00+03:00",
+                "minutes": 45.0,
+                "description": "Метро до Балтийского вокзала и подход к посадке: плановая оценка 45 минут",
+                "basis": "Плановая оценка: 40 минут метро с ожиданием и переходом через Звенигородскую/Пушкинскую, затем 5 минут до посадки. Это не точное расписание метро; запас на посадку задаётся отдельно. Режим метро 29.10 заново не подтверждён.",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-30T08:17:00+03:00",
+                "end": "2026-10-30T08:37:00+03:00",
+                "minutes": 20.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-30T08:37:00+03:00",
+                "end": "2026-10-30T10:00:00+03:00",
+                "minutes": 83.0,
+                "description": "Ласточка 7451",
+                "trip_id": "7451",
+                "mode": "suburban",
+                "from_stop": "szppk:036002",
+                "to_stop": "szppk:072102",
+                "from_name": "Санкт-Петербург, Балтийский вокзал",
+                "to_name": "Толмачёво",
+                "source_id": "szppk"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-30T10:00:00+03:00",
+                "end": "2026-10-30T11:55:00+03:00",
+                "minutes": 115.0,
+                "description": "От станции Толмачёво около 9,2 км пешком до каньона",
+                "basis": "BRouter 29.10.2026: 9226 м, 6587 с; округлено до 110 минут ходьбы плюс 5 минут на выход с платформы. Оценка без отдыха и полевой проверки проходимости.",
+                "estimated": true
+              }
+            ]
+          },
+          {
+            "chain_id": "tolmachevo-canyon",
+            "origin": "Метро «Проспект Славы»",
+            "destination": "Малый Лужский каньон у Плоского",
+            "leave_at": "2026-10-30T06:10:00+03:00",
+            "arrive_at": "2026-10-30T11:12:00+03:00",
+            "total_minutes": 302.0,
+            "waiting_minutes": 20,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-30T06:10:00+03:00",
+                "end": "2026-10-30T06:55:00+03:00",
+                "minutes": 45.0,
+                "description": "Метро до Балтийского вокзала и подход к посадке: плановая оценка 45 минут",
+                "basis": "Плановая оценка: 40 минут метро с ожиданием и переходом через Звенигородскую/Пушкинскую, затем 5 минут до посадки. Это не точное расписание метро; запас на посадку задаётся отдельно. Режим метро 29.10 заново не подтверждён.",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-30T06:55:00+03:00",
+                "end": "2026-10-30T07:15:00+03:00",
+                "minutes": 20.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-30T07:15:00+03:00",
+                "end": "2026-10-30T09:17:00+03:00",
+                "minutes": 122.0,
+                "description": "Электричка 6105",
+                "trip_id": "6105",
+                "mode": "suburban",
+                "from_stop": "szppk:036002",
+                "to_stop": "szppk:072102",
+                "from_name": "Санкт-Петербург, Балтийский вокзал",
+                "to_name": "Толмачёво",
+                "source_id": "szppk"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-30T09:17:00+03:00",
+                "end": "2026-10-30T11:12:00+03:00",
+                "minutes": 115.0,
+                "description": "От станции Толмачёво около 9,2 км пешком до каньона",
+                "basis": "BRouter 29.10.2026: 9226 м, 6587 с; округлено до 110 минут ходьбы плюс 5 минут на выход с платформы. Оценка без отдыха и полевой проверки проходимости.",
+                "estimated": true
+              }
+            ]
+          },
+          {
+            "chain_id": "tolmachevo-canyon",
+            "origin": "Метро «Проспект Славы»",
+            "destination": "Малый Лужский каньон у Плоского",
+            "leave_at": "2026-10-30T08:31:00+03:00",
+            "arrive_at": "2026-10-30T13:35:00+03:00",
+            "total_minutes": 304.0,
+            "waiting_minutes": 20,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-30T08:31:00+03:00",
+                "end": "2026-10-30T09:16:00+03:00",
+                "minutes": 45.0,
+                "description": "Метро до Балтийского вокзала и подход к посадке: плановая оценка 45 минут",
+                "basis": "Плановая оценка: 40 минут метро с ожиданием и переходом через Звенигородскую/Пушкинскую, затем 5 минут до посадки. Это не точное расписание метро; запас на посадку задаётся отдельно. Режим метро 29.10 заново не подтверждён.",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-30T09:16:00+03:00",
+                "end": "2026-10-30T09:36:00+03:00",
+                "minutes": 20.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-30T09:36:00+03:00",
+                "end": "2026-10-30T11:40:00+03:00",
+                "minutes": 124.0,
+                "description": "Ласточка 7413",
+                "trip_id": "7413",
+                "mode": "suburban",
+                "from_stop": "szppk:036002",
+                "to_stop": "szppk:072102",
+                "from_name": "Санкт-Петербург, Балтийский вокзал",
+                "to_name": "Толмачёво",
+                "source_id": "szppk"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-30T11:40:00+03:00",
+                "end": "2026-10-30T13:35:00+03:00",
+                "minutes": 115.0,
+                "description": "От станции Толмачёво около 9,2 км пешком до каньона",
+                "basis": "BRouter 29.10.2026: 9226 м, 6587 с; округлено до 110 минут ходьбы плюс 5 минут на выход с платформы. Оценка без отдыха и полевой проверки проходимости.",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ],
+        "sources": [
+          {
+            "id": "szppk",
+            "url": "https://ticket.ppk-piter.ru/passenger/schedule/?from=036002&to=072102&when=2026-10-30",
+            "checked_at": "2026-10-29T15:49:45+03:00",
+            "valid_dates": [
+              "2026-10-30"
+            ],
+            "mode": "manual",
+            "verified": true
+          },
+          {
+            "id": "walking-map",
+            "url": "https://brouter.de/brouter?lonlats=29.8967895%2C58.8646210%7C29.985616%2C58.824440&profile=hiking-mountain&alternativeidx=0&format=geojson",
+            "checked_at": "2026-10-29T15:49:45+03:00",
+            "valid_dates": [
+              "2026-10-30",
+              "2026-10-31"
+            ],
+            "mode": "manual",
+            "verified": true
+          }
+        ],
+        "data_kind": "real",
+        "search_scope": {
+          "chains": [
+            "tolmachevo-canyon"
+          ],
+          "departure_window": {
+            "start": "2026-10-30T06:00:00+03:00",
+            "end": "2026-10-30T10:00:00+03:00"
+          },
+          "max_scheduled_stages": 3,
+          "complete": true,
+          "claim": "Лучшие среди переданных проверенных цепочек"
+        }
+      }
+    },
+    {
+      "case": "no_routes",
+      "tool": "trip_planner.plan_departures",
+      "arguments": {
+        "request": {
+          "departure_window": {
+            "start": "2026-10-30T08:00:00+03:00",
+            "end": "2026-10-30T08:10:00+03:00"
+          },
+          "timezone": "Europe/Moscow",
+          "max_options": 5,
+          "boarding_buffer_minutes": 10,
+          "sources": [
+            {
+              "id": "szppk",
+              "url": "https://ticket.ppk-piter.ru/passenger/schedule/?from=036002&to=072102&when=2026-10-30",
+              "checked_at": "2026-10-29T15:49:45+03:00",
+              "valid_dates": [
+                "2026-10-30"
+              ],
+              "mode": "manual",
+              "verified": true
+            },
+            {
+              "id": "walking-map",
+              "url": "https://brouter.de/brouter?lonlats=29.8967895%2C58.8646210%7C29.985616%2C58.824440&profile=hiking-mountain&alternativeidx=0&format=geojson",
+              "checked_at": "2026-10-29T15:49:45+03:00",
+              "valid_dates": [
+                "2026-10-30",
+                "2026-10-31"
+              ],
+              "mode": "manual",
+              "verified": true
+            }
+          ],
+          "chains": [
+            {
+              "id": "tolmachevo-canyon",
+              "origin": "Метро «Проспект Славы»",
+              "destination": "Малый Лужский каньон у Плоского",
+              "coverage": "complete",
+              "access": {
+                "minutes": 45,
+                "description": "Метро до Балтийского вокзала и подход к посадке: плановая оценка 45 минут",
+                "basis": "Плановая оценка: 40 минут метро с ожиданием и переходом через Звенигородскую/Пушкинскую, затем 5 минут до посадки. Это не точное расписание метро; запас на посадку задаётся отдельно. Режим метро 29.10 заново не подтверждён.",
+                "source_ids": []
+              },
+              "egress": {
+                "minutes": 115,
+                "description": "От станции Толмачёво около 9,2 км пешком до каньона",
+                "basis": "BRouter 29.10.2026: 9226 м, 6587 с; округлено до 110 минут ходьбы плюс 5 минут на выход с платформы. Оценка без отдыха и полевой проверки проходимости.",
+                "source_ids": [
+                  "walking-map"
+                ]
+              },
+              "stages": [
+                {
+                  "from_stop": "szppk:036002",
+                  "to_stop": "szppk:072102",
+                  "from_name": "Санкт-Петербург, Балтийский вокзал",
+                  "to_name": "Толмачёво",
+                  "source_ids": [
+                    "szppk"
+                  ],
+                  "trips": [
+                    {
+                      "id": "6105",
+                      "mode": "suburban",
+                      "label": "Электричка 6105",
+                      "departure": "2026-10-30T07:15:00+03:00",
+                      "arrival": "2026-10-30T09:17:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7451",
+                      "mode": "suburban",
+                      "label": "Ласточка 7451",
+                      "departure": "2026-10-30T08:37:00+03:00",
+                      "arrival": "2026-10-30T10:00:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7413",
+                      "mode": "suburban",
+                      "label": "Ласточка 7413",
+                      "departure": "2026-10-30T09:36:00+03:00",
+                      "arrival": "2026-10-30T11:40:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6119",
+                      "mode": "suburban",
+                      "label": "Электричка 6119",
+                      "departure": "2026-10-30T13:50:00+03:00",
+                      "arrival": "2026-10-30T15:56:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7453",
+                      "mode": "suburban",
+                      "label": "Ласточка 7453",
+                      "departure": "2026-10-30T15:00:00+03:00",
+                      "arrival": "2026-10-30T16:26:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6125",
+                      "mode": "suburban",
+                      "label": "Электричка 6125",
+                      "departure": "2026-10-30T16:25:00+03:00",
+                      "arrival": "2026-10-30T18:26:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6131",
+                      "mode": "suburban",
+                      "label": "Электричка 6131",
+                      "departure": "2026-10-30T17:55:00+03:00",
+                      "arrival": "2026-10-30T19:58:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7455",
+                      "mode": "suburban",
+                      "label": "Ласточка 7455",
+                      "departure": "2026-10-30T19:20:00+03:00",
+                      "arrival": "2026-10-30T20:43:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6135",
+                      "mode": "suburban",
+                      "label": "Электричка 6135",
+                      "departure": "2026-10-30T19:38:00+03:00",
+                      "arrival": "2026-10-30T22:01:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6139",
+                      "mode": "suburban",
+                      "label": "Электричка 6139",
+                      "departure": "2026-10-30T21:10:00+03:00",
+                      "arrival": "2026-10-30T23:14:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6141",
+                      "mode": "suburban",
+                      "label": "Электричка 6141",
+                      "departure": "2026-10-30T23:45:00+03:00",
+                      "arrival": "2026-10-31T01:48:00+03:00",
+                      "source_id": "szppk"
+                    }
+                  ]
+                }
+              ],
+              "transfers": []
+            }
+          ]
+        }
+      },
+      "is_error": false,
+      "result": {
+        "status": "no_routes",
+        "options": [],
+        "warnings": [
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ],
+        "sources": [
+          {
+            "id": "szppk",
+            "url": "https://ticket.ppk-piter.ru/passenger/schedule/?from=036002&to=072102&when=2026-10-30",
+            "checked_at": "2026-10-29T15:49:45+03:00",
+            "valid_dates": [
+              "2026-10-30"
+            ],
+            "mode": "manual",
+            "verified": true
+          },
+          {
+            "id": "walking-map",
+            "url": "https://brouter.de/brouter?lonlats=29.8967895%2C58.8646210%7C29.985616%2C58.824440&profile=hiking-mountain&alternativeidx=0&format=geojson",
+            "checked_at": "2026-10-29T15:49:45+03:00",
+            "valid_dates": [
+              "2026-10-30",
+              "2026-10-31"
+            ],
+            "mode": "manual",
+            "verified": true
+          }
+        ],
+        "data_kind": "real",
+        "search_scope": {
+          "chains": [
+            "tolmachevo-canyon"
+          ],
+          "departure_window": {
+            "start": "2026-10-30T08:00:00+03:00",
+            "end": "2026-10-30T08:10:00+03:00"
+          },
+          "max_scheduled_stages": 3,
+          "complete": true,
+          "claim": "Лучшие среди переданных проверенных цепочек"
+        }
+      }
+    },
+    {
+      "case": "needs_data",
+      "tool": "trip_planner.plan_departures",
+      "arguments": {
+        "request": {
+          "departure_window": {
+            "start": "2026-10-31T06:00:00+03:00",
+            "end": "2026-10-31T10:00:00+03:00"
+          },
+          "timezone": "Europe/Moscow",
+          "max_options": 5,
+          "boarding_buffer_minutes": 10,
+          "sources": [
+            {
+              "id": "szppk",
+              "url": "https://ticket.ppk-piter.ru/passenger/schedule/?from=036002&to=072102&when=2026-10-30",
+              "checked_at": "2026-10-29T15:49:45+03:00",
+              "valid_dates": [
+                "2026-10-30"
+              ],
+              "mode": "manual",
+              "verified": true
+            },
+            {
+              "id": "walking-map",
+              "url": "https://brouter.de/brouter?lonlats=29.8967895%2C58.8646210%7C29.985616%2C58.824440&profile=hiking-mountain&alternativeidx=0&format=geojson",
+              "checked_at": "2026-10-29T15:49:45+03:00",
+              "valid_dates": [
+                "2026-10-30",
+                "2026-10-31"
+              ],
+              "mode": "manual",
+              "verified": true
+            }
+          ],
+          "chains": [
+            {
+              "id": "tolmachevo-canyon",
+              "origin": "Метро «Проспект Славы»",
+              "destination": "Малый Лужский каньон у Плоского",
+              "coverage": "complete",
+              "access": {
+                "minutes": 45,
+                "description": "Метро до Балтийского вокзала и подход к посадке: плановая оценка 45 минут",
+                "basis": "Плановая оценка: 40 минут метро с ожиданием и переходом через Звенигородскую/Пушкинскую, затем 5 минут до посадки. Это не точное расписание метро; запас на посадку задаётся отдельно. Режим метро 29.10 заново не подтверждён.",
+                "source_ids": []
+              },
+              "egress": {
+                "minutes": 115,
+                "description": "От станции Толмачёво около 9,2 км пешком до каньона",
+                "basis": "BRouter 29.10.2026: 9226 м, 6587 с; округлено до 110 минут ходьбы плюс 5 минут на выход с платформы. Оценка без отдыха и полевой проверки проходимости.",
+                "source_ids": [
+                  "walking-map"
+                ]
+              },
+              "stages": [
+                {
+                  "from_stop": "szppk:036002",
+                  "to_stop": "szppk:072102",
+                  "from_name": "Санкт-Петербург, Балтийский вокзал",
+                  "to_name": "Толмачёво",
+                  "source_ids": [
+                    "szppk"
+                  ],
+                  "trips": [
+                    {
+                      "id": "6105",
+                      "mode": "suburban",
+                      "label": "Электричка 6105",
+                      "departure": "2026-10-30T07:15:00+03:00",
+                      "arrival": "2026-10-30T09:17:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7451",
+                      "mode": "suburban",
+                      "label": "Ласточка 7451",
+                      "departure": "2026-10-30T08:37:00+03:00",
+                      "arrival": "2026-10-30T10:00:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7413",
+                      "mode": "suburban",
+                      "label": "Ласточка 7413",
+                      "departure": "2026-10-30T09:36:00+03:00",
+                      "arrival": "2026-10-30T11:40:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6119",
+                      "mode": "suburban",
+                      "label": "Электричка 6119",
+                      "departure": "2026-10-30T13:50:00+03:00",
+                      "arrival": "2026-10-30T15:56:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7453",
+                      "mode": "suburban",
+                      "label": "Ласточка 7453",
+                      "departure": "2026-10-30T15:00:00+03:00",
+                      "arrival": "2026-10-30T16:26:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6125",
+                      "mode": "suburban",
+                      "label": "Электричка 6125",
+                      "departure": "2026-10-30T16:25:00+03:00",
+                      "arrival": "2026-10-30T18:26:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6131",
+                      "mode": "suburban",
+                      "label": "Электричка 6131",
+                      "departure": "2026-10-30T17:55:00+03:00",
+                      "arrival": "2026-10-30T19:58:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "7455",
+                      "mode": "suburban",
+                      "label": "Ласточка 7455",
+                      "departure": "2026-10-30T19:20:00+03:00",
+                      "arrival": "2026-10-30T20:43:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6135",
+                      "mode": "suburban",
+                      "label": "Электричка 6135",
+                      "departure": "2026-10-30T19:38:00+03:00",
+                      "arrival": "2026-10-30T22:01:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6139",
+                      "mode": "suburban",
+                      "label": "Электричка 6139",
+                      "departure": "2026-10-30T21:10:00+03:00",
+                      "arrival": "2026-10-30T23:14:00+03:00",
+                      "source_id": "szppk"
+                    },
+                    {
+                      "id": "6141",
+                      "mode": "suburban",
+                      "label": "Электричка 6141",
+                      "departure": "2026-10-30T23:45:00+03:00",
+                      "arrival": "2026-10-31T01:48:00+03:00",
+                      "source_id": "szppk"
+                    }
+                  ]
+                }
+              ],
+              "transfers": []
+            }
+          ]
+        }
+      },
+      "is_error": false,
+      "result": {
+        "status": "needs_data",
+        "options": [],
+        "warnings": [
+          "tolmachevo-canyon/этап 1: нет подтверждённого покрытия дат 2026-10-31–2026-10-31; нужно расписание на запрошенное окно",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ],
+        "sources": [
+          {
+            "id": "szppk",
+            "url": "https://ticket.ppk-piter.ru/passenger/schedule/?from=036002&to=072102&when=2026-10-30",
+            "checked_at": "2026-10-29T15:49:45+03:00",
+            "valid_dates": [
+              "2026-10-30"
+            ],
+            "mode": "manual",
+            "verified": true
+          },
+          {
+            "id": "walking-map",
+            "url": "https://brouter.de/brouter?lonlats=29.8967895%2C58.8646210%7C29.985616%2C58.824440&profile=hiking-mountain&alternativeidx=0&format=geojson",
+            "checked_at": "2026-10-29T15:49:45+03:00",
+            "valid_dates": [
+              "2026-10-30",
+              "2026-10-31"
+            ],
+            "mode": "manual",
+            "verified": true
+          }
+        ],
+        "data_kind": "real",
+        "search_scope": {
+          "chains": [
+            "tolmachevo-canyon"
+          ],
+          "departure_window": {
+            "start": "2026-10-31T06:00:00+03:00",
+            "end": "2026-10-31T10:00:00+03:00"
+          },
+          "max_scheduled_stages": 3,
+          "complete": false,
+          "claim": "Лучшие среди переданных проверенных цепочек"
+        }
+      }
+    }
+  ]
+}

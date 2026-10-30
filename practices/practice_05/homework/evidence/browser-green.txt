@@ -1,0 +1,23 @@
+$ /Users/pip/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --test practices/practice_05/homework/tests/browser.test.mjs
+✔ real form calculates, changes buffer and preserves warnings, timeline and source (1720.182792ms)
+✔ real negative windows remain no_routes and needs_data, and equal boundary succeeds (507.159209ms)
+✔ invalid fields retain input and keyboard correction returns to real success (571.3885ms)
+✔ computer timezone cannot shift Moscow inputs or output (378.946833ms)
+✔ editing stays available and stale responses cannot replace the current result: old-first (357.240083ms)
+✔ editing stays available and stale responses cannot replace the current result: new-first (366.797375ms)
+✔ editing stays available and stale responses cannot replace the current result: late-old-error (372.871541ms)
+✔ double submission of the same revision has one current request (244.039667ms)
+✔ broken transport or malformed result can be retried without a stale summary (584.082916ms)
+✔ ten second timeout allows a manual retry (333.734833ms)
+✔ partial success and fractional durations preserve full displayed information (356.011875ms)
+✔ metadata failure offers reload and a narrow screen has no horizontal overflow (364.789792ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6524.513875
+
+EXIT_CODE=0

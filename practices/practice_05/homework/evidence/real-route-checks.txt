@@ -1,0 +1,260 @@
+Real-route verification, 2026-10-29, branch practice_05
+
+COMMAND: sh scripts/check.sh
+All checks passed!
+22 files already formatted
+python3 -m unittest -v
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+uv run --locked --offline python -m unittest discover -s tests -v
+test_real_protocol_success_error_and_next_success (test_mcp.MCPTests.test_real_protocol_success_error_and_next_success) ... ok
+test_combination_budget_counts_all_chains_and_empty_tail (test_planner.PlannerTests.test_combination_budget_counts_all_chains_and_empty_tail) ... ok
+test_coverage_uses_boarding_date_and_every_day_of_window (test_planner.PlannerTests.test_coverage_uses_boarding_date_and_every_day_of_window) ... ok
+test_deduplicates_full_paths_without_padding (test_planner.PlannerTests.test_deduplicates_full_paths_without_padding) ... ok
+test_departure_is_0935 (test_planner.PlannerTests.test_departure_is_0935) ... ok
+test_departure_window_includes_boundaries (test_planner.PlannerTests.test_departure_window_includes_boundaries) ... ok
+test_empty_stage_needs_verified_dated_evidence (test_planner.PlannerTests.test_empty_stage_needs_verified_dated_evidence) ... ok
+test_large_combination_input_is_rejected_before_calculation (test_planner.PlannerTests.test_large_combination_input_is_rejected_before_calculation) ... ok
+test_missed_transfer_by_one_minute (test_planner.PlannerTests.test_missed_transfer_by_one_minute) ... ok
+test_no_routes_is_not_missing_data (test_planner.PlannerTests.test_no_routes_is_not_missing_data) ... ok
+test_old_snapshot_cannot_rule_out_routes_on_another_date (test_planner.PlannerTests.test_old_snapshot_cannot_rule_out_routes_on_another_date) ... ok
+test_overnight_is_30_minutes (test_planner.PlannerTests.test_overnight_is_30_minutes) ... ok
+test_partial_coverage_warns_even_if_option_exists (test_planner.PlannerTests.test_partial_coverage_warns_even_if_option_exists) ... ok
+test_rejects_invalid_requests (test_planner.PlannerTests.test_rejects_invalid_requests) ... ok
+test_same_departure_keeps_only_the_best_route (test_planner.PlannerTests.test_same_departure_keeps_only_the_best_route) ... ok
+test_sources_are_exposed_with_search_scope (test_planner.PlannerTests.test_sources_are_exposed_with_search_scope) ... ok
+test_transfer_at_buffer_boundary (test_planner.PlannerTests.test_transfer_at_buffer_boundary) ... ok
+test_transfer_must_connect_exact_stop_ids (test_planner.PlannerTests.test_transfer_must_connect_exact_stop_ids) ... ok
+test_unknown_access_is_missing_data_not_zero_minutes (test_planner.PlannerTests.test_unknown_access_is_missing_data_not_zero_minutes) ... ok
+test_unverified_access_source_cannot_confirm_a_whole_trip (test_planner.PlannerTests.test_unverified_access_source_cannot_confirm_a_whole_trip) ... ok
+test_unverified_and_wrong_date_are_not_confirmed (test_planner.PlannerTests.test_unverified_and_wrong_date_are_not_confirmed) ... ok
+test_cli_missing_file_is_actionable_without_traceback (test_sources.SourceTests.test_cli_missing_file_is_actionable_without_traceback) ... ok
+test_duplicate_json_keys_are_not_silently_overwritten (test_sources.SourceTests.test_duplicate_json_keys_are_not_silently_overwritten) ... ok
+test_import_never_marks_unverified_source_verified (test_sources.SourceTests.test_import_never_marks_unverified_source_verified) ... ok
+test_import_preserves_provenance_and_fixture_label (test_sources.SourceTests.test_import_preserves_provenance_and_fixture_label) ... ok
+test_missing_and_broken_input_report_input_error (test_sources.SourceTests.test_missing_and_broken_input_report_input_error) ... ok
+test_plan_cli_uses_calculator_and_labels_fixture (test_sources.SourceTests.test_plan_cli_uses_calculator_and_labels_fixture) ... ok
+test_validate_cli_writes_normalized_request (test_sources.SourceTests.test_validate_cli_writes_normalized_request) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 1.172s
+
+OK
+uv run --project "/Users/pip/ITMOv2/practices/practice_04/homework" --locked --offline python -m unittest discover -s tests -p 'test_adapter.py' -v
+test_bad_json_duplicates_and_constants (test_adapter.AdapterTests.test_bad_json_duplicates_and_constants) ... ok
+test_default_route_is_real_and_schedule_date_excludes_map_only_date (test_adapter.AdapterTests.test_default_route_is_real_and_schedule_date_excludes_map_only_date) ... ok
+test_equal_boundary_includes_the_departure (test_adapter.AdapterTests.test_equal_boundary_includes_the_departure) ... ok
+test_fixed_fixture_launch_still_produces_control_metadata (test_adapter.AdapterTests.test_fixed_fixture_launch_still_produces_control_metadata) ... ok
+test_fractional_durations_are_not_truncated (test_adapter.AdapterTests.test_fractional_durations_are_not_truncated) ... ok
+test_internal_error_is_safe_and_next_request_succeeds (test_adapter.AdapterTests.test_internal_error_is_safe_and_next_request_succeeds) ... ok
+test_media_type_and_fixed_routes (test_adapter.AdapterTests.test_media_type_and_fixed_routes) ... ok
+test_metadata_and_loopback (test_adapter.AdapterTests.test_metadata_and_loopback) ... ok
+test_missing_extra_and_non_object_fields (test_adapter.AdapterTests.test_missing_extra_and_non_object_fields) ... ok
+test_moscow_datetime_grammar_and_calendar (test_adapter.AdapterTests.test_moscow_datetime_grammar_and_calendar) ... ok
+test_new_date_needs_data_without_moving_source (test_adapter.AdapterTests.test_new_date_needs_data_without_moving_source) ... ok
+test_no_routes_is_a_complete_calculation (test_adapter.AdapterTests.test_no_routes_is_a_complete_calculation) ... ok
+test_normal_response_preserves_entire_prior_core_result (test_adapter.AdapterTests.test_normal_response_preserves_entire_prior_core_result) ... ok
+test_parallel_requests_and_repeats_do_not_mutate_snapshot (test_adapter.AdapterTests.test_parallel_requests_and_repeats_do_not_mutate_snapshot) ... ok
+test_partial_success_is_not_replaced_by_needs_data (test_adapter.AdapterTests.test_partial_success_is_not_replaced_by_needs_data) ... ok
+test_real_route_recalculation_negative_date_and_recovery (test_adapter.AdapterTests.test_real_route_recalculation_negative_date_and_recovery) ... ok
+test_real_route_retains_late_trains_and_midnight_arrival (test_adapter.AdapterTests.test_real_route_retains_late_trains_and_midnight_arrival) ... ok
+test_recalculation_uses_new_buffer (test_adapter.AdapterTests.test_recalculation_uses_new_buffer) ... ok
+test_reverse_window_has_stable_field_and_recovers (test_adapter.AdapterTests.test_reverse_window_has_stable_field_and_recovers) ... ok
+test_strict_numbers_and_ranges (test_adapter.AdapterTests.test_strict_numbers_and_ranges) ... ok
+test_unknown_duration_is_not_zero (test_adapter.AdapterTests.test_unknown_duration_is_not_zero) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.549s
+
+OK
+"/opt/homebrew/bin/node" --test tests/browser.test.mjs
+✔ real form calculates, changes buffer and preserves warnings, timeline and source (1627.968333ms)
+✔ real negative windows remain no_routes and needs_data, and equal boundary succeeds (473.573917ms)
+✔ invalid fields retain input and keyboard correction returns to real success (455.373333ms)
+✔ computer timezone cannot shift Moscow inputs or output (282.574667ms)
+✔ 24-hour Moscow input is explicit even in an English browser locale (202.934042ms)
+✔ unusable nested metadata cannot enable the form and reload recovers (365.53175ms)
+✔ editing stays available and stale responses cannot replace the current result: old-first (341.915083ms)
+✔ editing stays available and stale responses cannot replace the current result: new-first (347.951541ms)
+✔ editing stays available and stale responses cannot replace the current result: late-old-error (356.610041ms)
+✔ double submission of the same revision has one current request (217.6325ms)
+✔ broken transport or malformed result can be retried without a stale summary (544.238666ms)
+✔ ten second timeout allows a manual retry (337.544792ms)
+✔ partial success and fractional durations preserve full displayed information (332.992917ms)
+✔ metadata failure offers reload and a narrow screen has no horizontal overflow (333.599958ms)
+✔ default screen uses the real dated route and real calculation (365.384041ms)
+✔ real screen reports uncovered dates and recovers without moving trains (452.249833ms)
+✔ overnight real train shows the next date at the end of its timeline event (296.720458ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7733.8445
+✔ checks homework code, tests, dependencies, skill and environment configuration (109.624875ms)
+✔ ignores homework evidence, reports, environments and files outside project (2.098667ms)
+✔ returns a real failing runner result to the agent without losing edit output (7.30275ms)
+✔ checks apply_patch changes from an absolute project path and reports PASS (6.658292ms)
+✔ ignores evidence edits and reads, so logging cannot recursively run the check (1.857166ms)
+✔ reports a timeout as FAIL and stops a stuck runner (105.3185ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 327.465
+
+EXIT_CODE=0
+
+COMMAND: make test
+Practice 1 artifacts: OK
+Practice 2 artifacts: OK
+Standard library only: ready
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+All checks passed!
+15 files already formatted
+test_real_protocol_success_error_and_next_success (test_mcp.MCPTests.test_real_protocol_success_error_and_next_success) ... ok
+test_combination_budget_counts_all_chains_and_empty_tail (test_planner.PlannerTests.test_combination_budget_counts_all_chains_and_empty_tail) ... ok
+test_coverage_uses_boarding_date_and_every_day_of_window (test_planner.PlannerTests.test_coverage_uses_boarding_date_and_every_day_of_window) ... ok
+test_deduplicates_full_paths_without_padding (test_planner.PlannerTests.test_deduplicates_full_paths_without_padding) ... ok
+test_departure_is_0935 (test_planner.PlannerTests.test_departure_is_0935) ... ok
+test_departure_window_includes_boundaries (test_planner.PlannerTests.test_departure_window_includes_boundaries) ... ok
+test_empty_stage_needs_verified_dated_evidence (test_planner.PlannerTests.test_empty_stage_needs_verified_dated_evidence) ... ok
+test_large_combination_input_is_rejected_before_calculation (test_planner.PlannerTests.test_large_combination_input_is_rejected_before_calculation) ... ok
+test_missed_transfer_by_one_minute (test_planner.PlannerTests.test_missed_transfer_by_one_minute) ... ok
+test_no_routes_is_not_missing_data (test_planner.PlannerTests.test_no_routes_is_not_missing_data) ... ok
+test_old_snapshot_cannot_rule_out_routes_on_another_date (test_planner.PlannerTests.test_old_snapshot_cannot_rule_out_routes_on_another_date) ... ok
+test_overnight_is_30_minutes (test_planner.PlannerTests.test_overnight_is_30_minutes) ... ok
+test_partial_coverage_warns_even_if_option_exists (test_planner.PlannerTests.test_partial_coverage_warns_even_if_option_exists) ... ok
+test_rejects_invalid_requests (test_planner.PlannerTests.test_rejects_invalid_requests) ... ok
+test_same_departure_keeps_only_the_best_route (test_planner.PlannerTests.test_same_departure_keeps_only_the_best_route) ... ok
+test_sources_are_exposed_with_search_scope (test_planner.PlannerTests.test_sources_are_exposed_with_search_scope) ... ok
+test_transfer_at_buffer_boundary (test_planner.PlannerTests.test_transfer_at_buffer_boundary) ... ok
+test_transfer_must_connect_exact_stop_ids (test_planner.PlannerTests.test_transfer_must_connect_exact_stop_ids) ... ok
+test_unknown_access_is_missing_data_not_zero_minutes (test_planner.PlannerTests.test_unknown_access_is_missing_data_not_zero_minutes) ... ok
+test_unverified_access_source_cannot_confirm_a_whole_trip (test_planner.PlannerTests.test_unverified_access_source_cannot_confirm_a_whole_trip) ... ok
+test_unverified_and_wrong_date_are_not_confirmed (test_planner.PlannerTests.test_unverified_and_wrong_date_are_not_confirmed) ... ok
+test_cli_missing_file_is_actionable_without_traceback (test_sources.SourceTests.test_cli_missing_file_is_actionable_without_traceback) ... ok
+test_duplicate_json_keys_are_not_silently_overwritten (test_sources.SourceTests.test_duplicate_json_keys_are_not_silently_overwritten) ... ok
+test_import_never_marks_unverified_source_verified (test_sources.SourceTests.test_import_never_marks_unverified_source_verified) ... ok
+test_import_preserves_provenance_and_fixture_label (test_sources.SourceTests.test_import_preserves_provenance_and_fixture_label) ... ok
+test_missing_and_broken_input_report_input_error (test_sources.SourceTests.test_missing_and_broken_input_report_input_error) ... ok
+test_plan_cli_uses_calculator_and_labels_fixture (test_sources.SourceTests.test_plan_cli_uses_calculator_and_labels_fixture) ... ok
+test_validate_cli_writes_normalized_request (test_sources.SourceTests.test_validate_cli_writes_normalized_request) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 1.134s
+
+OK
+All checks passed!
+3 files already formatted
+test_bad_json_duplicates_and_constants (test_adapter.AdapterTests.test_bad_json_duplicates_and_constants) ... ok
+test_default_route_is_real_and_schedule_date_excludes_map_only_date (test_adapter.AdapterTests.test_default_route_is_real_and_schedule_date_excludes_map_only_date) ... ok
+test_equal_boundary_includes_the_departure (test_adapter.AdapterTests.test_equal_boundary_includes_the_departure) ... ok
+test_fixed_fixture_launch_still_produces_control_metadata (test_adapter.AdapterTests.test_fixed_fixture_launch_still_produces_control_metadata) ... ok
+test_fractional_durations_are_not_truncated (test_adapter.AdapterTests.test_fractional_durations_are_not_truncated) ... ok
+test_internal_error_is_safe_and_next_request_succeeds (test_adapter.AdapterTests.test_internal_error_is_safe_and_next_request_succeeds) ... ok
+test_media_type_and_fixed_routes (test_adapter.AdapterTests.test_media_type_and_fixed_routes) ... ok
+test_metadata_and_loopback (test_adapter.AdapterTests.test_metadata_and_loopback) ... ok
+test_missing_extra_and_non_object_fields (test_adapter.AdapterTests.test_missing_extra_and_non_object_fields) ... ok
+test_moscow_datetime_grammar_and_calendar (test_adapter.AdapterTests.test_moscow_datetime_grammar_and_calendar) ... ok
+test_new_date_needs_data_without_moving_source (test_adapter.AdapterTests.test_new_date_needs_data_without_moving_source) ... ok
+test_no_routes_is_a_complete_calculation (test_adapter.AdapterTests.test_no_routes_is_a_complete_calculation) ... ok
+test_normal_response_preserves_entire_prior_core_result (test_adapter.AdapterTests.test_normal_response_preserves_entire_prior_core_result) ... ok
+test_parallel_requests_and_repeats_do_not_mutate_snapshot (test_adapter.AdapterTests.test_parallel_requests_and_repeats_do_not_mutate_snapshot) ... ok
+test_partial_success_is_not_replaced_by_needs_data (test_adapter.AdapterTests.test_partial_success_is_not_replaced_by_needs_data) ... ok
+test_real_route_recalculation_negative_date_and_recovery (test_adapter.AdapterTests.test_real_route_recalculation_negative_date_and_recovery) ... ok
+test_real_route_retains_late_trains_and_midnight_arrival (test_adapter.AdapterTests.test_real_route_retains_late_trains_and_midnight_arrival) ... ok
+test_recalculation_uses_new_buffer (test_adapter.AdapterTests.test_recalculation_uses_new_buffer) ... ok
+test_reverse_window_has_stable_field_and_recovers (test_adapter.AdapterTests.test_reverse_window_has_stable_field_and_recovers) ... ok
+test_strict_numbers_and_ranges (test_adapter.AdapterTests.test_strict_numbers_and_ranges) ... ok
+test_unknown_duration_is_not_zero (test_adapter.AdapterTests.test_unknown_duration_is_not_zero) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.551s
+
+OK
+✔ real form calculates, changes buffer and preserves warnings, timeline and source (1074.794791ms)
+✔ real negative windows remain no_routes and needs_data, and equal boundary succeeds (453.559ms)
+✔ invalid fields retain input and keyboard correction returns to real success (462.750167ms)
+✔ computer timezone cannot shift Moscow inputs or output (278.651416ms)
+✔ 24-hour Moscow input is explicit even in an English browser locale (199.685375ms)
+✔ unusable nested metadata cannot enable the form and reload recovers (336.977791ms)
+✔ editing stays available and stale responses cannot replace the current result: old-first (319.827375ms)
+✔ editing stays available and stale responses cannot replace the current result: new-first (353.68625ms)
+✔ editing stays available and stale responses cannot replace the current result: late-old-error (354.868459ms)
+✔ double submission of the same revision has one current request (234.192667ms)
+✔ broken transport or malformed result can be retried without a stale summary (539.265834ms)
+✔ ten second timeout allows a manual retry (348.132917ms)
+✔ partial success and fractional durations preserve full displayed information (359.990875ms)
+✔ metadata failure offers reload and a narrow screen has no horizontal overflow (342.466208ms)
+✔ default screen uses the real dated route and real calculation (388.146541ms)
+✔ real screen reports uncovered dates and recovers without moving trains (462.939333ms)
+✔ overnight real train shows the next date at the end of its timeline event (324.106708ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7198.960291
+Standard library only: ready
+test_health_and_not_found (test_http.HttpTest.test_health_and_not_found) ... ok
+test_login_and_purchase_over_http (test_http.HttpTest.test_login_and_purchase_over_http) ... ok
+test_transport_only_binds_loopback (test_http.HttpTest.test_transport_only_binds_loopback) ... ok
+test_delete_of_fixture_root_stays_inside_exercise (test_service.SandboxTest.test_delete_of_fixture_root_stays_inside_exercise) ... ok
+test_external_directory_cannot_be_deleted (test_service.SandboxTest.test_external_directory_cannot_be_deleted) ... ok
+test_parent_paths_cannot_escape_exercise (test_service.SandboxTest.test_parent_paths_cannot_escape_exercise) ... ok
+test_symlink_cannot_escape_exercise (test_service.SandboxTest.test_symlink_cannot_escape_exercise) ... ok
+test_assistant_can_return_own_receipt (test_service.ShopTest.test_assistant_can_return_own_receipt) ... ok
+test_customer_can_buy_at_catalog_price (test_service.ShopTest.test_customer_can_buy_at_catalog_price) ... ok
+test_health_and_catalog (test_service.ShopTest.test_health_and_catalog) ... ok
+test_own_profile_and_receipt (test_service.ShopTest.test_own_profile_and_receipt) ... ok
+test_review_can_be_submitted_and_viewed (test_service.ShopTest.test_review_can_be_submitted_and_viewed) ... ok
+test_staff_can_export_with_staff_session (test_service.ShopTest.test_staff_can_export_with_staff_session) ... ok
+test_tokens_identify_distinct_users (test_service.ShopTest.test_tokens_identify_distinct_users) ... ok
+test_unknown_product_rejected (test_service.ShopTest.test_unknown_product_rejected) ... ok
+test_wrong_password_rejected (test_service.ShopTest.test_wrong_password_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.560s
+
+OK
+
+EXIT_CODE=0
+
+COMMAND: git diff --check
+
+EXIT_CODE=0
+
+COMMAND: git diff --exit-code 5165c87 -- practices/practice_04/homework
+
+EXIT_CODE=0

@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-27",
+  "executor": "read-only research agent from speckit-plan",
+  "fetch_mcp_available": false,
+  "fallback_reason": "No universal fetch MCP in current ALL_TOOLS; GitHub fetch cannot access Python Docs.",
+  "actual_calls": [
+    {
+      "tool": "tools.web__run",
+      "arguments": {
+        "open": [
+          {
+            "ref_id": "https://docs.python.org/3.12/library/http.server.html"
+          },
+          {
+            "ref_id": "https://docs.python.org/3.12/library/json.html"
+          },
+          {
+            "ref_id": "https://docs.python.org/3.12/library/copy.html"
+          },
+          {
+            "ref_id": "https://docs.python.org/3.12/library/datetime.html"
+          }
+        ],
+        "response_length": "long"
+      }
+    },
+    {
+      "tool": "tools.web__run",
+      "arguments": {
+        "open": [
+          {
+            "ref_id": "https://docs.python.org/3.12/library/stdtypes.html#boolean-type-bool"
+          },
+          {
+            "ref_id": "https://docs.python.org/3.12/library/json.html",
+            "lineno": 245
+          },
+          {
+            "ref_id": "https://docs.python.org/3.12/library/json.html",
+            "lineno": 350
+          },
+          {
+            "ref_id": "https://docs.python.org/3.12/library/http.server.html",
+            "lineno": 122
+          },
+          {
+            "ref_id": "https://docs.python.org/3.12/library/datetime.html",
+            "lineno": 1005
+          }
+        ],
+        "response_length": "long"
+      }
+    },
+    {
+      "tool": "tools.web__run",
+      "arguments": {
+        "find": [
+          {
+            "ref_id": "https://docs.python.org/3.12/library/stdtypes.html",
+            "pattern": "bool is a subclass of int"
+          },
+          {
+            "ref_id": "https://docs.python.org/3.12/library/datetime.html",
+            "pattern": "datetime.fromisoformat"
+          }
+        ],
+        "response_length": "short"
+      }
+    }
+  ],
+  "facts_source": "specs/001-trip-planner-form/research.md"
+}
