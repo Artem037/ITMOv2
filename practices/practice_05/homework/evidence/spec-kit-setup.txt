@@ -1,0 +1,536 @@
+Transcript formatting: trailing whitespace from CLI banners removed before commit; output text and exit codes preserved.
+Spec Kit stage 2 setup; pinned official source tag v1.2.2
+$ uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.2.2
+WARN Fixing invalid version specifier by removing stray quotes (before: `>= '2.7'`; after: `>= 2.7`)
+Resolved 41 packages in 1.98s
+   Building specify-cli @ git+https://github.com/github/spec-kit.git@74be0a63e93c7087c5b06556b7561810d8f78a45
+Downloading pygments (1.2MiB)
+ Downloaded pygments
+      Built specify-cli @ git+https://github.com/github/spec-kit.git@74be0a63e93c7087c5b06556b7561810d8f78a45
+Prepared 14 packages in 2.11s
+Installed 41 packages in 63ms
+ + annotated-doc==0.0.5
+ + annotated-types==0.8.0
+ + anyio==4.15.1
+ + attrs==26.1.0
+ + cffi==2.1.1
+ + click==8.5.0
+ + cryptography==50.0.2
+ + h11==0.16.0
+ + httpcore2==2.16.0
+ + httpx2==2.16.0
+ + idna==3.20
+ + json5==0.17.3
+ + jsonschema==4.26.0
+ + jsonschema-specifications==2025.9.1
+ + markdown-it-py==4.2.0
+ + mcp==2.3.0
+ + mcp-types==2.3.0
+ + mdurl==0.1.2
+ + opentelemetry-api==1.45.1
+ + packaging==26.3
+ + pathspec==1.1.1
+ + pycparser==3.11
+ + pydantic==2.14.1
+ + pydantic-core==2.50.1
+ + pygments==2.21.0
+ + pyjwt==2.15.1
+ + python-multipart==0.0.32
+ + pyyaml==6.0.3
+ + readchar==4.2.2
+ + referencing==0.37.0
+ + rich==15.0.0
+ + rpds-py==2026.9.1
+ + shellingham==1.5.4
+ + specify-cli==1.2.2 (from git+https://github.com/github/spec-kit.git@74be0a63e93c7087c5b06556b7561810d8f78a45)
+ + sse-starlette==3.5.0
+ + starlette==1.9.0
+ + truststore==0.10.5
+ + typer==0.27.3
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+ + uvicorn==0.54.0
+Installed 1 executable: specify
+warning: `/Users/pip/.local/bin` is not on your PATH. To use installed tools, run `export PATH="/Users/pip/.local/bin:$PATH"` or `uv tool update-shell`.
+
+Exit code: 0
+
+$ uv tool update-shell
+Created configuration file: /Users/pip/.zshenv
+Restart your shell to apply changes
+
+Exit code: 0
+
+$ /Users/pip/.local/bin/specify version --json
+{
+  "cli_version": "1.2.2",
+  "runtime": {
+    "python": "3.14.8",
+    "openssl": "OpenSSL 3.6.5 29 Sep 2026"
+  },
+  "system": {
+    "platform": "Darwin",
+    "architecture": "arm64",
+    "os_version": "Darwin Kernel Version 25.5.0: Mon Apr 27 20:39:29 PDT 2026; root:xnu-12377.121.6~2/RELEASE_ARM64_T8142"
+  },
+  "features": {
+    "controlled_multi_install_integrations": true,
+    "integration_use_command": true,
+    "multi_install_safe_registry_metadata": true,
+    "integration_upgrade_command": true,
+    "self_check_command": true,
+    "workflow_catalog": true,
+    "bundled_templates": true
+  }
+}
+
+Exit code: 0
+
+$ /Users/pip/.local/bin/specify integration list
+Error: Not a Spec Kit project (no .specify/ directory)
+Run this command from a Spec Kit project root or set SPECIFY_INIT_DIR to one.
+
+Exit code: 1
+
+$ specify init --here --force --non-interactive --integration codex --script sh
+              ███████╗██████╗ ███████╗ ██████╗██╗███████╗██╗   ██╗
+              ██╔════╝██╔══██╗██╔════╝██╔════╝██║██╔════╝╚██╗ ██╔╝
+              ███████╗██████╔╝█████╗  ██║     ██║█████╗   ╚████╔╝
+              ╚════██║██╔═══╝ ██╔══╝  ██║     ██║██╔══╝    ╚██╔╝
+              ███████║██║     ███████╗╚██████╗██║██║        ██║
+              ╚══════╝╚═╝     ╚══════╝ ╚═════╝╚═╝╚═╝        ╚═╝
+
+               GitHub Spec Kit - Spec-Driven Development Toolkit
+
+Warning: Current directory is not empty (20 items)
+Template files will be merged with existing content and may overwrite existing
+files
+--force supplied: skipping confirmation and proceeding with merge
+╭──────────────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  Specify Project Setup                                                       │
+│                                                                              │
+│  Project         ITMOv2                                                      │
+│  Working Path    /Users/pip/ITMOv2                                           │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Selected coding agent integration: codex
+Selected script type: sh
+Initialize Specify Project
+├── ● Check required tools (ok)
+├── ● Select coding agent integration (codex)
+├── ● Select script type (sh)
+├── ● Install integration (Codex CLI)
+├── ● Install shared infrastructure (scripts (sh) + templates)
+├── ● Ensure scripts executable (6 updated)
+├── ● Constitution setup (copied from template)
+├── ● Install bundled workflow (speckit installed)
+└── ● Finalize (project ready)
+
+Project ready.
+
+╭─────────────────────────── Agent Folder Security ────────────────────────────╮
+│                                                                              │
+│  Some agents may store credentials, auth tokens, or other identifying and    │
+│  private artifacts in the agent folder within your project.                  │
+│  Consider adding .agents/ (or parts of it) to .gitignore to prevent          │
+│  accidental credential leakage.                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭───────────────────────────────── Next Steps ─────────────────────────────────╮
+│                                                                              │
+│  1. You're already in the project directory!                                 │
+│  2. Start Codex in this project directory; spec-kit skills were installed    │
+│  to .agents/skills                                                           │
+│  3. Start using skills with your coding agent:                               │
+│     3.1 $speckit-constitution - Establish project principles                 │
+│     3.2 $speckit-specify - Create baseline specification                     │
+│     3.3 $speckit-plan - Create implementation plan                           │
+│     3.4 $speckit-tasks - Generate actionable tasks                           │
+│     3.5 $speckit-implement - Execute implementation                          │
+│     3.6 $speckit-converge - Assess the codebase and append remaining work    │
+│  as tasks                                                                    │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭───────────────────────────── Enhancement Skills ─────────────────────────────╮
+│                                                                              │
+│  Optional skills that you can use for your specs (improve quality &          │
+│  confidence)                                                                 │
+│                                                                              │
+│  ○ $speckit-clarify (optional) - Ask structured questions to de-risk         │
+│  ambiguous areas before planning (run before $speckit-plan if used)          │
+│  ○ $speckit-analyze (optional) - Cross-artifact consistency & alignment      │
+│  report (after $speckit-tasks, before $speckit-implement)                    │
+│  ○ $speckit-checklist (optional) - Generate quality checklists to validate   │
+│  requirements completeness, clarity, and consistency (after $speckit-plan)   │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Exit code: 0
+
+$ bash .specify/scripts/bash/resolve-template.sh constitution-template --json
+{"TEMPLATE_NAME":"constitution-template","TEMPLATE_CONTENT":"# [PROJECT_NAME] Constitution\n<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->\n\n## Core Principles\n\n### [PRINCIPLE_1_NAME]\n<!-- Example: I. Library-First -->\n[PRINCIPLE_1_DESCRIPTION]\n<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->\n\n### [PRINCIPLE_2_NAME]\n<!-- Example: II. CLI Interface -->\n[PRINCIPLE_2_DESCRIPTION]\n<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->\n\n### [PRINCIPLE_3_NAME]\n<!-- Example: III. Test-First (NON-NEGOTIABLE) -->\n[PRINCIPLE_3_DESCRIPTION]\n<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->\n\n### [PRINCIPLE_4_NAME]\n<!-- Example: IV. Integration Testing -->\n[PRINCIPLE_4_DESCRIPTION]\n<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->\n\n### [PRINCIPLE_5_NAME]\n<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->\n[PRINCIPLE_5_DESCRIPTION]\n<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->\n\n## [SECTION_2_NAME]\n<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->\n\n[SECTION_2_CONTENT]\n<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->\n\n## [SECTION_3_NAME]\n<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->\n\n[SECTION_3_CONTENT]\n<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->\n\n## Governance\n<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->\n\n[GOVERNANCE_RULES]\n<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->\n\n**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]\n<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->\n"}
+
+Exit code: 0
+
+$ bash .specify/scripts/bash/resolve-template.sh spec-template --json
+{"TEMPLATE_NAME":"spec-template","TEMPLATE_CONTENT":"# Feature Specification: [FEATURE NAME]\n\n**Feature Branch**: `[###-feature-name]`\n\n**Created**: [DATE]\n\n**Status**: Draft\n\n**Input**: User description: \"$ARGUMENTS\"\n\n## User Scenarios & Testing *(mandatory)*\n\n<!--\n  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.\n  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,\n  you should still have a viable MVP (Minimum Viable Product) that delivers value.\n\n  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.\n  Think of each story as a standalone slice of functionality that can be:\n  - Developed independently\n  - Tested independently\n  - Deployed independently\n  - Demonstrated to users independently\n-->\n\n### User Story 1 - [Brief Title] (Priority: P1)\n\n[Describe this user journey in plain language]\n\n**Why this priority**: [Explain the value and why it has this priority level]\n\n**Independent Test**: [Describe how this can be tested independently - e.g., \"Can be fully tested by [specific action] and delivers [specific value]\"]\n\n**Acceptance Scenarios**:\n\n1. **Given** [initial state], **When** [action], **Then** [expected outcome]\n2. **Given** [initial state], **When** [action], **Then** [expected outcome]\n\n---\n\n### User Story 2 - [Brief Title] (Priority: P2)\n\n[Describe this user journey in plain language]\n\n**Why this priority**: [Explain the value and why it has this priority level]\n\n**Independent Test**: [Describe how this can be tested independently]\n\n**Acceptance Scenarios**:\n\n1. **Given** [initial state], **When** [action], **Then** [expected outcome]\n\n---\n\n### User Story 3 - [Brief Title] (Priority: P3)\n\n[Describe this user journey in plain language]\n\n**Why this priority**: [Explain the value and why it has this priority level]\n\n**Independent Test**: [Describe how this can be tested independently]\n\n**Acceptance Scenarios**:\n\n1. **Given** [initial state], **When** [action], **Then** [expected outcome]\n\n---\n\n[Add more user stories as needed, each with an assigned priority]\n\n### Edge Cases\n\n<!--\n  ACTION REQUIRED: The content in this section represents placeholders.\n  Fill them out with the right edge cases.\n-->\n\n- What happens when [boundary condition]?\n- How does system handle [error scenario]?\n\n## Requirements *(mandatory)*\n\n<!--\n  ACTION REQUIRED: The content in this section represents placeholders.\n  Fill them out with the right functional requirements.\n-->\n\n### Functional Requirements\n\n- **FR-001**: System MUST [specific capability, e.g., \"allow users to create accounts\"]\n- **FR-002**: System MUST [specific capability, e.g., \"validate email addresses\"]\n- **FR-003**: Users MUST be able to [key interaction, e.g., \"reset their password\"]\n- **FR-004**: System MUST [data requirement, e.g., \"persist user preferences\"]\n- **FR-005**: System MUST [behavior, e.g., \"log all security events\"]\n\n*Example of marking unclear requirements:*\n\n- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]\n- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]\n\n### Key Entities *(include if feature involves data)*\n\n- **[Entity 1]**: [What it represents, key attributes without implementation]\n- **[Entity 2]**: [What it represents, relationships to other entities]\n\n## Success Criteria *(mandatory)*\n\n<!--\n  ACTION REQUIRED: Define measurable success criteria.\n  These must be technology-agnostic and measurable.\n-->\n\n### Measurable Outcomes\n\n- **SC-001**: [Measurable metric, e.g., \"Users can complete account creation in under 2 minutes\"]\n- **SC-002**: [Measurable metric, e.g., \"System handles 1000 concurrent users without degradation\"]\n- **SC-003**: [User satisfaction metric, e.g., \"90% of users successfully complete primary task on first attempt\"]\n- **SC-004**: [Business metric, e.g., \"Reduce support tickets related to [X] by 50%\"]\n\n## Assumptions\n\n<!--\n  ACTION REQUIRED: The content in this section represents placeholders.\n  Fill them out with the right assumptions based on reasonable defaults\n  chosen when the feature description did not specify certain details.\n-->\n\n- [Assumption about target users, e.g., \"Users have stable internet connectivity\"]\n- [Assumption about scope boundaries, e.g., \"Mobile support is out of scope for v1\"]\n- [Assumption about data/environment, e.g., \"Existing authentication system will be reused\"]\n- [Dependency on existing system/service, e.g., \"Requires access to the existing user profile API\"]\n"}
+
+Exit code: 0
+
+$ bash .specify/scripts/bash/resolve-template.sh checklist-template --json
+{"TEMPLATE_NAME":"checklist-template","TEMPLATE_CONTENT":"# [CHECKLIST TYPE] Checklist: [FEATURE NAME]\n\n**Purpose**: [Brief description of what this checklist covers]\n**Created**: [DATE]\n**Feature**: [Link to spec.md or relevant documentation]\n\n**Note**: This custom checklist is generated by the `$speckit-checklist` command based on feature context and requirements.\n**Review Ownership**: This checklist is a reviewer-owned requirements-quality review artifact. Mark an item `[x]` only when the reviewer determines the requirements-quality criterion is satisfied.\n**Marker Semantics**: `[x]` means the criterion has been reviewed and satisfied for requirements quality. It does not mean implementation work is complete.\n\n<!--\n  ============================================================================\n  IMPORTANT: The checklist items below are SAMPLE ITEMS for illustration only.\n\n  The $speckit-checklist command MUST replace these with actual items based on:\n  - User's specific checklist request\n  - Feature requirements from spec.md\n  - Technical context from plan.md\n  - Implementation details from tasks.md\n\n  DO NOT keep these sample items in the generated checklist file.\n  ============================================================================\n-->\n\n## [Category 1]\n\n- [ ] CHK001 First checklist item with clear action\n- [ ] CHK002 Second checklist item\n- [ ] CHK003 Third checklist item\n\n## [Category 2]\n\n- [ ] CHK004 Another category item\n- [ ] CHK005 Item with specific criteria\n- [ ] CHK006 Final item in this category\n\n## Notes\n\n- Mark items `[x]` only after review confirms the requirement-quality criterion is satisfied\n- Leave items unchecked when they still require clarification, correction, or reviewer evaluation\n- `$speckit-implement` reads checklist checkbox state as a gate and must not modify markers\n- `checklists/requirements.md` has a separate built-in lifecycle maintained by `$speckit-specify` and `$speckit-clarify`\n- Add comments or findings inline\n- Link to relevant resources or documentation\n- Items are numbered sequentially for easy reference\n"}
+
+Exit code: 0
+
+Workflow: $speckit-specify (installed skill followed by current agent; not a CLI subcommand)
+$ bash .specify/scripts/bash/create-new-feature.sh --json --short-name trip-planner-form 'Local form to recalculate prepared trips using the existing transit planner'
+{"BRANCH_NAME":"001-trip-planner-form","SPEC_FILE":"/Users/pip/ITMOv2/specs/001-trip-planner-form/spec.md","FEATURE_NUM":"001"}
+# To persist: export SPECIFY_FEATURE=001-trip-planner-form
+#              export SPECIFY_FEATURE_DIRECTORY=/Users/pip/ITMOv2/specs/001-trip-planner-form
+
+Exit code: 0
+
+Agent workflow: $speckit-constitution
+Installed skill read and applied; resolved constitution-template. Output: .specify/memory/constitution.md v1.0.0; no template-source edits; hooks absent.
+Agent workflow: $speckit-specify
+Installed skill read and applied to accepted BRIEF. Resolved spec-template; core helper created one feature. Outputs: specs/001-trip-planner-form/spec.md and checklists/requirements.md; 16/16 self-review; hooks absent.
+
+Workflow: $speckit-clarify (installed agent skill)
+$ bash .specify/scripts/bash/check-prerequisites.sh --json --paths-only
+{"REPO_ROOT":"/Users/pip/ITMOv2","BRANCH":"001-trip-planner-form","FEATURE_DIR":"/Users/pip/ITMOv2/specs/001-trip-planner-form","FEATURE_SPEC":"/Users/pip/ITMOv2/specs/001-trip-planner-form/spec.md","IMPL_PLAN":"/Users/pip/ITMOv2/specs/001-trip-planner-form/plan.md","TASKS":"/Users/pip/ITMOv2/specs/001-trip-planner-form/tasks.md"}
+
+Exit code: 0
+Spec reviewed against scope/data/UX/quality/integration/edge-case/constraints/terminology/completion/placeholder taxonomy.
+Questions asked: 0; no critical ambiguity in accepted functional scope. No invented user Q/A.
+Deferred: exact UI/logic contract and technical choices belong to homework stages 3-4, before code.
+Checklist revalidated: 16/16 -> 16/16, no marker changes. Spec unchanged by clarify; hooks absent.
+
+Final stage 2 verification
+
+$ specify version --json
+{
+  "cli_version": "1.2.2",
+  "runtime": {
+    "python": "3.14.8",
+    "openssl": "OpenSSL 3.6.5 29 Sep 2026"
+  },
+  "system": {
+    "platform": "Darwin",
+    "architecture": "arm64",
+    "os_version": "Darwin Kernel Version 25.5.0: Mon Apr 27 20:39:29 PDT 2026; root:xnu-12377.121.6~2/RELEASE_ARM64_T8142"
+  },
+  "features": {
+    "controlled_multi_install_integrations": true,
+    "integration_use_command": true,
+    "multi_install_safe_registry_metadata": true,
+    "integration_upgrade_command": true,
+    "self_check_command": true,
+    "workflow_catalog": true,
+    "bundled_templates": true
+  }
+}
+
+Exit code: 0
+
+$ specify check
+              ███████╗██████╗ ███████╗ ██████╗██╗███████╗██╗   ██╗
+              ██╔════╝██╔══██╗██╔════╝██╔════╝██║██╔════╝╚██╗ ██╔╝
+              ███████╗██████╔╝█████╗  ██║     ██║█████╗   ╚████╔╝
+              ╚════██║██╔═══╝ ██╔══╝  ██║     ██║██╔══╝    ╚██╔╝
+              ███████║██║     ███████╗╚██████╗██║██║        ██║
+              ╚══════╝╚═╝     ╚══════╝ ╚═════╝╚═╝╚═╝        ╚═╝
+
+               GitHub Spec Kit - Spec-Driven Development Toolkit
+
+Checking for installed tools...
+
+Check Available Tools
+├── ● Antigravity (not found)
+├── ● Alquimia AI (not found)
+├── ● Amp (not found)
+├── ● Auggie CLI (not found)
+├── ○ IBM Bob (IDE-based, no CLI check)
+├── ● Claude Code (not found)
+├── ○ Cline (IDE-based, no CLI check)
+├── ● CodeBuddy (not found)
+├── ● Codex CLI (available)
+├── ● Command Code (not found)
+├── ○ GitHub Copilot (IDE-based, no CLI check)
+├── ○ Cursor (IDE-based, no CLI check)
+├── ● Devin for Terminal (not found)
+├── ● Docker Agent (not found)
+├── ● Factory Droid (not found)
+├── ● DeepSeek Harness (not found)
+├── ○ Firebender (IDE-based, no CLI check)
+├── ● Forge (not found)
+├── ● Gemini CLI (not found)
+├── ● Goose (not found)
+├── ● Grok Build (not found)
+├── ● Hermes Agent (not found)
+├── ● Junie (not found)
+├── ○ Kilo Code (IDE-based, no CLI check)
+├── ● Kimi Code (not found)
+├── ● Kiro CLI (not found)
+├── ○ Lingma (IDE-based, no CLI check)
+├── ● MiniMax Code (not found)
+├── ● Muse Code (not found)
+├── ● Oh My Pi (not found)
+├── ● opencode (available)
+├── ● Pi Coding Agent (not found)
+├── ● Qoder CLI (not found)
+├── ● Qwen Code (not found)
+├── ● RovoDev ACLI (not found)
+├── ● SHAI (not found)
+├── ● Tabnine CLI (not found)
+├── ○ Trae (IDE-based, no CLI check)
+├── ● Mistral Vibe (not found)
+├── ● ZCode (not found)
+├── ○ Zed (IDE-based, no CLI check)
+├── ● Visual Studio Code (not found)
+└── ● Visual Studio Code Insiders (not found)
+
+Specify CLI is ready to use!
+Tip: Run 'specify self check' to verify you have the latest CLI version
+
+Exit code: 0
+
+$ specify integration list
+                           Coding Agent Integrations
+┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃              ┃               ┃                ┃              ┃ Multi-install ┃
+┃ Key          ┃ Name          ┃ Status         ┃ CLI Required ┃ Safe          ┃
+┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ agy          │ Antigravity   │                │ yes          │ no            │
+│ alquimia     │ Alquimia AI   │                │ yes          │ yes           │
+│ amp          │ Amp           │                │ yes          │ no            │
+│ auggie       │ Auggie CLI    │                │ yes          │ yes           │
+│ bob          │ IBM Bob       │                │ no (IDE)     │ no            │
+│ claude       │ Claude Code   │                │ yes          │ yes           │
+│ cline        │ Cline         │                │ no (IDE)     │ yes           │
+│ codebuddy    │ CodeBuddy     │                │ yes          │ yes           │
+│ codex        │ Codex CLI     │ installed      │ yes          │ yes           │
+│              │               │ (default)      │              │               │
+│ command-code │ Command Code  │                │ yes          │ yes           │
+│ copilot      │ GitHub        │                │ no (IDE)     │ no            │
+│              │ Copilot       │                │              │               │
+│ cursor-agent │ Cursor        │                │ no (IDE)     │ yes           │
+│ devin        │ Devin for     │                │ yes          │ no            │
+│              │ Terminal      │                │              │               │
+│ docker-agent │ Docker Agent  │                │ yes          │ no            │
+│ droid        │ Factory Droid │                │ yes          │ yes           │
+│ dsh          │ DeepSeek      │                │ yes          │ yes           │
+│              │ Harness       │                │              │               │
+│ firebender   │ Firebender    │                │ no (IDE)     │ yes           │
+│ forge        │ Forge         │                │ yes          │ no            │
+│ gemini       │ Gemini CLI    │                │ yes          │ yes           │
+│ generic      │ Generic       │                │ no (IDE)     │ no            │
+│              │ (bring your   │                │              │               │
+│              │ own agent)    │                │              │               │
+│ goose        │ Goose         │                │ yes          │ no            │
+│ grok         │ Grok Build    │                │ yes          │ yes           │
+│ hermes       │ Hermes Agent  │                │ yes          │ no            │
+│ junie        │ Junie         │                │ yes          │ yes           │
+│ kilocode     │ Kilo Code     │                │ no (IDE)     │ yes           │
+│ kimi         │ Kimi Code     │                │ yes          │ no            │
+│ kiro-cli     │ Kiro CLI      │                │ yes          │ yes           │
+│ lingma       │ Lingma        │                │ no (IDE)     │ yes           │
+│ mcode        │ MiniMax Code  │                │ yes          │ yes           │
+│ muse         │ Muse Code     │                │ yes          │ no            │
+│ omp          │ Oh My Pi      │                │ yes          │ yes           │
+│ opencode     │ opencode      │                │ yes          │ yes           │
+│ pi           │ Pi Coding     │                │ yes          │ yes           │
+│              │ Agent         │                │              │               │
+│ qodercli     │ Qoder CLI     │                │ yes          │ yes           │
+│ qwen         │ Qwen Code     │                │ yes          │ yes           │
+│ rovodev      │ RovoDev ACLI  │                │ yes          │ no            │
+│ shai         │ SHAI          │                │ yes          │ yes           │
+│ tabnine      │ Tabnine CLI   │                │ yes          │ yes           │
+│ trae         │ Trae          │                │ no (IDE)     │ yes           │
+│ vibe         │ Mistral Vibe  │                │ yes          │ yes           │
+│ zcode        │ ZCode         │                │ yes          │ yes           │
+│ zed          │ Zed           │                │ no (IDE)     │ no            │
+└──────────────┴───────────────┴────────────────┴──────────────┴───────────────┘
+
+Default integration: codex
+Installed integrations: codex
+
+Exit code: 0
+
+$ specify extension list
+No extensions installed.
+
+Install an extension with:
+  specify extension add <extension-name>
+
+Exit code: 0
+
+$ sh scripts/check.sh
+All checks passed!
+19 files already formatted
+python3 -m unittest -v
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+uv run --locked --offline python -m unittest discover -s tests -v
+test_real_protocol_success_error_and_next_success (test_mcp.MCPTests.test_real_protocol_success_error_and_next_success) ... ok
+test_combination_budget_counts_all_chains_and_empty_tail (test_planner.PlannerTests.test_combination_budget_counts_all_chains_and_empty_tail) ... ok
+test_coverage_uses_boarding_date_and_every_day_of_window (test_planner.PlannerTests.test_coverage_uses_boarding_date_and_every_day_of_window) ... ok
+test_deduplicates_full_paths_without_padding (test_planner.PlannerTests.test_deduplicates_full_paths_without_padding) ... ok
+test_departure_is_0935 (test_planner.PlannerTests.test_departure_is_0935) ... ok
+test_departure_window_includes_boundaries (test_planner.PlannerTests.test_departure_window_includes_boundaries) ... ok
+test_empty_stage_needs_verified_dated_evidence (test_planner.PlannerTests.test_empty_stage_needs_verified_dated_evidence) ... ok
+test_large_combination_input_is_rejected_before_calculation (test_planner.PlannerTests.test_large_combination_input_is_rejected_before_calculation) ... ok
+test_missed_transfer_by_one_minute (test_planner.PlannerTests.test_missed_transfer_by_one_minute) ... ok
+test_no_routes_is_not_missing_data (test_planner.PlannerTests.test_no_routes_is_not_missing_data) ... ok
+test_old_snapshot_cannot_rule_out_routes_on_another_date (test_planner.PlannerTests.test_old_snapshot_cannot_rule_out_routes_on_another_date) ... ok
+test_overnight_is_30_minutes (test_planner.PlannerTests.test_overnight_is_30_minutes) ... ok
+test_partial_coverage_warns_even_if_option_exists (test_planner.PlannerTests.test_partial_coverage_warns_even_if_option_exists) ... ok
+test_rejects_invalid_requests (test_planner.PlannerTests.test_rejects_invalid_requests) ... ok
+test_same_departure_keeps_only_the_best_route (test_planner.PlannerTests.test_same_departure_keeps_only_the_best_route) ... ok
+test_sources_are_exposed_with_search_scope (test_planner.PlannerTests.test_sources_are_exposed_with_search_scope) ... ok
+test_transfer_at_buffer_boundary (test_planner.PlannerTests.test_transfer_at_buffer_boundary) ... ok
+test_transfer_must_connect_exact_stop_ids (test_planner.PlannerTests.test_transfer_must_connect_exact_stop_ids) ... ok
+test_unknown_access_is_missing_data_not_zero_minutes (test_planner.PlannerTests.test_unknown_access_is_missing_data_not_zero_minutes) ... ok
+test_unverified_access_source_cannot_confirm_a_whole_trip (test_planner.PlannerTests.test_unverified_access_source_cannot_confirm_a_whole_trip) ... ok
+test_unverified_and_wrong_date_are_not_confirmed (test_planner.PlannerTests.test_unverified_and_wrong_date_are_not_confirmed) ... ok
+test_cli_missing_file_is_actionable_without_traceback (test_sources.SourceTests.test_cli_missing_file_is_actionable_without_traceback) ... ok
+test_duplicate_json_keys_are_not_silently_overwritten (test_sources.SourceTests.test_duplicate_json_keys_are_not_silently_overwritten) ... ok
+test_import_never_marks_unverified_source_verified (test_sources.SourceTests.test_import_never_marks_unverified_source_verified) ... ok
+test_import_preserves_provenance_and_fixture_label (test_sources.SourceTests.test_import_preserves_provenance_and_fixture_label) ... ok
+test_missing_and_broken_input_report_input_error (test_sources.SourceTests.test_missing_and_broken_input_report_input_error) ... ok
+test_plan_cli_uses_calculator_and_labels_fixture (test_sources.SourceTests.test_plan_cli_uses_calculator_and_labels_fixture) ... ok
+test_validate_cli_writes_normalized_request (test_sources.SourceTests.test_validate_cli_writes_normalized_request) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 1.245s
+
+OK
+✔ checks homework code, tests, dependencies, skill and environment configuration (73.442916ms)
+✔ ignores homework evidence, reports, environments and files outside project (2.028791ms)
+✔ returns a real failing runner result to the agent without losing edit output (7.29925ms)
+✔ checks apply_patch changes from an absolute project path and reports PASS (7.03625ms)
+✔ ignores evidence edits and reads, so logging cannot recursively run the check (1.321541ms)
+✔ reports a timeout as FAIL and stops a stuck runner (105.063375ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 301.180958
+
+Exit code: 0
+
+$ make test
+Practice 1 artifacts: OK
+Practice 2 artifacts: OK
+Standard library only: ready
+test_duplicate (test_service.SubscribeTest.test_duplicate) ... ok
+test_empty (test_service.SubscribeTest.test_empty) ... ok
+test_list_subscribers_empty (test_service.SubscribeTest.test_list_subscribers_empty) ... ok
+test_list_subscribers_sorted_without_mutation (test_service.SubscribeTest.test_list_subscribers_sorted_without_mutation) ... ok
+test_subscribe (test_service.SubscribeTest.test_subscribe) ... ok
+test_unsubscribe_missing_is_safe (test_service.SubscribeTest.test_unsubscribe_missing_is_safe) ... ok
+test_unsubscribe_rejects_empty_name (test_service.SubscribeTest.test_unsubscribe_rejects_empty_name) ... ok
+test_unsubscribe_removes_existing (test_service.SubscribeTest.test_unsubscribe_removes_existing) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+All checks passed!
+15 files already formatted
+test_real_protocol_success_error_and_next_success (test_mcp.MCPTests.test_real_protocol_success_error_and_next_success) ... ok
+test_combination_budget_counts_all_chains_and_empty_tail (test_planner.PlannerTests.test_combination_budget_counts_all_chains_and_empty_tail) ... ok
+test_coverage_uses_boarding_date_and_every_day_of_window (test_planner.PlannerTests.test_coverage_uses_boarding_date_and_every_day_of_window) ... ok
+test_deduplicates_full_paths_without_padding (test_planner.PlannerTests.test_deduplicates_full_paths_without_padding) ... ok
+test_departure_is_0935 (test_planner.PlannerTests.test_departure_is_0935) ... ok
+test_departure_window_includes_boundaries (test_planner.PlannerTests.test_departure_window_includes_boundaries) ... ok
+test_empty_stage_needs_verified_dated_evidence (test_planner.PlannerTests.test_empty_stage_needs_verified_dated_evidence) ... ok
+test_large_combination_input_is_rejected_before_calculation (test_planner.PlannerTests.test_large_combination_input_is_rejected_before_calculation) ... ok
+test_missed_transfer_by_one_minute (test_planner.PlannerTests.test_missed_transfer_by_one_minute) ... ok
+test_no_routes_is_not_missing_data (test_planner.PlannerTests.test_no_routes_is_not_missing_data) ... ok
+test_old_snapshot_cannot_rule_out_routes_on_another_date (test_planner.PlannerTests.test_old_snapshot_cannot_rule_out_routes_on_another_date) ... ok
+test_overnight_is_30_minutes (test_planner.PlannerTests.test_overnight_is_30_minutes) ... ok
+test_partial_coverage_warns_even_if_option_exists (test_planner.PlannerTests.test_partial_coverage_warns_even_if_option_exists) ... ok
+test_rejects_invalid_requests (test_planner.PlannerTests.test_rejects_invalid_requests) ... ok
+test_same_departure_keeps_only_the_best_route (test_planner.PlannerTests.test_same_departure_keeps_only_the_best_route) ... ok
+test_sources_are_exposed_with_search_scope (test_planner.PlannerTests.test_sources_are_exposed_with_search_scope) ... ok
+test_transfer_at_buffer_boundary (test_planner.PlannerTests.test_transfer_at_buffer_boundary) ... ok
+test_transfer_must_connect_exact_stop_ids (test_planner.PlannerTests.test_transfer_must_connect_exact_stop_ids) ... ok
+test_unknown_access_is_missing_data_not_zero_minutes (test_planner.PlannerTests.test_unknown_access_is_missing_data_not_zero_minutes) ... ok
+test_unverified_access_source_cannot_confirm_a_whole_trip (test_planner.PlannerTests.test_unverified_access_source_cannot_confirm_a_whole_trip) ... ok
+test_unverified_and_wrong_date_are_not_confirmed (test_planner.PlannerTests.test_unverified_and_wrong_date_are_not_confirmed) ... ok
+test_cli_missing_file_is_actionable_without_traceback (test_sources.SourceTests.test_cli_missing_file_is_actionable_without_traceback) ... ok
+test_duplicate_json_keys_are_not_silently_overwritten (test_sources.SourceTests.test_duplicate_json_keys_are_not_silently_overwritten) ... ok
+test_import_never_marks_unverified_source_verified (test_sources.SourceTests.test_import_never_marks_unverified_source_verified) ... ok
+test_import_preserves_provenance_and_fixture_label (test_sources.SourceTests.test_import_preserves_provenance_and_fixture_label) ... ok
+test_missing_and_broken_input_report_input_error (test_sources.SourceTests.test_missing_and_broken_input_report_input_error) ... ok
+test_plan_cli_uses_calculator_and_labels_fixture (test_sources.SourceTests.test_plan_cli_uses_calculator_and_labels_fixture) ... ok
+test_validate_cli_writes_normalized_request (test_sources.SourceTests.test_validate_cli_writes_normalized_request) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 1.303s
+
+OK
+Standard library only: ready
+test_health_and_not_found (test_http.HttpTest.test_health_and_not_found) ... ok
+test_login_and_purchase_over_http (test_http.HttpTest.test_login_and_purchase_over_http) ... ok
+test_transport_only_binds_loopback (test_http.HttpTest.test_transport_only_binds_loopback) ... ok
+test_delete_of_fixture_root_stays_inside_exercise (test_service.SandboxTest.test_delete_of_fixture_root_stays_inside_exercise) ... ok
+test_external_directory_cannot_be_deleted (test_service.SandboxTest.test_external_directory_cannot_be_deleted) ... ok
+test_parent_paths_cannot_escape_exercise (test_service.SandboxTest.test_parent_paths_cannot_escape_exercise) ... ok
+test_symlink_cannot_escape_exercise (test_service.SandboxTest.test_symlink_cannot_escape_exercise) ... ok
+test_assistant_can_return_own_receipt (test_service.ShopTest.test_assistant_can_return_own_receipt) ... ok
+test_customer_can_buy_at_catalog_price (test_service.ShopTest.test_customer_can_buy_at_catalog_price) ... ok
+test_health_and_catalog (test_service.ShopTest.test_health_and_catalog) ... ok
+test_own_profile_and_receipt (test_service.ShopTest.test_own_profile_and_receipt) ... ok
+test_review_can_be_submitted_and_viewed (test_service.ShopTest.test_review_can_be_submitted_and_viewed) ... ok
+test_staff_can_export_with_staff_session (test_service.ShopTest.test_staff_can_export_with_staff_session) ... ok
+test_tokens_identify_distinct_users (test_service.ShopTest.test_tokens_identify_distinct_users) ... ok
+test_unknown_product_rejected (test_service.ShopTest.test_unknown_product_rejected) ... ok
+test_wrong_password_rejected (test_service.ShopTest.test_wrong_password_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.573s
+
+OK
+
+Exit code: 0
+
+$ git diff --check
+
+Exit code: 0
+
+Final preservation and setup assertions
+{
+  "branch": "practice_05",
+  "head": "e828f5b1918cc7bb615ef1a85e769b5ec97f8466",
+  "cli_version": "1.2.2",
+  "preserved_existing_files": 158,
+  "authorized_status_changes": [
+    "docs/superpowers/plans/2026-10-20-practice05-homework.md",
+    "practices/practice_05/homework/BRIEF.md"
+  ],
+  "requirements_checklist": "16/16",
+  "extensions_installed": false,
+  "code_plan_tasks_team_specs_created": false,
+  "feature_pointer_ignored": true,
+  "explicit_feature_read_does_not_persist": true,
+  "markdown_and_shell_syntax": "pass",
+  "tracked_source_and_index_changes": false
+}

@@ -1,0 +1,156 @@
+{
+  "departure_window": {
+    "start": "2026-10-30T06:00:00+03:00",
+    "end": "2026-10-30T10:00:00+03:00"
+  },
+  "timezone": "Europe/Moscow",
+  "max_options": 5,
+  "boarding_buffer_minutes": 10,
+  "sources": [
+    {
+      "id": "szppk",
+      "url": "https://ticket.ppk-piter.ru/passenger/schedule/?from=036002&to=072102&when=2026-10-30",
+      "checked_at": "2026-10-29T15:49:45+03:00",
+      "valid_dates": [
+        "2026-10-30"
+      ],
+      "mode": "manual",
+      "verified": true
+    },
+    {
+      "id": "walking-map",
+      "url": "https://brouter.de/brouter?lonlats=29.8967895%2C58.8646210%7C29.985616%2C58.824440&profile=hiking-mountain&alternativeidx=0&format=geojson",
+      "checked_at": "2026-10-29T15:49:45+03:00",
+      "valid_dates": [
+        "2026-10-30",
+        "2026-10-31"
+      ],
+      "mode": "manual",
+      "verified": true
+    }
+  ],
+  "chains": [
+    {
+      "id": "tolmachevo-canyon",
+      "origin": "Метро «Проспект Славы»",
+      "destination": "Малый Лужский каньон у Плоского",
+      "coverage": "complete",
+      "access": {
+        "minutes": 45,
+        "description": "Метро до Балтийского вокзала и подход к посадке: плановая оценка 45 минут",
+        "basis": "Плановая оценка: 40 минут метро с ожиданием и переходом через Звенигородскую/Пушкинскую, затем 5 минут до посадки. Это не точное расписание метро; запас на посадку задаётся отдельно. Режим метро 29.10 заново не подтверждён.",
+        "source_ids": []
+      },
+      "egress": {
+        "minutes": 115,
+        "description": "От станции Толмачёво около 9,2 км пешком до каньона",
+        "basis": "BRouter 29.10.2026: 9226 м, 6587 с; округлено до 110 минут ходьбы плюс 5 минут на выход с платформы. Оценка без отдыха и полевой проверки проходимости.",
+        "source_ids": [
+          "walking-map"
+        ]
+      },
+      "stages": [
+        {
+          "from_stop": "szppk:036002",
+          "to_stop": "szppk:072102",
+          "from_name": "Санкт-Петербург, Балтийский вокзал",
+          "to_name": "Толмачёво",
+          "source_ids": [
+            "szppk"
+          ],
+          "trips": [
+            {
+              "id": "6105",
+              "mode": "suburban",
+              "label": "Электричка 6105",
+              "departure": "2026-10-30T07:15:00+03:00",
+              "arrival": "2026-10-30T09:17:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "7451",
+              "mode": "suburban",
+              "label": "Ласточка 7451",
+              "departure": "2026-10-30T08:37:00+03:00",
+              "arrival": "2026-10-30T10:00:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "7413",
+              "mode": "suburban",
+              "label": "Ласточка 7413",
+              "departure": "2026-10-30T09:36:00+03:00",
+              "arrival": "2026-10-30T11:40:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "6119",
+              "mode": "suburban",
+              "label": "Электричка 6119",
+              "departure": "2026-10-30T13:50:00+03:00",
+              "arrival": "2026-10-30T15:56:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "7453",
+              "mode": "suburban",
+              "label": "Ласточка 7453",
+              "departure": "2026-10-30T15:00:00+03:00",
+              "arrival": "2026-10-30T16:26:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "6125",
+              "mode": "suburban",
+              "label": "Электричка 6125",
+              "departure": "2026-10-30T16:25:00+03:00",
+              "arrival": "2026-10-30T18:26:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "6131",
+              "mode": "suburban",
+              "label": "Электричка 6131",
+              "departure": "2026-10-30T17:55:00+03:00",
+              "arrival": "2026-10-30T19:58:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "7455",
+              "mode": "suburban",
+              "label": "Ласточка 7455",
+              "departure": "2026-10-30T19:20:00+03:00",
+              "arrival": "2026-10-30T20:43:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "6135",
+              "mode": "suburban",
+              "label": "Электричка 6135",
+              "departure": "2026-10-30T19:38:00+03:00",
+              "arrival": "2026-10-30T22:01:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "6139",
+              "mode": "suburban",
+              "label": "Электричка 6139",
+              "departure": "2026-10-30T21:10:00+03:00",
+              "arrival": "2026-10-30T23:14:00+03:00",
+              "source_id": "szppk"
+            },
+            {
+              "id": "6141",
+              "mode": "suburban",
+              "label": "Электричка 6141",
+              "departure": "2026-10-30T23:45:00+03:00",
+              "arrival": "2026-10-31T01:48:00+03:00",
+              "source_id": "szppk"
+            }
+          ]
+        }
+      ],
+      "transfers": []
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "created_at_utc": "2026-10-22T08:56:12.605748+00:00",
+  "branch": "practice_05",
+  "base_commit": "e828f5b1918cc7bb615ef1a85e769b5ec97f8466",
+  "note": "Identical shared read-only inputs for UI and logic; first drafts must not read each other.",
+  "files": {
+    "AGENTS.md": "8eb06ac0959a850b0fc2e95fb0e1c4256e70dc185b08c67c7039a59d956b907b",
+    ".specify/memory/constitution.md": "843cf9b8053c2abe29ba03e926e4447cac210a4f37c0e66eb5fede0989eeb740",
+    ".specify/templates/spec-template.md": "3945437fc35cd30a5b2bf7beea680337c3516826d3efa5a6b92c4a7eca1ba28e",
+    ".agents/skills/speckit-specify/SKILL.md": "a505028de7f6489878696d6656c7d057f3a66119ebb8c0cc82d69fabb7b344ff",
+    "practices/practice_05/homework/BRIEF.md": "8f209a50279e5d7b52a8f73800658e06f059a12f016e0d2111f2b1a0bb697144",
+    "specs/001-trip-planner-form/spec.md": "b2a3a83e3c4e8de0b5a54ccbf857233f4f15384dfe648d8c92765b8479c21769",
+    "practices/practice_04/homework/README.md": "97e88e15287ff7efed4bd1dbf66a7b8e3419e0b9b12bad73d410f30f7c19b887",
+    "practices/practice_04/homework/SOURCE_CHECK.md": "7bf348775f6f8458b7b0b4d6423fd4ff1f967526fdf0cb71af0b0a2ddf27f0d7",
+    "practices/practice_04/homework/trip_planner/models.py": "e212becd2ef17bca2ab18fb5f59c1069d9d50fa3bb16189b3d63c25d7b9c426d",
+    "practices/practice_04/homework/trip_planner/planner.py": "de2eca558a2821bce0cba3c78b6768388fdd6b10890a6935d93ee371b13dc468",
+    "practices/practice_04/homework/trip_planner/cli.py": "3ad6446860f59e3993a97dd7a5b605d72f0f6b8974549236c2da28b97a9810c7",
+    "practices/practice_04/homework/trip_planner/server.py": "de9a217d3b6338d7d6b0aee0b267cec8fbf15a41e22d277318a07838d8765538",
+    "practices/practice_04/homework/trip_planner/sources.py": "35f5dd7e8e06b4ac1a280df6d085ea42587dd0e3f17e3df2caecc9f6842037fb",
+    "practices/practice_04/homework/tests/fixtures/rare_connections.json": "58869447591ea5260dadab7b14dfb4c6cf5b465214dc68fd4dbb60b8dec8dcce",
+    "practices/practice_05/homework/evidence/baseline-scenarios.json": "b453824debe40f6bbd5c9babc4da3f53b7695df1f0f79b83de85ff17cf0e87d7"
+  }
+}

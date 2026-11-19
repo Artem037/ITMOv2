@@ -1,0 +1,107 @@
+$ uv run --directory practices/practice_04/homework --locked --offline python - <<'PY'
+import copy
+import hashlib
+import json
+from pathlib import Path
+from trip_planner.models import InputError, parse_request
+from trip_planner.planner import plan_departures
+
+root = Path('/Users/pip/ITMOv2')
+fixture = root / 'practices/practice_04/homework/tests/fixtures/rare_connections.json'
+original_bytes = fixture.read_bytes()
+original = json.loads(original_bytes)
+unchanged = copy.deepcopy(original)
+records = []
+
+def run(name, changes=None, internal=None, expected_status=None, expected_error=False):
+    payload = copy.deepcopy(original)
+    if changes:
+        payload.update(changes)
+    if internal:
+        for key, value in internal.items():
+            if key == 'coverage':
+                payload['chains'][0]['coverage'] = value
+            elif key == 'arrival':
+                payload['chains'][0]['stages'][0]['trips'][0]['arrival'] = value
+    before = copy.deepcopy(payload)
+    form = {key: copy.deepcopy(payload[key]) for key in
+            ('departure_window', 'boarding_buffer_minutes', 'max_options')}
+    record = {'case': name, 'form_request': form,
+              'test_only_snapshot_changes': internal or {}}
+    try:
+        result = plan_departures(parse_request(payload))
+        assert not expected_error, name
+        assert result['status'] == expected_status, name
+        record['observed_core_result'] = result
+        record['expected_http_after_implementation'] = 200
+        print(name, result['status'], 'complete=' + str(result['search_scope']['complete']),
+              'options=' + str(len(result['options'])))
+    except InputError as error:
+        assert expected_error, (name, str(error))
+        record['observed_core_error'] = {'type': 'InputError', 'message': str(error)}
+        record['expected_http_after_implementation'] = 422
+        print(name, 'InputError:', str(error))
+    assert payload == before, name + ': request mutated'
+    assert original == unchanged, name + ': original mutated'
+    assert fixture.read_bytes() == original_bytes, name + ': file mutated'
+    record['input_and_fixture_unchanged'] = True
+    records.append(record)
+    return record.get('observed_core_result')
+
+def window(day, start, end):
+    return {'departure_window': {'start': f'2026-10-{day}T{start}:00+03:00',
+                                  'end': f'2026-10-{day}T{end}:00+03:00'}}
+
+normal = run('normal', expected_status='ok')
+assert normal['options'][0]['leave_at'] == '2026-10-14T09:35:00+03:00'
+assert normal['options'][0]['total_minutes'] == 135
+buffer20 = run('buffer20', {'boarding_buffer_minutes': 20}, expected_status='ok')
+assert buffer20['options'][0]['leave_at'] == '2026-10-14T09:25:00+03:00'
+assert buffer20['options'][0]['total_minutes'] == 145
+assert buffer20['options'][0]['waiting_minutes'] == 20
+none = run('no_routes', window('14', '09:36', '10:00'), expected_status='no_routes')
+assert none['search_scope']['complete'] is True and not none['options']
+needs = run('needs_data', window('15', '06:00', '12:00'), expected_status='needs_data')
+assert needs['search_scope']['complete'] is False and not needs['options']
+assert needs['sources'][0]['valid_dates'] == ['2026-10-14']
+run('equal_boundary', window('14', '09:35', '09:35'), expected_status='ok')
+partial = run('partial', internal={'coverage': 'partial'}, expected_status='ok')
+assert partial['search_scope']['complete'] is False
+assert partial['options'] == normal['options']
+fractional = run('fractional', internal={'arrival': '2026-10-14T11:40:30+03:00'},
+                 expected_status='ok')
+assert fractional['options'][0]['total_minutes'] == 135.5
+assert fractional['options'][0]['arrive_at'] == '2026-10-14T11:50:30+03:00'
+assert fractional['options'][0]['timeline'][2]['minutes'] == 60.5
+run('invalid_window', window('14', '10:00', '09:00'), expected_error=True)
+run('invalid_max_options', {'max_options': 6}, expected_error=True)
+run('invalid_string', {'max_options': '5'}, expected_error=True)
+again = run('success_after_errors', expected_status='ok')
+assert normal == again
+output = {'scope': 'existing HW4 core only; HTTP and UI not implemented',
+          'date': '2026-10-27',
+          'fixture_sha256': hashlib.sha256(original_bytes).hexdigest(),
+          'cases': records}
+(root / 'practices/practice_05/homework/evidence/contract-examples.json').write_text(
+    json.dumps(output, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+print('PASS: 11 core scenarios, recovery after errors, exact fractional values, no mutation.')
+
+PY
+
+STDOUT:
+normal ok complete=True options=1
+buffer20 ok complete=True options=1
+no_routes no_routes complete=True options=0
+needs_data needs_data complete=False options=0
+equal_boundary ok complete=True options=1
+partial ok complete=False options=1
+fractional ok complete=True options=1
+invalid_window InputError: departure_window: Value error, end должен быть не раньше start
+invalid_max_options InputError: max_options: Input should be less than or equal to 5
+invalid_string InputError: max_options: Input should be a valid integer
+success_after_errors ok complete=True options=1
+PASS: 11 core scenarios, recovery after errors, exact fractional values, no mutation.
+
+STDERR:
+
+EXIT_CODE=0

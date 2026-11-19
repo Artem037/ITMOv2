@@ -1,0 +1,755 @@
+{
+  "scope": "existing HW4 core only; HTTP and UI not implemented",
+  "date": "2026-10-27",
+  "fixture_sha256": "58869447591ea5260dadab7b14dfb4c6cf5b465214dc68fd4dbb60b8dec8dcce",
+  "cases": [
+    {
+      "case": "normal",
+      "form_request": {
+        "departure_window": {
+          "start": "2026-10-14T06:00:00+03:00",
+          "end": "2026-10-14T12:00:00+03:00"
+        },
+        "boarding_buffer_minutes": 10,
+        "max_options": 5
+      },
+      "test_only_snapshot_changes": {},
+      "observed_core_result": {
+        "status": "ok",
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:35:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 135.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:35:00+03:00",
+                "end": "2026-10-14T10:30:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:30:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ],
+        "sources": [
+          {
+            "id": "synthetic",
+            "url": "https://example.org/synthetic-timetable",
+            "checked_at": "2026-10-07T12:00:00+03:00",
+            "valid_dates": [
+              "2026-10-14"
+            ],
+            "mode": "fixture",
+            "verified": true
+          }
+        ],
+        "data_kind": "fixture",
+        "search_scope": {
+          "chains": [
+            "training-route"
+          ],
+          "departure_window": {
+            "start": "2026-10-14T06:00:00+03:00",
+            "end": "2026-10-14T12:00:00+03:00"
+          },
+          "max_scheduled_stages": 3,
+          "complete": true,
+          "claim": "Лучшие среди переданных проверенных цепочек"
+        }
+      },
+      "expected_http_after_implementation": 200,
+      "input_and_fixture_unchanged": true
+    },
+    {
+      "case": "buffer20",
+      "form_request": {
+        "departure_window": {
+          "start": "2026-10-14T06:00:00+03:00",
+          "end": "2026-10-14T12:00:00+03:00"
+        },
+        "boarding_buffer_minutes": 20,
+        "max_options": 5
+      },
+      "test_only_snapshot_changes": {},
+      "observed_core_result": {
+        "status": "ok",
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:25:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 145.0,
+            "waiting_minutes": 20,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:25:00+03:00",
+                "end": "2026-10-14T10:20:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:20:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 20.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ],
+        "sources": [
+          {
+            "id": "synthetic",
+            "url": "https://example.org/synthetic-timetable",
+            "checked_at": "2026-10-07T12:00:00+03:00",
+            "valid_dates": [
+              "2026-10-14"
+            ],
+            "mode": "fixture",
+            "verified": true
+          }
+        ],
+        "data_kind": "fixture",
+        "search_scope": {
+          "chains": [
+            "training-route"
+          ],
+          "departure_window": {
+            "start": "2026-10-14T06:00:00+03:00",
+            "end": "2026-10-14T12:00:00+03:00"
+          },
+          "max_scheduled_stages": 3,
+          "complete": true,
+          "claim": "Лучшие среди переданных проверенных цепочек"
+        }
+      },
+      "expected_http_after_implementation": 200,
+      "input_and_fixture_unchanged": true
+    },
+    {
+      "case": "no_routes",
+      "form_request": {
+        "departure_window": {
+          "start": "2026-10-14T09:36:00+03:00",
+          "end": "2026-10-14T10:00:00+03:00"
+        },
+        "boarding_buffer_minutes": 10,
+        "max_options": 5
+      },
+      "test_only_snapshot_changes": {},
+      "observed_core_result": {
+        "status": "no_routes",
+        "options": [],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ],
+        "sources": [
+          {
+            "id": "synthetic",
+            "url": "https://example.org/synthetic-timetable",
+            "checked_at": "2026-10-07T12:00:00+03:00",
+            "valid_dates": [
+              "2026-10-14"
+            ],
+            "mode": "fixture",
+            "verified": true
+          }
+        ],
+        "data_kind": "fixture",
+        "search_scope": {
+          "chains": [
+            "training-route"
+          ],
+          "departure_window": {
+            "start": "2026-10-14T09:36:00+03:00",
+            "end": "2026-10-14T10:00:00+03:00"
+          },
+          "max_scheduled_stages": 3,
+          "complete": true,
+          "claim": "Лучшие среди переданных проверенных цепочек"
+        }
+      },
+      "expected_http_after_implementation": 200,
+      "input_and_fixture_unchanged": true
+    },
+    {
+      "case": "needs_data",
+      "form_request": {
+        "departure_window": {
+          "start": "2026-10-15T06:00:00+03:00",
+          "end": "2026-10-15T12:00:00+03:00"
+        },
+        "boarding_buffer_minutes": 10,
+        "max_options": 5
+      },
+      "test_only_snapshot_changes": {},
+      "observed_core_result": {
+        "status": "needs_data",
+        "options": [],
+        "warnings": [
+          "training-route/этап 1: нет подтверждённого покрытия дат 2026-10-15–2026-10-15; нужно расписание на запрошенное окно",
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ],
+        "sources": [
+          {
+            "id": "synthetic",
+            "url": "https://example.org/synthetic-timetable",
+            "checked_at": "2026-10-07T12:00:00+03:00",
+            "valid_dates": [
+              "2026-10-14"
+            ],
+            "mode": "fixture",
+            "verified": true
+          }
+        ],
+        "data_kind": "fixture",
+        "search_scope": {
+          "chains": [
+            "training-route"
+          ],
+          "departure_window": {
+            "start": "2026-10-15T06:00:00+03:00",
+            "end": "2026-10-15T12:00:00+03:00"
+          },
+          "max_scheduled_stages": 3,
+          "complete": false,
+          "claim": "Лучшие среди переданных проверенных цепочек"
+        }
+      },
+      "expected_http_after_implementation": 200,
+      "input_and_fixture_unchanged": true
+    },
+    {
+      "case": "equal_boundary",
+      "form_request": {
+        "departure_window": {
+          "start": "2026-10-14T09:35:00+03:00",
+          "end": "2026-10-14T09:35:00+03:00"
+        },
+        "boarding_buffer_minutes": 10,
+        "max_options": 5
+      },
+      "test_only_snapshot_changes": {},
+      "observed_core_result": {
+        "status": "ok",
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:35:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 135.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:35:00+03:00",
+                "end": "2026-10-14T10:30:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:30:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ],
+        "sources": [
+          {
+            "id": "synthetic",
+            "url": "https://example.org/synthetic-timetable",
+            "checked_at": "2026-10-07T12:00:00+03:00",
+            "valid_dates": [
+              "2026-10-14"
+            ],
+            "mode": "fixture",
+            "verified": true
+          }
+        ],
+        "data_kind": "fixture",
+        "search_scope": {
+          "chains": [
+            "training-route"
+          ],
+          "departure_window": {
+            "start": "2026-10-14T09:35:00+03:00",
+            "end": "2026-10-14T09:35:00+03:00"
+          },
+          "max_scheduled_stages": 3,
+          "complete": true,
+          "claim": "Лучшие среди переданных проверенных цепочек"
+        }
+      },
+      "expected_http_after_implementation": 200,
+      "input_and_fixture_unchanged": true
+    },
+    {
+      "case": "partial",
+      "form_request": {
+        "departure_window": {
+          "start": "2026-10-14T06:00:00+03:00",
+          "end": "2026-10-14T12:00:00+03:00"
+        },
+        "boarding_buffer_minutes": 10,
+        "max_options": 5
+      },
+      "test_only_snapshot_changes": {
+        "coverage": "partial"
+      },
+      "observed_core_result": {
+        "status": "ok",
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:35:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 135.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:35:00+03:00",
+                "end": "2026-10-14T10:30:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:30:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "training-route: покрытие partial",
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ],
+        "sources": [
+          {
+            "id": "synthetic",
+            "url": "https://example.org/synthetic-timetable",
+            "checked_at": "2026-10-07T12:00:00+03:00",
+            "valid_dates": [
+              "2026-10-14"
+            ],
+            "mode": "fixture",
+            "verified": true
+          }
+        ],
+        "data_kind": "fixture",
+        "search_scope": {
+          "chains": [
+            "training-route"
+          ],
+          "departure_window": {
+            "start": "2026-10-14T06:00:00+03:00",
+            "end": "2026-10-14T12:00:00+03:00"
+          },
+          "max_scheduled_stages": 3,
+          "complete": false,
+          "claim": "Лучшие среди переданных проверенных цепочек"
+        }
+      },
+      "expected_http_after_implementation": 200,
+      "input_and_fixture_unchanged": true
+    },
+    {
+      "case": "fractional",
+      "form_request": {
+        "departure_window": {
+          "start": "2026-10-14T06:00:00+03:00",
+          "end": "2026-10-14T12:00:00+03:00"
+        },
+        "boarding_buffer_minutes": 10,
+        "max_options": 5
+      },
+      "test_only_snapshot_changes": {
+        "arrival": "2026-10-14T11:40:30+03:00"
+      },
+      "observed_core_result": {
+        "status": "ok",
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:35:00+03:00",
+            "arrive_at": "2026-10-14T11:50:30+03:00",
+            "total_minutes": 135.5,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:35:00+03:00",
+                "end": "2026-10-14T10:30:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:30:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:30+03:00",
+                "minutes": 60.5,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:30+03:00",
+                "end": "2026-10-14T11:50:30+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ],
+        "sources": [
+          {
+            "id": "synthetic",
+            "url": "https://example.org/synthetic-timetable",
+            "checked_at": "2026-10-07T12:00:00+03:00",
+            "valid_dates": [
+              "2026-10-14"
+            ],
+            "mode": "fixture",
+            "verified": true
+          }
+        ],
+        "data_kind": "fixture",
+        "search_scope": {
+          "chains": [
+            "training-route"
+          ],
+          "departure_window": {
+            "start": "2026-10-14T06:00:00+03:00",
+            "end": "2026-10-14T12:00:00+03:00"
+          },
+          "max_scheduled_stages": 3,
+          "complete": true,
+          "claim": "Лучшие среди переданных проверенных цепочек"
+        }
+      },
+      "expected_http_after_implementation": 200,
+      "input_and_fixture_unchanged": true
+    },
+    {
+      "case": "invalid_window",
+      "form_request": {
+        "departure_window": {
+          "start": "2026-10-14T10:00:00+03:00",
+          "end": "2026-10-14T09:00:00+03:00"
+        },
+        "boarding_buffer_minutes": 10,
+        "max_options": 5
+      },
+      "test_only_snapshot_changes": {},
+      "observed_core_error": {
+        "type": "InputError",
+        "message": "departure_window: Value error, end должен быть не раньше start"
+      },
+      "expected_http_after_implementation": 422,
+      "input_and_fixture_unchanged": true
+    },
+    {
+      "case": "invalid_max_options",
+      "form_request": {
+        "departure_window": {
+          "start": "2026-10-14T06:00:00+03:00",
+          "end": "2026-10-14T12:00:00+03:00"
+        },
+        "boarding_buffer_minutes": 10,
+        "max_options": 6
+      },
+      "test_only_snapshot_changes": {},
+      "observed_core_error": {
+        "type": "InputError",
+        "message": "max_options: Input should be less than or equal to 5"
+      },
+      "expected_http_after_implementation": 422,
+      "input_and_fixture_unchanged": true
+    },
+    {
+      "case": "invalid_string",
+      "form_request": {
+        "departure_window": {
+          "start": "2026-10-14T06:00:00+03:00",
+          "end": "2026-10-14T12:00:00+03:00"
+        },
+        "boarding_buffer_minutes": 10,
+        "max_options": "5"
+      },
+      "test_only_snapshot_changes": {},
+      "observed_core_error": {
+        "type": "InputError",
+        "message": "max_options: Input should be a valid integer"
+      },
+      "expected_http_after_implementation": 422,
+      "input_and_fixture_unchanged": true
+    },
+    {
+      "case": "success_after_errors",
+      "form_request": {
+        "departure_window": {
+          "start": "2026-10-14T06:00:00+03:00",
+          "end": "2026-10-14T12:00:00+03:00"
+        },
+        "boarding_buffer_minutes": 10,
+        "max_options": 5
+      },
+      "test_only_snapshot_changes": {},
+      "observed_core_result": {
+        "status": "ok",
+        "options": [
+          {
+            "chain_id": "training-route",
+            "origin": "Учебная точка А",
+            "destination": "Учебная точка Б",
+            "leave_at": "2026-10-14T09:35:00+03:00",
+            "arrive_at": "2026-10-14T11:50:00+03:00",
+            "total_minutes": 135.0,
+            "waiting_minutes": 10,
+            "transfer_count": 0,
+            "timeline": [
+              {
+                "kind": "access",
+                "start": "2026-10-14T09:35:00+03:00",
+                "end": "2026-10-14T10:30:00+03:00",
+                "minutes": 55.0,
+                "description": "Пешком и метро до автобуса",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              },
+              {
+                "kind": "wait",
+                "start": "2026-10-14T10:30:00+03:00",
+                "end": "2026-10-14T10:40:00+03:00",
+                "minutes": 10.0,
+                "description": "Запас на посадку"
+              },
+              {
+                "kind": "ride",
+                "start": "2026-10-14T10:40:00+03:00",
+                "end": "2026-10-14T11:40:00+03:00",
+                "minutes": 60.0,
+                "description": "Учебный автобус",
+                "trip_id": "bus-1",
+                "mode": "bus",
+                "from_stop": "bus-a",
+                "to_stop": "bus-b",
+                "from_name": "Учебная остановка А",
+                "to_name": "Учебная остановка Б",
+                "source_id": "synthetic"
+              },
+              {
+                "kind": "egress",
+                "start": "2026-10-14T11:40:00+03:00",
+                "end": "2026-10-14T11:50:00+03:00",
+                "minutes": 10.0,
+                "description": "Пешком до цели",
+                "basis": "Вымышленная оценка для теста",
+                "estimated": true
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          "Есть вымышленные данные: это не реальная поездка.",
+          "Городские и пешие участки оценочные. Перед поездкой проверьте изменения расписаний."
+        ],
+        "sources": [
+          {
+            "id": "synthetic",
+            "url": "https://example.org/synthetic-timetable",
+            "checked_at": "2026-10-07T12:00:00+03:00",
+            "valid_dates": [
+              "2026-10-14"
+            ],
+            "mode": "fixture",
+            "verified": true
+          }
+        ],
+        "data_kind": "fixture",
+        "search_scope": {
+          "chains": [
+            "training-route"
+          ],
+          "departure_window": {
+            "start": "2026-10-14T06:00:00+03:00",
+            "end": "2026-10-14T12:00:00+03:00"
+          },
+          "max_scheduled_stages": 3,
+          "complete": true,
+          "claim": "Лучшие среди переданных проверенных цепочек"
+        }
+      },
+      "expected_http_after_implementation": 200,
+      "input_and_fixture_unchanged": true
+    }
+  ]
+}

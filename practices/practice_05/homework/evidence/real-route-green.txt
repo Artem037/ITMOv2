@@ -1,0 +1,60 @@
+COMMAND: HW5_SCREENSHOTS_DIR=/Users/pip/ITMOv2/practices/practice_05/homework/evidence make -C practices/practice_05/homework lint test
+uv run --project "/Users/pip/ITMOv2/practices/practice_04/homework" --locked --offline ruff check --extend-select=E501,I --line-length=79 web tests
+All checks passed!
+uv run --project "/Users/pip/ITMOv2/practices/practice_04/homework" --locked --offline ruff format --check --line-length=79 web tests
+3 files already formatted
+uv run --project "/Users/pip/ITMOv2/practices/practice_04/homework" --locked --offline python -m unittest discover -s tests -p 'test_adapter.py' -v
+test_bad_json_duplicates_and_constants (test_adapter.AdapterTests.test_bad_json_duplicates_and_constants) ... ok
+test_default_route_is_real_and_schedule_date_excludes_map_only_date (test_adapter.AdapterTests.test_default_route_is_real_and_schedule_date_excludes_map_only_date) ... ok
+test_equal_boundary_includes_the_departure (test_adapter.AdapterTests.test_equal_boundary_includes_the_departure) ... ok
+test_fixed_fixture_launch_still_produces_control_metadata (test_adapter.AdapterTests.test_fixed_fixture_launch_still_produces_control_metadata) ... ok
+test_fractional_durations_are_not_truncated (test_adapter.AdapterTests.test_fractional_durations_are_not_truncated) ... ok
+test_internal_error_is_safe_and_next_request_succeeds (test_adapter.AdapterTests.test_internal_error_is_safe_and_next_request_succeeds) ... ok
+test_media_type_and_fixed_routes (test_adapter.AdapterTests.test_media_type_and_fixed_routes) ... ok
+test_metadata_and_loopback (test_adapter.AdapterTests.test_metadata_and_loopback) ... ok
+test_missing_extra_and_non_object_fields (test_adapter.AdapterTests.test_missing_extra_and_non_object_fields) ... ok
+test_moscow_datetime_grammar_and_calendar (test_adapter.AdapterTests.test_moscow_datetime_grammar_and_calendar) ... ok
+test_new_date_needs_data_without_moving_source (test_adapter.AdapterTests.test_new_date_needs_data_without_moving_source) ... ok
+test_no_routes_is_a_complete_calculation (test_adapter.AdapterTests.test_no_routes_is_a_complete_calculation) ... ok
+test_normal_response_preserves_entire_prior_core_result (test_adapter.AdapterTests.test_normal_response_preserves_entire_prior_core_result) ... ok
+test_parallel_requests_and_repeats_do_not_mutate_snapshot (test_adapter.AdapterTests.test_parallel_requests_and_repeats_do_not_mutate_snapshot) ... ok
+test_partial_success_is_not_replaced_by_needs_data (test_adapter.AdapterTests.test_partial_success_is_not_replaced_by_needs_data) ... ok
+test_real_route_recalculation_negative_date_and_recovery (test_adapter.AdapterTests.test_real_route_recalculation_negative_date_and_recovery) ... ok
+test_real_route_retains_late_trains_and_midnight_arrival (test_adapter.AdapterTests.test_real_route_retains_late_trains_and_midnight_arrival) ... ok
+test_recalculation_uses_new_buffer (test_adapter.AdapterTests.test_recalculation_uses_new_buffer) ... ok
+test_reverse_window_has_stable_field_and_recovers (test_adapter.AdapterTests.test_reverse_window_has_stable_field_and_recovers) ... ok
+test_strict_numbers_and_ranges (test_adapter.AdapterTests.test_strict_numbers_and_ranges) ... ok
+test_unknown_duration_is_not_zero (test_adapter.AdapterTests.test_unknown_duration_is_not_zero) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.523s
+
+OK
+"/opt/homebrew/bin/node" --test tests/browser.test.mjs
+✔ real form calculates, changes buffer and preserves warnings, timeline and source (1281.452458ms)
+✔ real negative windows remain no_routes and needs_data, and equal boundary succeeds (531.264167ms)
+✔ invalid fields retain input and keyboard correction returns to real success (500.918875ms)
+✔ computer timezone cannot shift Moscow inputs or output (294.7365ms)
+✔ 24-hour Moscow input is explicit even in an English browser locale (201.524042ms)
+✔ unusable nested metadata cannot enable the form and reload recovers (368.578667ms)
+✔ editing stays available and stale responses cannot replace the current result: old-first (310.853583ms)
+✔ editing stays available and stale responses cannot replace the current result: new-first (345.025041ms)
+✔ editing stays available and stale responses cannot replace the current result: late-old-error (367.8785ms)
+✔ double submission of the same revision has one current request (239.528791ms)
+✔ broken transport or malformed result can be retried without a stale summary (541.717875ms)
+✔ ten second timeout allows a manual retry (346.057417ms)
+✔ partial success and fractional durations preserve full displayed information (345.228458ms)
+✔ metadata failure offers reload and a narrow screen has no horizontal overflow (416.501583ms)
+✔ default screen uses the real dated route and real calculation (490.619416ms)
+✔ real screen reports uncovered dates and recovers without moving trains (568.088041ms)
+✔ overnight real train shows the next date at the end of its timeline event (429.033125ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7933.240209
+
+EXIT_CODE=0

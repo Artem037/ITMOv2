@@ -1,0 +1,192 @@
+[Formatting note: trailing spaces on diagnostic blank lines removed; command/output text and exit codes otherwise retained.]
+$ uv run --project practices/practice_04/homework --locked --offline python -m unittest discover -s practices/practice_05/homework/tests -p test_adapter.py -v
+test_bad_json_duplicates_and_constants (test_adapter.AdapterTests.test_bad_json_duplicates_and_constants) ... ok
+test_equal_boundary_includes_the_departure (test_adapter.AdapterTests.test_equal_boundary_includes_the_departure) ... ok
+test_fractional_durations_are_not_truncated (test_adapter.AdapterTests.test_fractional_durations_are_not_truncated) ... ok
+test_internal_error_is_safe_and_next_request_succeeds (test_adapter.AdapterTests.test_internal_error_is_safe_and_next_request_succeeds) ... ok
+test_media_type_and_fixed_routes (test_adapter.AdapterTests.test_media_type_and_fixed_routes) ... ERROR
+test_metadata_and_loopback (test_adapter.AdapterTests.test_metadata_and_loopback) ... ok
+test_missing_extra_and_non_object_fields (test_adapter.AdapterTests.test_missing_extra_and_non_object_fields) ... ok
+test_moscow_datetime_grammar_and_calendar (test_adapter.AdapterTests.test_moscow_datetime_grammar_and_calendar) ... ok
+test_new_date_needs_data_without_moving_source (test_adapter.AdapterTests.test_new_date_needs_data_without_moving_source) ... ok
+test_no_routes_is_a_complete_calculation (test_adapter.AdapterTests.test_no_routes_is_a_complete_calculation) ... ok
+test_normal_response_preserves_entire_prior_core_result (test_adapter.AdapterTests.test_normal_response_preserves_entire_prior_core_result) ... ok
+test_parallel_requests_and_repeats_do_not_mutate_snapshot (test_adapter.AdapterTests.test_parallel_requests_and_repeats_do_not_mutate_snapshot) ... ok
+test_partial_success_is_not_replaced_by_needs_data (test_adapter.AdapterTests.test_partial_success_is_not_replaced_by_needs_data) ... ok
+test_recalculation_uses_new_buffer (test_adapter.AdapterTests.test_recalculation_uses_new_buffer) ... ok
+test_reverse_window_has_stable_field_and_recovers (test_adapter.AdapterTests.test_reverse_window_has_stable_field_and_recovers) ... ok
+test_strict_numbers_and_ranges (test_adapter.AdapterTests.test_strict_numbers_and_ranges) ... ok
+test_unknown_duration_is_not_zero (test_adapter.AdapterTests.test_unknown_duration_is_not_zero) ... ok
+
+======================================================================
+ERROR: test_media_type_and_fixed_routes (test_adapter.AdapterTests.test_media_type_and_fixed_routes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 232, in test_media_type_and_fixed_routes
+    status, headers, result = self.request(method, path)
+                              ~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 76, in request
+    json.loads(data),
+    ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.289s
+
+FAILED (errors=1)
+
+EXIT_CODE=1
+
+$ /Users/pip/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --test --test-name-pattern=24-hour|unusable nested practices/practice_05/homework/tests/browser.test.mjs
+✖ 24-hour Moscow input is explicit even in an English browser locale (1437.694875ms)
+✖ unusable nested metadata cannot enable the form and reload recovers (1711.633875ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3532.794083
+
+✖ failing tests:
+
+test at practices/practice_05/homework/tests/browser.test.mjs:162:1
+✖ 24-hour Moscow input is explicit even in an English browser locale (1437.694875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + '2026-10-14T06:00'
+  - '14.10.2026 06:00'
+
+      at TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:164:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '2026-10-14T06:00',
+    expected: '14.10.2026 06:00',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:168:1
+✖ unusable nested metadata cannot enable the form and reload recovers (1711.633875ms)
+  locator.waitFor: Timeout 1500ms exceeded.
+  Call log:
+  [2m  - waiting for getByRole('button', { name: 'Повторить загрузку' }) to be visible[22m
+
+      at TestContext.<anonymous> (/Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:177:66) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for getByRole('button', { name: 'Повторить загрузку' }) to be visible" ]
+  }
+
+EXIT_CODE=1
+
+Repeat RED with explicit boundary assertions (instead of JSON parse/locator timeout errors):
+
+$ uv run --project practices/practice_04/homework --locked --offline python -m unittest discover -s practices/practice_05/homework/tests -p test_adapter.py -v
+test_bad_json_duplicates_and_constants (test_adapter.AdapterTests.test_bad_json_duplicates_and_constants) ... ok
+test_equal_boundary_includes_the_departure (test_adapter.AdapterTests.test_equal_boundary_includes_the_departure) ... ok
+test_fractional_durations_are_not_truncated (test_adapter.AdapterTests.test_fractional_durations_are_not_truncated) ... ok
+test_internal_error_is_safe_and_next_request_succeeds (test_adapter.AdapterTests.test_internal_error_is_safe_and_next_request_succeeds) ... ok
+test_media_type_and_fixed_routes (test_adapter.AdapterTests.test_media_type_and_fixed_routes) ... FAIL
+test_metadata_and_loopback (test_adapter.AdapterTests.test_metadata_and_loopback) ... ok
+test_missing_extra_and_non_object_fields (test_adapter.AdapterTests.test_missing_extra_and_non_object_fields) ... ok
+test_moscow_datetime_grammar_and_calendar (test_adapter.AdapterTests.test_moscow_datetime_grammar_and_calendar) ... ok
+test_new_date_needs_data_without_moving_source (test_adapter.AdapterTests.test_new_date_needs_data_without_moving_source) ... ok
+test_no_routes_is_a_complete_calculation (test_adapter.AdapterTests.test_no_routes_is_a_complete_calculation) ... ok
+test_normal_response_preserves_entire_prior_core_result (test_adapter.AdapterTests.test_normal_response_preserves_entire_prior_core_result) ... ok
+test_parallel_requests_and_repeats_do_not_mutate_snapshot (test_adapter.AdapterTests.test_parallel_requests_and_repeats_do_not_mutate_snapshot) ... ok
+test_partial_success_is_not_replaced_by_needs_data (test_adapter.AdapterTests.test_partial_success_is_not_replaced_by_needs_data) ... ok
+test_recalculation_uses_new_buffer (test_adapter.AdapterTests.test_recalculation_uses_new_buffer) ... ok
+test_reverse_window_has_stable_field_and_recovers (test_adapter.AdapterTests.test_reverse_window_has_stable_field_and_recovers) ... ok
+test_strict_numbers_and_ranges (test_adapter.AdapterTests.test_strict_numbers_and_ranges) ... ok
+test_unknown_duration_is_not_zero (test_adapter.AdapterTests.test_unknown_duration_is_not_zero) ... ok
+
+======================================================================
+FAIL: test_media_type_and_fixed_routes (test_adapter.AdapterTests.test_media_type_and_fixed_routes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 237, in test_media_type_and_fixed_routes
+    status, headers, result = self.request(method, path)
+                              ~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 73, in request
+    self.assertIn(
+    ~~~~~~~~~~~~~^
+        "application/json",
+        ^^^^^^^^^^^^^^^^^^^
+        response.getheader("Content-Type", ""),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        f"{method} {path} returned unstructured HTTP {response.status}",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: 'application/json' not found in 'text/html;charset=utf-8' : TRACE /api/trip returned unstructured HTTP 501
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.276s
+
+FAILED (failures=1)
+
+EXIT_CODE=1
+
+$ /Users/pip/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --test --test-name-pattern=24-hour|unusable nested practices/practice_05/homework/tests/browser.test.mjs
+✖ 24-hour Moscow input is explicit even in an English browser locale (1256.845709ms)
+✖ unusable nested metadata cannot enable the form and reload recovers (234.065125ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1853.275125
+
+✖ failing tests:
+
+test at practices/practice_05/homework/tests/browser.test.mjs:162:1
+✖ 24-hour Moscow input is explicit even in an English browser locale (1256.845709ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + '2026-10-14T06:00'
+  - '14.10.2026 06:00'
+
+      at TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:164:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '2026-10-14T06:00',
+    expected: '14.10.2026 06:00',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at practices/practice_05/homework/tests/browser.test.mjs:168:1
+✖ unusable nested metadata cannot enable the form and reload recovers (234.065125ms)
+  AssertionError [ERR_ASSERTION]: Unusable metadata must offer reload
+
+  false !== true
+
+      at TestContext.<anonymous> (file:///Users/pip/ITMOv2/practices/practice_05/homework/tests/browser.test.mjs:178:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+EXIT_CODE=1

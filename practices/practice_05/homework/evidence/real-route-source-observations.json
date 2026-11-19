@@ -1,0 +1,106 @@
+{
+  "observed_at": "2026-10-29T15:49:45+03:00",
+  "schedule": {
+    "url": "https://ticket.ppk-piter.ru/passenger/schedule/?from=036002&to=072102&when=2026-10-30",
+    "method": "CUA browser read; selected form date 2026-10-30; origin and destination visible",
+    "trips": [
+      {
+        "id": "6105",
+        "departure": "07:15",
+        "arrival": "09:17",
+        "arrival_next_day": false
+      },
+      {
+        "id": "7451",
+        "departure": "08:37",
+        "arrival": "10:00",
+        "arrival_next_day": false
+      },
+      {
+        "id": "7413",
+        "departure": "09:36",
+        "arrival": "11:40",
+        "arrival_next_day": false
+      },
+      {
+        "id": "6119",
+        "departure": "13:50",
+        "arrival": "15:56",
+        "arrival_next_day": false
+      },
+      {
+        "id": "7453",
+        "departure": "15:00",
+        "arrival": "16:26",
+        "arrival_next_day": false
+      },
+      {
+        "id": "6125",
+        "departure": "16:25",
+        "arrival": "18:26",
+        "arrival_next_day": false
+      },
+      {
+        "id": "6131",
+        "departure": "17:55",
+        "arrival": "19:58",
+        "arrival_next_day": false
+      },
+      {
+        "id": "7455",
+        "departure": "19:20",
+        "arrival": "20:43",
+        "arrival_next_day": false
+      },
+      {
+        "id": "6135",
+        "departure": "19:38",
+        "arrival": "22:01",
+        "arrival_next_day": false
+      },
+      {
+        "id": "6139",
+        "departure": "21:10",
+        "arrival": "23:14",
+        "arrival_next_day": false
+      },
+      {
+        "id": "6141",
+        "departure": "23:45",
+        "arrival": "01:48",
+        "arrival_next_day": true
+      }
+    ],
+    "detail_verified": "https://ticket.ppk-piter.ru/passenger/schedule/detail.php?from=036002&to=072102&when=2026-10-30&id=7451&uid=7451_2_9602498_g25_4",
+    "detail_stops": "Балтийский вокзал 08:37; Толмачёво 10:00/10:01",
+    "fetch_mcp_attempt": {
+      "tool": "fetch",
+      "arguments": {
+        "url": "https://ticket.ppk-piter.ru/passenger/schedule/?from=036002&to=072102&when=2026-10-30",
+        "max_length": 16000,
+        "raw": false
+      },
+      "is_error": true,
+      "reason": "robots.txt disallows autonomous fetch; ordinary browser navigation succeeded"
+    }
+  },
+  "walking": {
+    "method": "actual configured fetch MCP via stdio SDK",
+    "tool": "fetch",
+    "arguments": {
+      "url": "https://brouter.de/brouter?lonlats=29.8967895%2C58.8646210%7C29.985616%2C58.824440&profile=hiking-mountain&alternativeidx=0&format=geojson",
+      "max_length": 3500,
+      "raw": true
+    },
+    "is_error": false,
+    "track_length_m": 9226,
+    "total_time_seconds": 6587,
+    "note": "Response intentionally truncated after properties; full geometry not needed for this UI. Map is a model, not field observation."
+  },
+  "metro": {
+    "url": "https://metro.spb.ru/rejimrabotystancii.html?v=1",
+    "status": "browser ERR_CERT_AUTHORITY_INVALID; not bypassed",
+    "decision": "45 minutes is explicit planning estimate, not a newly verified metro timetable; no confirmed metro source/reference added."
+  },
+  "scope": "Prepared real dated route; not automatic live schedule fetching or global network search."
+}

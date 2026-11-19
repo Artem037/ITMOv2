@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-27",
+  "branch": "practice_05",
+  "status": "prepared; awaiting explicit human acceptance before code",
+  "documents": {
+    "practices/practice_05/homework/CONTRACT.md": "9260a30c265b4b715d187212ac39b5db59179897b461c2310dc263e0bb22d357",
+    "practices/practice_05/homework/AGREEMENT.md": "76821a194522140b0dcb62bcc5c800a9d40f5eb7e45c81578e6688340f6fc732",
+    "practices/practice_05/homework/specs/ui.after.md": "7f7df5e6a606ce209e5f606585572d202e9711fe9cb25254031a1af4775bb49c",
+    "practices/practice_05/homework/specs/logic.after.md": "a69d04277cd67623ef530e7491e0789e43e4f598fb8698c3e9c58367617059cd"
+  }
+}

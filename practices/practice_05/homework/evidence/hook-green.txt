@@ -1,0 +1,35 @@
+$ /Users/pip/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --test tests/check-after-edit.test.mjs
+✔ checks homework code, tests, dependencies, skill and environment configuration (121.059ms)
+✔ ignores homework evidence, reports, environments and files outside project (4.60925ms)
+✔ returns a real failing runner result to the agent without losing edit output (8.846084ms)
+✔ checks apply_patch changes from an absolute project path and reports PASS (8.406291ms)
+✔ ignores evidence edits and reads, so logging cannot recursively run the check (1.706167ms)
+✔ reports a timeout as FAIL and stops a stuck runner (106.198208ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 320.111833
+
+EXIT_CODE=0
+
+$ make -C practices/practice_05/homework lint
+uv run --project "/Users/pip/ITMOv2/practices/practice_04/homework" --locked --offline ruff check --extend-select=E501,I --line-length=79 web tests
+E501 Line too long (88 > 79)
+   --> web/server.py:254:80
+    |
+252 |                         "error": {
+253 |                             "code": "internal_error",
+254 |                             "message": "Не удалось выполнить расчёт. Повторите запрос.",
+    |                                                                                ^^^^^^^^^
+255 |                         }
+256 |                     },
+    |
+
+Found 1 error.
+make: *** [lint] Error 1
+
+EXIT_CODE=2

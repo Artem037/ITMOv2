@@ -1,0 +1,246 @@
+$ uv run --project practices/practice_04/homework --locked --offline python -m unittest discover -s practices/practice_05/homework/tests -p test_adapter.py -v
+test_bad_json_duplicates_and_constants (test_adapter.AdapterTests.test_bad_json_duplicates_and_constants) ... FAIL
+test_equal_boundary_includes_the_departure (test_adapter.AdapterTests.test_equal_boundary_includes_the_departure) ... FAIL
+test_fractional_durations_are_not_truncated (test_adapter.AdapterTests.test_fractional_durations_are_not_truncated) ... FAIL
+test_internal_error_is_safe_and_next_request_succeeds (test_adapter.AdapterTests.test_internal_error_is_safe_and_next_request_succeeds) ... FAIL
+test_media_type_and_fixed_routes (test_adapter.AdapterTests.test_media_type_and_fixed_routes) ... FAIL
+test_metadata_and_loopback (test_adapter.AdapterTests.test_metadata_and_loopback) ... FAIL
+test_missing_extra_and_non_object_fields (test_adapter.AdapterTests.test_missing_extra_and_non_object_fields) ... FAIL
+test_moscow_datetime_grammar_and_calendar (test_adapter.AdapterTests.test_moscow_datetime_grammar_and_calendar) ... FAIL
+test_new_date_needs_data_without_moving_source (test_adapter.AdapterTests.test_new_date_needs_data_without_moving_source) ... FAIL
+test_no_routes_is_a_complete_calculation (test_adapter.AdapterTests.test_no_routes_is_a_complete_calculation) ... FAIL
+test_normal_response_preserves_entire_prior_core_result (test_adapter.AdapterTests.test_normal_response_preserves_entire_prior_core_result) ... FAIL
+test_parallel_requests_and_repeats_do_not_mutate_snapshot (test_adapter.AdapterTests.test_parallel_requests_and_repeats_do_not_mutate_snapshot) ... FAIL
+test_partial_success_is_not_replaced_by_needs_data (test_adapter.AdapterTests.test_partial_success_is_not_replaced_by_needs_data) ... FAIL
+test_recalculation_uses_new_buffer (test_adapter.AdapterTests.test_recalculation_uses_new_buffer) ... FAIL
+test_reverse_window_has_stable_field_and_recovers (test_adapter.AdapterTests.test_reverse_window_has_stable_field_and_recovers) ... FAIL
+test_strict_numbers_and_ranges (test_adapter.AdapterTests.test_strict_numbers_and_ranges) ... FAIL
+test_unknown_duration_is_not_zero (test_adapter.AdapterTests.test_unknown_duration_is_not_zero) ... FAIL
+
+======================================================================
+FAIL: test_bad_json_duplicates_and_constants (test_adapter.AdapterTests.test_bad_json_duplicates_and_constants)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_equal_boundary_includes_the_departure (test_adapter.AdapterTests.test_equal_boundary_includes_the_departure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_fractional_durations_are_not_truncated (test_adapter.AdapterTests.test_fractional_durations_are_not_truncated)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_internal_error_is_safe_and_next_request_succeeds (test_adapter.AdapterTests.test_internal_error_is_safe_and_next_request_succeeds)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_media_type_and_fixed_routes (test_adapter.AdapterTests.test_media_type_and_fixed_routes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_metadata_and_loopback (test_adapter.AdapterTests.test_metadata_and_loopback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_missing_extra_and_non_object_fields (test_adapter.AdapterTests.test_missing_extra_and_non_object_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_moscow_datetime_grammar_and_calendar (test_adapter.AdapterTests.test_moscow_datetime_grammar_and_calendar)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_new_date_needs_data_without_moving_source (test_adapter.AdapterTests.test_new_date_needs_data_without_moving_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_no_routes_is_a_complete_calculation (test_adapter.AdapterTests.test_no_routes_is_a_complete_calculation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_normal_response_preserves_entire_prior_core_result (test_adapter.AdapterTests.test_normal_response_preserves_entire_prior_core_result)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_parallel_requests_and_repeats_do_not_mutate_snapshot (test_adapter.AdapterTests.test_parallel_requests_and_repeats_do_not_mutate_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_partial_success_is_not_replaced_by_needs_data (test_adapter.AdapterTests.test_partial_success_is_not_replaced_by_needs_data)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_recalculation_uses_new_buffer (test_adapter.AdapterTests.test_recalculation_uses_new_buffer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_reverse_window_has_stable_field_and_recovers (test_adapter.AdapterTests.test_reverse_window_has_stable_field_and_recovers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_strict_numbers_and_ranges (test_adapter.AdapterTests.test_strict_numbers_and_ranges)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+======================================================================
+FAIL: test_unknown_duration_is_not_zero (test_adapter.AdapterTests.test_unknown_duration_is_not_zero)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/pip/ITMOv2/practices/practice_05/homework/tests/test_adapter.py", line 44, in setUp
+    self.assertIsNotNone(
+    ~~~~~~~~~~~~~~~~~~~~^
+        create_server, "The local calculation adapter is not implemented"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: unexpectedly None : The local calculation adapter is not implemented
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.002s
+
+FAILED (failures=17)
+
+EXIT_CODE=1

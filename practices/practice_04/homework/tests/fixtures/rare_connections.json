@@ -1,0 +1,30 @@
+{
+  "departure_window": {
+    "start": "2026-10-14T06:00:00+03:00",
+    "end": "2026-10-14T12:00:00+03:00"
+  },
+  "timezone": "Europe/Moscow",
+  "max_options": 5,
+  "boarding_buffer_minutes": 10,
+  "sources": [{
+    "id": "synthetic", "url": "https://example.org/synthetic-timetable",
+    "checked_at": "2026-10-07T12:00:00+03:00",
+    "valid_dates": ["2026-10-14"], "mode": "fixture", "verified": true
+  }],
+  "chains": [{
+    "id": "training-route", "origin": "Учебная точка А",
+    "destination": "Учебная точка Б", "coverage": "complete",
+    "access": {"minutes": 55, "description": "Пешком и метро до автобуса", "basis": "Вымышленная оценка для теста"},
+    "egress": {"minutes": 10, "description": "Пешком до цели", "basis": "Вымышленная оценка для теста"},
+    "stages": [{
+      "from_stop": "bus-a", "to_stop": "bus-b",
+      "from_name": "Учебная остановка А", "to_name": "Учебная остановка Б",
+      "trips": [{
+        "id": "bus-1", "mode": "bus", "label": "Учебный автобус",
+        "departure": "2026-10-14T10:40:00+03:00",
+        "arrival": "2026-10-14T11:40:00+03:00", "source_id": "synthetic"
+      }]
+    }],
+    "transfers": []
+  }]
+}

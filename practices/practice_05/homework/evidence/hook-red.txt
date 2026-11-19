@@ -1,0 +1,39 @@
+[Formatting note: trailing spaces on diagnostic blank lines removed; command/output text and exit codes otherwise retained.]
+$ /Users/pip/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --test tests/check-after-edit.test.mjs
+✖ checks homework code, tests, dependencies, skill and environment configuration (51.05025ms)
+✔ ignores homework evidence, reports, environments and files outside project (3.275708ms)
+✔ returns a real failing runner result to the agent without losing edit output (8.261417ms)
+✔ checks apply_patch changes from an absolute project path and reports PASS (7.43875ms)
+✔ ignores evidence edits and reads, so logging cannot recursively run the check (1.52175ms)
+✔ reports a timeout as FAIL and stops a stuck runner (105.610583ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 5
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 248.337667
+
+✖ failing tests:
+
+test at tests/check-after-edit.test.mjs:20:1
+✖ checks homework code, tests, dependencies, skill and environment configuration (51.05025ms)
+  AssertionError [ERR_ASSERTION]: practices/practice_05/homework/web/server.py
+  + actual - expected
+
+  + undefined
+  - 'PASS'
+
+      at TestContext.<anonymous> (file:///Users/pip/ITMOv2/tests/check-after-edit.test.mjs:43:12)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'PASS',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+EXIT_CODE=1

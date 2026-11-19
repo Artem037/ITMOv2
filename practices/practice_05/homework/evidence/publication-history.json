@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-30",
+  "base": "0c8a9c1567e334a00502a2d83bd3d9997b2b2687",
+  "source_head": "098ad8c165e29d24d71e28da1ae62c6ad74cf055",
+  "source_backup": "practice_05-backup-20261030",
+  "dependency_commit": "78ba140",
+  "ordered_commits": [
+    {
+      "source": "ec5f8c9e33b84240d4c76991b9c2c8da6e0ead4a",
+      "published": "8a9096769ecf6a46986a0a10b1d10f9802556da4"
+    },
+    {
+      "source": "91994f0bad29f941ba8c77887d17cf3c14d6b5a6",
+      "published": "0ab29e96a0398155ca37669d1dafa7593385ff6a"
+    },
+    {
+      "source": "0c4c5d74fc86dd801d80c78168d0e77a65792213",
+      "published": "3a47d6449093e019a052bff4223ecbb7099d8544"
+    },
+    {
+      "source": "5165c875b8126eb33332ae1acaf8e4e7bfdde3d1",
+      "published": "0da6eadd6b3374cf4da63a88f43ec35c2d20f2af"
+    },
+    {
+      "source": "369252709a0aed8cdc98deb7e691d14e44ec5a45",
+      "published": "31cefc64ee5c11e1d7c76182eff9f94e46b57483"
+    },
+    {
+      "source": "277f12aa04b439f3f623ba22d8f23916e626e6c9",
+      "published": "3d018b452bc4c8578637e3c5f7f953ee21834ab3"
+    },
+    {
+      "source": "098ad8c165e29d24d71e28da1ae62c6ad74cf055",
+      "published": "5162482f7ea725e6b0dd924c1ff5689465cf7d12"
+    }
+  ],
+  "note": "Original hashes in historical evidence refer to the saved source history; spec/contract precede code in both histories."
+}

@@ -1,0 +1,10 @@
+$ git ls-remote origin refs/heads/main
+ed72ed8b20f587cb2df55f85a6d670ace2c223fe	refs/heads/main
+
+EXIT_CODE=0
+
+$ git merge-base --is-ancestor homework_04 ed72ed8b20f587cb2df55f85a6d670ace2c223fe
+
+EXIT_CODE=1
+
+Remote main ed72ed8b20f587cb2df55f85a6d670ace2c223fe does not include homework_04. Read-only remote verification; no fetch/push/merge performed.

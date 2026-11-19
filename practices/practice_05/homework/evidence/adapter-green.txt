@@ -1,0 +1,25 @@
+$ uv run --project practices/practice_04/homework --locked --offline python -m unittest discover -s practices/practice_05/homework/tests -p test_adapter.py -v
+test_bad_json_duplicates_and_constants (test_adapter.AdapterTests.test_bad_json_duplicates_and_constants) ... ok
+test_equal_boundary_includes_the_departure (test_adapter.AdapterTests.test_equal_boundary_includes_the_departure) ... ok
+test_fractional_durations_are_not_truncated (test_adapter.AdapterTests.test_fractional_durations_are_not_truncated) ... ok
+test_internal_error_is_safe_and_next_request_succeeds (test_adapter.AdapterTests.test_internal_error_is_safe_and_next_request_succeeds) ... ok
+test_media_type_and_fixed_routes (test_adapter.AdapterTests.test_media_type_and_fixed_routes) ... ok
+test_metadata_and_loopback (test_adapter.AdapterTests.test_metadata_and_loopback) ... ok
+test_missing_extra_and_non_object_fields (test_adapter.AdapterTests.test_missing_extra_and_non_object_fields) ... ok
+test_moscow_datetime_grammar_and_calendar (test_adapter.AdapterTests.test_moscow_datetime_grammar_and_calendar) ... ok
+test_new_date_needs_data_without_moving_source (test_adapter.AdapterTests.test_new_date_needs_data_without_moving_source) ... ok
+test_no_routes_is_a_complete_calculation (test_adapter.AdapterTests.test_no_routes_is_a_complete_calculation) ... ok
+test_normal_response_preserves_entire_prior_core_result (test_adapter.AdapterTests.test_normal_response_preserves_entire_prior_core_result) ... ok
+test_parallel_requests_and_repeats_do_not_mutate_snapshot (test_adapter.AdapterTests.test_parallel_requests_and_repeats_do_not_mutate_snapshot) ... ok
+test_partial_success_is_not_replaced_by_needs_data (test_adapter.AdapterTests.test_partial_success_is_not_replaced_by_needs_data) ... ok
+test_recalculation_uses_new_buffer (test_adapter.AdapterTests.test_recalculation_uses_new_buffer) ... ok
+test_reverse_window_has_stable_field_and_recovers (test_adapter.AdapterTests.test_reverse_window_has_stable_field_and_recovers) ... ok
+test_strict_numbers_and_ranges (test_adapter.AdapterTests.test_strict_numbers_and_ranges) ... ok
+test_unknown_duration_is_not_zero (test_adapter.AdapterTests.test_unknown_duration_is_not_zero) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.285s
+
+OK
+
+EXIT_CODE=0
