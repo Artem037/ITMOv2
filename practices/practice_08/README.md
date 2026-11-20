@@ -72,3 +72,44 @@
 | 10 | Тестирование клиентской части с AI | Проверяются состояния интерфейса: загрузка, пустые данные, успешный результат и ошибка. Ответы сервера подменяются тестовыми данными | 1 |
 | 11 | Тестирование клиентской части с AI | Хотя бы один тест проверяет основной пользовательский сценарий на клиенте от действия до видимого результата | 1 |
 | | | **Итого** | **12** |
+
+## Запуск Issue Review
+
+Интерфейс использует React, TypeScript, Vite и компоненты shadcn/ui. Он отправляет заголовок и описание черновика в n8n и показывает рекомендуемый лейбл и уверенность модели. [Макет и промпт](proof.md) · [Экспорт workflow API](issue-review-api.json)
+
+Из папки практики запусти приложение.
+
+```bash
+cd app
+npm ci
+npm run dev
+```
+
+Открой `http://127.0.0.1:5173` и отправь черновик из формы. По умолчанию приложение обращается к опубликованному сценарию `8 дз` в n8n.
+
+Чтобы использовать тестовый Webhook или другой сервер n8n, укажи полный URL в `app/.env.local` как `N8N_WEBHOOK_URL`. Для тестового URL сначала нажми **Execute workflow** в n8n. Если Webhook использует Header Auth с заголовком `X-Issue-Review-Key`, укажи значение в `N8N_WEBHOOK_KEY`. Его читает локальный прокси Vite. Команда `npm run build` проверяет TypeScript и собирает приложение.
+
+### Публикация Issue
+
+1. Импортируй [сценарий публикации](issue-create-api.json) в n8n. В Webhook выбери **Header Auth**, задай имя заголовка `X-Issue-Create-Key` и свой секрет. В узле «Создать Issue в GitHub» выбери GitHub credential с доступом на запись Issues в `Artem037/ITMOv2`.
+2. Опубликуй сценарий и скопируй **Production URL** Webhook в `app/.env.local`. Укажи в этом же файле значение заголовка, заданное в n8n.
+
+   ```dotenv
+   N8N_CREATE_ISSUE_URL=https://n8n-itmo.cyrweb.ru/webhook/practice-08-create-issue
+   N8N_CREATE_ISSUE_KEY=значение_из_Header_Auth
+   ```
+
+3. Перезапусти Vite. Получи рекомендацию, нажми **Создать Issue** и подтверди публикацию. При успехе появится ссылка GitHub. Лейбл и автоответ обрабатывает `7.2_2` после события `issues.opened`.
+
+Прокси публикации рассчитан на локальный запуск через Vite. Ключ хранится в `.env.local` и используется на сервере. [Webhook n8n](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.webhook/) · [GitHub API](https://docs.github.com/en/rest/issues/issues#create-an-issue)
+
+### Клиентские тесты
+
+```bash
+cd app
+npm ci
+npx playwright install chromium
+npm test
+```
+
+Playwright подменяет ответы классификатора и публикации. Тесты проверяют ввод, диалог с клавиатуры, состояния формы, повтор после ошибки и весь сценарий до ссылки на созданный Issue.

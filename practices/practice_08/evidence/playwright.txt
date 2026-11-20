@@ -1,0 +1,20 @@
+
+> itmo-issue-review@0.1.0 test
+> playwright test --reporter=list
+
+
+Running 11 tests using 1 worker
+
+  ✓   1 tests/issue-review.spec.ts:33:1 › загружает разные примеры и позволяет редактировать черновик (262ms)
+  ✓   2 tests/issue-review.spec.ts:49:3 › заголовок (пустой) не отправляется и получает фокус (143ms)
+  ✓   3 tests/issue-review.spec.ts:49:3 › заголовок (из пробелов) не отправляется и получает фокус (138ms)
+  ✓   4 tests/issue-review.spec.ts:62:1 › показывает загрузку и блокирует повторную проверку (147ms)
+  ✓   5 tests/issue-review.spec.ts:80:1 › обрабатывает пустую рекомендацию (248ms)
+  ✓   6 tests/issue-review.spec.ts:88:1 › сохраняет черновик при ошибке проверки и позволяет её повторить (277ms)
+  ✓   7 tests/issue-review.spec.ts:100:1 › отмена и Escape закрывают подтверждение без запроса (828ms)
+  ✓   8 tests/issue-review.spec.ts:119:1 › проходит от черновика до ссылки на GitHub с одним запросом публикации (407ms)
+  ✓   9 tests/issue-review.spec.ts:150:1 › после ошибки публикации сохраняет черновик и даёт подтвердить повтор (457ms)
+  ✓  10 tests/issue-review.spec.ts:169:1 › после изменения черновика требует новую рекомендацию (282ms)
+  ✓  11 tests/issue-review.spec.ts:176:1 › показывает подтверждение на узком экране (324ms)
+
+  11 passed (4.2s)

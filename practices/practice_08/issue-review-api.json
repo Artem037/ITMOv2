@@ -1,0 +1,96 @@
+{
+  "name": "8 — Issue Review API",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "practice-08-issue-review",
+        "responseMode": "lastNode",
+        "responseData": "firstEntryJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        224
+      ],
+      "id": "1701754a-9fb1-4394-ba06-378bed5f40db",
+      "name": "Черновик Issue",
+      "webhookId": "897e4b05-2d60-48c2-a5f6-1b27f57ede83"
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "AoAIoy39YsV0hgqk",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/AoAIoy39YsV0hgqk",
+          "cachedResultName": "7.2_1"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "title": "={{ $json.body.title }}",
+            "body": "={{ $json.body.body ?? '' }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "body",
+              "displayName": "body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        480,
+        224
+      ],
+      "id": "587213ae-a70e-42c5-b8ca-94ddfbd828bd",
+      "name": "Вызвать классификатор 7.2_1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Черновик Issue": {
+      "main": [
+        [
+          {
+            "node": "Вызвать классификатор 7.2_1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": []
+}

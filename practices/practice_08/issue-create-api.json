@@ -1,0 +1,127 @@
+{
+  "name": "8 — Создание Issue",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "practice-08-create-issue",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "id": "f02c1296-3521-42f0-8fa9-b6dbf77f2237",
+      "name": "Принять подтверждённый черновик",
+      "webhookId": "5c9543ef-c32f-41fe-bebf-912a23ccbfb1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const payload = $input.first().json.body;\nconst title = typeof payload?.title === 'string' ? payload.title.trim() : '';\nconst body = payload?.body ?? '';\nconst valid = title.length > 0 && title.length <= 120\n  && typeof body === 'string' && body.trim().length <= 2000;\n\nreturn [{ json: valid\n  ? { valid, title, body: body.trim() }\n  : { valid, status: 400, payload: { code: 'invalid_draft' } }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 0],
+      "id": "272ddfca-be0e-4ceb-8978-e318dad6ad0c",
+      "name": "Проверить черновик"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2 },
+          "conditions": [
+            {
+              "id": "0a34db8b-8f3f-4c14-856a-4bebc666f068",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": "",
+              "operator": { "type": "boolean", "operation": "true", "singleValue": true }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [480, 0],
+      "id": "499ff241-59aa-4256-bb97-5f4b5f382d34",
+      "name": "Черновик валиден"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.github.com/repos/Artem037/ITMOv2/issues",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [{ "name": "Accept", "value": "application/vnd.github+json" }]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { title: $json.title, body: $json.body } }}",
+        "options": {
+          "response": {
+            "response": { "fullResponse": true, "neverError": true, "responseFormat": "json" }
+          },
+          "timeout": 20000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [720, -96],
+      "id": "356afe7a-cc5d-4531-99a1-f55217df9338",
+      "name": "Создать Issue в GitHub",
+      "credentials": {
+        "githubApi": { "id": "LwL1mHIsq5IXKuVo", "name": "GitHub account 11" }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nif (response.valid === false) {\n  return [{ json: { status: response.status, payload: response.payload } }];\n}\n\nconst { statusCode, body } = response;\nif (statusCode === 201) {\n  return [{ json: { status: 201, payload: { number: body.number, url: body.html_url } } }];\n}\n\nconst rejected = statusCode >= 400 && statusCode < 500;\nreturn [{ json: {\n  status: rejected ? statusCode : 502,\n  payload: { code: rejected ? 'github_rejected' : 'github_unavailable' },\n} }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [960, 0],
+      "id": "25ceb480-0e49-4f05-9133-a535f7765a6d",
+      "name": "Подготовить ответ"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json.payload) }}",
+        "options": { "responseCode": "={{ $json.status }}" }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [1200, 0],
+      "id": "1ea1d61a-eb55-4fe6-b314-9c87e6d6d55c",
+      "name": "Вернуть результат публикации"
+    }
+  ],
+  "connections": {
+    "Принять подтверждённый черновик": {
+      "main": [[{ "node": "Проверить черновик", "type": "main", "index": 0 }]]
+    },
+    "Проверить черновик": {
+      "main": [[{ "node": "Черновик валиден", "type": "main", "index": 0 }]]
+    },
+    "Черновик валиден": {
+      "main": [
+        [{ "node": "Создать Issue в GitHub", "type": "main", "index": 0 }],
+        [{ "node": "Подготовить ответ", "type": "main", "index": 0 }]
+      ]
+    },
+    "Создать Issue в GitHub": {
+      "main": [[{ "node": "Подготовить ответ", "type": "main", "index": 0 }]]
+    },
+    "Подготовить ответ": {
+      "main": [[{ "node": "Вернуть результат публикации", "type": "main", "index": 0 }]]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "tags": []
+}

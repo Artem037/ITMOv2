@@ -1,0 +1,14 @@
+Playwright checks with two temporary mutations in an isolated app copy.
+Changes: suppress the empty title error and hide the publication link.
+  ✘  1 tests/issue-review.spec.ts:49:3 › заголовок (пустой) не отправляется и получает фокус (5.4s)
+  ✘  2 tests/issue-review.spec.ts:119:1 › проходит от черновика до ссылки на GitHub с одним запросом публикации (5.3s)
+    Error: expect(locator).toHaveText(expected) failed
+    Locator: getByRole('alert')
+    Expected: "Введите заголовок Issue."
+    Error: expect(locator).toBeVisible() failed
+    Locator: getByRole('link', { name: 'Открыть Issue #42 на GitHub' })
+    Expected: visible
+  2 failed
+
+Restored the original application code.
+  11 passed (4.2s)
