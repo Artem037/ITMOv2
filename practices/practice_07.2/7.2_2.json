@@ -1,0 +1,714 @@
+{
+  "name": "7.2_2",
+  "nodes": [
+    {
+      "parameters": {
+        "owner": {
+          "__rl": true,
+          "value": "Artem037",
+          "mode": "list",
+          "cachedResultName": "Artem037",
+          "cachedResultUrl": "https://github.com/Artem037"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "ITMOv2",
+          "mode": "list",
+          "cachedResultName": "ITMOv2",
+          "cachedResultUrl": "https://github.com/Artem037/ITMOv2"
+        },
+        "events": [
+          "issues"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.githubTrigger",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        80
+      ],
+      "id": "d56fb035-bb61-4276-9c05-fe6b04e1edda",
+      "name": "Github Trigger",
+      "webhookId": "d20fb006-5aca-47d3-b3ae-f84ff3f3f100",
+      "credentials": {
+        "githubApi": {
+          "id": "LwL1mHIsq5IXKuVo",
+          "name": "GitHub account 11"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "190fb1a9-caa5-43ea-82f1-968996cf548f",
+              "leftValue": "={{ $json.body.action }}",
+              "rightValue": "opened",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -48,
+        80
+      ],
+      "id": "d9dfa659-ba8b-431e-80ac-31bce92d1ed1",
+      "name": "Только opened"
+    },
+    {
+      "parameters": {
+        "operation": "rowNotExists",
+        "dataTableId": {
+          "__rl": true,
+          "value": "uNfhu7Q7NKi61aCN",
+          "mode": "list",
+          "cachedResultName": "processed_issues",
+          "cachedResultUrl": "/projects/UsEZ5A3dDvnXEsAa/datatables/uNfhu7Q7NKi61aCN"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "issue_id",
+              "keyValue": "={{ String($json.body.issue.id) }}"
+            }
+          ]
+        }
+      },
+      "name": "Issue ещё не обработан",
+      "id": "f2a1548d-9dc9-493f-baad-6549f1669f08",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        176,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "AoAIoy39YsV0hgqk",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/AoAIoy39YsV0hgqk",
+          "cachedResultName": "7.2_1"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "title": "={{ $('Github Trigger').first().json.body.issue.title }}",
+            "body": "={{ $('Github Trigger').first().json.body.issue.body ?? '' }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "body",
+              "displayName": "body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "name": "Вызвать классификатор",
+      "id": "4b6268f7-504a-4084-8432-89cbc138d146",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        400,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const { issue, repository } = $('Github Trigger').first().json.body;\nconst { type, confidence } = $input.first().json;\nconst accepted = ['bug', 'task', 'feature'].includes(type)\n  && Number.isFinite(confidence) && confidence >= 0.8 && confidence <= 1;\nconst route = accepted ? type : 'unknown';\nconst newContributor = accepted && issue.author_association === 'NONE';\nconst replies = {\n  bug: 'Спасибо за сообщение о баге! При необходимости добавьте шаги воспроизведения, ожидаемый и фактический результат.',\n  task: 'Спасибо за вопрос! Мейнтейнер посмотрит обращение и ответит в этом Issue.',\n  feature: 'Спасибо за идею! Если нужно, дополните её примером того, как должна работать новая функция.',\n};\nconst readme = 'https://github.com/' + repository.full_name + '/blob/' + (repository.default_branch ?? 'main') + '/README.md';\nconst welcome = newContributor ? 'Рады вашему обращению! О проекте можно прочитать в [README](' + readme + ').\\n\\n' : '';\nreturn [{ json: {\n  type, confidence, route, newContributor,\n  issueId: String(issue.id), number: issue.number,\n  author: issue.user.login, createdAt: issue.created_at,\n  issueApi: 'https://api.github.com/repos/' + repository.full_name + '/issues/' + issue.number,\n  message: accepted ? welcome + replies[route] : '',\n} }];"
+      },
+      "name": "Маршрут",
+      "id": "3456abc2-c1d6-43f0-861f-5eeca18692dd",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d1ac8af8-2fac-4b2f-bd93-46f83db41fdf",
+                    "leftValue": "={{ $json.route }}",
+                    "rightValue": "bug",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "bug"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "41fcc199-d8a1-4b3d-b4cf-ced730636343",
+                    "leftValue": "={{ $json.route }}",
+                    "rightValue": "task",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "task"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "1ef6e156-ef2c-4af2-a31c-b3fc9b517896",
+                    "leftValue": "={{ $json.route }}",
+                    "rightValue": "feature",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "feature"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8255ec61-625e-45f0-9cd6-acb1e51cc0fa",
+                    "leftValue": "={{ $json.route }}",
+                    "rightValue": "unknown",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "unknown"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        848,
+        80
+      ],
+      "id": "fdc14d30-ea73-4838-8107-2efc97cac81e",
+      "name": "Switch по типу"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Маршрут').first().json.issueApi + '/labels' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { labels: $('Маршрут').first().json.newContributor ? [\"bug\", 'first-time-contributor'] : [\"bug\"] } }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 60000
+        }
+      },
+      "name": "Лейбл bug",
+      "id": "14c9db1f-5c2b-4315-846b-7cffa16e86df",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1104,
+        -160
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "LwL1mHIsq5IXKuVo",
+          "name": "GitHub account 11"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Маршрут').first().json.issueApi + '/labels' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { labels: $('Маршрут').first().json.newContributor ? [\"task\", 'first-time-contributor'] : [\"task\"] } }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 60000
+        }
+      },
+      "name": "Лейбл task",
+      "id": "5367f68c-6ac7-4bed-994a-31da0014e782",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1104,
+        0
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "LwL1mHIsq5IXKuVo",
+          "name": "GitHub account 11"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Маршрут').first().json.issueApi + '/labels' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { labels: $('Маршрут').first().json.newContributor ? [\"feature-request\", 'first-time-contributor'] : [\"feature-request\"] } }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 60000
+        }
+      },
+      "name": "Лейбл feature-request",
+      "id": "133f7b42-9079-4df5-81bb-af1188fb9ae3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1104,
+        160
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "LwL1mHIsq5IXKuVo",
+          "name": "GitHub account 11"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Маршрут').first().json.issueApi + '/labels' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"labels\": [\"needs-triage\"]}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 60000
+        }
+      },
+      "name": "Лейбл needs-triage",
+      "id": "d838cb36-18e1-4683-8332-728be1f0ffd4",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1104,
+        320
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "LwL1mHIsq5IXKuVo",
+          "name": "GitHub account 11"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Маршрут').first().json.issueApi + '/comments' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { body: $('Маршрут').first().json.message } }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "name": "Ответ по типу",
+      "id": "59e8d326-1de1-4ea8-9ffe-e14cc38120d8",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        0
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "LwL1mHIsq5IXKuVo",
+          "name": "GitHub account 11"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "uNfhu7Q7NKi61aCN",
+          "mode": "list",
+          "cachedResultName": "processed_issues",
+          "cachedResultUrl": "/projects/UsEZ5A3dDvnXEsAa/datatables/uNfhu7Q7NKi61aCN"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "issue_id": "={{ $('Маршрут').first().json.issueId }}",
+            "author": "={{ $('Маршрут').first().json.author }}",
+            "created_at": "={{ $('Маршрут').first().json.createdAt }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "issue_id",
+              "displayName": "issue_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "author",
+              "displayName": "author",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "name": "Записать обработку",
+      "id": "734d56b2-1cce-4ec0-b020-79fedf9c9994",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        1616,
+        160
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Github Trigger": {
+      "main": [
+        [
+          {
+            "node": "Только opened",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Только opened": {
+      "main": [
+        [
+          {
+            "node": "Issue ещё не обработан",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Issue ещё не обработан": {
+      "main": [
+        [
+          {
+            "node": "Вызвать классификатор",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Вызвать классификатор": {
+      "main": [
+        [
+          {
+            "node": "Маршрут",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Маршрут": {
+      "main": [
+        [
+          {
+            "node": "Switch по типу",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch по типу": {
+      "main": [
+        [
+          {
+            "node": "Лейбл bug",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Лейбл task",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Лейбл feature-request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Лейбл needs-triage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Лейбл bug": {
+      "main": [
+        [
+          {
+            "node": "Ответ по типу",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Лейбл task": {
+      "main": [
+        [
+          {
+            "node": "Ответ по типу",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Лейбл feature-request": {
+      "main": [
+        [
+          {
+            "node": "Ответ по типу",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Лейбл needs-triage": {
+      "main": [
+        [
+          {
+            "node": "Записать обработку",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ответ по типу": {
+      "main": [
+        [
+          {
+            "node": "Записать обработку",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "8f719471-b1c0-436c-94bd-db8a47143442",
+  "meta": {
+    "instanceId": "68dbbb4e8fa686c3fd4e9982ade6836edb66976f207553e7ac22df961581c78c"
+  },
+  "nodeGroups": [],
+  "id": "ffRroqLqmugw5kuQ",
+  "tags": []
+}
