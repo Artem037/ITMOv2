@@ -1,0 +1,34 @@
+{
+  "engine": "n8n 2.48.7",
+  "mode": "manual CLI with mocked worker",
+  "executedNodes": [
+    "Запустить вручную",
+    "Проверить новые bug reports",
+    "Есть воспроизводимый баг",
+    "Сформировать и проверить исправление",
+    "Регрессионные проверки пройдены",
+    "Запушить ветку и открыть PR",
+    "Провести независимое ревью",
+    "Ревью разрешает merge",
+    "Остановиться без merge"
+  ],
+  "workerCalls": [
+    {
+      "endpoint": "/next",
+      "status": "ready"
+    },
+    {
+      "endpoint": "/propose",
+      "status": "tested"
+    },
+    {
+      "endpoint": "/push",
+      "status": "pushed"
+    },
+    {
+      "endpoint": "/review",
+      "status": "blocked"
+    }
+  ],
+  "mergeExecuted": false
+}

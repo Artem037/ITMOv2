@@ -1,0 +1,190 @@
+{
+  "engine": "n8n 2.48.7",
+  "timestamps": "UTC",
+  "blocked": {
+    "id": 3,
+    "mode": "trigger",
+    "status": "success",
+    "startedAt": "2026-11-20 18:03:39.912",
+    "stoppedAt": "2026-11-20 18:04:42.026",
+    "executedNodes": [
+      "Опрос очереди каждую минуту",
+      "Проверить новые bug reports",
+      "Есть воспроизводимый баг",
+      "Сформировать и проверить исправление",
+      "Регрессионные проверки пройдены",
+      "Запушить ветку и открыть PR",
+      "Провести независимое ревью",
+      "Ревью разрешает merge",
+      "Остановиться без merge"
+    ],
+    "intake": {
+      "runId": "ee8fdebd-62a4-4178-a436-598372ce8bba",
+      "status": "ready",
+      "issue": "https://github.com/Artem037/itmo-7-2-bugfix-demo/issues/1",
+      "base": "292a5dd2c430283164d30d6d4454440c456cf7f1",
+      "observed": {
+        "total": 100,
+        "percent": 10,
+        "expected": 90,
+        "actual": 110
+      }
+    },
+    "proposal": {
+      "runId": "ee8fdebd-62a4-4178-a436-598372ce8bba",
+      "status": "tested",
+      "expression": "total - total * percent / 100",
+      "reason": "Subtracting the discount amount from the original total gives 90 for a 10% discount on 100.",
+      "checks": 6
+    },
+    "push": {
+      "runId": "ee8fdebd-62a4-4178-a436-598372ce8bba",
+      "status": "pushed",
+      "branch": "codex/issue-1",
+      "head": "674ac1413fdb578fabf3594a51e1e75df52dc968",
+      "pullRequest": "https://github.com/Artem037/itmo-7-2-bugfix-demo/pull/2"
+    },
+    "review": {
+      "runId": "ee8fdebd-62a4-4178-a436-598372ce8bba",
+      "status": "blocked",
+      "reviewedHead": "674ac1413fdb578fabf3594a51e1e75df52dc968",
+      "review": "https://github.com/Artem037/itmo-7-2-bugfix-demo/pull/2#pullrequestreview-5997244243",
+      "summary": "By inspection, the patch preserves the interface, returns 90 for a total of 100 at 10%, and handles 0% and zero totals. The reported 110 matches the old expression. The empty failure list misses the decimal case above.",
+      "failures": []
+    }
+  },
+  "merged": {
+    "id": 5,
+    "mode": "trigger",
+    "status": "success",
+    "startedAt": "2026-11-20 18:07:20.328",
+    "stoppedAt": "2026-11-20 18:08:12.468",
+    "executedNodes": [
+      "Опрос очереди каждую минуту",
+      "Проверить новые bug reports",
+      "Есть воспроизводимый баг",
+      "Сформировать и проверить исправление",
+      "Регрессионные проверки пройдены",
+      "Запушить ветку и открыть PR",
+      "Провести независимое ревью",
+      "Ревью разрешает merge",
+      "Смержить проверенный PR в master"
+    ],
+    "intake": {
+      "runId": "502e5f9e-ec7b-4203-9d94-16fed6ec040c",
+      "status": "ready",
+      "issue": "https://github.com/Artem037/itmo-7-2-bugfix-demo/issues/3",
+      "base": "292a5dd2c430283164d30d6d4454440c456cf7f1",
+      "observed": {
+        "total": 1.333,
+        "percent": 100,
+        "expected": 0,
+        "actual": 2.6659999999999995
+      }
+    },
+    "proposal": {
+      "runId": "502e5f9e-ec7b-4203-9d94-16fed6ec040c",
+      "status": "tested",
+      "expression": "total - total * (percent / 100)",
+      "reason": "Dividing the percentage by 100 before multiplying avoids intermediate overflow for discounts up to 100%. At 100%, subtracting the original total from itself gives exactly zero, even for decimals.",
+      "checks": 8
+    },
+    "push": {
+      "runId": "502e5f9e-ec7b-4203-9d94-16fed6ec040c",
+      "status": "pushed",
+      "branch": "codex/issue-3",
+      "head": "e30acaa396f19068277995596f9d1bcaea92ef46",
+      "pullRequest": "https://github.com/Artem037/itmo-7-2-bugfix-demo/pull/4"
+    },
+    "review": {
+      "runId": "502e5f9e-ec7b-4203-9d94-16fed6ec040c",
+      "status": "approved",
+      "reviewedHead": "e30acaa396f19068277995596f9d1bcaea92ef46",
+      "review": "https://github.com/Artem037/itmo-7-2-bugfix-demo/pull/4#pullrequestreview-5997284515",
+      "summary": "By inspection, the patch preserves the interface and subtracts the specified percentage from the total. It returns 0 for the reported 1.333 total at 100% and gives the expected results for all supplied cases, including 0%, 100%, zero totals, decimal inputs, and a large finite total.",
+      "checks": [
+        {
+          "total": 1.333,
+          "percent": 100,
+          "expected": 0,
+          "actual": 0,
+          "passed": true
+        },
+        {
+          "total": 80,
+          "percent": 0,
+          "expected": 80,
+          "actual": 80,
+          "passed": true
+        },
+        {
+          "total": 120,
+          "percent": 100,
+          "expected": 0,
+          "actual": 0,
+          "passed": true
+        },
+        {
+          "total": 1.333,
+          "percent": 100,
+          "expected": 0,
+          "actual": 0,
+          "passed": true
+        },
+        {
+          "total": 0,
+          "percent": 15,
+          "expected": 0,
+          "actual": 0,
+          "passed": true
+        },
+        {
+          "total": 24.5,
+          "percent": 12.5,
+          "expected": 21.4375,
+          "actual": 21.4375,
+          "passed": true
+        },
+        {
+          "total": 200,
+          "percent": 25,
+          "expected": 150,
+          "actual": 150,
+          "passed": true
+        },
+        {
+          "total": 1e+308,
+          "percent": 50,
+          "expected": 5e+307,
+          "actual": 5e+307,
+          "passed": true
+        }
+      ],
+      "failures": []
+    },
+    "merge": {
+      "runId": "502e5f9e-ec7b-4203-9d94-16fed6ec040c",
+      "status": "merged",
+      "issue": "https://github.com/Artem037/itmo-7-2-bugfix-demo/issues/3",
+      "pullRequest": "https://github.com/Artem037/itmo-7-2-bugfix-demo/pull/4",
+      "base": "master",
+      "mergeCommit": "e35a8550310531a3d1b11ec05fe2c9da44e69b39"
+    }
+  },
+  "repeated": {
+    "id": 7,
+    "mode": "trigger",
+    "status": "success",
+    "startedAt": "2026-11-20 18:08:39.912",
+    "stoppedAt": "2026-11-20 18:08:42.257",
+    "executedNodes": [
+      "Опрос очереди каждую минуту",
+      "Проверить новые bug reports",
+      "Есть воспроизводимый баг",
+      "Остановиться без merge"
+    ],
+    "intake": {
+      "status": "idle"
+    }
+  }
+}

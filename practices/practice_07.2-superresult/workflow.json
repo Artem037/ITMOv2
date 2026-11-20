@@ -1,0 +1,373 @@
+{
+  "id": "Itmo72AutofixV1",
+  "name": "7.2 — сверхрезультат — автоматическое исправление бага",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        -96
+      ],
+      "id": "72a10000-1234-4678-8000-000000000010",
+      "name": "Запустить вручную"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -240,
+        96
+      ],
+      "id": "72a10000-1234-4678-8000-000000000011",
+      "name": "Опрос очереди каждую минуту"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8763/next",
+        "options": {
+          "timeout": 170000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "72a10000-1234-4678-8000-000000000001",
+      "name": "Проверить новые bug reports"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "72a20000-1234-4678-8000-000000000002",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "ready",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        240,
+        0
+      ],
+      "id": "72a10000-1234-4678-8000-000000000002",
+      "name": "Есть воспроизводимый баг"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8763/propose",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { runId: $json.runId } }}",
+        "options": {
+          "timeout": 170000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ],
+      "id": "72a10000-1234-4678-8000-000000000003",
+      "name": "Сформировать и проверить исправление"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "72a20000-1234-4678-8000-000000000004",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "tested",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        720,
+        0
+      ],
+      "id": "72a10000-1234-4678-8000-000000000004",
+      "name": "Регрессионные проверки пройдены"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8763/push",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { runId: $json.runId } }}",
+        "options": {
+          "timeout": 170000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        0
+      ],
+      "id": "72a10000-1234-4678-8000-000000000005",
+      "name": "Запушить ветку и открыть PR"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8763/review",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { runId: $json.runId } }}",
+        "options": {
+          "timeout": 170000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        0
+      ],
+      "id": "72a10000-1234-4678-8000-000000000006",
+      "name": "Провести независимое ревью"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "72a20000-1234-4678-8000-000000000007",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "approved",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1440,
+        0
+      ],
+      "id": "72a10000-1234-4678-8000-000000000007",
+      "name": "Ревью разрешает merge"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8763/merge",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { runId: $json.runId } }}",
+        "options": {
+          "timeout": 170000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        0
+      ],
+      "id": "72a10000-1234-4678-8000-000000000008",
+      "name": "Смержить проверенный PR в master"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        240
+      ],
+      "id": "72a10000-1234-4678-8000-000000000012",
+      "name": "Остановиться без merge"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Запустить вручную": {
+      "main": [
+        [
+          {
+            "node": "Проверить новые bug reports",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Опрос очереди каждую минуту": {
+      "main": [
+        [
+          {
+            "node": "Проверить новые bug reports",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Проверить новые bug reports": {
+      "main": [
+        [
+          {
+            "node": "Есть воспроизводимый баг",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Есть воспроизводимый баг": {
+      "main": [
+        [
+          {
+            "node": "Сформировать и проверить исправление",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Остановиться без merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Сформировать и проверить исправление": {
+      "main": [
+        [
+          {
+            "node": "Регрессионные проверки пройдены",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Регрессионные проверки пройдены": {
+      "main": [
+        [
+          {
+            "node": "Запушить ветку и открыть PR",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Остановиться без merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Запушить ветку и открыть PR": {
+      "main": [
+        [
+          {
+            "node": "Провести независимое ревью",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Провести независимое ревью": {
+      "main": [
+        [
+          {
+            "node": "Ревью разрешает merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ревью разрешает merge": {
+      "main": [
+        [
+          {
+            "node": "Смержить проверенный PR в master",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Остановиться без merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Moscow"
+  },
+  "tags": []
+}

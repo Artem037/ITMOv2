@@ -1,0 +1,37 @@
+Before repair, the seed project reproduced the expected test failure.
+19:  110 !== 90
+
+Local guard, patch and merge control tests
+✔ extracts a reproducible discount case from the report (1.618542ms)
+✔ rejects an invalid percentage or an unrelated component (0.59925ms)
+✔ replaces only the discount return expression (0.641292ms)
+✔ accepts a model response formatted as a single return statement (0.267458ms)
+✔ rejects proposed changes that are outside arithmetic (0.193583ms)
+✔ detects the original bug with a literal expected result (0.436584ms)
+✔ catches a patch that fits one report but regresses a boundary (0.260917ms)
+✔ requires an exact zero balance with a full discount on a fractional total (0.19275ms)
+✔ permits a reviewed patch only while the reviewed heads match (0.198334ms)
+✔ blocks serious review findings or failed regression checks (0.317292ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 170.712708
+
+Project tests on the merged master
+e35a8550310531a3d1b11ec05fe2c9da44e69b39
+✔ 10 percent discount reduces 100 to 90 (1.035709ms)
+✔ keeps the total with a 0 percent discount (0.174542ms)
+✔ 100 percent discount reduces the total to zero (0.097917ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 150.707291
+Boundary cases on master: 1.333 at 100% = 0; 1e308 at 50% = 5e307
