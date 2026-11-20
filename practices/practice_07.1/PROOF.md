@@ -8,6 +8,8 @@
 
 ![Команда и опубликованное ревью](evidence/pr13/review.png)
 
+![Успешный запуск второй модели в Executions](evidence/pr13/secondary-execution.png)
+
 ![Точечные комментарии к скидке и остатку товара](evidence/pr13/inline.png)
 
 **История.** В таблице `ai_reviews` появилась запись для PR `13` с `model_key = secondary`.
